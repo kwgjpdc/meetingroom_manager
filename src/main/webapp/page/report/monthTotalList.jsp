@@ -34,17 +34,17 @@ String fule = base + "/" + contextPath + "/";
             <div class="panel-body">
                 <form id="formSearch" class="form-horizontal">
                     <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="txt_search_departmentname">部门</label>
+                        <label class="control-label col-sm-1" for="department">部门</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="txt_search_departmentname">
+                            <input type="text" class="form-control" id="department" >
                         </div>
-                        <label class="control-label col-sm-1" for="txt_search_statu">年份</label>
+                        <label class="control-label col-sm-1" for="year">年份</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" id="txt_search_year">
+                            <input type="text" class="form-control" id="year">
                         </div>
-                        <label class="control-label col-sm-1" for="txt_search_statu">月份</label>
+                        <label class="control-label col-sm-1" for="month">月份</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" id="txt_search_month">
+                            <input type="text" class="form-control" id="month" >
                         </div>
                         <div class="col-sm-2" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>

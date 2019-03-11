@@ -32,7 +32,7 @@ public class ContractController {
 	}
 	
 	//获取支付情况列表数据
-	@RequestMapping(value = "/project/payforGetData.json",method=RequestMethod.POST)
+	@RequestMapping(value = "/contract/payforGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<PayforEntity> payforGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		//TODO 为测试数据，请改为数据库获取
 		List<PayforEntity> results = new ArrayList<PayforEntity>();
