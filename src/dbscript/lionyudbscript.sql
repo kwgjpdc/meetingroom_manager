@@ -6,6 +6,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `t_p_monthtotal`;
 CREATE TABLE `t_p_monthtotal` (
   `id` int(11) NOT NULL COMMENT '主键',
+  `depart` int(11) DEFAULT NULL COMMENT '所属分局',
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
   `contracttotal` double DEFAULT NULL COMMENT '合同总金额',
