@@ -16,8 +16,7 @@
 	        <ul class="nav navbar-nav">
 	            <li id="mainpli" ><a href="#">首页</a></li>
 	            <li><a href="#">供应商管理</a></li>
-	            <li class="active"><a href="#">首页</a></li>
-	            <li class="dropdown">
+	            <li id="writeli" >
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	                	填报管理 <b class="caret"></b>
 	                </a>
