@@ -38,6 +38,18 @@ public class MonthTotalEntity implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public String getDepart() {
+		return depart;
+	}
+	public void setDepart(String depart) {
+		this.depart = depart;
+	}
+	public String getDepartStr() {
+		return departStr;
+	}
+	public void setDepartStr(String departStr) {
+		this.departStr = departStr;
+	}
 	public String getMonth() {
 		return month;
 	}
