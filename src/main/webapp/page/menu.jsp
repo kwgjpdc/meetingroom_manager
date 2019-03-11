@@ -16,6 +16,16 @@
 	        <ul class="nav navbar-nav">
 	            <li id="mainpli" ><a href="#">首页</a></li>
 	            <li><a href="#">供应商管理</a></li>
+	            <li class="active"><a href="#">首页</a></li>
+	            <li class="dropdown">
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                	填报管理 <b class="caret"></b>
+	                </a>
+	                <ul class="dropdown-menu">
+	                    <li><a href="#">分局填报</a></li>
+	                    <li><a href="#">财务填报</a></li>
+	                </ul>
+	            </li>
 	            <li><a href="#">合同管理</a></li>
 	            <li id="projectli" > 
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
@@ -47,8 +57,16 @@
 	                	统计报表<b class="caret"></b>
 	                </a>
 	                <ul class="dropdown-menu">
-	                    <li><a href="<%=fule %>report/monthTotalList.web">合同月度统计表</a></li>
+	                    <li><a href="<%=fule %>report/monthTotalList.web">合同执行月统计</a></li>
 	                    <li><a href="#">建设资金支付统计表</a></li>
+	               	 	<li><a href="#">分局数据统计</a></li>
+	               	 	<li><a href="#">财务数据统计</a></li>
+	               	 	<li><a href="#">工程建设开工进度、投资完成情况月统计</a></li>
+	               	 	<li><a href="#">工程投资完成汇总月统计</a></li>
+	               	 	<li><a href="#">工程建设资金支付情况月统计</a></li>
+	               	 	<li><a href="#">招投标情况统计</a></li>
+	                    <li><a href="#">合同签订情况统计</a></li>
+	                    <li><a href="#">已签合同执行情况统计</a></li>
 	                </ul>
 				</li>
 	            <li><a href="#">流程管理</a></li>
