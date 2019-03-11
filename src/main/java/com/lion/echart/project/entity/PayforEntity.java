@@ -3,7 +3,7 @@ package com.lion.echart.project.entity;
 import java.io.Serializable;
 
 /**
- * 支付情况统计试图
+ * 支付情况统计视图
  * @author lion-y
  *
  */

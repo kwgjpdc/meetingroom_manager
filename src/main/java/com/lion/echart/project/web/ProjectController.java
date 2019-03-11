@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.project.entity.PayforEntity;
 
+/**
+ * 项目相关跳转控制
+ * @author lion-y
+ *
+ */
 @Controller
 public class ProjectController {
 
@@ -25,8 +30,10 @@ public class ProjectController {
 		return "/page/project/payforList";
 	}
 	
+	//获取支付情况列表数据
 	@RequestMapping(value = "/project/payforGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<PayforEntity> payforGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		//TODO 为测试数据，请改为数据库获取
 		List<PayforEntity> results = new ArrayList<PayforEntity>();
 		results.add(new PayforEntity("工程款","10,696.41","163,522.85","6295.08","9838.73","","186057.99"));
 		results.add(new PayforEntity("监理费","24.96","924.62","104.70","154.79","","1,104.37"));
