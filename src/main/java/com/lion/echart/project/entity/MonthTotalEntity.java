@@ -10,6 +10,8 @@ import java.util.Date;
  */
 public class MonthTotalEntity implements Serializable {
 	private Long id;
+	private String depart;//分局
+	private String departStr;
 	private String year;//年份
 	private String month;//月份
 	private Double contractTotal;//合同总金额

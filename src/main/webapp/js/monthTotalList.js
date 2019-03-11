@@ -5,8 +5,12 @@ $(document).ready(function(){
 
 	$("#year").val(year);
 	$("#month").val(month);
+	validatef();
+	
 	//var oTable = new TableInit();
 	//oTable.Init();
+});
+function validatef(){
 	$('#formSearch').bootstrapValidator({
 		message: 'This value is not valid',
 		feedbackIcons: {
@@ -49,14 +53,14 @@ $(document).ready(function(){
 			}
 		}
 	});
-});
+}
 
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/project/payforGetData.json',         //请求后台的URL（*）
+			url: '/echart/report/monthTotal.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -64,7 +68,7 @@ var TableInit = function () {
 			pagination: true,                   //是否显示分页（*）
 			sortable: false,                     //是否启用排序
 			sortOrder: "asc",                   //排序方式
-			queryParams: oTableInit.queryParams,//传递参数（*）
+			queryParams: $("#formSearch").serializeObject(),//传递参数（*）
 			sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
 			pageNumber: 1,                       //初始化加载第一页，默认第一页
 			pageSize: 10,                       //每页的记录行数（*）
@@ -82,18 +86,6 @@ var TableInit = function () {
 			cardView: false,                    //是否显示详细视图
 			detailView: false,                   //是否显示父子表
 			columns: [
-				[
-				  {
-					field: 'payType',
-					title: '支付款项' ,
-					rowspan: 2
-				  }
-				 ,{
-						field: '',
-						title: '支付金额' ,
-						colspan: 5
-				  }
-				],
 				[
 				  {
 						field: 'moneyyi',
