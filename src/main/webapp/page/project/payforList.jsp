@@ -9,7 +9,7 @@ String fule = base + "/" + contextPath + "/";
 <html>
 <head>
 <meta charset="UTF-8">
-<title>水委报表管理系统</title>
+<title>滇中引水管理局</title>
 <link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">

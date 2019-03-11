@@ -36,40 +36,110 @@ var TableInit = function () {
 			columns: [
 				[
 				  {
+					field: 'payType',
+					title: '序号' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '合同名称' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '合同编号' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '主要建设内容' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '计划完工时间' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '概算投资(万元)' ,
+					rowspan: 2
+				  },
+				  {
+					field: '',
+					title: '投资完成情况' ,
+					colspan: 3
+				  },
+				  {
+					field: '',
+					title: '计划执行情况' ,
+					colspan: 5
+				  },
+				  {
+					field: '',
+					title: '累计完成实物工程量' ,
+					colspan: 3
+				  },
+				  {
+					field: 'payType',
+					title: '总体形象进度（已完成的单项工程、正在进行的单项工程，完成工程占总工程的百分比）' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '下一月度计划完成投资（万元）' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'payType',
+					title: '备注' ,
+					rowspan: 2
+				  }
+				],
+				[
+				  {
 						field: 'moneyyi',
-						title: '序号' ,
+						title: '合同金额（万元）' ,
 				  }
 				 ,{
-						field: 'moneyer',
-						title: '合同名称'
+						field: 'moneysi',
+						title: '自开工以来累计完成投资（万元）'
 				  }
 				 ,{
 						field: 'moneysa',
-						title: '合同编号'
+						title: '剩余投资（万元）'
+				  }
+				 ,{
+						field: 'moneyyi',
+						title: '本年度计划完成投资（万元）' ,
 				  }
 				 ,{
 						field: 'moneysi',
-						title: '合同金额(万元)'
+						title: '本月计划完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysi',
-						title: '合同工期(年/月/天)'
+						field: 'moneysa',
+						title: '本年度实际完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysi',
-						title: '合同签订日期'
+						field: 'moneysa',
+						title: '本月实际完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysi',
-						title: '合同乙方'
+						field: 'moneysa',
+						title: '本旬实际完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysi',
-						title: '备注'
+						field: 'moneysa',
+						title: '土方（万方）'
 				  }
 				 ,{
-						field: 'moneyhj',
-						title: '状态'
+						field: 'moneysa',
+						title: '石方（万方）'
+				  }
+				 ,{
+						field: 'moneysa',
+						title: '混凝土（万立方米）'
 				  }
 				]
 			],
