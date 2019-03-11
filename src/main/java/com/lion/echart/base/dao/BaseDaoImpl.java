@@ -19,12 +19,20 @@ import com.lion.echart.base.entity.Pagintable;
  */
 @Repository("baseDao")
 public class BaseDaoImpl implements BaseDao{
-	
-	
+
 	protected SqlSession sqlMapClient;
+
+	private SqlSessionFactory sqlSessionFactory;
+
+	@Autowired(required = false)
+	public final void setMySessionFacoty(SqlSessionFactory sessionFactory){  
+	    this.sqlSessionFactory = sessionFactory;  
+	}
 	
 	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
+	public void setSqlSessionFacoty(SqlSessionFactory sessionFactory){  
+	    this.sqlSessionFactory = sessionFactory;  
+	}
 	
 	public SqlSession getSqlMapClient(){
 		sqlMapClient = sqlSessionFactory.openSession();

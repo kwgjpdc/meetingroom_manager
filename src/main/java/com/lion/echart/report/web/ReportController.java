@@ -8,11 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.lion.echart.base.logic.BaseService;
 import com.lion.echart.project.entity.MonthTotalEntity;
 
 /**
@@ -23,11 +25,15 @@ import com.lion.echart.project.entity.MonthTotalEntity;
 @Controller
 public class ReportController {
 
+	@Autowired
+	private BaseService baseService;
+	
 	//月度统计表列表页 
 	@RequestMapping(value = "/report/monthTotalList.web",method=RequestMethod.GET)
 	public String monthTotalList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "report");
+		System.out.println(1);
 		return "/page/report/monthTotalList";
 	}
 	
@@ -35,6 +41,10 @@ public class ReportController {
 	@RequestMapping(value = "/report/monthTotal.json",method=RequestMethod.POST)
 	public @ResponseBody List<MonthTotalEntity> monthTotal(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		//TODO 为测试数据，请改为数据库获取
+		System.out.println(2);
+		List<MonthTotalEntity> list = baseService.queryList("comle.project.getMonthTotalListData", null);
+
+		System.out.println("list"+","+list);
 		List<MonthTotalEntity> results = testdata();
 		return results;
 	}
@@ -42,7 +52,7 @@ public class ReportController {
 	//测试数据构建方法
 	private List<MonthTotalEntity> testdata(){
 		List<MonthTotalEntity> results = new ArrayList<MonthTotalEntity>();
-		for(int i = 0; i < 10; i++) {
+		for(int i = 0; i < 6; i++) {
 			results.add(createOneTest());
 		}
 		return results;

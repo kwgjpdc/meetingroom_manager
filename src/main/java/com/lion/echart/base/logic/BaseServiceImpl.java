@@ -2,10 +2,13 @@ package com.lion.echart.base.logic;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.lion.echart.base.dao.BaseDao;
 
 public class BaseServiceImpl implements BaseService{
-	
+
+	@Autowired
 	protected BaseDao baseDao;
 	
 	public BaseDao getBaseDao() {

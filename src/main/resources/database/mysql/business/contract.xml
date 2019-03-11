@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comle.contract">
-	<select id="getdata" parameterType="java.util.Map" resultType="com.lion.echart.contract.entity.ContractEntity" >
+	<select id="getdata" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
 			contractid,contractname,contractnum,amount,durationtime,signtime,contractpartyb,remark,priority,status,isdisabled,operuser,operdate,subofficeid 
 		from t_c_contract 

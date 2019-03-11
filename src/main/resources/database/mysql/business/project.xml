@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comle.project">
-	<select id="getParforListData" parameterType="java.util.Map" resultType="com.lion.echart.project.entity.PayforEntity" >
+	<select id="getParforListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		
+	</select>
+	
+	<select id="getMonthTotalListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select * from t_p_monthtotal 
 	</select>
 </mapper>
