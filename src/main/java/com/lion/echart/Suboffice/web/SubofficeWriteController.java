@@ -32,7 +32,7 @@ public class SubofficeWriteController {
 	}
 	
 	//获取分局填报列表数据
-	@RequestMapping(value = "/subofficewrite/subofficewriteGetData.json",method=RequestMethod.POST)
+	@RequestMapping(value = "/subofficewrite/subofficewriteGetData.json",method=RequestMethod.GET)
 	public @ResponseBody List<PayforEntity> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		//TODO 为测试数据，请改为数据库获取
 		List<PayforEntity> results = new ArrayList<PayforEntity>();
