@@ -9,7 +9,7 @@ String fule = base + "/" + contextPath + "/";
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>合同管理</title>
 </head>
 <body>
 
