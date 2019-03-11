@@ -13,6 +13,11 @@ import com.lion.echart.utils.ImageUtils;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 登陆相关后台请求
+ * @author lion-y
+ *
+ */
 @Controller
 public class LoginController {
 	

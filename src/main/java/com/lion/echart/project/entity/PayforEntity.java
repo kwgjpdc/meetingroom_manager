@@ -2,19 +2,38 @@ package com.lion.echart.project.entity;
 
 import java.io.Serializable;
 
+/**
+ * 支付情况统计试图
+ * @author lion-y
+ *
+ */
 public class PayforEntity implements Serializable {
-	private String payType;
+	private String id;
+	private String payType;//支付类型
 	private String payTypeStr;
 	private String moneyyi;
 	private String moneyer;
 	private String moneysa;
 	private String moneysi;
 	private String moneywu;
-	private String moneyhj;
+	private String moneyhj;//费用合计
 	
 	public PayforEntity(String payType, String payTypeStr, String moneyyi, String moneyer, String moneysa,
+			String moneysi, String moneyhj) {
+		super();
+		this.payType = payType;
+		this.payTypeStr = payTypeStr;
+		this.moneyyi = moneyyi;
+		this.moneyer = moneyer;
+		this.moneysa = moneysa;
+		this.moneysi = moneysi;
+		this.moneyhj = moneyhj;
+	}
+	
+	public PayforEntity(String id, String payType, String payTypeStr, String moneyyi, String moneyer, String moneysa,
 			String moneysi, String moneywu, String moneyhj) {
 		super();
+		this.id = id;
 		this.payType = payType;
 		this.payTypeStr = payTypeStr;
 		this.moneyyi = moneyyi;
@@ -23,6 +42,12 @@ public class PayforEntity implements Serializable {
 		this.moneysi = moneysi;
 		this.moneywu = moneywu;
 		this.moneyhj = moneyhj;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getPayType() {
 		return payType;
