@@ -141,7 +141,7 @@
 	</bean>
     
 	<!-- Ibatis SqlMap Bean -->
-	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean"  primary="false">
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"  primary="false">
    		<property name="configLocations">  
             <list>  
 				<value>classpath:database/${database.type}/sql-map-config.xml</value>

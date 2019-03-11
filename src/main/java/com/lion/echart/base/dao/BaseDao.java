@@ -1,7 +1,10 @@
 package com.lion.echart.base.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
+
+import com.lion.echart.base.entity.Pagintable;
 
 /**
  * 所有dao处理请继承此类
@@ -62,7 +65,7 @@ public interface BaseDao {
 	 * @param pagingParameter
 	 * @return
 	 */
-	//public abstract PagingResult queryListPaging(String sqlid, Object param, PagingParameter pagingParameter);
+	public abstract void queryListPaging(String sqlid, HashMap<String, Object> param, Pagintable pagintable);
 
 	/**
 	 * 批量更新

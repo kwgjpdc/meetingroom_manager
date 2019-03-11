@@ -1,11 +1,16 @@
 package com.lion.echart.base.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.lion.echart.base.entity.Pagintable;
 
 /**
  * 所有dao处理请继承此类
@@ -14,28 +19,24 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("baseDao")
 public class BaseDaoImpl implements BaseDao{
+	
+	
 	protected SqlSession sqlMapClient;
 	
-	@Autowired(required = false)
-	public final void setMySqlMapClient(SqlSession sqlMapClient) {
-		setSqlMapClient(sqlMapClient);
-	}
-	
 	@Autowired
-	public void setSqlMapClient(SqlSession sqlMapClient) {
-		this.sqlMapClient = sqlMapClient;
-	}
+	private SqlSessionFactory sqlSessionFactory;
 	
-	public SqlSession getSqlMapClient() {
+	public SqlSession getSqlMapClient(){
+		sqlMapClient = sqlSessionFactory.openSession();
 		return sqlMapClient;
 	}
 
 	public void updateObject(String sqlid, Object object) throws Exception{
-		sqlMapClient.update(sqlid, object);
+		getSqlMapClient().update(sqlid, object);
 	}
 	
 	public void insertObject(String sqlid, Object object) throws Exception{
-		sqlMapClient.insert(sqlid, object);
+		getSqlMapClient().insert(sqlid, object);
 	}
 
 	public String getNameSpace() {
@@ -43,20 +44,47 @@ public class BaseDaoImpl implements BaseDao{
 	}
 
 	public int delete(String sqlid, Object param) {
-		return sqlMapClient.delete(sqlid, param);
+		return getSqlMapClient().delete(sqlid, param);
 	}
 
 	public List queryList(String sqlid, Object param) {
-		return sqlMapClient.selectList(sqlid, param);
+		return getSqlMapClient().selectList(sqlid, param);
 	}
 
 	public Object queryObject(String sqlid, Object param) {
-		List list = sqlMapClient.selectList(sqlid, param);
+		List list = getSqlMapClient().selectList(sqlid, param);
 		Object obj = null;
 		if(list != null && list.size() == 1) {
 			obj = list.get(0);
 		}
 		return obj;
+	}
+
+	public void queryListPaging(String sqlid, HashMap<String, Object> param, Pagintable pagintable) {
+		String sql = sqlSessionFactory.getConfiguration()
+				.getMappedStatement(sqlid).getBoundSql(param).getSql();
+		HashMap<String, String> paramt = new HashMap<String, String>();
+		paramt.put("sql", sql);
+		Object obj = getSqlMapClient().selectOne("com.system.login.getPageCount", paramt);
+		int totle = 0;
+		if(obj != null) {
+			if(obj instanceof Integer) {
+				totle = new Integer(obj.toString()).intValue();
+			}
+		}
+		pagintable.setTotal(totle);
+		
+		int pageNum = 0;
+		if(param.get("pageNum")!=null) {
+			if(param.get("pageNum") instanceof Integer) {
+				pageNum = new Integer(param.get("pageNum").toString()).intValue();
+			}
+		}
+		
+		int start = pageNum*pagintable.getPageSize()-1;
+		RowBounds rowBounds = new RowBounds(start,pagintable.getPageSize());
+		
+		pagintable.setRows(getSqlMapClient().selectList(sqlid, param, rowBounds));
 	}
 
 	public void updateBatchBySQL(String sqlID, Object object) throws Exception {
