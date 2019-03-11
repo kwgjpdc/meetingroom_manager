@@ -1,4 +1,4 @@
-package com.lion.echart.contract.entity;
+package com.lion.echart.Suboffice.entity;
 
 import java.io.Serializable;
 import java.util.Date;

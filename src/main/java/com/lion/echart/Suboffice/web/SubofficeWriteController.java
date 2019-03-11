@@ -1,4 +1,4 @@
-package com.lion.echart.contract.web;
+package com.lion.echart.Suboffice.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,23 +17,23 @@ import com.lion.echart.contract.entity.ContractEntity;
 import com.lion.echart.project.entity.PayforEntity;
 
 /**
- * 合同管理相关跳转控制
+ * 分局填报相关跳转控制
  * @author TANGXIAN
  *
  */
 @Controller
-public class ContractController {
+public class SubofficeWriteController {
 
-	//项目合同管理列表页 
-	@RequestMapping(value = "/contract/contractList.web",method=RequestMethod.GET)
+	//分局填报管理列表页 
+	@RequestMapping(value = "/subofficewrite/subofficewriteList.web",method=RequestMethod.GET)
 	public String payforList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
 		return "/page/contract/contractList";
 	}
 	
-	//获取合同列表数据
-	@RequestMapping(value = "/contract/contractGetData.json",method=RequestMethod.POST)
+	//获取分局填报列表数据
+	@RequestMapping(value = "/subofficewrite/subofficewriteGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<ContractEntity> contractGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		//TODO 为测试数据，请改为数据库获取
 		List<ContractEntity> results = new ArrayList<ContractEntity>();
