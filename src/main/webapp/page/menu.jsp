@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <input type="hidden" id="who" value="<%=request.getAttribute("who") %>" />
 	<div class="title" >
-		长江勘测规划设计研究院
+		滇中引水管理局
 		<div class="userinfo" >您好：admin</div>
 	</div>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
