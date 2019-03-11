@@ -27,6 +27,7 @@ public class ProjectController {
 	@RequestMapping(value = "/project/payforList.web",method=RequestMethod.GET)
 	public String payforList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "project");
 		return "/page/project/payforList";
 	}
 	

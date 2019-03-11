@@ -29,7 +29,7 @@ String fule = base + "/" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	项目管理 / 支付申请 / 查询条件
+            	项目管理 / 支付申请 
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="btn_add" type="button" class="btn btn-default">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
