@@ -14,9 +14,11 @@ String fule = base + "/" + contextPath + "/";
 <link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/bootstrapValidator.min.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/monthTotalList.js?ts=<%=request.getAttribute("ts") %>"></script>
 
@@ -36,15 +38,15 @@ String fule = base + "/" + contextPath + "/";
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="department">部门</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="department" >
+                            <input type="text" class="form-control" id="department" name="department" >
                         </div>
                         <label class="control-label col-sm-1" for="year">年份</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" id="year">
+                            <input type="text" class="form-control" id="year" name="year" >
                         </div>
                         <label class="control-label col-sm-1" for="month">月份</label>
                         <div class="col-sm-1">
-                            <input type="text" class="form-control" id="month" >
+                            <input type="text" class="form-control" id="month" name="month" >
                         </div>
                         <div class="col-sm-2" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>

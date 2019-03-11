@@ -8,13 +8,13 @@ import java.util.Date;
  *
  */
 public class SubofficeEntity implements Serializable {
-	private int subofficeId;//分局ID
-	private String subofficeName;//分局名称
-	private String remark;//备注
-	private int priority;//排序
-	private String isDisabled;//是否禁用
-	private String operUser;//修改人
-	private Date operDate;//修改时间
+	private int subofficeId;
+	private String subofficeName;
+	private String remark;
+	private int priority;
+	private String isDisabled;
+	private String operUser;
+	private Date operDate;
 	
 	public SubofficeEntity(int subofficeId, String subofficeName, String remark, int priority, String isDisabled,
 			String operUser, Date operDate) {

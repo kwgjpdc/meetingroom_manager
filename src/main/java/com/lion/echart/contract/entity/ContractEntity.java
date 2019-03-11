@@ -8,20 +8,20 @@ import java.util.Date;
  *
  */
 public class ContractEntity implements Serializable {
-	private int contractId;//合同ID
-	private String contractName;//合同名称
-	private String contractNum;//合同编码
-	private Double amount;//合同金额
-	private String durationTime;//工期
-	private Date signTime;//合同签订日期
-	private String contractPartyB;//合同乙方
-	private String remark;//备注
-	private int priority;//排序
-	private int status;//状态
-	private String isDisabled;//是否禁用
-	private String operUser;//修改人
-	private Date operDate;//修改时间
-	private int subofficeId;//所属分局
+	private int contractId;
+	private String contractName;
+	private String contractNum;
+	private Double amount;
+	private String durationTime;
+	private Date signTime;
+	private String contractPartyB;
+	private String remark;
+	private int priority;
+	private int status;
+	private String isDisabled;
+	private String operUser;
+	private Date operDate;
+	private int subofficeId;
 	
 	public ContractEntity(int contractId, String contractName, String contractNum, Double amount, String durationTime,
 			Date signTime, String contractPartyB, String remark, int priority, int status, String isDisabled,

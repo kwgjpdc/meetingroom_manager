@@ -35,8 +35,20 @@ public class ReportController {
 	@RequestMapping(value = "/report/monthTotal.json",method=RequestMethod.POST)
 	public @ResponseBody List<MonthTotalEntity> monthTotal(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		//TODO 为测试数据，请改为数据库获取
-		List<MonthTotalEntity> results = new ArrayList<MonthTotalEntity>();
-		
+		List<MonthTotalEntity> results = testdata();
 		return results;
+	}
+	
+	//测试数据构建方法
+	private List<MonthTotalEntity> testdata(){
+		List<MonthTotalEntity> results = new ArrayList<MonthTotalEntity>();
+		for(int i = 0; i < 10; i++) {
+			results.add(createOneTest());
+		}
+		return results;
+	}
+	private MonthTotalEntity createOneTest() {
+		MonthTotalEntity one = new MonthTotalEntity();
+		return one;
 	}
 }

@@ -25,7 +25,7 @@
 	                    <li><a href="#">财务填报</a></li>
 	                </ul>
 	            </li>
-	            <li><a href="<%=fule %>contract/contractList.web">合同管理</a></li>
+	            <li><a href="#">合同管理</a></li>
 	            <li id="projectli" > 
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
 	                	项目管理 <b class="caret"></b>
@@ -37,8 +37,20 @@
 	            </li>
 	            <li><a href="#">费用管理</a></li>
 	            <li><a href="#">采购管理</a></li>
+	            <li><a href="#">物资管理</a></li>
 	            <li><a href="#">人事管理</a></li>
 	            <li><a href="#">绩效管理</a></li>
+	            <li><a href="#">账户管理</a></li>
+	            <li><a href="#">银企直联</a></li>
+	            <li>
+	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+	                	财务管理<b class="caret"></b>
+	                </a>
+	                <ul class="dropdown-menu">
+	                    <li><a href="#">头寸管理</a></li>
+	                    <li><a href="#">付费管理</a></li>
+	                </ul>
+	            </li>
 	            <li id="reportli" >
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	                	统计报表<b class="caret"></b>
