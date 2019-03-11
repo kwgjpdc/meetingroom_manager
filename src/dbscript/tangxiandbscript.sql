@@ -29,6 +29,7 @@ CREATE TABLE `contract` (
   `contractPartyB` varchar(200) DEFAULT NULL,
   `remark` varchar(200) DEFAULT NULL,
   `priority` int(11) NOT NULL,
+  `status` int(10) NOT NULL,
   `is_disabled` varchar(20) NOT NULL,
   `suboffice_id` int(11) NOT NULL,
   PRIMARY KEY (`contract_id`),
@@ -39,7 +40,7 @@ CREATE TABLE `contract` (
 -- ----------------------------
 -- Records of contract
 -- ----------------------------
-INSERT INTO `contract` VALUES ('1', '大理Ⅱ段进场道路施工3标', 'DZYS-DLⅡ-GCBF-SG-DL003\r\nDZYS-DLⅡ-GCBF-SG-DL003', '3271.069711', '365日历天', '2019-2-22', null, null, '1', 'false', '2');
+INSERT INTO `contract` VALUES ('1', '大理Ⅱ段进场道路施工3标', 'DZYS-DLⅡ-GCBF-SG-DL003\r\nDZYS-DLⅡ-GCBF-SG-DL003', '3271.069711', '365日历天', '2019-2-22', null, null, '1','9', 'false', '2');
 
 -- ----------------------------
 -- Table structure for `suboffice`
