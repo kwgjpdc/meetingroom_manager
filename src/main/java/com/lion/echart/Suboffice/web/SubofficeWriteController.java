@@ -28,7 +28,7 @@ public class SubofficeWriteController {
 	public String subofficewriteList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
-		return "/page/contract/contractList";
+		return "/page/suboffice/subofficeWriteList";
 	}
 	
 	//获取分局填报列表数据
