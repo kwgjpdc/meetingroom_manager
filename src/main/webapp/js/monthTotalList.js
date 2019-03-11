@@ -7,6 +7,48 @@ $(document).ready(function(){
 	$("#month").val(month);
 	//var oTable = new TableInit();
 	//oTable.Init();
+	$('#formSearch').bootstrapValidator({
+		message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {
+			year: {
+				validators: {
+					notEmpty: {
+						message: '年份不能为空'
+					},
+					stringLength: {
+                        min: 4,
+                        max: 4,
+                        message: '年份长度为4位'
+                    },
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: '年份必须为数字'
+					}
+				}
+			},
+			month: {
+				validators: {
+					notEmpty: {
+						message: '月份不能为空'
+					},
+					stringLength: {
+                        min: 1,
+                        max: 2,
+                        message: '月份长度为1到2位'
+                    },
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: '月份必须为位数字'
+					}
+				}
+			}
+		}
+	});
 });
 
 var TableInit = function () {
