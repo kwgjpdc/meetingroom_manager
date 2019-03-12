@@ -61,6 +61,30 @@ function save(){
 	var signTime = $("#signTimeStr").val();
 	var contractPartyB = $("#contractPartyB").val();
 	var remark = $("#remark").val();
+	if(contractName == ''){
+    	alert('请输入合同名称');
+        return false;
+    }
+	if(contractNum == ''){
+    	alert('请输入合同编号');
+        return false;
+    }
+	if(amount == ''){
+    	alert('请输入合同金额');
+        return false;
+    }
+	if(durationTime == ''){
+    	alert('请输入工期');
+        return false;
+    }
+	if(signTime == ''){
+    	alert('请输入签订日期');
+        return false;
+    }
+    if(contractPartyB == ''){
+    	alert('请输入合同乙方');
+        return false;
+    }
 	$.ajax({
 		url: '/echart/contract/contractSave.json',
 		type:"POST",

@@ -38,7 +38,7 @@ String fule = base + "/" + contextPath + "/";
                 	<div class="form-group">
 						<label for="suboffice">所属分局</label>
 						<select class="form-control" id="suboffice" name="suboffice" style="width: 200px;">
-							<option>5</option>
+							<option></option>
 						</select>
 					</div>
 					<div class="form-group">

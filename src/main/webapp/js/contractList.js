@@ -2,8 +2,25 @@ $(document).ready(function(){
 	var oTable = new TableInit();
 	oTable.Init();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
+	loadSubofficeData();
 });
-
+function loadSubofficeData(){
+	$.ajax({
+		url:"/echart/suboffice/subofficeGetData.json",
+		type:"POST",
+		dataType:"json",
+		success:function(data){
+			var strHtml= "";
+			$.each(data, function(key,value){
+				strHtml+='<option value="'+value.subofficeid+'">'+value.subofficename+'</option>';
+			});
+			$("#suboffice").html(strHtml);
+		},
+		error:function(){
+			
+		}
+	});
+}
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table

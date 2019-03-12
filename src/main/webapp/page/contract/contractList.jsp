@@ -49,9 +49,11 @@ String fule = base + "/" + contextPath + "/";
                         <div class="col-sm-2">
                             <input type="text" class="form-control" id="txt_search_departmentname">
                         </div>
-                        <label class="control-label col-sm-1" for="txt_search_statu">分局</label>
+                        <label class="control-label col-sm-1" for="txt_search_statu">所属分局</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="txt_search_statu">
+                            <select class="form-control" id="suboffice" name="suboffice" style="width: 200px;">
+								<option></option>
+							</select>
                         </div>
                         <div class="col-sm-2" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
