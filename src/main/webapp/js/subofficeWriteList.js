@@ -42,7 +42,6 @@ var TableInit = function () {
                     checkbox: true,
                     rowspan: 2
 	              },
-	              {field:"userstatus_usertype",title:"用户类型",width : 150,align:"center",rowspan: 2},
 				  {
 					field: 'contractname',
 					align: 'center',
