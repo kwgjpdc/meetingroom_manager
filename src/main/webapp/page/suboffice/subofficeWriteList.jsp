@@ -21,7 +21,9 @@ String fule = base + "/" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteList.js?ts=<%=request.getAttribute("ts") %>"></script>
-
+<style type="text/css">
+	.table {table-layout:fixed;}
+</style>
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
 	<div id="head" >
@@ -29,7 +31,7 @@ String fule = base + "/" + contextPath + "/";
 	</div>
 	<div id="content" class="content" >
 		<div class="panel-body" style="padding-bottom:0px;">
-        <div class="panel panel-default">
+        <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
             	填报管理 / 分局填报 
             	<div id="toolbar" class="btn-group btn-group-right" >
@@ -56,9 +58,11 @@ String fule = base + "/" + contextPath + "/";
             </div>
         </div>       
 
-        <table id="t_datagrid"></table>
+        <div id="contentTablediv" style="overflow-y: auto;">
+        	<table id="t_datagrid"></table>
         </div>
 	</div>
+</div>
 </body>
 
 </html>

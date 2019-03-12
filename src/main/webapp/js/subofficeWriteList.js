@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var oTable = new TableInit();
 	oTable.Init();
+	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 
 var TableInit = function () {
@@ -10,6 +11,7 @@ var TableInit = function () {
 		$('#t_datagrid').bootstrapTable({
 			url: '/echart/subofficewrite/subofficewriteGetData.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
+			editable:true,//开启编辑模式
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
 			cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -33,88 +35,122 @@ var TableInit = function () {
 			showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
 			cardView: false,                    //是否显示详细视图
 			detailView: false,                   //是否显示父子表
+			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 			columns: [
 				[
 				  {                    
                     checkbox: true,
                     rowspan: 2
 	              },
-				  {
-					field: 'subofficewriteid',
-					align: 'center',
-					title: '序号' ,
-					rowspan: 2
-				  },
+	              {field:"userstatus_usertype",title:"用户类型",width : 150,align:"center",rowspan: 2},
 				  {
 					field: 'contractname',
 					align: 'center',
 					title: '合同名称' ,
+					valign : "middle",
+					width : 250,
 					rowspan: 2
 				  },
 				  {
 					field: 'contractnum',
 					align: 'center',
 					title: '合同编号' ,
+					valign : "middle",
+					width : 220,
 					rowspan: 2
 				  },
 				  {
 					field: 'constructioncontent',
 					align: 'center',
 					title: '主要建设内容' ,
+					valign : "middle",
+					width : 250,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
 					rowspan: 2
 				  },
 				  {
 					field: 'begindatestr',
 					align: 'center',
 					title: '开工时间' ,
+					valign : "middle",
+					width : 150,
 					rowspan: 2
 				  },
 				  {
 					field: 'planfinishdatestr',
 					align: 'center',
 					title: '计划完工时间' ,
+					valign : "middle",
+					width : 150,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
 					rowspan: 2
 				  },
 				  {
 					field: 'budgetinvest',
 					align: 'center',
 					title: '概算投资<br/>(万元)' ,
+					width : 100,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
 					rowspan: 2
 				  },
 				  {
 					field: '',
 					align: 'center',
 					title: '投资完成情况' ,
+					width : 280,
 					colspan: 3
 				  },
 				  {
 					field: '',
 					align: 'center',
 					title: '计划执行情况' ,
+					width : 500,
 					colspan: 5
 				  },
 				  {
 					field: '',
 					align: 'center',
 					title: '累计完成实物工程量' ,
+					width : 300,
 					colspan: 3
-				  },
-				  {
-					field: 'overallimageprogress',
-					align: 'center',
-					title: '总体形象进度（已完成的单项工程、正在进行的单项工程，完成工程占总工程的百分比）' ,
-					rowspan: 2
 				  },
 				  {
 					field: 'nextmonthplaninvest',
 					align: 'center',
+					valign : "middle",
 					title: '下一月度计划<br/>完成投资（万元）' ,
+					width : 150,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
 					rowspan: 2
 				  },
 				  {
 					field: 'remark',
 					align: 'center',
+					valign : "middle",
 					title: '备注' ,
+					width : 150,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
+					rowspan: 2
+				  },
+				  {
+					field: 'overallimageprogress',
+					align: 'center',
+					valign : "middle",
+					title: '总体形象进度（已完成的单项工程、正在进行的单项工程，完成工程占总工程的百分比）' ,
+					width : 950,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
 					rowspan: 2
 				  }
 				],
@@ -123,56 +159,100 @@ var TableInit = function () {
 						field: 'contractamount',
 						align: 'center',
 						title: '合同金额<br/>（万元）' ,
+						width : 80,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'finishinvest',
 						align: 'center',
-						title: '自开工以来累计<br/>完成投资（万元）'
+						title: '自开工以来累计<br/>完成投资<br/>（万元）',
+						width : 120,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'surplusinvest',
 						align: 'center',
-						title: '剩余投资<br/>（万元）'
+						title: '剩余投资<br/>（万元）',
+						width : 80,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'yearplaninvest',
 						align: 'center',
-						title: '本年度计划<br/>完成投资（万元）' ,
+						title: '本年度计划<br/>完成投资<br/>（万元）' ,
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'monthplaninvest',
 						align: 'center',
-						title: '本月计划<br/>完成投资（万元）'
+						title: '本月计划<br/>完成投资<br/>（万元）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'yearrealityinvest',
 						align: 'center',
-						title: '本年度实际<br/>完成投资（万元）'
+						title: '本年度实际<br/>完成投资<br/>（万元）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'monthrealityinvest',
 						align: 'center',
-						title: '本月实际<br/>完成投资（万元）'
+						title: '本月实际<br/>完成投资<br/>（万元）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'tendayrealityinvest',
 						align: 'center',
-						title: '本旬实际<br/>完成投资（万元）'
+						title: '本旬实际<br/>完成投资<br/>（万元）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'earthwork',
 						align: 'center',
-						title: '土方<br/>（万方）'
+						title: '土方<br/>（万方）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'stonework',
 						align: 'center',
-						title: '石方<br/>（万方）'
+						title: '石方<br/>（万方）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				 ,{
 						field: 'beton',
 						align: 'center',
-						title: '混凝土<br/>（万立方米）'
+						title: '混凝土<br/>（万立方米）',
+						width : 100,
+						formatter:function (value, row, index, field) {
+					        return '<div contenteditable="true">' + (value || "") + '</div>';
+					    }
 				  }
 				]
 			],
