@@ -41,6 +41,10 @@ String fule = base + "/" + contextPath + "/";
 		            <button id="excelbtn" type="button" class="btn btn-default" onclick="doexcel()" >
 		                <span class="glyphicon" aria-hidden="true"  >导出</span>
 		            </button>
+		            <button id="btn_changeCahart" style="display:none;" type="button" 
+		            	class="btn btn-default" onclick="dochange()" >
+		                <span class="glyphicon" aria-hidden="true"  >切换视图</span>
+		            </button>
 		            <button id="btn_change" type="button" class="btn btn-default" onclick="changeView()" >
 		                <span class="glyphicon" aria-hidden="true" id="btnLabber" >图表视图</span>
 		            </button>
@@ -71,13 +75,22 @@ String fule = base + "/" + contextPath + "/";
 		<div id="contentTablediv" >
         	<table id="t_datagrid"></table>
         </div>
-		<div id="contentEchartdiv" style="display:none;width:100%;height:100%;" >
+		<div id="pieEchartdiv1" style="display:none;width:100%;height:100%;" >
 			<div id="onepiediv1" class="pieone" ></div>
 			<div id="onepiediv2" class="pieone" ></div>
 			<div id="onepiediv3" class="pieone" ></div>
 			<div id="onepiediv4" class="pieone" ></div>
 			<div id="onepiediv5" class="pieone" ></div>
 			<div id="onepiediv6" class="pieone" ></div>
+		</div>
+		<div id="pieEchartdiv2" style="display:none;width:100%;height:100%;" >
+			<div id="onepie2div1" class="pieone" ></div>
+			<div id="onepie2div2" class="pieone" ></div>
+			<div id="onepie2div3" class="pieone" ></div>
+			<div id="onepie2div4" class="pieone" ></div>
+			<div id="onepie2div5" class="pieone" ></div>
+			<div id="onepie2div6" class="pieone" ></div>
+			<div id="onepie2div7" class="pieone" ></div>
 		</div>
         </div>
 </div>

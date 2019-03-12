@@ -9,8 +9,9 @@ $(document).ready(function(){
 	
 	var oTable = new TableInit();
 	oTable.Init();
-	
-	$("#contentEchartdiv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
+
+	$("#pieEchartdiv1").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
+	$("#pieEchartdiv2").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 function changeView(){
@@ -19,7 +20,8 @@ function changeView(){
 		$("#printbtn").hide();
 		$("#excelbtn").hide();
 		$("#contentTablediv").hide();
-		$("#contentEchartdiv").show();
+		$("#pieEchartdiv1").show();
+		$("#btn_changeCahart").show();
 		echartinitpie();
 	}else{
 		$("#btnLabber").html('图表视图');
@@ -27,6 +29,7 @@ function changeView(){
 		$("#excelbtn").show();
 		$("#contentTablediv").show();
 		$("#contentEchartdiv").hide();
+		$("#btn_changeCahart").hiden();
 	}
 }
 function validatef(){
@@ -80,15 +83,56 @@ function echartinitpie(){
 	}
 }
 function echartonepie(_divid,datas){
-	/*
-	 		datas["contractTotal"]+'-合同总金额', 
-           	datas["thisYearPlan"]+'-本年度计划完成投资', 
-           	datas["thisMonthInvest"]+'-本月完成投资', 
-           	datas["thisYtmTotal"]+'-本年至当月完成投资', 
-           	datas["investTotal"]+'-自开关以来累计完成投资', 
-           	datas["balanceTotal"]+'-累计结算工程款额', 
-           	datas["payforTotal"]+'-工程累计支付情况'
-	 */
+	echarts.init(document.getElementById(_divid)).setOption({
+		 title:{//标题
+            text:datas["departStr"],
+            top:'bottom',
+            left:'center',
+            textStyle:{
+                fontSize: 14,
+                fontWeight: '',
+                color: '#333'
+            },
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        series: {
+        	name: '分局合同月统计',
+            type: 'pie',
+            data: [
+                {name: '合同总金额', value: datas["contractTotal"]},
+                {name: '本年度计划完成投资', value: datas["thisYearPlan"]},
+                {name: '本月完成投资', value: datas["thisMonthInvest"]},
+                {name: '本年至当月完成投资', value: datas["thisYtmTotal"]},
+                {name: '自开关以来累计完成投资', value: datas["investTotal"]},
+                {name: '累计结算工程款额', value: datas["balanceTotal"]},
+                {name: '工程累计支付情况', value: datas["payforTotal"]}
+            ]
+        }
+    });
+}
+function echartinitpie2(){
+	var rows = $('#t_datagrid').bootstrapTable('getData');
+	for(var i = 0; i < rows.length-1; i++){
+		echartonepie('onepiediv'+(i+1),rows[i]);
+	}
+}
+function echartonepie2(_divid,datas){
 	echarts.init(document.getElementById(_divid)).setOption({
 		 title:{//标题
             text:datas["departStr"],
