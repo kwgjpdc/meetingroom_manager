@@ -28,6 +28,8 @@ public class SubofficeWriteEntity implements Serializable {
 	private String overallImageProgress;//总体形象进度
 	private Double nextMonthPlanInvest;//下一月度计划完成投资
 	private String remark;//备注
+	private String year;//所属年份
+	private String month;//所属月份
 	private int priority;//序号
 	private String isDisabled;//是否禁用
 	private String operUser;//修改人
@@ -37,8 +39,8 @@ public class SubofficeWriteEntity implements Serializable {
 			Date planFinishDate, Double budgetInvest, Double contractAmount, Double finishInvest, Double surplusInvest,
 			Double yearPlanInvest, Double monthPlanInvest, Double yearRealityInvest, Double monthRealityInvest,
 			Double tendayRealityInvest, Double earthwork, Double stonework, Double beton, String overallImageProgress,
-			Double nextMonthPlanInvest, String remark, int priority, String isDisabled, String operUser,
-			Date operDate) {
+			Double nextMonthPlanInvest, String remark, String year, String month, int priority, String isDisabled,
+			String operUser, Date operDate) {
 		super();
 		this.subofficeWriteId = subofficeWriteId;
 		this.contractId = contractId;
@@ -60,6 +62,8 @@ public class SubofficeWriteEntity implements Serializable {
 		this.overallImageProgress = overallImageProgress;
 		this.nextMonthPlanInvest = nextMonthPlanInvest;
 		this.remark = remark;
+		this.year = year;
+		this.month = month;
 		this.priority = priority;
 		this.isDisabled = isDisabled;
 		this.operUser = operUser;
@@ -184,6 +188,18 @@ public class SubofficeWriteEntity implements Serializable {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
 	}
 	public int getPriority() {
 		return priority;

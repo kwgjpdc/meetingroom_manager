@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comle.Suboffice">
+	<resultMap type="com.lion.echart.Suboffice.entity.SubofficeWriteEntity" id="subofficeWrite">
+		<id property="subofficeWriteId" column="subofficewriteid"/>
+		<result property="contractId" column="contractid"/>
+		<result property="constructionContent" column="constructioncontent"/>
+		<result property="beginDate" column="begindate"/>
+		<result property="planFinishDate" column="planfinishdate"/>
+		<result property="budgetInvest" column="budgetinvest"/>
+		<result property="contractAmount" column="contractamount"/>
+		<result property="finishInvest" column="finishinvest"/>
+		<result property="surplusInvest" column="surplusinvest"/>
+		<result property="yearPlanInvest" column="yearplaninvest"/>
+		<result property="monthPlanInvest" column="monthplaninvest"/>
+		<result property="yearRealityInvest" column="yearrealityinvest"/>
+		<result property="monthRealityInvest" column="monthrealityinvest"/>
+		<result property="tendayRealityInvest" column="tendayrealityinvest"/>
+		<result property="earthwork" column="earthwork"/>
+		<result property="stonework" column="stonework"/>
+		<result property="beton" column="beton"/>
+		<result property="overallImageProgress" column="overallimageprogress"/>
+		<result property="nextMonthPlanInvest" column="nextmonthplaninvest"/>
+		<result property="remark" column="remark"/>
+		<result property="priority" column="priority"/>
+		<result property="isDisabled" column="isdisabled"/>
+		<result property="operUser" column="operuser"/>
+		<result property="nextMonthPlanInvest" column="nextmonthplaninvest"/>
+		<result property="year" column="year"/>
+		<result property="month" column="month"/>
+		<result property="operDate" column="operdate" jdbcType="DATE"/>
+	</resultMap>
+	<select id="getSubofficewriteListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select 
+			sw.*,ct.contractname,ct.contractnum,
+			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
+			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr
+		from t_s_subofficewrite sw,t_c_contract ct where sw.contractid = ct.contractid
+	</select>
+</mapper>

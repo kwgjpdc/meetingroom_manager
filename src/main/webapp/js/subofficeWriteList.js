@@ -8,7 +8,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/project/payforGetData.json',         //请求后台的URL（*）
+			url: '/echart/subofficewrite/subofficewriteGetData.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -35,111 +35,144 @@ var TableInit = function () {
 			detailView: false,                   //是否显示父子表
 			columns: [
 				[
+				  {                    
+                    checkbox: true,
+                    rowspan: 2
+	              },
 				  {
-					field: 'payType',
+					field: 'subofficewriteid',
+					align: 'center',
 					title: '序号' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
+					field: 'contractname',
+					align: 'center',
 					title: '合同名称' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
+					field: 'contractnum',
+					align: 'center',
 					title: '合同编号' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
+					field: 'constructioncontent',
+					align: 'center',
 					title: '主要建设内容' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
+					field: 'begindatestr',
+					align: 'center',
+					title: '开工时间' ,
+					rowspan: 2
+				  },
+				  {
+					field: 'planfinishdatestr',
+					align: 'center',
 					title: '计划完工时间' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
-					title: '概算投资(万元)' ,
+					field: 'budgetinvest',
+					align: 'center',
+					title: '概算投资<br/>(万元)' ,
 					rowspan: 2
 				  },
 				  {
 					field: '',
+					align: 'center',
 					title: '投资完成情况' ,
 					colspan: 3
 				  },
 				  {
 					field: '',
+					align: 'center',
 					title: '计划执行情况' ,
 					colspan: 5
 				  },
 				  {
 					field: '',
+					align: 'center',
 					title: '累计完成实物工程量' ,
 					colspan: 3
 				  },
 				  {
-					field: 'payType',
+					field: 'overallimageprogress',
+					align: 'center',
 					title: '总体形象进度（已完成的单项工程、正在进行的单项工程，完成工程占总工程的百分比）' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
-					title: '下一月度计划完成投资（万元）' ,
+					field: 'nextmonthplaninvest',
+					align: 'center',
+					title: '下一月度计划<br/>完成投资（万元）' ,
 					rowspan: 2
 				  },
 				  {
-					field: 'payType',
+					field: 'remark',
+					align: 'center',
 					title: '备注' ,
 					rowspan: 2
 				  }
 				],
 				[
 				  {
-						field: 'moneyyi',
-						title: '合同金额（万元）' ,
+						field: 'contractamount',
+						align: 'center',
+						title: '合同金额<br/>（万元）' ,
 				  }
 				 ,{
-						field: 'moneysi',
-						title: '自开工以来累计完成投资（万元）'
+						field: 'finishinvest',
+						align: 'center',
+						title: '自开工以来累计<br/>完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '剩余投资（万元）'
+						field: 'surplusinvest',
+						align: 'center',
+						title: '剩余投资<br/>（万元）'
 				  }
 				 ,{
-						field: 'moneyyi',
-						title: '本年度计划完成投资（万元）' ,
+						field: 'yearplaninvest',
+						align: 'center',
+						title: '本年度计划<br/>完成投资（万元）' ,
 				  }
 				 ,{
-						field: 'moneysi',
-						title: '本月计划完成投资（万元）'
+						field: 'monthplaninvest',
+						align: 'center',
+						title: '本月计划<br/>完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '本年度实际完成投资（万元）'
+						field: 'yearrealityinvest',
+						align: 'center',
+						title: '本年度实际<br/>完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '本月实际完成投资（万元）'
+						field: 'monthrealityinvest',
+						align: 'center',
+						title: '本月实际<br/>完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '本旬实际完成投资（万元）'
+						field: 'tendayrealityinvest',
+						align: 'center',
+						title: '本旬实际<br/>完成投资（万元）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '土方（万方）'
+						field: 'earthwork',
+						align: 'center',
+						title: '土方<br/>（万方）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '石方（万方）'
+						field: 'stonework',
+						align: 'center',
+						title: '石方<br/>（万方）'
 				  }
 				 ,{
-						field: 'moneysa',
-						title: '混凝土（万立方米）'
+						field: 'beton',
+						align: 'center',
+						title: '混凝土<br/>（万立方米）'
 				  }
 				]
 			],
@@ -166,3 +199,29 @@ var TableInit = function () {
 	};
 	return oTableInit;
 };
+
+/**
+ * 新增一行数据
+ */
+function addRow(){
+    var count = $('#t_datagrid').bootstrapTable('getData').length;
+    // newFlag == 1的数据为新规的数据
+    $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
+}
+/**
+ * 删除一行数据
+ */
+function delRow(){
+    var count = $('#t_datagrid').bootstrapTable('getData').length;
+    var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+    if(checkRow.length<=0){
+		 alert("请选中一行")
+	}else{
+		var check=JSON.stringify(checkRow);
+		console.log(check);
+	}
+    if (count == 1) {
+        info("已经是最后一条，不能删除!");
+        return;
+    }
+}

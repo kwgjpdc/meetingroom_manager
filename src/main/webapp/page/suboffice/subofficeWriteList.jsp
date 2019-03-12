@@ -9,14 +9,16 @@ String fule = base + "/" + contextPath + "/";
 <html>
 <head>
 <meta charset="UTF-8">
-<title>水委报表管理系统</title>
+<title>滇中引水管理局</title>
 <link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-editable.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteList.js?ts=<%=request.getAttribute("ts") %>"></script>
 
@@ -31,13 +33,10 @@ String fule = base + "/" + contextPath + "/";
             <div class="panel-heading">
             	填报管理 / 分局填报 
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="btn_add" type="button" class="btn btn-default">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
-		            <button id="btn_edit" type="button" class="btn btn-default">
-		                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-		            </button>
-		            <button id="btn_delete" type="button" class="btn btn-default">
+		            <button id="btn_delete" type="button" class="btn btn-default" onclick="delRow()">
 		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 		            </button>
 		        </div>
