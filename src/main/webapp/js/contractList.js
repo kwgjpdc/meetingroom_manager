@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var oTable = new TableInit();
 	oTable.Init();
+	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 
 var TableInit = function () {
@@ -8,7 +9,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/project/payforGetData.json',         //请求后台的URL（*）
+			url: '/echart/contract/contractListGetData.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -33,42 +34,46 @@ var TableInit = function () {
 			showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
 			cardView: false,                    //是否显示详细视图
 			detailView: false,                   //是否显示父子表
+			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 			columns: [
 				[
-				  {
-						field: 'moneyyi',
-						title: '序号' ,
+				  {                    
+                    checkbox: true
+	              }
+				  ,{
+						field: 'subofficename',
+						title: '所属分局'
 				  }
 				 ,{
-						field: 'moneyer',
+						field: 'contractname',
 						title: '合同名称'
 				  }
 				 ,{
-						field: 'moneysa',
+						field: 'contractnum',
 						title: '合同编号'
 				  }
 				 ,{
-						field: 'moneysi',
+						field: 'amount',
 						title: '合同金额(万元)'
 				  }
 				 ,{
-						field: 'moneysi',
+						field: 'durationtime',
 						title: '合同工期(年/月/天)'
 				  }
 				 ,{
-						field: 'moneysi',
+						field: 'signtimestr',
 						title: '合同签订日期'
 				  }
 				 ,{
-						field: 'moneysi',
+						field: 'contractpartyb',
 						title: '合同乙方'
 				  }
 				 ,{
-						field: 'moneysi',
+						field: 'remark',
 						title: '备注'
 				  }
 				 ,{
-						field: 'moneyhj',
+						field: 'statusstr',
 						title: '状态'
 				  }
 				]

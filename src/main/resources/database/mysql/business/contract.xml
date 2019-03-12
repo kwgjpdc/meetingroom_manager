@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comle.contract">
-	<select id="getdata" parameterType="java.util.Map" resultType="java.util.Map" >
+	<select id="getcontractListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
-			contractid,contractname,contractnum,amount,durationtime,signtime,contractpartyb,remark,priority,status,isdisabled,operuser,operdate,subofficeid 
-		from t_c_contract 
+			ct.*,
+			sf.subofficename,
+			date_format(ct.signtime, '%y-%m-%d') signtimestr,
+			case when ct.status = '9' then '已审核' 
+                 when ct.status = '2' then '审核中'
+            else '未审核' end  statusstr
+		from t_c_contract ct , t_s_suboffice sf where ct.subofficeid = sf.subofficeid
 	</select>
+	
+	<insert id="insertContract" parameterType="com.lion.echart.contract.entity.ContractEntity">
+           insert into t_c_contract(contractname, contractnum, amount, durationtime, signtime, contractpartyb, remark, priority, status, isdisabled, operuser, operdate, subofficeid) 
+               values(#{contractName}, #{contractNum}, #{amount}, #{durationTime}, #{signTime}, #{contractPartyB}, #{remark}, #{priority}, #{status}, #{isDisabled}, #{operUser}, #{operDate}, #{subofficeId})
+   </insert>
 </mapper>

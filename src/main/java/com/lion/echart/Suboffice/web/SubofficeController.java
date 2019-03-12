@@ -21,26 +21,26 @@ import com.lion.echart.project.entity.MonthTotalEntity;
 import com.lion.echart.project.entity.PayforEntity;
 
 /**
- * 分局填报相关跳转控制
+ * 分局信息相关跳转控制
  * @author TANGXIAN
  *
  */
 @Controller
-public class SubofficeWriteController {
+public class SubofficeController {
 	@Autowired
 	private BaseService baseService;
-	//分局填报列表页 
-	@RequestMapping(value = "/subofficewrite/subofficewriteList.web",method=RequestMethod.GET)
-	public String subofficewriteList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	//分局信息列表页 
+	@RequestMapping(value = "/suboffice/subofficeList.web",method=RequestMethod.GET)
+	public String subofficeList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
 		return "/page/suboffice/subofficeWriteList";
 	}
 	
-	//获取分局填报列表数据
-	@RequestMapping(value = "/subofficewrite/subofficewriteGetData.json",method=RequestMethod.POST)
+	//获取分局列表数据
+	@RequestMapping(value = "/suboffice/subofficeGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", null);
+		List<Map<String, Object>> list = baseService.queryList("comle.Suboffice.getSubofficeListData", null);
 		return list;
 	}
 }

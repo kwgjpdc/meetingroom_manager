@@ -27,11 +27,11 @@ String fule = base + "/" + contextPath + "/";
 	</div>
 	<div id="content" class="content" >
 		<div class="panel-body" style="padding-bottom:0px;">
-        <div class="panel panel-default">
+        <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
             	合同管理
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="btn_add" type="button" class="btn btn-default">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>contract/contractAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
 		            <button id="btn_edit" type="button" class="btn btn-default">
@@ -61,9 +61,11 @@ String fule = base + "/" + contextPath + "/";
             </div>
         </div>       
 
-        <table id="t_datagrid"></table>
+        <div id="contentTablediv" style="overflow-y: auto;">
+        	<table id="t_datagrid"></table>
         </div>
 	</div>
+</div>
 </body>
 
 </html>

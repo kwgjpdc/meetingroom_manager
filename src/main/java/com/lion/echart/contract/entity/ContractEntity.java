@@ -23,11 +23,10 @@ public class ContractEntity implements Serializable {
 	private Date operDate;
 	private int subofficeId;
 	
-	public ContractEntity(int contractId, String contractName, String contractNum, Double amount, String durationTime,
+	public ContractEntity(String contractName, String contractNum, Double amount, String durationTime,
 			Date signTime, String contractPartyB, String remark, int priority, int status, String isDisabled,
 			String operUser, Date operDate, int subofficeId) {
 		super();
-		this.contractId = contractId;
 		this.contractName = contractName;
 		this.contractNum = contractNum;
 		this.amount = amount;
