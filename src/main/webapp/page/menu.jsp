@@ -24,7 +24,15 @@
 	                    <li><a href="#">财务填报</a></li>
 	                </ul>
 	            </li>
-	            <li><a href="<%=fule %>contract/contractList.web">合同管理</a></li>
+	            <li id="projectli" > 
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
+	                	合同管理 <b class="caret"></b>
+	                </a>
+	                <ul class="dropdown-menu">
+	                     <li><a href="<%=fule %>contract/contractList.web">合同签订</a></li>
+	                    <li><a href="" >合同执行</a></li>
+	                </ul>
+	            </li>
 	            <li id="projectli" > 
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
 	                	项目管理 <b class="caret"></b>

@@ -5,7 +5,7 @@
 		select 
 			ct.*,
 			sf.subofficename,
-			date_format(ct.signtime, '%y-%m-%d') signtimestr,
+			date_format(ct.signtime, '%Y-%m-%d') signtimestr,
 			case when ct.status = '9' then '已审核' 
                  when ct.status = '2' then '审核中'
             else '未审核' end  statusstr

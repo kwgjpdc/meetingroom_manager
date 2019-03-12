@@ -75,6 +75,9 @@ var TableInit = function () {
 					title: '开工时间' ,
 					valign : "middle",
 					width : 150,
+					formatter:function (value, row, index, field) {
+				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				    },
 					rowspan: 2
 				  },
 				  {

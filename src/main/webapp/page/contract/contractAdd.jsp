@@ -32,7 +32,7 @@ String fule = base + "/" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	合同管理 / 合同添加
+            	合同管理 / 合同签订 / 合同添加
             </div>
             <div class="panel-body">
                 	<div class="form-group">

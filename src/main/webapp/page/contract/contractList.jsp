@@ -29,7 +29,7 @@ String fule = base + "/" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
-            	合同管理
+            	合同管理 / 合同签订
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>contract/contractAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
