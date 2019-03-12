@@ -57,6 +57,12 @@ public class MonthTotalEntity implements Serializable {
 		this.month = month;
 	}
 	public Double getContractTotal() {
+		if(contractTotalStr != null && !contractTotalStr.isEmpty()) {
+			contractTotal = new Double(contractTotalStr.replace(",", ""));
+		}else {
+			contractTotal = 0d;
+		}
+				
 		return contractTotal;
 	}
 	public void setContractTotal(Double contractTotal) {
@@ -69,6 +75,11 @@ public class MonthTotalEntity implements Serializable {
 		this.contractTotalStr = contractTotalStr;
 	}
 	public Double getThisYearPlan() {
+		if(thisYearPlanStr != null && !thisYearPlanStr.isEmpty()) {
+			thisYearPlan = new Double(thisYearPlanStr.replace(",", ""));
+		}else {
+			thisYearPlan = 0d;
+		}
 		return thisYearPlan;
 	}
 	public void setThisYearPlan(Double thisYearPlan) {
@@ -81,6 +92,11 @@ public class MonthTotalEntity implements Serializable {
 		this.thisYearPlanStr = thisYearPlanStr;
 	}
 	public Double getThisMonthInvest() {
+		if(thisMonthInvestStr != null && !thisMonthInvestStr.isEmpty()) {
+			thisMonthInvest = new Double(thisMonthInvestStr.replace(",", ""));
+		}else {
+			thisMonthInvest = 0d;
+		}
 		return thisMonthInvest;
 	}
 	public void setThisMonthInvest(Double thisMonthInvest) {
@@ -99,6 +115,11 @@ public class MonthTotalEntity implements Serializable {
 		this.year = year;
 	}
 	public Double getInvestTotal() {
+		if(investTotalStr != null && !investTotalStr.isEmpty()) {
+			investTotal = new Double(investTotalStr.replace(",", ""));
+		}else {
+			investTotal = 0d;
+		}
 		return investTotal;
 	}
 	public void setInvestTotal(Double investTotal) {
@@ -111,6 +132,11 @@ public class MonthTotalEntity implements Serializable {
 		this.investTotalStr = investTotalStr;
 	}
 	public Double getThisYtmTotal() {
+		if(thisYtmTotalStr != null && !thisYtmTotalStr.isEmpty()) {
+			thisYtmTotal = new Double(thisYtmTotalStr.replace(",", ""));
+		}else {
+			thisYtmTotal = 0d;
+		}
 		return thisYtmTotal;
 	}
 	public void setThisYtmTotal(Double thisYtmTotal) {
@@ -123,6 +149,11 @@ public class MonthTotalEntity implements Serializable {
 		this.thisYtmTotalStr = thisYtmTotalStr;
 	}
 	public Double getBalanceTotal() {
+		if(balanceTotalStr != null && !balanceTotalStr.isEmpty()) {
+			balanceTotal = new Double(balanceTotalStr.replace(",", ""));
+		}else {
+			balanceTotal = 0d;
+		}
 		return balanceTotal;
 	}
 	public void setBalanceTotal(Double balanceTotal) {
@@ -135,6 +166,11 @@ public class MonthTotalEntity implements Serializable {
 		this.balanceTotalStr = balanceTotalStr;
 	}
 	public Double getPayforTotal() {
+		if(payforTotalStr != null && !payforTotalStr.isEmpty()) {
+			payforTotal = new Double(balanceTotalStr.replace(",", ""));
+		}else {
+			payforTotal = 0d;
+		}
 		return payforTotal;
 	}
 	public void setPayforTotal(Double payforTotal) {

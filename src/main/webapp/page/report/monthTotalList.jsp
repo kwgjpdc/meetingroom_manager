@@ -10,28 +10,41 @@ String fule = base + "/" + contextPath + "/";
 <head>
 <meta charset="UTF-8">
 <title>月度统计表</title>
-<link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
-<link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrapValidator.min.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
+<link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
+<link rel="stylesheet" href="<%=contextPath%>/css/monthTotalList.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/echarts.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/monthTotalList.js?ts=<%=request.getAttribute("ts") %>"></script>
 
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
-	<div id="head" >
-		<%@include file="../menu.jsp" %>
-	</div>
-	<div id="content" class="content" >
-		<div class="panel-body" style="padding-bottom:0px;">
-        <div class="panel panel-default">
+<div id="head" >
+	<%@include file="../menu.jsp" %>
+</div>
+<div id="content" class="content" >
+	<div class="panel-body" style="padding-bottom:0px;">
+    	<div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
             	统计报表 / 合同月度统计表
+            	<div id="toolbar" class="btn-group btn-group-right" >
+		            <button id="printbtn" type="button" class="btn btn-default" onclick="print()" >
+		                <span class="glyphicon" aria-hidden="true" >打印</span>
+		            </button>
+		            <button id="excelbtn" type="button" class="btn btn-default" onclick="doexcel()" >
+		                <span class="glyphicon" aria-hidden="true"  >导出</span>
+		            </button>
+		            <button id="btn_change" type="button" class="btn btn-default" onclick="changeView()" >
+		                <span class="glyphicon" aria-hidden="true" id="btnLabber" >图表视图</span>
+		            </button>
+		        </div>
             </div>
             <div class="panel-body">
                 <form id="formSearch" class="form-horizontal">
@@ -55,10 +68,18 @@ String fule = base + "/" + contextPath + "/";
                 </form>
             </div>
         </div>       
-
-        <table id="t_datagrid"></table>
+		<div id="contentTablediv" >
+        	<table id="t_datagrid"></table>
         </div>
-	</div>
+		<div id="contentEchartdiv" style="display:none;width:100%;height:100%;" >
+			<div id="onepiediv1" class="pieone" ></div>
+			<div id="onepiediv2" class="pieone" ></div>
+			<div id="onepiediv3" class="pieone" ></div>
+			<div id="onepiediv4" class="pieone" ></div>
+			<div id="onepiediv5" class="pieone" ></div>
+			<div id="onepiediv6" class="pieone" ></div>
+		</div>
+        </div>
+</div>
 </body>
-
 </html>

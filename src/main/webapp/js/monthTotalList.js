@@ -9,7 +9,26 @@ $(document).ready(function(){
 	
 	var oTable = new TableInit();
 	oTable.Init();
+	
+	$("#contentEchartdiv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
+	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
+function changeView(){
+	if($("#btnLabber").html() == '图表视图'){
+		$("#btnLabber").html('列表视图');
+		$("#printbtn").hide();
+		$("#excelbtn").hide();
+		$("#contentTablediv").hide();
+		$("#contentEchartdiv").show();
+		echartinitpie();
+	}else{
+		$("#btnLabber").html('图表视图');
+		$("#printbtn").show();
+		$("#excelbtn").show();
+		$("#contentTablediv").show();
+		$("#contentEchartdiv").hide();
+	}
+}
 function validatef(){
 	$('#formSearch').bootstrapValidator({
 		message: 'This value is not valid',
@@ -54,7 +73,65 @@ function validatef(){
 		}
 	});
 }
-
+function echartinitpie(){
+	var rows = $('#t_datagrid').bootstrapTable('getData');
+	for(var i = 0; i < rows.length-1; i++){
+		echartonepie('onepiediv'+(i+1),rows[i]);
+	}
+}
+function echartonepie(_divid,datas){
+	/*
+	 		datas["contractTotal"]+'-合同总金额', 
+           	datas["thisYearPlan"]+'-本年度计划完成投资', 
+           	datas["thisMonthInvest"]+'-本月完成投资', 
+           	datas["thisYtmTotal"]+'-本年至当月完成投资', 
+           	datas["investTotal"]+'-自开关以来累计完成投资', 
+           	datas["balanceTotal"]+'-累计结算工程款额', 
+           	datas["payforTotal"]+'-工程累计支付情况'
+	 */
+	echarts.init(document.getElementById(_divid)).setOption({
+		 title:{//标题
+            text:datas["departStr"],
+            top:'bottom',
+            left:'center',
+            textStyle:{
+                fontSize: 14,
+                fontWeight: '',
+                color: '#333'
+            },
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType : {
+                    show: true,
+                    type: ['pie', 'funnel']
+                },
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        series: {
+        	name: '分局合同月统计',
+            type: 'pie',
+            data: [
+                {name: '合同总金额', value: datas["contractTotal"]},
+                {name: '本年度计划完成投资', value: datas["thisYearPlan"]},
+                {name: '本月完成投资', value: datas["thisMonthInvest"]},
+                {name: '本年至当月完成投资', value: datas["thisYtmTotal"]},
+                {name: '自开关以来累计完成投资', value: datas["investTotal"]},
+                {name: '累计结算工程款额', value: datas["balanceTotal"]},
+                {name: '工程累计支付情况', value: datas["payforTotal"]}
+            ]
+        }
+    });
+}
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
@@ -65,7 +142,7 @@ var TableInit = function () {
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
 			cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-			pagination: true,                   //是否显示分页（*）
+			pagination: false,                   //是否显示分页（*）
 			sortable: false,                     //是否启用排序
 			sortOrder: "asc",                   //排序方式
 			queryParams: $("#formSearch").serializeArray(),//传递参数（*）
@@ -87,26 +164,21 @@ var TableInit = function () {
 			detailView: false,                   //是否显示父子表
 			columns: [
 				[
-				  {
-						field: 'moneyyi',
-						title: '2017年' ,
-				  }
-				 ,{
-						field: 'moneyer',
-						title: '2018年'
-				  }
-				 ,{
-						field: 'moneysa',
-						title: '2019年1月'
-				  }
-				 ,{
-						field: 'moneysi',
-						title: '2019年2月'
-				  }
-				 ,{
-						field: 'moneyhj',
-						title: '累计'
-				  }
+				  {field: 'departStr',title: '直属分局' ,align:'center'}
+				 ,{field: 'contractTotal',hiden:'true'}
+				 ,{field: 'contractTotalStr',title: '合同总金额（万元）',align:'right'}
+				 ,{field: 'thisYearPlan',hiden:'right'}
+				 ,{field: 'thisYearPlanStr',title: '本年度计划完成投资（万元）',align:'right'}
+				 ,{field: 'thisMonthInvest',hiden:'right'}
+				 ,{field: 'thisMonthInvestStr',title: '2月完成投资（万元）',align:'right'}
+				 ,{field: 'thisYtmTotal',hiden:'right'}
+				 ,{field: 'thisYtmTotalStr',title: '2019年至2月实际完成投资（万元）',align:'right'}
+				 ,{field: 'investTotal',hiden:'right'}
+				 ,{field: 'investTotalStr',title: '自开工以来累计完成投资（万元）',align:'right'}
+				 ,{field: 'balanceTotal',hiden:'right'}
+				 ,{field: 'balanceTotalStr',title: '累计结算工程款额（万元）',align:'right'}
+				 ,{field: 'payforTotal',hiden:'right'}
+				 ,{field: 'payforTotalStr',title: '工程款累计支付情况（万元）',align:'right'}
 				]
 			],
 			rowStyle: function (row, index) {

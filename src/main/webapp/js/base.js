@@ -7,3 +7,12 @@ $(document).ready(function(){
 		$("#mainpli").addClass("active");
 	}
 });
+
+
+function print(){
+	alert('工程师正在努力实现中');
+}
+
+function doexcel(){
+	alert('工程师正在努力实现中');
+}
