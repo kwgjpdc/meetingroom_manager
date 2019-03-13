@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <input type="hidden" id="who" value="<%=request.getAttribute("who") %>" />
+<input type="hidden" id="fule" value="<%=fule %>" />
 	<div class="title" >
 		滇中引水管理局
 		<div class="userinfo" >您好：admin</div>
@@ -21,7 +22,7 @@
 	                </a>
 	                <ul class="dropdown-menu">
 	                    <li><a href="<%=fule %>subofficewrite/subofficewriteList.web">分局填报</a></li>
-	                    <li><a href="#">财务填报</a></li>
+	                    <li><a href="<%=fule %>financing/financingList.web">财务填报</a></li>
 	                </ul>
 	            </li>
 	            <li id="projectli" > 
@@ -88,3 +89,22 @@
 	    </div>
 	    </div>
 	</nav>
+	
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">提示消息</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="infobody" >是否保存新增编辑的数据</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >关闭</button>
+        <button type="button" class="btn btn-primary" id="rightBtn" >保存</button>
+      </div>
+    </div>
+  </div>
+</div>

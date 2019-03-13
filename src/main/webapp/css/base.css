@@ -18,3 +18,9 @@ body,html,div{
 	margin-top:-6px;
 	margin-right:-8px; 
 }
+.editDiv{
+	min-height:20px;
+	height:20px;
+	outline:0px;
+	padding:2px; 
+}

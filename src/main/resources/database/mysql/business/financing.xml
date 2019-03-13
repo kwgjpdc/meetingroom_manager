@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comle.financing">
+	<select id="getfinancingListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select t.key as costType,t.value as costTypeStr
+			,t.maintype as mainType,t.maintypedescribe as mainTypeStr
+			,st.writeyear as year,sum(st.money) as total
+		from t_s_code t 
+		 left join t_f_financingwrite st on t.codetype = st.costtype
+	       and st.writeyear = '$writeyear$'
+		where t.codetype = 'costtype' 
+	    group by t.key,t.value,t.maintype,t.maintypedescribe ,st.writeyear
+	    order by t.orderby
+	</select>
+	
+	<select id="getflistDetailData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select t.*
+		from t_f_financingwrite t 
+		left join t_s_code st on t.costtype = st.codetype
+			and st.codetype = 'costtype' 
+		where t.writeyear = '#year#'
+	</select>
+	
+	<insert id="insertFinancingWrite" parameterType="com.lion.echart.contract.entity.ContractEntity">
+           insert into t_c_contract(contractname, contractnum, amount, durationtime, signtime, contractpartyb, remark, priority, status, isdisabled, operuser, operdate, subofficeid) 
+               values(#{contractName}, #{contractNum}, #{amount}, #{durationTime}, #{signTime}, #{contractPartyB}, #{remark}, #{priority}, #{status}, #{isDisabled}, #{operUser}, #{operDate}, #{subofficeId})
+   </insert>
+</mapper>
