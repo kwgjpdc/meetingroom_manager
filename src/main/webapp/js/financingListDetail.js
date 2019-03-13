@@ -43,7 +43,7 @@ function typeSelect(){
 				}else{
 					checked = '';
 				}
-				$("#txt_search_ctype").append('<option title="'+data[i].maintypedescribe
+				$("#txt_search_ctype").append('<option label="'+data[i].maintypedescribe
 						+'" '+checked+' value="'+data[i].key+'">'+data[i].value+'</option>');
 			}
 			//这一步不要忘记 不然下拉框没有数据
@@ -206,7 +206,7 @@ function initDateTable(){
 								var _val = value;
 								if(value == undefined || value == ''){
 									var index = document.getElementById("txt_search_ctype").selectedIndex;
-									_val = document.getElementById("txt_search_ctype").options[index].getAttribute("title");;
+									_val = document.getElementById("txt_search_ctype").options[index].getAttribute("label");;
 								}
 								return _val;
 						    }
@@ -342,7 +342,6 @@ function saveRow(){
 	var rows = $("#t_datagrid").bootstrapTable('getData');
 	var datas = rows[rows.length-1];
 
-	modalTitle(rows.length,1,null);
 	
 	/*
 	$.ajax({
