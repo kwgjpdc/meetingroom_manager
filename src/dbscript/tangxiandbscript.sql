@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2019-03-13 17:09:11
+Date: 2019-03-13 18:06:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,7 +57,6 @@ DROP TABLE IF EXISTS `t_c_contractexecute`;
 CREATE TABLE `t_c_contractexecute` (
   `contractexecuteid` int(11) NOT NULL AUTO_INCREMENT,
   `contractid` int(11) NOT NULL,
-  `contractnum` varchar(200) DEFAULT NULL,
   `monthamount` double DEFAULT NULL,
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
@@ -72,6 +71,10 @@ CREATE TABLE `t_c_contractexecute` (
 -- ----------------------------
 -- Records of t_c_contractexecute
 -- ----------------------------
+INSERT INTO `t_c_contractexecute` VALUES ('1', '1', '376.18', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:11:22');
+INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:10');
+INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:49');
+INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:19:52');
 
 -- ----------------------------
 -- Table structure for `t_p_monthtotal`

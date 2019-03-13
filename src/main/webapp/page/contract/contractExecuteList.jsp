@@ -31,7 +31,7 @@ String fule = base + "/" + contextPath + "/";
             <div class="panel-heading">
             	合同管理 / 合同执行
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="btn_add" type="button" class="btn btn-default">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>contract/contractExecuteAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
 		            <button id="btn_delete" type="button" class="btn btn-default">
@@ -51,6 +51,14 @@ String fule = base + "/" + contextPath + "/";
                             <select class="form-control" id="suboffice" name="suboffice" style="width: 200px;">
 								<option></option>
 							</select>
+                        </div>
+                         <label class="control-label col-sm-1" for="year">年份</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" id="year" name="year" >
+                        </div>
+                        <label class="control-label col-sm-1" for="month">月份</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" id="month" name="month" >
                         </div>
                         <div class="col-sm-2" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>

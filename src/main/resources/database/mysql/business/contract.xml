@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comle.contract">
+	<!-- 合同签订查询 -->
 	<select id="getcontractSignedListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
 			ct.*,
@@ -10,10 +11,29 @@
                  when ct.status = '2' then '审核中'
             else '未审核' end  statusstr
 		from t_c_contract ct , t_s_suboffice sf where ct.subofficeid = sf.subofficeid
+		<if test="subofficeid != null and subofficeid != 0">
+			and (ct.subofficeid = #{subofficeid} )
+		</if>
 	</select>
-	
+	<!-- 合同签订插入 -->
 	<insert id="insertContractSigned" parameterType="com.lion.echart.contract.entity.ContractEntity">
            insert into t_c_contract(contractname, contractnum, amount, durationtime, signtime, contractpartyb, remark, priority, status, isdisabled, operuser, operdate, subofficeid) 
                values(#{contractName}, #{contractNum}, #{amount}, #{durationTime}, #{signTime}, #{contractPartyB}, #{remark}, #{priority}, #{status}, #{isDisabled}, #{operUser}, #{operDate}, #{subofficeId})
+   </insert>
+   <!-- 合同执行查询 -->
+   <select id="getcontractExecuteListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select b.*,a.monthamount,a.year,a.month from t_c_contractexecute a,(
+			select ct.contractid,ct.contractname,ct.contractnum,s.subofficeid,s.subofficename,
+			ct.amount,sum(cte.monthamount) amountyear,
+			convert(sum(cte.monthamount)/ct.amount*100,decimal(15,2))percent
+			from t_c_contractexecute cte,t_c_contract ct,t_s_suboffice s
+			where cte.contractid=ct.contractid and ct.subofficeid=s.subofficeid
+			group by cte.contractid) b 
+		where a.contractid = b.contractid and a.year=2019 and a.month=2
+	</select>
+	<!-- 合同执行插入 -->
+	<insert id="insertContractExecute" parameterType="com.lion.echart.contract.entity.ContractEntity">
+           insert into t_c_contractexecute(contractid, monthamount, year, month, remark, priority, isdisabled, operuser, operdate) 
+               values(#{contractId}, #{monthamount}, #{year}, #{month},  #{remark}, #{priority}, #{isDisabled}, #{operUser}, #{operDate})
    </insert>
 </mapper>

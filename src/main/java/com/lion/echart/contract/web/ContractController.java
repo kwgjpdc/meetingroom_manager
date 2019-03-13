@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.base.logic.BaseService;
 import com.lion.echart.contract.entity.ContractEntity;
+import com.lion.echart.contract.entity.ContractExecuteEntity;
 import com.lion.echart.contract.logic.ContractService;
 import com.lion.echart.project.entity.PayforEntity;
 
@@ -47,6 +49,15 @@ public class ContractController {
 	@RequestMapping(value = "/contract/contractSignedListGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> contractSignedListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", null);
+		return list;
+	}
+	
+	//通过分局ID获取合同签订列表数据
+	@RequestMapping(value = "/contract/contractSignedListGetDatBySuboffice.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> contractSignedListGetDatBySuboffice(Integer subofficeid, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("subofficeid", subofficeid);
+		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
 		return list;
 	}
 	
@@ -87,5 +98,30 @@ public class ContractController {
 	public @ResponseBody List<Map<String, Object>> contractExecuteListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractExecuteListData", null);
 		return list;
+	}
+	
+	//合同执行添加页 
+	@RequestMapping(value = "/contract/contractExecuteAdd.web",method=RequestMethod.GET)
+	public String contractExecuteAdd(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		return "/page/contract/contractExecuteAdd";
+	}
+	
+	//合同执行保存
+	@RequestMapping(value = "/contract/contractExecuteSave.json",method=RequestMethod.POST)
+	public @ResponseBody String contractExecuteSave(Integer contractId,Double monthamount,String belongTime,String remark,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
+		JSONObject obj = new JSONObject();
+		try {
+			ContractExecuteEntity contractExecute = new ContractExecuteEntity(contractId, monthamount, remark, belongTime.substring(0,4), belongTime.substring(5,7), 0, "false", "admin", new Date());
+			//ContractEntity contract = new ContractEntity(contractName, contractNum, amount, durationTime, si.parse(signTime), contractPartyB, remark, 0, 9, "false", "admin", new Date(), subofficeId);
+			baseService.insertObject("comle.contract.insertContractExecute", contractExecute);
+			obj.put("flag", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("flag", 0);
+		}
+		return obj.toString();
 	}
 }

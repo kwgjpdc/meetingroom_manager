@@ -21,7 +21,7 @@ String fule = base + "/" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/moment-with-locales.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/contractSignedAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/contractExecuteAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
 
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
@@ -32,43 +32,33 @@ String fule = base + "/" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	合同管理 / 合同签订 / 合同添加
+            	合同管理 / 合同执行 / 合同执行添加
             </div>
             <div class="panel-body">
                 	<div class="form-group">
 						<label for="suboffice">所属分局</label>
-						<select class="form-control" id="suboffice" name="suboffice" style="width: 200px;">
+						<select class="form-control" id="suboffice" name="suboffice" style="width: 200px;" onchange="loadContractData(this.value)">
 							<option></option>
 						</select>
 					</div>
 					<div class="form-group">
-						<label for="contractName">合同名称</label>
-						<input type="text" class="form-control" id="contractName" style="width: 400px;" placeholder="请输入合同名称">
+						<label for="contract">合同名称</label>
+						<select class="form-control" id="contract" name="contract" style="width: 500px;">
+							<option></option>
+						</select>
 					</div>
 					<div class="form-group">
-						<label for="contractNum">合同编号</label>
-						<input type="text" class="form-control" id="contractNum" style="width: 400px;" placeholder="请输入合同编号">
+						<label for="monthamount">当月结算额(万元)</label>
+						<input type="text" class="form-control" id="monthamount" style="width: 200px;" placeholder="请输入合同金额">
 					</div>
 					<div class="form-group">
-						<label for="amount">合同金额(万元)</label>
-						<input type="text" class="form-control" id="amount" style="width: 200px;" placeholder="请输入合同金额">
-					</div>
-					<div class="form-group">
-						<label for="durationTime">合同工期</label>
-						<input type="text" class="form-control" id="durationTime" style="width: 200px;" placeholder="请输入合同工期">
-					</div>
-					<div class="form-group">
-						<label for="signTime">合同签订日期</label>
-						<div class='input-group date' id='signTime' style="width: 200px;">
-			                <input type='text' class="form-control" name="signTimeStr" id="signTimeStr"/>
+						<label for="signTime">所属年月</label>
+						<div class='input-group date' id='belongTime' style="width: 200px;">
+			                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr"/>
 			                <span class="input-group-addon">
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>
 			            </div>
-					</div>
-					<div class="form-group">
-						<label for="contractPartyB">合同乙方</label>
-						<input type="text" class="form-control" id="contractPartyB" style="width: 200px;" placeholder="请输入合同乙方">
 					</div>
 					<div class="form-group">
 						<label for="remark">备注</label>

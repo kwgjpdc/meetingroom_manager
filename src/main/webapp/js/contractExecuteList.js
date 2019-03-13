@@ -3,14 +3,65 @@ $(document).ready(function(){
 	oTable.Init();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 	loadSubofficeData();
+	var now = new Date();
+	var year = now.getFullYear();
+	var month = now.getMonth();
+
+	$("#year").val(year);
+	$("#month").val(month);
+	validatef();
 });
+function validatef(){
+	$('#formSearch').bootstrapValidator({
+		message: 'This value is not valid',
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {
+			year: {
+				validators: {
+					notEmpty: {
+						message: '年份不能为空'
+					},
+					stringLength: {
+                        min: 4,
+                        max: 4,
+                        message: '年份长度为4位'
+                    },
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: '年份必须为数字'
+					}
+				}
+			},
+			month: {
+				validators: {
+					notEmpty: {
+						message: '月份不能为空'
+					},
+					stringLength: {
+                        min: 1,
+                        max: 2,
+                        message: '月份长度为1到2位'
+                    },
+					regexp: {
+						regexp: /^[0-9]+$/,
+						message: '月份必须为位数字'
+					}
+				}
+			}
+		}
+	});
+}
 function loadSubofficeData(){
 	$.ajax({
 		url:"/echart/suboffice/subofficeGetData.json",
 		type:"POST",
 		dataType:"json",
 		success:function(data){
-			var strHtml= "";
+			var strHtml= '<option value="0">-请选择-</option>';
 			$.each(data, function(key,value){
 				strHtml+='<option value="'+value.subofficeid+'">'+value.subofficename+'</option>';
 			});
@@ -26,7 +77,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/contract/contractSignedListGetData.json',         //请求后台的URL（*）
+			url: '/echart/contract/contractExecuteListGetData.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -57,6 +108,10 @@ var TableInit = function () {
 				  {                    
                     checkbox: true
 	              }
+				  ,{
+						field: 'subofficename',
+						title: '所属分局'
+				  }
 				 ,{
 						field: 'contractname',
 						title: '合同名称'
@@ -70,15 +125,15 @@ var TableInit = function () {
 						title: '合同金额(万元)'
 				  }
 				 ,{
-						field: 'durationtime',
+						field: 'monthamount',
 						title: '当月结算(万元)'
 				  }
 				 ,{
-						field: 'signtimestr',
+						field: 'amountyear',
 						title: '累计结算额(万元)'
 				  }
 				 ,{
-						field: 'contractpartyb',
+						field: 'percent',
 						title: '累计结算额占合同额百分比%'
 				  }
 				 ,{
