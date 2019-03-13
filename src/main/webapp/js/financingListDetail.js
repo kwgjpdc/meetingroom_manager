@@ -67,14 +67,14 @@ function subofficeDataInit(){
 }
 function contractDataInit(){
 	$.ajax({
-		url: $("#fule").val()+'contract/contractListGetData.json',
+		url: $("#fule").val()+'contract/contractSignedListGetData.json',
 		type: 'post',
 		data: {},
 		dataType: "json",
 		success: function (data) {
 			for(var i=0;i<data.length;i++){
-				$("#contractdata").append('<option subofficeid="'+data[i].subofficeid+'" value="'
-						+data[i].contractid+'" contractnum="'+data[i].contractnum+'" >'+data[i].contractname+'</option>');
+				$("#contractdata").append('<option label="'+data[i].subofficeid+'" value="'
+						+data[i].contractid+'" title="'+data[i].contractnum+'" >'+data[i].contractname+'</option>');
 			}
 		}
 	});
@@ -83,32 +83,56 @@ function contractDataInit(){
 function initTableSelect(){
 	//初始分局
 	$(".subofficeinputsel").html($("#subofficedata").html());
+    $("select").selectpicker("refresh");
 	
 	//初始合同
-	var contractinputs = $(".contractdatainputsel");
+	contracinputsel(null);
+}
+function contracinputsel(_one){
+	var contractinputs = null;
+
+	if(_one == null){
+		contractinputs = $(".contractdatainputsel");
+	}else{
+		contractinputs = new Array();
+		contractinputs.push($("#contractid_"+_one));
+	}
+	
 	var contractOps = $("#contractdata").find("option");
 	var mysubofficeid = '';
-	if(contractinputs != null && contractinputs != undefined 
-			&& contractOps != null && contractOps != undefined)
-	for(var i = 0; i < contractinputs.length; i++){
-		mysubofficeid = $(contractinputs[i]).attr("subofficeid");
-		for(var j = 0; i < contractOps.length; j++){
-			if($(contractOps[j]).attr("subofficeid") == mysubofficeid){
-				$(contractinputs[i]).append($(contractOps[j]));
+	if(contractinputs != null && contractinputs != undefined){
+		if(contractOps == null || contractOps == undefined){
+			contractOps = new Array();
+		}
+		var opscount = 0;
+		var outHtmls = '';
+		for(var i = 0; i < contractinputs.length; i++){
+			mysubofficeid = $("#subofficeid"+$(contractinputs[i]).attr("id").split("_")[1]).val();
+			opscount = 0;
+			outHtmls = '<option>请选择合同</option>';
+			for(var j = 0; j < contractOps.length; j++){
+				if($(contractOps[j]).attr("label") == mysubofficeid){
+					outHtmls = outHtmls + $(contractOps[j]).prop("outerHTML");
+					opscount++;
+				}
+				console.log($(contractOps[j]).attr("label")+":::"+mysubofficeid+":::"
+						+($(contractOps[j]).attr("label") == mysubofficeid)  + ":::" + opscount + ":::" + outHtmls);
+			
 			}
+			$(contractinputs[i]).html(outHtmls);
+			if(opscount == 0){
+				$(contractinputs[i]).append('<option>没有合同</option>');
+			}
+			$(contractinputs[i]).selectpicker("refresh");
 		}
 	}
 	
-    $("select").selectpicker("refresh");
 }
-function inputdownforv(_this){
-	var showstr = $(_this).html();
-	var value = $(_this).html();
-	
-	var _id = $(_this).parent().parent().attr("id");
-	var indexinfo = _id.split("_");
-	$("#"+indexinfo[0]+indexinfo[1]).val(value);
-	$("#"+indexinfo[0]+"span"+indexinfo[1]).html(showstr);
+function setcontractno(_this){
+	var index = _this.selectedIndex ;
+	var _contractno = $(_this.options[index]).attr("title");
+	var _index = $(_this).attr("id").split("_")[1];
+	$("#contractno"+_index).html(_contractno);
 }
 function initDateTable(){
 	var tparam = {
@@ -149,6 +173,14 @@ function initDateTable(){
 				height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 				columns: [
 					[
+					  {field:'id',visible:false,
+							formatter:function (value, row, index, field) {
+								return '<input type="hidden" name="list['+index+'].id" />' + 
+								'<input type="hidden" name="list['+index+'].money" />' +
+								'<input type="hidden" name="list['+index+'].cashierno" />' +
+								'<input type="hidden" name="list['+index+'].voucherno" />'; 
+							}
+					  },
 					  {
 							field: 'costtype',
 							align: 'center',
@@ -159,7 +191,7 @@ function initDateTable(){
 								var _val = value;
 								if(value == undefined || value == ''){
 									var index = document.getElementById("txt_search_ctype").selectedIndex;
-									_val = document.getElementById("txt_search_ctype").options[index].text;;
+									_val = document.getElementById("txt_search_ctype").options[index].text;
 								}
 								return _val;
 						    }
@@ -186,7 +218,7 @@ function initDateTable(){
 						valign : "middle",
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<select class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" ></select>';
+					        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" ></select>';
 					    }
 					  },
 					  {
@@ -196,7 +228,7 @@ function initDateTable(){
 							valign : "middle",
 							width : 200,
 							formatter:function (value, row, index, field) {
-								return '<select subofficeid="'+row["subofficeid"]+'" class="contractinputsel" id="contractid'+index+'" data-width="100px" value="'+value+'" ></select>';
+								return '<select name="list['+index+'].contractid" onchange="setcontractno(this)" subofficeid="'+row["subofficeid"]+'" class="contractinputsel" id="contractid_'+index+'" data-width="200px" value="'+value+'" ></select>';
 							}
 					  },
 					  {
@@ -216,7 +248,7 @@ function initDateTable(){
 							title: '应付款(元)' ,
 							width : 150,
 							formatter:function (value, row, index, field) {
-						        return '<div contenteditable="true" class="editDiv">' + (value || "") + '</div>';
+						        return '<div id="inputmoney_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>';
 						    }
 					  },
 					  {
@@ -229,7 +261,7 @@ function initDateTable(){
 							if(value == undefined){
 								value = '';
 							}
-					        return '<div class="col-sm-1"><input width="100" type="text" value="'+value+'" id="payfordate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
+					        return '<div class="col-sm-1"><input name="list['+index+'].payfordate" width="100" type="text" value="'+value+'" id="payfordate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
 					    }
 					  },
 					  {
@@ -238,7 +270,7 @@ function initDateTable(){
 						title: '出纳编号' ,
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true" class="editDiv">' + (value || "") + '</div>';
+					        return '<div id="inputcashierno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>';
 					    }
 					  },
 					  {
@@ -247,7 +279,7 @@ function initDateTable(){
 						title: '凭证号' ,
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true" class="editDiv">' + (value || "") + '</div>';
+					        return '<div id="inputvoucherno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>';
 					    }
 					  }
 					]
@@ -296,6 +328,7 @@ function addRow(){
 	    $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
 		$("#subofficeid"+count).html($("#subofficedata").html());
 	    $("#subofficeid"+count).selectpicker("refresh");
+	    contracinputsel(count);
 	    $("#payfordate"+count).datepicker();
 	    $("#payfordate"+count).width(110);
 	    hasnosave = true;

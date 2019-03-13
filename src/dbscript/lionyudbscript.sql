@@ -57,18 +57,57 @@ CREATE TABLE `t_s_code` (
 -- ----------------------------
 -- Records of t_s_code
 -- ----------------------------
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '1', '工程款', '1', '合同款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '2', '监理费', '1', '合同款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '3', '施工供电费', '1', '合同款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '4', '勘察设计费', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '5', '征地拆迁安置补偿', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '6', '环境影响', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '7', '耕地占用税', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '8', '水土保持补偿费', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '9', '金中公司清算费用', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '10', '印花税', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '11', '其他技术服务合同款', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '12', '建设管理费', '2', '其他款项');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '13', '临时用地复垦保证金', '2', '其他款项');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '01', '工程款', '1', '合同款项', '01');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '02', '监理费', '1', '合同款项', '02');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '03', '施工供电费', '1', '合同款项', '03');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '04', '勘察设计费', '2', '其他款项', '04');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '05', '征地拆迁安置补偿', '2', '其他款项', '05');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '06', '环境影响', '2', '其他款项', '06');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '07', '耕地占用税', '2', '其他款项', '07');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '08', '水土保持补偿费', '2', '其他款项', '08');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '09', '金中公司清算费用', '2', '其他款项', '09');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '10', '印花税', '2', '其他款项', '10');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '11', '其他技术服务合同款', '2', '其他款项', '11');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '12', '建设管理费', '2', '其他款项', '12');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '13', '临时用地复垦保证金', '2', '其他款项', '13');
 
+
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : MySQL57
+Source Server Version : 50725
+Source Host           : localhost:3306
+Source Database       : echart
+
+Target Server Type    : MYSQL
+Target Server Version : 50725
+File Encoding         : 65001
+
+Date: 2019-03-13 20:27:48
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `t_f_financingwrite`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_f_financingwrite`;
+CREATE TABLE `t_f_financingwrite` (
+  `id` int(11) DEFAULT NULL COMMENT '自增主键',
+  `payfordate` date DEFAULT NULL COMMENT '付款日期',
+  `writeyear` int(4) DEFAULT NULL COMMENT '填报年',
+  `writemonth` int(2) DEFAULT NULL COMMENT '填报月',
+  `costtype` varchar(5) DEFAULT NULL COMMENT '费用类型',
+  `maintype` varchar(2) DEFAULT NULL COMMENT '大类归类',
+  `contractid` int(11) DEFAULT NULL COMMENT '所属合同',
+  `subofficeid` int(11) DEFAULT NULL COMMENT '所属分局',
+  `money` double(19,6) DEFAULT NULL COMMENT '金额',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
+  `operuser` int(11) DEFAULT NULL COMMENT '操作人'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='财务填报';
+
+-- ----------------------------
+-- Records of t_f_financingwrite
+-- ----------------------------
 

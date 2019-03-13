@@ -75,7 +75,9 @@ String fule = base + contextPath + "/";
         </div>       
 
         <div id="bodydiv" >
+        	<form style="border:none;margin:0px;padding:0px;" id="editForm" >
         	<table id="t_datagrid"></table>
+        	</form>
         </div>
         
         <select id="subofficedata" style="display:none;" >
