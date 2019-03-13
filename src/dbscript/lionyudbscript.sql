@@ -1,26 +1,43 @@
-SET FOREIGN_KEY_CHECKS=0;
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : MySQL57
+Source Server Version : 50725
+Source Host           : localhost:3306
+Source Database       : echart
+
+Target Server Type    : MYSQL
+Target Server Version : 50725
+File Encoding         : 65001
+
+Date: 2019-03-13 23:19:28
+*/
 
 -- ----------------------------
--- Table structure for `t_p_monthtotal`
+-- Table structure for `t_f_financingwrite`
 -- ----------------------------
-DROP TABLE IF EXISTS `t_p_monthtotal`;
-CREATE TABLE `t_p_monthtotal` (
-  `id` int(11) NOT NULL COMMENT '主键',
-  `depart` int(11) DEFAULT NULL COMMENT '所属分局',
-  `year` int(4) DEFAULT NULL COMMENT '所属年份',
-  `month` int(2) DEFAULT NULL COMMENT '所属月份',
-  `contracttotal` double DEFAULT NULL COMMENT '合同总金额',
-  `thisyearplan` double DEFAULT NULL COMMENT '本年计划完成投资',
-  `thismonthinvest` double DEFAULT NULL COMMENT '当月完成投资',
-  `thisytmtotal` double DEFAULT NULL COMMENT '本年至当月实际完成投资',
-  `investtotal` double DEFAULT NULL COMMENT '开工以来累计完成投资',
-  `balancetotal` double DEFAULT NULL COMMENT '累计结算工程款',
-  `payfortotal` double DEFAULT NULL COMMENT '累计支付情况',
-  `describe` varchar(2000) DEFAULT NULL COMMENT '工程形象进度描述',
-  `comment` varchar(200) DEFAULT NULL COMMENT '备注',
+DROP TABLE IF EXISTS `t_f_financingwrite`;
+CREATE TABLE `t_f_financingwrite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `payfordate` date DEFAULT NULL COMMENT '付款日期',
+  `writeyear` int(4) DEFAULT NULL COMMENT '填报年',
+  `writemonth` int(2) DEFAULT NULL COMMENT '填报月',
+  `costtype` varchar(5) DEFAULT NULL COMMENT '费用类型',
+  `maintype` varchar(2) DEFAULT NULL COMMENT '大类归类',
+  `contractid` int(11) DEFAULT NULL COMMENT '所属合同',
+  `subofficeid` int(11) DEFAULT NULL COMMENT '所属分局',
+  `money` double(19,6) DEFAULT NULL COMMENT '金额',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   `operuser` int(11) DEFAULT NULL COMMENT '操作人',
-  `operdate` datetime DEFAULT NULL COMMENT '操作时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `cashierno` varchar(50) DEFAULT NULL COMMENT '出纳编号',
+  `voucherno` varchar(50) DEFAULT NULL COMMENT '凭证编号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='财务填报';
+
+-- ----------------------------
+-- Records of t_f_financingwrite
+-- ----------------------------
+INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-03-07', '2019', '1', '02', '1', '1', '2', '321.000000', '2019-03-13 23:12:25', null, null, null);
 
 
 /*
@@ -35,7 +52,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-13 10:42:24
+Date: 2019-03-13 23:19:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -50,8 +67,8 @@ CREATE TABLE `t_s_code` (
   `key` varchar(5) DEFAULT NULL COMMENT '字典值',
   `value` varchar(200) DEFAULT NULL COMMENT '字典显示',
   `maintype` varchar(2) DEFAULT NULL COMMENT '大类归类',
-  `maintypedescribe` varchar(50) DEFAULT NULL COMMENT '大类备注'
-  `orderby` varchar(5) DEFAULT NULL COMMENT '排序列',
+  `maintypedescribe` varchar(50) DEFAULT NULL COMMENT '大类备注',
+  `orderby` varchar(5) DEFAULT NULL COMMENT '排序列'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
 
 -- ----------------------------
@@ -71,7 +88,6 @@ INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '11', '其他技术�
 INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '12', '建设管理费', '2', '其他款项', '12');
 INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '13', '临时用地复垦保证金', '2', '其他款项', '13');
 
-
 /*
 Navicat MySQL Data Transfer
 
@@ -84,7 +100,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-13 20:27:48
+Date: 2019-03-13 23:19:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,7 +110,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_f_financingwrite`;
 CREATE TABLE `t_f_financingwrite` (
-  `id` int(11) DEFAULT NULL COMMENT '自增主键',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `payfordate` date DEFAULT NULL COMMENT '付款日期',
   `writeyear` int(4) DEFAULT NULL COMMENT '填报年',
   `writemonth` int(2) DEFAULT NULL COMMENT '填报月',
@@ -104,10 +120,15 @@ CREATE TABLE `t_f_financingwrite` (
   `subofficeid` int(11) DEFAULT NULL COMMENT '所属分局',
   `money` double(19,6) DEFAULT NULL COMMENT '金额',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
-  `operuser` int(11) DEFAULT NULL COMMENT '操作人'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='财务填报';
+  `operuser` int(11) DEFAULT NULL COMMENT '操作人',
+  `cashierno` varchar(50) DEFAULT NULL COMMENT '出纳编号',
+  `voucherno` varchar(50) DEFAULT NULL COMMENT '凭证编号',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='财务填报';
 
 -- ----------------------------
 -- Records of t_f_financingwrite
 -- ----------------------------
+INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-03-07', '2019', '1', '02', '1', '1', '2', '321.000000', '2019-03-13 23:12:25', null, null, null);
+
 

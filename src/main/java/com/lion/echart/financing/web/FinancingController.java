@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.base.logic.BaseService;
-import com.lion.echart.financing.entity.FinancingWriteEntity;
+import com.lion.echart.financing.entity.FinancingWritesView;
 
 import net.sf.json.JSONObject;
 
@@ -71,14 +71,22 @@ public class FinancingController {
 	
 	//财务填报保存
 	@RequestMapping(value = "/insertFinancing.json",method=RequestMethod.POST)
-	public @ResponseBody String insertFinancing(FinancingWriteEntity financingw,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public @ResponseBody String insertFinancing(FinancingWritesView list
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		JSONObject obj = new JSONObject();
 		try {
-			baseService.insertObject("comle.financing.insertFinancingWrite", financingw);
-			obj.put("flag", 1);
+			if(list != null && list.getList() != null) {
+				for (int i = list.getList().size() - 1; i > 0; i--) {
+					if(list.getList().get(i).getMoney() == null) {
+						list.getList().remove(i);
+					}
+				}
+			}
+			baseService.insertOupdates("comle.financing.financingWrite", list.getList());
+			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
-			obj.put("flag", 0);
+			obj.put("msgType", 0);
 		}
 		return obj.toString();
 	}

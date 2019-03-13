@@ -21,8 +21,16 @@
 		where t.writeyear = '#year#'
 	</select>
 	
-	<insert id="insertFinancingWrite" parameterType="com.lion.echart.contract.entity.ContractEntity">
-           insert into t_c_contract(contractname, contractnum, amount, durationtime, signtime, contractpartyb, remark, priority, status, isdisabled, operuser, operdate, subofficeid) 
-               values(#{contractName}, #{contractNum}, #{amount}, #{durationTime}, #{signTime}, #{contractPartyB}, #{remark}, #{priority}, #{status}, #{isDisabled}, #{operUser}, #{operDate}, #{subofficeId})
-   </insert>
+	<insert id="financingWriteInsert" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
+           insert into t_f_financingwrite(payfordate, costtype, maintype, contractid, 
+           	subofficeid, money, operdate, operuser, writeyear, writemonth, cashierno, voucherno) 
+               values(str_to_date(#{payfordateStr},'%Y-%m-%d %H'), #{costtype}, #{maintype}, #{contractid}, 
+            #{subofficeid}, #{money}, now(), #{operuser}, #{writeyear}, #{writemonth}, #{cashierno}, #{voucherno})
+   	</insert>
+	
+	<update id="financingWriteUpdate" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
+    	udpate t_f_financingwrite
+    	set id = #id#
+    	where id = #id#
+    </update>
 </mapper>

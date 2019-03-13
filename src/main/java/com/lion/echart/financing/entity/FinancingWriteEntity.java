@@ -1,16 +1,21 @@
 package com.lion.echart.financing.entity;
 
-import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.lion.echart.base.entity.BaseEntity;
 
 /**
  * * 财务填报实体对象
  * @author lion-y
  *
  */
-public class FinancingWriteEntity implements Serializable{
+public class FinancingWriteEntity extends BaseEntity{
 	private Long id;//自增id
 	private Date payfordate;//付款时间
+	private String payfordateStr;
 	private String writeyear;//填报年份
 	private String writemonth;//填报月份
 	private String costtype;//款项类型
@@ -19,11 +24,13 @@ public class FinancingWriteEntity implements Serializable{
 	private String maintypeStr;//所属大类
 	private String contractid;//所属合同
 	private String subofficeid;//所属分局
-	private String money;//金额
+	private Double money;//金额
 	private String cashierno;//出纳编号
 	private String voucherno;//凭证编号
 	private Date operdate;//操作时间
 	private Long operuser;//操作人
+	
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -35,6 +42,22 @@ public class FinancingWriteEntity implements Serializable{
 	}
 	public void setPayfordate(Date payfordate) {
 		this.payfordate = payfordate;
+	}
+	public String getPayfordateStr() {
+		return payfordateStr;
+	}
+	public void setPayfordateStr(String payfordateStr) {
+		this.payfordateStr = payfordateStr;
+		try {
+			if(payfordateStr != null && !payfordateStr.isEmpty()) {
+				this.payfordate = new SimpleDateFormat("yyyy-mm-dd").parse(payfordateStr);
+				String[] str = payfordateStr.split("-");
+				writeyear = str[0];
+				writemonth = str[1];
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 	public String getWriteyear() {
 		return writeyear;
@@ -84,10 +107,10 @@ public class FinancingWriteEntity implements Serializable{
 	public void setSubofficeid(String subofficeid) {
 		this.subofficeid = subofficeid;
 	}
-	public String getMoney() {
+	public Double getMoney() {
 		return money;
 	}
-	public void setMoney(String money) {
+	public void setMoney(Double money) {
 		this.money = money;
 	}
 	public String getCashierno() {

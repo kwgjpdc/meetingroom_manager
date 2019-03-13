@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<iframe style="display:none" id="myajaxfor" name="myajaxfor" ></iframe>
 <input type="hidden" id="who" value="<%=request.getAttribute("who") %>" />
 <input type="hidden" id="fule" value="<%=fule %>" />
 	<div class="title" >
@@ -91,7 +93,7 @@
 	</nav>
 	
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop='static'>
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -101,9 +103,9 @@
         </button>
       </div>
       <div class="modal-body" id="infobody" >是否保存新增编辑的数据</div>
-      <div class="modal-footer">
+      <div class="modal-footer" id="modalfooter" >
         <button type="button" class="btn btn-secondary" data-dismiss="modal" >关闭</button>
-        <button type="button" class="btn btn-primary" id="rightBtn" >保存</button>
+        <button type="button" class="btn btn-primary" id="rightBtn" onclick="saveFun()" >保存</button>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.system.code">
 	<select id="getCosttypes" parameterType="java.util.Map" resultType="java.util.Map"  >
-		select t.key,t.value,t.maintypedescribe from t_s_code t
+		select t.key,t.value,t.maintypedescribe,t.maintype from t_s_code t
 		where t.codetype = 'costtype'
 		order by t.orderby
 	</select>

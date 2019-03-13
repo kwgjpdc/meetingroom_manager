@@ -43,7 +43,7 @@ function typeSelect(){
 				}else{
 					checked = '';
 				}
-				$("#txt_search_ctype").append('<option label="'+data[i].maintypedescribe
+				$("#txt_search_ctype").append('<option lang="'+data[i].maintype+'" label="'+data[i].maintypedescribe
 						+'" '+checked+' value="'+data[i].key+'">'+data[i].value+'</option>');
 			}
 			//这一步不要忘记 不然下拉框没有数据
@@ -74,7 +74,7 @@ function contractDataInit(){
 		success: function (data) {
 			for(var i=0;i<data.length;i++){
 				$("#contractdata").append('<option label="'+data[i].subofficeid+'" value="'
-						+data[i].contractid+'" title="'+data[i].contractnum+'" >'+data[i].contractname+'</option>');
+						+data[i].contractid+'" lang="'+data[i].contractnum+'" >'+data[i].contractname+'</option>');
 			}
 		}
 	});
@@ -109,19 +109,16 @@ function contracinputsel(_one){
 		for(var i = 0; i < contractinputs.length; i++){
 			mysubofficeid = $("#subofficeid"+$(contractinputs[i]).attr("id").split("_")[1]).val();
 			opscount = 0;
-			outHtmls = '<option>请选择合同</option>';
+			outHtmls = '<option value="" >请选择合同</option>';
 			for(var j = 0; j < contractOps.length; j++){
 				if($(contractOps[j]).attr("label") == mysubofficeid){
 					outHtmls = outHtmls + $(contractOps[j]).prop("outerHTML");
 					opscount++;
 				}
-				console.log($(contractOps[j]).attr("label")+":::"+mysubofficeid+":::"
-						+($(contractOps[j]).attr("label") == mysubofficeid)  + ":::" + opscount + ":::" + outHtmls);
-			
 			}
 			$(contractinputs[i]).html(outHtmls);
 			if(opscount == 0){
-				$(contractinputs[i]).append('<option>没有合同</option>');
+				$(contractinputs[i]).append('<option value="" >没有合同</option>');
 			}
 			$(contractinputs[i]).selectpicker("refresh");
 		}
@@ -130,7 +127,7 @@ function contracinputsel(_one){
 }
 function setcontractno(_this){
 	var index = _this.selectedIndex ;
-	var _contractno = $(_this.options[index]).attr("title");
+	var _contractno = $(_this.options[index]).attr("lang");
 	var _index = $(_this).attr("id").split("_")[1];
 	$("#contractno"+_index).html(_contractno);
 }
@@ -175,10 +172,7 @@ function initDateTable(){
 					[
 					  {field:'id',visible:false,
 							formatter:function (value, row, index, field) {
-								return '<input type="hidden" name="list['+index+'].id" />' + 
-								'<input type="hidden" name="list['+index+'].money" />' +
-								'<input type="hidden" name="list['+index+'].cashierno" />' +
-								'<input type="hidden" name="list['+index+'].voucherno" />'; 
+								return '<input type="hidden" name="list['+index+'].id" />'; 
 							}
 					  },
 					  {
@@ -190,10 +184,10 @@ function initDateTable(){
 							formatter:function (value, row, index, field) {
 								var _val = value;
 								if(value == undefined || value == ''){
-									var index = document.getElementById("txt_search_ctype").selectedIndex;
-									_val = document.getElementById("txt_search_ctype").options[index].text;
+									var _index = document.getElementById("txt_search_ctype").selectedIndex;
+									_val = document.getElementById("txt_search_ctype").options[_index].text;
 								}
-								return _val;
+								return _val + '<input type="hidden" value="'+$("#txt_search_ctype").val()+'" name="list['+index+'].costtype" />';;
 						    }
 					  },
 					  {
@@ -204,11 +198,14 @@ function initDateTable(){
 							width : 100,
 							formatter:function (value, row, index, field) {
 								var _val = value;
+								var _show = value;
 								if(value == undefined || value == ''){
-									var index = document.getElementById("txt_search_ctype").selectedIndex;
-									_val = document.getElementById("txt_search_ctype").options[index].getAttribute("label");;
+									var _index = document.getElementById("txt_search_ctype").selectedIndex;
+									_show = document.getElementById("txt_search_ctype").options[_index].getAttribute("label");
+									console.log(document.getElementById("txt_search_ctype").options[_index]);
+									_val = $(document.getElementById("txt_search_ctype").options[_index]).attr("lang");
 								}
-								return _val;
+								return _show + '<input type="hidden" value="'+_val+'" name="list['+index+'].maintype" />';
 						    }
 					  },
 					  {
@@ -248,7 +245,8 @@ function initDateTable(){
 							title: '应付款(元)' ,
 							width : 150,
 							formatter:function (value, row, index, field) {
-						        return '<div id="inputmoney_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>';
+						        return '<div id="inputmoney_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>' + 
+								'<input type="hidden" value="'+(value || "")+'" id="money'+index+'" name="list['+index+'].money" />';
 						    }
 					  },
 					  {
@@ -261,7 +259,7 @@ function initDateTable(){
 							if(value == undefined){
 								value = '';
 							}
-					        return '<div class="col-sm-1"><input name="list['+index+'].payfordate" width="100" type="text" value="'+value+'" id="payfordate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
+					        return '<input name="list['+index+'].payfordateStr" width="100" type="text" value="'+value+'" id="payfordate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" >';
 					    }
 					  },
 					  {
@@ -270,7 +268,8 @@ function initDateTable(){
 						title: '出纳编号' ,
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div id="inputcashierno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>';
+					        return '<div id="inputcashierno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>' +
+							'<input type="hidden" value="'+(value || "")+'" id="cashierno'+index+'" name="list['+index+'].cashierno" />';
 					    }
 					  },
 					  {
@@ -279,7 +278,8 @@ function initDateTable(){
 						title: '凭证号' ,
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div id="inputvoucherno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>';
+					        return '<div id="inputvoucherno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>' +
+							'<input type="hidden" value="'+(value || "")+'" id="voucherno'+index+'" name="list['+index+'].voucherno" />';
 					    }
 					  }
 					]
@@ -339,34 +339,34 @@ function saveRow(){
 		modalTitle("没有可保存的数据，请先新增行",1,null);
 		return;
 	}
-	var rows = $("#t_datagrid").bootstrapTable('getData');
-	var datas = rows[rows.length-1];
+	var length = 0;
+	if(true){
+		var rows = $("#t_datagrid").bootstrapTable('getData');
+		length = rows.length; 
+	}
+	for(var i = 0; i < length; i++){
+		$("#money"+i).val($("#inputmoney_"+i).html());
+		$("#voucherno"+i).val($("#inputvoucherno_"+i).html());
+		$("#cashierno"+i).val($("#inputcashierno_"+i).html());
+	}
 
-	
-	/*
+	modalTitle("是否确定提交",2);
+}
+function saveFun(){
+	showloding();
 	$.ajax({
-		url: $("#fule").val()+'systemcode/getCodeTypeList.json',
+		url: $("#fule").val()+'financing/insertFinancing.json',
 		type: 'post',
-		data: datas,
+		data: $("#editForm").serialize(),
 		dataType: "json",
 		success: function (data) {
-			if(data.mesType == 0){
-				hasnosave = false;
-				Modal.alert({
-					title:'提示',
-					msg: data.msg,
-					btnok: '确定'
-				}).on(function (e) {
-					if(callback){
-						//callback();
-					}
-				});
-			}else{
-				
-			}
+			closeloding();
+			modalTitle("操作成功",1);
+		},error:function(data){
+			closeloding();
+			modalTitle("操作失败，请重试",1);
 		}
 	});
-	*/
 }
 /**
  * 删除一行数据
@@ -384,4 +384,5 @@ function delRow(){
         info("已经是最后一条，不能删除!");
         return;
     }
+    hasnosave = false;
 }

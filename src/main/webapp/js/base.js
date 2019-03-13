@@ -20,10 +20,18 @@ function doexcel(){
 	alert('工程师正在努力实现中');
 }
 
-function modalTitle(_msg,_type,_callback){
+function modalTitle(_msg,_type){
 	$("#rightBtn").hide();
+	$("#modalfooter").show();
 	$("#infobody").html(_msg);
 	if(_type == 2){
 		$("#rightBtn").show();
 	}
+}
+function showloding(){
+	$("#modalfooter").hide();
+	$("#infobody").html("处理中，请稍等！");
+}
+function closeloding(){
+	$('#myModal').modal('hide');
 }

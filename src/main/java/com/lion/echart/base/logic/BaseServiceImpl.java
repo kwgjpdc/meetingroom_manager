@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lion.echart.base.dao.BaseDao;
+import com.lion.echart.base.entity.BaseEntity;
 
 public class BaseServiceImpl implements BaseService{
 
@@ -37,6 +38,10 @@ public class BaseServiceImpl implements BaseService{
 
 	public Object queryObject(String sqlid, Object param) {
 		return baseDao.queryObject(sqlid, param);
+	}
+
+	public void insertOupdates(String sqlID, List object) throws Exception {
+		baseDao.insertOupdates(sqlID, object);
 	}
 
 	public void updateBatchBySQL(String sqlID, Object object) throws Exception {

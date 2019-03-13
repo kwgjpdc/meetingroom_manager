@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.lion.echart.base.entity.BaseEntity;
 import com.lion.echart.base.entity.Pagintable;
 
 /**
@@ -93,6 +94,17 @@ public class BaseDaoImpl implements BaseDao{
 		RowBounds rowBounds = new RowBounds(start,pagintable.getPageSize());
 		
 		pagintable.setRows(getSqlMapClient().selectList(sqlid, param, rowBounds));
+	}
+
+	public void insertOupdates(String sqlID, List<BaseEntity> object) throws Exception {
+		if(object != null)
+		for (int i = 0; i < object.size(); i++) {
+			if(object.get(i).getId() != null) {
+				updateObject(sqlID+"Update", object.get(i));
+			}else {
+				insertObject(sqlID+"Insert", object.get(i));
+			}
+		}
 	}
 
 	public void updateBatchBySQL(String sqlID, Object object) throws Exception {

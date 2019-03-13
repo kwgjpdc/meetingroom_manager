@@ -37,6 +37,8 @@ String fule = base + contextPath + "/";
 	</div>
 	<div id="content" class="content" >
 		<div class="panel-body" style="padding-bottom:0px;">
+		
+		
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
             	填报管理 / 财务填报明细
@@ -75,9 +77,10 @@ String fule = base + contextPath + "/";
         </div>       
 
         <div id="bodydiv" >
-        	<form style="border:none;margin:0px;padding:0px;" id="editForm" >
-        	<table id="t_datagrid"></table>
-        	</form>
+			<form style="border:none;margin:0px;padding:0px;" id="editForm" target="myajaxfor"
+				action="<%=fule %>financing/insertFinancing.json" method="post" >
+        		<table id="t_datagrid"></table>
+			</form>
         </div>
         
         <select id="subofficedata" style="display:none;" >

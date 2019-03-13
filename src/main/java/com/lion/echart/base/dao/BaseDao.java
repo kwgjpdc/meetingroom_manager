@@ -4,6 +4,7 @@ package com.lion.echart.base.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.lion.echart.base.entity.BaseEntity;
 import com.lion.echart.base.entity.Pagintable;
 
 /**
@@ -17,6 +18,14 @@ public interface BaseDao {
 	 * @return
 	 */
 	public abstract String getNameSpace();
+	
+	/**
+	 * *批量新增
+	 * @param sqlID
+	 * @param object
+	 * @throws Exception
+	 */
+	public void insertOupdates(String sqlID, List<BaseEntity> object) throws Exception;
 	
 	/**
 	 * 新增
