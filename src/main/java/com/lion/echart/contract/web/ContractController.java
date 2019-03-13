@@ -37,7 +37,7 @@ public class ContractController {
 	protected ContractService contractService;
 	//合同签订管理列表页 
 	@RequestMapping(value = "/contract/contractSignedList.web",method=RequestMethod.GET)
-	public String contractList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public String contractSignedList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
 		return "/page/contract/contractSignedList";
@@ -45,14 +45,14 @@ public class ContractController {
 	
 	//获取合同签订列表数据
 	@RequestMapping(value = "/contract/contractSignedListGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> contractListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractListData", null);
+	public @ResponseBody List<Map<String, Object>> contractSignedListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", null);
 		return list;
 	}
 	
 	//合同签订添加页 
 	@RequestMapping(value = "/contract/contractSignedAdd.web",method=RequestMethod.GET)
-	public String contractAdd(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public String contractSignedAdd(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
 		return "/page/contract/contractSignedAdd";
@@ -60,17 +60,32 @@ public class ContractController {
 	
 	//合同签订保存
 	@RequestMapping(value = "/contract/contractSignedSave.json",method=RequestMethod.POST)
-	public @ResponseBody String contractSave(String contractName,String contractNum,Double amount,String durationTime,String signTime,String contractPartyB,String remark,Integer subofficeId,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public @ResponseBody String contractSignedSave(String contractName,String contractNum,Double amount,String durationTime,String signTime,String contractPartyB,String remark,Integer subofficeId,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
 			ContractEntity contract = new ContractEntity(contractName, contractNum, amount, durationTime, si.parse(signTime), contractPartyB, remark, 0, 9, "false", "admin", new Date(), subofficeId);
-			baseService.insertObject("comle.contract.insertContract", contract);
+			baseService.insertObject("comle.contract.insertContractSigned", contract);
 			obj.put("flag", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			obj.put("flag", 0);
 		}
 		return obj.toString();
+	}
+	
+	//合同执行管理列表页 
+	@RequestMapping(value = "/contract/contractExecuteList.web",method=RequestMethod.GET)
+	public String contractExecuteList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		return "/page/contract/contractExecuteList";
+	}
+	
+	//获取合同执行列表数据
+	@RequestMapping(value = "/contract/contractExecuteListGetData.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> contractExecuteListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractExecuteListData", null);
+		return list;
 	}
 }
