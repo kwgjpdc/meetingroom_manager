@@ -14,14 +14,12 @@ String fule = base + "/" + contextPath + "/";
 <link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
-<link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-editable.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/financingListDetail.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/modal.js"></script>
@@ -69,7 +67,7 @@ String fule = base + "/" + contextPath + "/";
         </div>
         <select id="subofficedata" style="display:none;" >
         </select>
-        <select id="contractdata" style="display:none;" >
+        <select id="contractdata" style="display:black;" >
         </select>
 	</div>
 </div>

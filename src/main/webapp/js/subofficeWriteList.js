@@ -8,7 +8,6 @@ $(document).ready(function(){
 });
 function initSelectPicker(){
 	subofficeDataInit();
-	contractDataInit();
 }
 var TableInit = function () {
 	var oTableInit = new Object();
@@ -57,8 +56,7 @@ var TableInit = function () {
 					rowspan: 2,
 				       // return '<select class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
 					formatter:function (value, row, index, field) {
-				        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
-				        $("#subofficeid"+index).selectpicker("refresh");
+				        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
 					}
 				  },
 				  {
@@ -69,7 +67,7 @@ var TableInit = function () {
 					width : 250,
 					rowspan: 2,
 					formatter:function (value, row, index, field) {
-						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="contractinputsel" id="contractid_'+index+'" data-width="200px" value="'+value+'" ></select>';
+						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" ></select>';
 					}
 				  },
 				  {
@@ -328,69 +326,34 @@ function subofficeDataInit(){
 		}
 	});
 }
-function contractDataInit(){
-	$.ajax({
-		url: $("#fule").val()+'contract/contractSignedListGetData.json',
-		type: 'post',
-		data: {},
-		dataType: "json",
-		success: function (data) {
-			for(var i=0;i<data.length;i++){
-				$("#contractdata").append('<option label="'+data[i].subofficeid+'" value="'
-						+data[i].contractid+'" title="'+data[i].contractnum+'" >'+data[i].contractname+'</option>');
-			}
-		}
-	});
-}
 function initTableSelect(){
 	//初始分局
 	$(".subofficeinputsel").html($("#subofficedata").html());
-    $("select").selectpicker("refresh");
 	
 	//初始合同
 	contracinputsel(null);
 }
 function contracinputsel(_one){
-	var contractinputs = null;
-
-	if(_one == null){
-		contractinputs = $(".contractdatainputsel");
-	}else{
-		contractinputs = new Array();
-		contractinputs.push($("#contractid_"+_one));
-	}
-	
-	var contractOps = $("#contractdata").find("option");
-	var mysubofficeid = '';
-	if(contractinputs != null && contractinputs != undefined){
-		if(contractOps == null || contractOps == undefined){
-			contractOps = new Array();
-		}
-		var opscount = 0;
-		var outHtmls = '';
-		for(var i = 0; i < contractinputs.length; i++){
-			mysubofficeid = $("#subofficeid"+$(contractinputs[i]).attr("id").split("_")[1]).val();
-			opscount = 0;
-			outHtmls = '<option>请选择合同</option>';
-			for(var j = 0; j < contractOps.length; j++){
-				if($(contractOps[j]).attr("label") == mysubofficeid){
-					outHtmls = outHtmls + $(contractOps[j]).prop("outerHTML");
-					opscount++;
-				}
-				console.log($(contractOps[j]).attr("label")+":::"+mysubofficeid+":::"
-						+($(contractOps[j]).attr("label") == mysubofficeid)  + ":::" + opscount + ":::" + outHtmls);
+	var subofficeid = $("#subofficeid"+_one).val();
+	$.ajax({
+		url: $("#fule").val()+'contract/contractSignedListGetDatBySuboffice.json',
+		type:"POST",
+		dataType:"json",
+		data: {subofficeid : subofficeid},
+		success:function(data){
+			var strHtml= '<option value="0">-请选择-</option>';
+			$.each(data, function(key,value){
+				strHtml+='<option value="'+value.contractid+'" title="'+value.contractnum+'">'+value.contractname+'</option>';
+			});
+			$("#contractid_"+_one).html(strHtml);
+		},
+		error:function(){
 			
-			}
-			$(contractinputs[i]).html(outHtmls);
-			if(opscount == 0){
-				$(contractinputs[i]).append('<option>没有合同</option>');
-			}
-			$(contractinputs[i]).selectpicker("refresh");
 		}
-	}
-	
+	});
 }
 function setcontractnum(_this){
+	$("#contractnum"+_index).html("");
 	var index = _this.selectedIndex ;
 	var _contractnum = $(_this.options[index]).attr("title");
 	var _index = $(_this).attr("id").split("_")[1];
@@ -404,7 +367,7 @@ function addRow(){
     // newFlag == 1的数据为新规的数据
     $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
 	$("#subofficeid"+count).html($("#subofficedata").html());
-    $("#subofficeid"+count).selectpicker("refresh");
+    //$("#subofficeid"+count).selectpicker("refresh");
     $("#begindate"+count).datepicker();
     $("#planfinishdate"+count).datepicker();
     contracinputsel(count);
