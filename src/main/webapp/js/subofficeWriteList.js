@@ -1,9 +1,15 @@
 $(document).ready(function(){
 	var oTable = new TableInit();
+	initSelectPicker();
+	initTableSelect();
 	oTable.Init();
+	$(".datetimepicker").datetimepicker();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
-
+function initSelectPicker(){
+	subofficeDataInit();
+	contractDataInit();
+}
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
@@ -42,13 +48,29 @@ var TableInit = function () {
                     checkbox: true,
                     rowspan: 2
 	              },
+	              {
+					field: 'subofficeid',
+					align: 'center',
+					title: '分局名称' ,
+					valign : "middle",
+					width : 250,
+					rowspan: 2,
+				       // return '<select class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
+					formatter:function (value, row, index, field) {
+				        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
+				        $("#subofficeid"+index).selectpicker("refresh");
+					}
+				  },
 				  {
 					field: 'contractname',
 					align: 'center',
 					title: '合同名称' ,
 					valign : "middle",
 					width : 250,
-					rowspan: 2
+					rowspan: 2,
+					formatter:function (value, row, index, field) {
+						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="contractinputsel" id="contractid_'+index+'" data-width="200px" value="'+value+'" ></select>';
+					}
 				  },
 				  {
 					field: 'contractnum',
@@ -56,7 +78,11 @@ var TableInit = function () {
 					title: '合同编号' ,
 					valign : "middle",
 					width : 220,
-					rowspan: 2
+					rowspan: 2,
+					formatter:function (value, row, index, field) {
+				       // return '<div contenteditable="true">' + (value || "") + '</div>';
+						return '<span id="contractnum'+index+'">' + (value || "") + '</span>';
+				    }
 				  },
 				  {
 					field: 'constructioncontent',
@@ -75,10 +101,13 @@ var TableInit = function () {
 					title: '开工时间' ,
 					valign : "middle",
 					width : 150,
+					rowspan: 2,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
-				    },
-					rowspan: 2
+						if(value == undefined){
+							value = '';
+						}
+				        return '<div class="col-sm-1"><input name="list['+index+'].begindate" style="width: 90px;" type="text" value="'+value+'" id="begindate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
+				    }
 				  },
 				  {
 					field: 'planfinishdatestr',
@@ -86,10 +115,13 @@ var TableInit = function () {
 					title: '计划完工时间' ,
 					valign : "middle",
 					width : 150,
+					rowspan: 2,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
-				    },
-					rowspan: 2
+						if(value == undefined){
+							value = '';
+						}
+				        return '<div class="col-sm-1"><input name="list['+index+'].planfinishdate" style="width: 90px;" type="text" value="'+value+'" id="planfinishdate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
+				    }
 				  },
 				  {
 					field: 'budgetinvest',
@@ -282,6 +314,88 @@ var TableInit = function () {
 	return oTableInit;
 };
 
+function subofficeDataInit(){
+	$.ajax({
+		url: $("#fule").val()+'suboffice/subofficeGetData.json',
+		type: 'post',
+		data: {},
+		dataType: "json",
+		success: function (data) {
+			for(var i=0;i<data.length;i++){
+				$("#subofficedata").append('<option value="'
+						+data[i].subofficeid+'">'+data[i].subofficename+'</option>');
+			}
+		}
+	});
+}
+function contractDataInit(){
+	$.ajax({
+		url: $("#fule").val()+'contract/contractSignedListGetData.json',
+		type: 'post',
+		data: {},
+		dataType: "json",
+		success: function (data) {
+			for(var i=0;i<data.length;i++){
+				$("#contractdata").append('<option label="'+data[i].subofficeid+'" value="'
+						+data[i].contractid+'" title="'+data[i].contractnum+'" >'+data[i].contractname+'</option>');
+			}
+		}
+	});
+}
+function initTableSelect(){
+	//初始分局
+	$(".subofficeinputsel").html($("#subofficedata").html());
+    $("select").selectpicker("refresh");
+	
+	//初始合同
+	contracinputsel(null);
+}
+function contracinputsel(_one){
+	var contractinputs = null;
+
+	if(_one == null){
+		contractinputs = $(".contractdatainputsel");
+	}else{
+		contractinputs = new Array();
+		contractinputs.push($("#contractid_"+_one));
+	}
+	
+	var contractOps = $("#contractdata").find("option");
+	var mysubofficeid = '';
+	if(contractinputs != null && contractinputs != undefined){
+		if(contractOps == null || contractOps == undefined){
+			contractOps = new Array();
+		}
+		var opscount = 0;
+		var outHtmls = '';
+		for(var i = 0; i < contractinputs.length; i++){
+			mysubofficeid = $("#subofficeid"+$(contractinputs[i]).attr("id").split("_")[1]).val();
+			opscount = 0;
+			outHtmls = '<option>请选择合同</option>';
+			for(var j = 0; j < contractOps.length; j++){
+				if($(contractOps[j]).attr("label") == mysubofficeid){
+					outHtmls = outHtmls + $(contractOps[j]).prop("outerHTML");
+					opscount++;
+				}
+				console.log($(contractOps[j]).attr("label")+":::"+mysubofficeid+":::"
+						+($(contractOps[j]).attr("label") == mysubofficeid)  + ":::" + opscount + ":::" + outHtmls);
+			
+			}
+			$(contractinputs[i]).html(outHtmls);
+			if(opscount == 0){
+				$(contractinputs[i]).append('<option>没有合同</option>');
+			}
+			$(contractinputs[i]).selectpicker("refresh");
+		}
+	}
+	
+}
+function setcontractnum(_this){
+	var index = _this.selectedIndex ;
+	var _contractnum = $(_this.options[index]).attr("title");
+	var _index = $(_this).attr("id").split("_")[1];
+	$("#contractnum"+_index).html(_contractnum);
+}
 /**
  * 新增一行数据
  */
@@ -289,6 +403,11 @@ function addRow(){
     var count = $('#t_datagrid').bootstrapTable('getData').length;
     // newFlag == 1的数据为新规的数据
     $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
+	$("#subofficeid"+count).html($("#subofficedata").html());
+    $("#subofficeid"+count).selectpicker("refresh");
+    $("#begindate"+count).datepicker();
+    $("#planfinishdate"+count).datepicker();
+    contracinputsel(count);
 }
 /**
  * 删除一行数据
