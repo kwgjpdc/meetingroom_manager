@@ -35,31 +35,31 @@ public class ContractController {
 	private BaseService baseService;
 	
 	protected ContractService contractService;
-	//合同管理列表页 
-	@RequestMapping(value = "/contract/contractList.web",method=RequestMethod.GET)
+	//合同签订管理列表页 
+	@RequestMapping(value = "/contract/contractSignedList.web",method=RequestMethod.GET)
 	public String contractList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
-		return "/page/contract/contractList";
+		return "/page/contract/contractSignedList";
 	}
 	
-	//获取合同列表数据
-	@RequestMapping(value = "/contract/contractListGetData.json",method=RequestMethod.POST)
+	//获取合同签订列表数据
+	@RequestMapping(value = "/contract/contractSignedListGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> contractListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractListData", null);
 		return list;
 	}
 	
-	//合同添加页 
-	@RequestMapping(value = "/contract/contractAdd.web",method=RequestMethod.GET)
+	//合同签订添加页 
+	@RequestMapping(value = "/contract/contractSignedAdd.web",method=RequestMethod.GET)
 	public String contractAdd(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "contract");
-		return "/page/contract/contractAdd";
+		return "/page/contract/contractSignedAdd";
 	}
 	
-	//合同保存
-	@RequestMapping(value = "/contract/contractSave.json",method=RequestMethod.POST)
+	//合同签订保存
+	@RequestMapping(value = "/contract/contractSignedSave.json",method=RequestMethod.POST)
 	public @ResponseBody String contractSave(String contractName,String contractNum,Double amount,String durationTime,String signTime,String contractPartyB,String remark,Integer subofficeId,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();

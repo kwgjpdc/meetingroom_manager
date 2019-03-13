@@ -21,7 +21,7 @@ String fule = base + "/" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/moment-with-locales.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/contractAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/contractSignedAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
 
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
