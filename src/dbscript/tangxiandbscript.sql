@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2019-03-12 17:22:29
+Date: 2019-03-13 18:06:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,6 +49,32 @@ INSERT INTO `t_c_contract` VALUES ('6', '玉溪段进场道路施工3标', 'DZYS
 INSERT INTO `t_c_contract` VALUES ('7', '红河段进场道路施工1标', 'DZYS-HH-GCBF-SG-DL001', '6587.799056', '365日历天', '2019-02-22 00:00:00', '中铁十二局集团有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:53:49', '6');
 INSERT INTO `t_c_contract` VALUES ('8', '云南省滇中引水工程施工准备工程昆明段进场道路施工1标', 'DZYS-KM-GCBF-SG-DL001', '5267.02', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 17:06:07', '4');
 INSERT INTO `t_c_contract` VALUES ('9', '云南省滇中引水工程施工准备工程昆明段进场道路施工2标', 'DZYS-KM-GCBF-SG-DL002', '4234.95', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 17:07:01', '4');
+
+-- ----------------------------
+-- Table structure for `t_c_contractexecute`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_c_contractexecute`;
+CREATE TABLE `t_c_contractexecute` (
+  `contractexecuteid` int(11) NOT NULL AUTO_INCREMENT,
+  `contractid` int(11) NOT NULL,
+  `monthamount` double DEFAULT NULL,
+  `year` int(4) DEFAULT NULL COMMENT '所属年份',
+  `month` int(2) DEFAULT NULL COMMENT '所属月份',
+  `remark` varchar(200) DEFAULT NULL,
+  `priority` int(11) NOT NULL,
+  `isdisabled` varchar(20) NOT NULL,
+  `operuser` varchar(20) NOT NULL,
+  `operdate` datetime DEFAULT NULL,
+  PRIMARY KEY (`contractexecuteid`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_c_contractexecute
+-- ----------------------------
+INSERT INTO `t_c_contractexecute` VALUES ('1', '1', '376.18', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:11:22');
+INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:10');
+INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:49');
+INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:19:52');
 
 -- ----------------------------
 -- Table structure for `t_p_monthtotal`

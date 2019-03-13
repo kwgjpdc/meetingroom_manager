@@ -18,7 +18,7 @@ String fule = base + "/" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/contractList.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/contractSignedList.js?ts=<%=request.getAttribute("ts") %>"></script>
 
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
@@ -31,7 +31,7 @@ String fule = base + "/" + contextPath + "/";
             <div class="panel-heading">
             	合同管理 / 合同签订
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>contract/contractAdd.web'">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>contract/contractSignedAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
 		            <button id="btn_edit" type="button" class="btn btn-default">

@@ -21,7 +21,7 @@ String fule = base + "/" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/moment-with-locales.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/contractAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/contractSignedAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
 
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
@@ -65,7 +65,6 @@ String fule = base + "/" + contextPath + "/";
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>
 			            </div>
-<!-- 						<input type="text" class="form-control" id="signTime" style="width: 200px;" placeholder="请输入合同签订日期"> -->
 					</div>
 					<div class="form-group">
 						<label for="contractPartyB">合同乙方</label>

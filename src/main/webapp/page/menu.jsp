@@ -30,8 +30,8 @@
 	                	合同管理 <b class="caret"></b>
 	                </a>
 	                <ul class="dropdown-menu">
-	                     <li><a href="<%=fule %>contract/contractList.web">合同签订</a></li>
-	                    <li><a href="" >合同执行</a></li>
+	                     <li><a href="<%=fule %>contract/contractSignedList.web">合同签订</a></li>
+	                    <li><a href="<%=fule %>contract/contractExecuteList.web" >合同执行</a></li>
 	                </ul>
 	            </li>
 	            <li id="projectli" > 

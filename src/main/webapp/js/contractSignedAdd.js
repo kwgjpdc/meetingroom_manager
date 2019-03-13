@@ -86,7 +86,7 @@ function save(){
         return false;
     }
 	$.ajax({
-		url: '/echart/contract/contractSave.json',
+		url: '/echart/contract/contractSignedSave.json',
 		type:"POST",
 		dataType:"json",
 		data: {
@@ -101,7 +101,7 @@ function save(){
         },
 		success:function(data){
 			 alert("操作成功");
-			 window.location.href="/echart/contract/contractList.web";
+			 window.location.href="/echart/contract/contractSignedList.web";
 		},
 		error:function(){
 			console.log("失败");
