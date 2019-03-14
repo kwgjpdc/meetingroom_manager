@@ -1,12 +1,8 @@
 $(document).ready(function(){
 	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-400)});
-	initDateTable();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 	initSelectPicker();
-	initTableSelect();
-	$(".datetimepicker").datetimepicker();
-	$(".datetimepicker").width(110);
-	
+	initDateTable();
 });
 function initSelectPicker(){
 	typeSelect();
@@ -79,49 +75,90 @@ function contractDataInit(){
 		}
 	});
 }
-
-function initTableSelect(){
-	//初始分局
-	$(".subofficeinputsel").html($("#subofficedata").html());
-    $("select").selectpicker("refresh");
-	
-	//初始合同
-	contracinputsel(null);
+function laterinitsub(_one){
+	setTimeout("subofficeinputsel("+_one+")",300);
 }
-function contracinputsel(_one){
-	var contractinputs = null;
+function laterinitcon(_one){
+	setTimeout("contracinputsel("+_one+")",300);
+}
+function laterinitpayfordate(_one){
+	setTimeout("inputpayfordate("+_one+")",300);
+}
+function inputpayfordate(_one){
+	$("#payfordate"+_one).datetimepicker();
+	$("#payfordate"+_one).width(110);
+}
+function subofficeinputsel(_one){
+
+	var subofficeinput = null;
 
 	if(_one == null){
-		contractinputs = $(".contractdatainputsel");
+		return;
 	}else{
-		contractinputs = new Array();
-		contractinputs.push($("#contractid_"+_one));
+		subofficeinput = $("#subofficeid"+_one);
+	}
+	
+	var subofficeOps = $("#subofficedata").find("option");
+	var mysubofficeid = '';
+	if(subofficeinput != null && subofficeinput != undefined){
+		if(subofficeOps == null || subofficeOps == undefined){
+			subofficeOps = new Array();
+		}
+		var opscount = 0;
+		var outHtmls = '';
+		mysubofficeid = $(subofficeinput).attr("lang");
+		opscount = 0;
+		outHtmls = '<option value="" >请选择分局</option>';
+		var onehtm = '';
+		for(var j = 0; j < subofficeOps.length; j++){
+			onehtm = $(subofficeOps[j]).prop("outerHTML");
+			if($(subofficeOps[j]).attr("value") == mysubofficeid){
+				onehtm = onehtm.replace("<option","<option selected ");
+			}
+			outHtmls = outHtmls + onehtm;
+		}
+		$(subofficeinput).html(outHtmls);
+		$(subofficeinput).selectpicker("refresh");
+	}
+}
+function contracinputsel(_one){
+	var contractinput = null;
+
+	if(_one == null){
+		return;
+	}else{
+		contractinput = $("#contractid_"+_one);
 	}
 	
 	var contractOps = $("#contractdata").find("option");
 	var mysubofficeid = '';
-	if(contractinputs != null && contractinputs != undefined){
+	if(contractinput != null && contractinput != undefined){
 		if(contractOps == null || contractOps == undefined){
 			contractOps = new Array();
 		}
 		var opscount = 0;
 		var outHtmls = '';
-		for(var i = 0; i < contractinputs.length; i++){
-			mysubofficeid = $("#subofficeid"+$(contractinputs[i]).attr("id").split("_")[1]).val();
-			opscount = 0;
-			outHtmls = '<option value="" >请选择合同</option>';
-			for(var j = 0; j < contractOps.length; j++){
-				if($(contractOps[j]).attr("label") == mysubofficeid){
-					outHtmls = outHtmls + $(contractOps[j]).prop("outerHTML");
-					opscount++;
+		var oneHtm = '';
+		var mycheckv = $(contractinput).attr("lang");
+		mysubofficeid = $("#subofficeid"+_one).val();
+		opscount = 0;
+		outHtmls = '<option value="" >请选择合同</option>';
+		for(var j = 0; j < contractOps.length; j++){
+			if($(contractOps[j]).attr("label") == mysubofficeid){
+				oneHtm = $(contractOps[j]).prop("outerHTML");
+				if(mycheckv == $(contractOps[j]).attr("value")){
+					oneHtm = oneHtm.replace("<option","<option selected ");
+					$("#contractno"+_one).html($(contractOps[j]).attr("lang"));
 				}
+				outHtmls = outHtmls + oneHtm;
+				opscount++;
 			}
-			$(contractinputs[i]).html(outHtmls);
-			if(opscount == 0){
-				$(contractinputs[i]).append('<option value="" >没有合同</option>');
-			}
-			$(contractinputs[i]).selectpicker("refresh");
 		}
+		$(contractinput).html(outHtmls);
+		if(opscount == 0){
+			$(contractinput).append('<option value="" >没有合同</option>');
+		}
+		$(contractinput).selectpicker("refresh");
 	}
 	
 }
@@ -132,16 +169,14 @@ function setcontractno(_this){
 	$("#contractno"+_index).html(_contractno);
 }
 function initDateTable(){
-	var tparam = {
-			year:$("#txt_search_year").val(),
-			costType:$("#txt_search_ctype").val()
-	};
+	var _url = $("#fule").val()+'financing/getflistDetailData.json';
+	_url = _url + '?year='+$("#yeardefault").val()+'&costtype='+$("#ctypedefault").val();
 	var TableInit = function () {
 		var oTableInit = new Object();
 		//初始化Table
 		oTableInit.Init = function () {
 			$('#t_datagrid').bootstrapTable({
-				url: '/echart/financing/getflistDetailData.json',         //请求后台的URL（*）
+				url: _url,         //请求后台的URL（*）
 				method: 'post',                      //请求方式（*）
 				editable:true,//开启编辑模式
 				toolbar: false,                //工具按钮用哪个容器
@@ -150,7 +185,7 @@ function initDateTable(){
 				pagination: true,                   //是否显示分页（*）
 				sortable: false,                     //是否启用排序
 				sortOrder: "asc",                   //排序方式
-				queryParams: oTableInit.queryParams,//传递参数（*）
+				queryParams: null,//传递参数（*）
 				sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
 				pageNumber: 1,                       //初始化加载第一页，默认第一页
 				pageSize: 10,                       //每页的记录行数（*）
@@ -175,110 +210,95 @@ function initDateTable(){
 								return '<input type="hidden" name="list['+index+'].id" />'; 
 							}
 					  },
+					  {field:'costtype',visible:false,
+							formatter:function (value, row, index, field) {
+								return '<input type="hidden" value="'+$("#txt_search_ctype").val()+'" name="list['+index+'].costtype" />'; 
+							}
+					  },
 					  {
-							field: 'costtype',
-							align: 'center',
-							title: '款项类型' ,
-							valign : "middle",
-							width : 100,
+							field: 'costtypeStr',align: 'center',title: '款项类型' ,valign : "middle",width : 100,
+							formatter:function (value, row, index, field) {
+								var _val = value;
+								var _index = document.getElementById("txt_search_ctype").selectedIndex;
+								console.log(_index);
+								_val = document.getElementById("txt_search_ctype").options[_index].text;
+								return _val;
+						    }
+					  },
+					  {field:'maintype',visible:false,
 							formatter:function (value, row, index, field) {
 								var _val = value;
 								if(value == undefined || value == ''){
 									var _index = document.getElementById("txt_search_ctype").selectedIndex;
-									_val = document.getElementById("txt_search_ctype").options[_index].text;
+									_val = $(document.getElementById("txt_search_ctype").options[_index]).attr("lang");
 								}
-								return _val + '<input type="hidden" value="'+$("#txt_search_ctype").val()+'" name="list['+index+'].costtype" />';;
-						    }
+								return '<input type="hidden" value="'+_val+'" name="list['+index+'].maintype" />'; 
+							}
 					  },
 					  {
-							field: 'maintype',
-							align: 'center',
-							title: '类型所属' ,
-							valign : "middle",
-							width : 100,
+							field: 'maintypestr',align: 'center',title: '类型所属' ,valign : "middle",width : 100,
 							formatter:function (value, row, index, field) {
-								var _val = value;
 								var _show = value;
 								if(value == undefined || value == ''){
 									var _index = document.getElementById("txt_search_ctype").selectedIndex;
 									_show = document.getElementById("txt_search_ctype").options[_index].getAttribute("label");
-									console.log(document.getElementById("txt_search_ctype").options[_index]);
-									_val = $(document.getElementById("txt_search_ctype").options[_index]).attr("lang");
 								}
-								return _show + '<input type="hidden" value="'+_val+'" name="list['+index+'].maintype" />';
+								return _show;
 						    }
 					  },
 					  {
-						field: 'subofficeid',
-						align: 'center',
-						title: '所属分局' ,
-						valign : "middle",
-						width : 100,
-						formatter:function (value, row, index, field) {
-					        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" ></select>';
-					    }
+						  	field: 'subofficeid',align: 'center',title: '所属分局' ,valign : "middle",	width : 100,
+						  	formatter:function (value, row, index, field) {
+						  		laterinitsub(index);
+						  		return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" lang="'+value+'" ></select>';
+						  	}
 					  },
 					  {
-							field: 'contractname',
-							align: 'center',
-							title: '合同名称' ,
-							valign : "middle",
-							width : 200,
+							field: 'contractid',align: 'center',title: '合同名称' ,valign : "middle",width : 200,
 							formatter:function (value, row, index, field) {
-								return '<select name="list['+index+'].contractid" onchange="setcontractno(this)" subofficeid="'+row["subofficeid"]+'" class="contractinputsel" id="contractid_'+index+'" data-width="200px" value="'+value+'" ></select>';
+						  		laterinitcon(index);
+								return '<select name="list['+index+'].contractid" onchange="setcontractno(this)" subofficeid="'+row["subofficeid"]+'" class="contractinputsel" id="contractid_'+index+'" data-width="200px" lang="'+value+'" ></select>';
 							}
 					  },
 					  {
-						field: 'contractno',
-						align: 'center',
-						title: '合同编号' ,
-						valign : "middle",
-						width : 150,
+						field: 'contractno',align: 'center',title: '合同编号' ,valign : "middle",width : 150,
 						formatter:function (value, row, index, field) {
 							if(value == undefined || value == null) value = '';
-							return '<span id="contractno'+index+'"></span>';
+							return '<span id="contractno'+index+'">'+value+'</span>';
 						}
 					  },
 					  {
-							field: 'money',
-							align: 'center',
-							title: '应付款(元)' ,
-							width : 150,
+							field: 'money',align: 'center',title: '应付款(元)' ,width : 150,
 							formatter:function (value, row, index, field) {
-						        return '<div id="inputmoney_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>' + 
+								//class="editDiv"
+						        return '<div id="inputmoney_'+index+'" contenteditable="true" >' + (value || "") + '</div>' + 
 								'<input type="hidden" value="'+(value || "")+'" id="money'+index+'" name="list['+index+'].money" />';
 						    }
 					  },
 					  {
-						field: 'payfordate',
-						align: 'center',
-						title: '支付日期' ,
-						valign : "middle",
+						field: 'payfordate',align: 'center',title: '支付日期' ,valign : "middle",
 						width : 120,
 						formatter:function (value, row, index, field) {
 							if(value == undefined){
 								value = '';
 							}
+							laterinitpayfordate(index);
 					        return '<input name="list['+index+'].payfordateStr" width="100" type="text" value="'+value+'" id="payfordate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" >';
 					    }
 					  },
 					  {
-						field: 'cashierno',
-						align: 'center',
-						title: '出纳编号' ,
-						width : 100,
+						field: 'cashierno',align: 'center',title: '出纳编号' ,width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div id="inputcashierno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>' +
+							//class="editDiv"
+					        return '<div id="inputcashierno_'+index+'" contenteditable="true" >' + (value || "") + '</div>' +
 							'<input type="hidden" value="'+(value || "")+'" id="cashierno'+index+'" name="list['+index+'].cashierno" />';
 					    }
 					  },
 					  {
-						field: 'voucherno',
-						align: 'center',
-						title: '凭证号' ,
-						width : 100,
+						field: 'voucherno',align: 'center',title: '凭证号' ,width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div id="inputvoucherno_'+index+'" contenteditable="true" class="editDiv">' + (value || "") + '</div>' +
+							//class="editDiv"
+					        return '<div id="inputvoucherno_'+index+'" contenteditable="true" >' + (value || "") + '</div>' +
 							'<input type="hidden" value="'+(value || "")+'" id="voucherno'+index+'" name="list['+index+'].voucherno" />';
 					    }
 					  }
@@ -295,18 +315,6 @@ function initDateTable(){
 					return { classes: strclass };
 				},//隔行变色
 			});
-		};
-	
-		//得到查询的参数
-		oTableInit.queryParams = function (params) {
-			/*
-			var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-				limit: params.limit,   //页面大小
-				offset:params.offset,
-				year:params.year
-			};
-			*/
-			return params;
 		};
 		return oTableInit;
 	};
@@ -335,10 +343,6 @@ function addRow(){
 	}
 }
 function saveRow(){
-	if(!hasnosave){
-		modalTitle("没有可保存的数据，请先新增行",1,null);
-		return;
-	}
 	var length = 0;
 	if(true){
 		var rows = $("#t_datagrid").bootstrapTable('getData');

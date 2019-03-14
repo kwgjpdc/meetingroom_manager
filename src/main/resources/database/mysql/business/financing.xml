@@ -6,8 +6,8 @@
 			,t.maintype as mainType,t.maintypedescribe as mainTypeStr
 			,st.writeyear as year,sum(st.money) as total
 		from t_s_code t 
-		 left join t_f_financingwrite st on t.codetype = st.costtype
-	       and st.writeyear = '$writeyear$'
+		 left join t_f_financingwrite st on t.key = st.costtype
+	       and st.writeyear = #{writeyear}
 		where t.codetype = 'costtype' 
 	    group by t.key,t.value,t.maintype,t.maintypedescribe ,st.writeyear
 	    order by t.orderby
@@ -16,9 +16,9 @@
 	<select id="getflistDetailData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select t.*
 		from t_f_financingwrite t 
-		left join t_s_code st on t.costtype = st.codetype
+		left join t_s_code st on t.costtype = st.key
 			and st.codetype = 'costtype' 
-		where t.writeyear = '#year#'
+		where t.writeyear = #{year} and t.costtype = #{costtype}
 	</select>
 	
 	<insert id="financingWriteInsert" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
