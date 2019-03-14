@@ -99,6 +99,12 @@ CREATE TABLE `t_sys_menu` (
 -- ----------------------------
 -- Records of t_sys_menu
 -- ----------------------------
+INSERT INTO `t_sys_menu` VALUES ('1', '填报管理', null, '1', '0', '2019-03-14 21:20:12', null, '1', '1', '0', '1', '2019-03-14 21:20:35');
+INSERT INTO `t_sys_menu` VALUES ('2', '分局填报', 'subofficewrite/subofficewriteList.web', '0', '1', '2019-03-14 21:21:18', null, '0', '1', '0', '1', '2019-03-14 21:21:28');
+INSERT INTO `t_sys_menu` VALUES ('3', '财务填报', 'financing/financingList.web', '0', '1', '2019-03-14 21:22:05', null, '0', '1', '0', '1', '2019-03-14 21:22:15');
+INSERT INTO `t_sys_menu` VALUES ('4', '合同管理', null, '1', '0', '2019-03-14 21:23:43', null, '2', '1', '0', '1', '2019-03-14 21:23:35');
+INSERT INTO `t_sys_menu` VALUES ('5', '合同签订', 'contract/contractSignedList.web', '0', '4', '2019-03-14 21:24:55', null, '0', '1', '0', '1', '2019-03-14 21:25:00');
+INSERT INTO `t_sys_menu` VALUES ('6', '合同执行', 'contract/contractExecuteList.web', '0', '4', '2019-03-14 21:42:11', null, '0', '1', '0', '1', '2019-03-14 21:42:08');
 
 -- ----------------------------
 -- Table structure for `t_sys_role`

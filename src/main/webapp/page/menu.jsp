@@ -82,9 +82,9 @@
 	                	系统管理 <b class="caret"></b>
 	                </a>
 	                <ul class="dropdown-menu">
-	                    <li><a href="#">用户管理</a></li>
-	                    <li><a href="#">部门管理</a></li>
-	                    <li><a href="#">菜单管理</a></li>
+	                    <li><a href="<%=fule %>user/userList.web">用户管理</a></li>
+	                    <li><a href="<%=fule %>role/roleList.web">角色管理</a></li>
+	                    <li><a href="<%=fule %>menu/menuList.web">菜单管理</a></li>
 	                </ul>
 	            </li>
 	        </ul>

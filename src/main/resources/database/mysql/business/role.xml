@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comle.role">
+	<select id="getRoleListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select 
+			*,date_format(createdate, '%Y-%m-%d') createdateStr
+		from t_sys_role
+	</select>
+</mapper>
