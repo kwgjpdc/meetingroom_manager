@@ -380,6 +380,7 @@ function saveRow(){
 	modalTitle("未填写的支付日期会默认为当日，<br/>是否确定提交?",2);
 }
 function saveFun(){
+	showloding();
 	$.ajax({
 		url: $("#fule").val()+'financing/insertFinancing.json',
 		type: 'post',
@@ -411,24 +412,30 @@ function delRow(){
 }
 function deleteFun(){
     var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
-	var _id = checkRow["id"] ;
-	$.ajax({
-		url: $("#fule").val()+'financing/deleteFinancing.json',
-		type: 'post',
-		data: {id:_id},
-		dataType: "json",
-		success: function (data) {
-			if(data.msgType == 1){
-				reloadtable();
-				modalTitle("操作成功",1);
-			}else{
+	var _id = checkRow[0]["id"] ;
+	if(_id == null || _id == undefined || _id == 0){
+		reloadtable();
+		modalTitle("操作成功",1);
+	    hasnosave = false;
+	}else{
+		$.ajax({
+			url: $("#fule").val()+'financing/deleteFinancing.json',
+			type: 'post',
+			data: {id:_id},
+			dataType: "json",
+			success: function (data) {
+				if(data.msgType == 1){
+					reloadtable();
+					modalTitle("操作成功",1);
+				    hasnosave = false;
+				}else{
+					modalTitle("操作失败，请重试",1);
+				}
+			},error:function(data){
 				modalTitle("操作失败，请重试",1);
 			}
-		},error:function(data){
-			modalTitle("操作失败，请重试",1);
-		}
-	});
-    hasnosave = false;
+		});
+	}
 }
 
 function reloadtable(){

@@ -24,6 +24,7 @@ function modalTitle(_msg,_type,_width,_height){
 	$("#infobody").html(_msg);
 	$("#rightBtn1").hide();
 	$("#rightBtn2").hide();
+	$("#leftBtn").show();
 
 	if(_type == 3){
 		$("#rightBtn2").show();
@@ -33,8 +34,10 @@ function modalTitle(_msg,_type,_width,_height){
 	$('#show-modal').modal().open();
 }
 function showloding(){
+	$("#leftBtn").hide();
 	$("#rightBtn1").hide();
-	$("#infobody").html("处理中，请稍等！");
+	$("#rightBtn2").hide();
+	$("#infobody").html('<img width="50" src="'+$("#fule").val()+'/image/loading.gif" />处理中，请稍等！');
 	$('#show-modal').modal().open();
 }
 function closeloding(){
