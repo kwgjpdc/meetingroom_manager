@@ -99,7 +99,7 @@ public class BaseDaoImpl implements BaseDao{
 	public void insertOupdates(String sqlID, List<BaseEntity> object) throws Exception {
 		if(object != null)
 		for (int i = 0; i < object.size(); i++) {
-			if(object.get(i).getId() != null) {
+			if(object.get(i).getId() != null&&object.get(i).getId()!=0) {
 				updateObject(sqlID+"Update", object.get(i));
 			}else {
 				insertObject(sqlID+"Insert", object.get(i));

@@ -2,6 +2,7 @@ package com.lion.echart.Suboffice.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -54,12 +55,15 @@ public class SubofficeWriteController {
 			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		JSONObject obj = new JSONObject();
 		try {
-			if(list != null && list.getList() != null) {
-				for (int i = list.getList().size() - 1; i > 0; i--) {
-					
-				}
+			for(SubofficeWriteEntity s :list.getList()){
+				s.setYear("2019");
+				s.setMonth("2");
+				s.setPriority(0);
+				s.setIsdisabled("false");
+				s.setOperuser("admin");
+				s.setOperdate(new Date());
 			}
-			baseService.insertOupdates("comle.financing.financingWrite", list.getList());
+			baseService.insertOupdates("comle.SubofficeWrite.subofficewrite", list.getList());
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();

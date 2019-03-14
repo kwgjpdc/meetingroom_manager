@@ -4,7 +4,7 @@ $(document).ready(function(){
 	initSelectPicker();
 	initTableSelect();
 	oTable.Init();
-	$(".datetimepicker").datetimepicker();
+	$(".datetimepicker").datepicker();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 function initSelectPicker(){
@@ -46,6 +46,13 @@ var TableInit = function () {
 				[
 				  {                    
                     checkbox: true,
+                    formatter:function (value, row, index, field) {
+                    	var defaultValue = row["subofficewriteid"];
+						if(defaultValue==undefined){
+							defaultValue="0";
+						}
+						return '<input type="hidden" name="list['+index+'].subofficewriteid" value="'+defaultValue+'" />'; 
+				    },
                     rowspan: 2
 	              },
 	              {
@@ -104,7 +111,8 @@ var TableInit = function () {
 					valign : "middle",
 					width : 250,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				        return '<div id="constructioncontent_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+						'<input type="hidden" value="'+(value || "")+'" id="constructioncontent'+index+'" name="list['+index+'].constructioncontent" />';
 				    },
 					rowspan: 2
 				  },
@@ -119,7 +127,8 @@ var TableInit = function () {
 						if(value == undefined){
 							value = '';
 						}
-				        return '<div class="col-sm-1"><input name="list['+index+'].begindate" style="width: 90px;" type="text" value="'+value+'" id="begindate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
+						laterinitbegindate(index);
+				        return '<input name="list['+index+'].begindate" readonly="readonly" style="width: 90px;" type="text" value="'+value+'" id="begindate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" >';
 				    }
 				  },
 				  {
@@ -133,7 +142,8 @@ var TableInit = function () {
 						if(value == undefined){
 							value = '';
 						}
-				        return '<div class="col-sm-1"><input name="list['+index+'].planfinishdate" style="width: 90px;" type="text" value="'+value+'" id="planfinishdate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" ></div>';
+						laterinitplanfinishdate(index);
+				        return '<input name="list['+index+'].planfinishdate" readonly="readonly" style="width: 90px;" type="text" value="'+value+'" id="planfinishdate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" >';
 				    }
 				  },
 				  {
@@ -142,7 +152,8 @@ var TableInit = function () {
 					title: '概算投资<br/>(万元)' ,
 					width : 100,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
+				        return '<div id="budgetinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+						'<input type="hidden" value="'+(value || "")+'" id="budgetinvest'+index+'" name="list['+index+'].budgetinvest" />';
 				    },
 					rowspan: 2
 				  },
@@ -174,7 +185,8 @@ var TableInit = function () {
 					title: '下一月度计划<br/>完成投资（万元）' ,
 					width : 150,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
+						return '<div id="nextmonthplaninvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+						'<input type="hidden" value="'+(value || "")+'" id="nextmonthplaninvest'+index+'" name="list['+index+'].nextmonthplaninvest" />';
 				    },
 					rowspan: 2
 				  },
@@ -185,7 +197,8 @@ var TableInit = function () {
 					title: '备注' ,
 					width : 150,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
+						return '<div id="remark_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+						'<input type="hidden" value="'+(value || "")+'" id="remark'+index+'" name="list['+index+'].remark" />';
 				    },
 					rowspan: 2
 				  },
@@ -196,7 +209,8 @@ var TableInit = function () {
 					title: '总体形象进度（已完成的单项工程、正在进行的单项工程，完成工程占总工程的百分比）' ,
 					width : 950,
 					formatter:function (value, row, index, field) {
-				        return '<div contenteditable="true">' + (value || "") + '</div>';
+						return '<div id="overallimageprogress_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+						'<input type="hidden" value="'+(value || "")+'" id="overallimageprogress'+index+'" name="list['+index+'].overallimageprogress" />';
 				    },
 					rowspan: 2
 				  }
@@ -209,7 +223,7 @@ var TableInit = function () {
 						width : 80,
 						formatter:function (value, row, index, field) {
 							return '<span id="contractamount'+index+'">' + (value || "") + '</span>';
-					    }
+						}
 				  }
 				 ,{
 						field: 'finishinvest',
@@ -217,7 +231,8 @@ var TableInit = function () {
 						title: '自开工以来累计<br/>完成投资<br/>（万元）',
 						width : 120,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="finishinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="finishinvest'+index+'" name="list['+index+'].finishinvest" />';
 					    }
 				  }
 				 ,{
@@ -226,7 +241,8 @@ var TableInit = function () {
 						title: '剩余投资<br/>（万元）',
 						width : 80,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="surplusinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="surplusinvest'+index+'" name="list['+index+'].surplusinvest" />';
 					    }
 				  }
 				 ,{
@@ -235,7 +251,8 @@ var TableInit = function () {
 						title: '本年度计划<br/>完成投资<br/>（万元）' ,
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="yearplaninvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="yearplaninvest'+index+'" name="list['+index+'].yearplaninvest" />';
 					    }
 				  }
 				 ,{
@@ -244,7 +261,8 @@ var TableInit = function () {
 						title: '本月计划<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="monthplaninvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="monthplaninvest'+index+'" name="list['+index+'].monthplaninvest" />';
 					    }
 				  }
 				 ,{
@@ -253,7 +271,8 @@ var TableInit = function () {
 						title: '本年度实际<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="yearrealityinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="yearrealityinvest'+index+'" name="list['+index+'].yearrealityinvest" />';
 					    }
 				  }
 				 ,{
@@ -262,7 +281,8 @@ var TableInit = function () {
 						title: '本月实际<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="monthrealityinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="monthrealityinvest'+index+'" name="list['+index+'].monthrealityinvest" />';
 					    }
 				  }
 				 ,{
@@ -271,7 +291,8 @@ var TableInit = function () {
 						title: '本旬实际<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="tendayrealityinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="tendayrealityinvest'+index+'" name="list['+index+'].tendayrealityinvest" />';
 					    }
 				  }
 				 ,{
@@ -280,7 +301,8 @@ var TableInit = function () {
 						title: '土方<br/>（万方）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="earthwork_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="earthwork'+index+'" name="list['+index+'].earthwork" />';
 					    }
 				  }
 				 ,{
@@ -289,7 +311,8 @@ var TableInit = function () {
 						title: '石方<br/>（万方）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="stonework_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="stonework'+index+'" name="list['+index+'].stonework" />';
 					    }
 				  }
 				 ,{
@@ -298,7 +321,8 @@ var TableInit = function () {
 						title: '混凝土<br/>（万立方米）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<div id="beton_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							'<input type="hidden" value="'+(value || "")+'" id="beton'+index+'" name="list['+index+'].beton" />';
 					    }
 				  }
 				]
@@ -326,7 +350,20 @@ var TableInit = function () {
 	};
 	return oTableInit;
 };
-
+function laterinitbegindate(_one){
+	setTimeout("inputbegindate("+_one+")",300);
+}
+function laterinitplanfinishdate(_one){
+	setTimeout("inputplanfinishdate("+_one+")",300);
+}
+function inputbegindate(_one){
+	$("#begindate"+_one).datepicker();
+	$("#begindate"+_one).width(110);
+}
+function inputplanfinishdate(_one){
+	$("#planfinishdate"+_one).datepicker();
+	$("#planfinishdate"+_one).width(110);
+}
 function subofficeDataInit(){
 	$.ajax({
 		url: $("#fule").val()+'suboffice/subofficeGetData.json',
@@ -345,9 +382,6 @@ function subofficeDataInit(){
 function initTableSelect(){
 	//初始分局
 	$(".subofficeinputsel").html($("#subofficedata").html());
-	
-	//初始合同
-	//contracinputsel(null);
 }
 function contracinputsel(_one){
 	var subofficeid = $("#subofficeid"+_one).val();
@@ -388,15 +422,21 @@ function setcontractnum(_this){
 /**
  * 新增一行数据
  */
+var hasnosave = false;
 function addRow(){
-    var count = $('#t_datagrid').bootstrapTable('getData').length;
-    // newFlag == 1的数据为新规的数据
-    $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
-	$("#subofficeid"+count).html($("#subofficedata").html());
-    //$("#subofficeid"+count).selectpicker("refresh");
-	$("#contractid_"+count).html('<option value="0">-请选择-</option>');
-    $("#begindate"+count).datepicker();
-    $("#planfinishdate"+count).datepicker();
+	if(hasnosave){
+		alert("您尚有未完成的操作，请保存当前行");
+	}else{
+		var count = $('#t_datagrid').bootstrapTable('getData').length;
+	    // newFlag == 1的数据为新规的数据
+	    $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
+		$("#subofficeid"+count).html($("#subofficedata").html());
+	    //$("#subofficeid"+count).selectpicker("refresh");
+		$("#contractid_"+count).html('<option value="0">-请选择-</option>');
+	    $("#begindate"+count).datepicker();
+	    $("#planfinishdate"+count).datepicker();
+	    hasnosave = true;
+	}
 }
 /**
  * 删除一行数据
@@ -415,7 +455,33 @@ function delRow(){
         return;
     }
 }
+function saveRow(){
+	var length = 0;
+	if(true){
+		var rows = $("#t_datagrid").bootstrapTable('getData');
+		length = rows.length; 
+	}
+	for(var i = 0; i < length; i++){
+		$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
+		$("#budgetinvest"+i).val($("#budgetinvest_"+i).html());
+		$("#nextmonthplaninvest"+i).val($("#nextmonthplaninvest_"+i).html());
+		$("#finishinvest"+i).val($("#finishinvest_"+i).html());
+		$("#surplusinvest"+i).val($("#surplusinvest_"+i).html());
+		$("#yearplaninvest"+i).val($("#yearplaninvest_"+i).html());
+		$("#monthplaninvest"+i).val($("#monthplaninvest_"+i).html());
+		$("#yearrealityinvest"+i).val($("#yearrealityinvest_"+i).html());
+		$("#monthrealityinvest"+i).val($("#monthrealityinvest_"+i).html());
+		$("#tendayrealityinvest"+i).val($("#tendayrealityinvest_"+i).html());
+		$("#earthwork"+i).val($("#earthwork_"+i).html());
+		$("#stonework"+i).val($("#stonework_"+i).html());
+		$("#beton"+i).val($("#beton_"+i).html());
+		$("#remark"+i).val($("#remark_"+i).html());
+		$("#overallimageprogress"+i).val($("#overallimageprogress_"+i).html());
+	}
+	modalTitle("是否确定提交",2);
+}
 function saveFun(){
+	//console.log($("#editForm").serialize());
 	showloding();
 	$.ajax({
 		url: $("#fule").val()+'subofficewrite/insertSubofficewrite.json',
@@ -425,6 +491,7 @@ function saveFun(){
 		success: function (data) {
 			closeloding();
 			modalTitle("操作成功",1);
+			window.location.reload();
 		},error:function(data){
 			closeloding();
 			modalTitle("操作失败，请重试",1);

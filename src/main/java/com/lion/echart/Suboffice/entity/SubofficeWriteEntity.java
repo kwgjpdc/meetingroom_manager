@@ -2,156 +2,120 @@ package com.lion.echart.Suboffice.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import com.lion.echart.base.entity.BaseEntity;
 /**
  * 分局填报表
  * @author TANGXIAN
  *
  */
-public class SubofficeWriteEntity implements Serializable {
-	private int subofficeWriteId;//分局填报ID
-	private int contractId;//合同ID
-	private String constructionContent;//主要建设内容
-	private Date beginDate;//开工时间
-	private Date planFinishDate;//计划完工时间
-	private Double budgetInvest;//概算投资（万元）
-	private Double contractAmount;//合同金额
-	private Double finishInvest;//自开工以来累计完成投资
-	private Double surplusInvest;//剩余投资（万元）
-	private Double yearPlanInvest;//本年度计划完成投资
-	private Double monthPlanInvest;//本月计划完成投资（万元）
-	private Double yearRealityInvest;//本年度实际完成投资
-	private Double monthRealityInvest;//本月实际完成投资
-	private Double tendayRealityInvest;//本旬实际完成投资（万元）
+public class SubofficeWriteEntity extends BaseEntity implements Serializable {
+	private long subofficewriteid;//分局填报ID
+	private int contractid;//合同ID
+	private String constructioncontent;//主要建设内容
+	private String begindate;//开工时间
+	private String planfinishdate;//计划完工时间
+	private Double budgetinvest;//概算投资（万元）
+	private Double finishinvest;//自开工以来累计完成投资
+	private Double surplusinvest;//剩余投资（万元）
+	private Double yearplaninvest;//本年度计划完成投资
+	private Double monthplaninvest;//本月计划完成投资（万元）
+	private Double yearrealityinvest;//本年度实际完成投资
+	private Double monthrealityinvest;//本月实际完成投资
+	private Double tendayrealityinvest;//本旬实际完成投资（万元）
 	private Double earthwork;//土方（万方）
 	private Double stonework;//石方（万方）
 	private Double beton;//混凝土（万立方米）
-	private String overallImageProgress;//总体形象进度
-	private Double nextMonthPlanInvest;//下一月度计划完成投资
+	private String overallimageprogress;//总体形象进度
+	private Double nextmonthplaninvest;//下一月度计划完成投资
 	private String remark;//备注
 	private String year;//所属年份
 	private String month;//所属月份
 	private int priority;//序号
-	private String isDisabled;//是否禁用
-	private String operUser;//修改人
-	private Date operDate;//修改时间
-	
-	public SubofficeWriteEntity(int subofficeWriteId, int contractId, String constructionContent, Date beginDate,
-			Date planFinishDate, Double budgetInvest, Double contractAmount, Double finishInvest, Double surplusInvest,
-			Double yearPlanInvest, Double monthPlanInvest, Double yearRealityInvest, Double monthRealityInvest,
-			Double tendayRealityInvest, Double earthwork, Double stonework, Double beton, String overallImageProgress,
-			Double nextMonthPlanInvest, String remark, String year, String month, int priority, String isDisabled,
-			String operUser, Date operDate) {
-		super();
-		this.subofficeWriteId = subofficeWriteId;
-		this.contractId = contractId;
-		this.constructionContent = constructionContent;
-		this.beginDate = beginDate;
-		this.planFinishDate = planFinishDate;
-		this.budgetInvest = budgetInvest;
-		this.contractAmount = contractAmount;
-		this.finishInvest = finishInvest;
-		this.surplusInvest = surplusInvest;
-		this.yearPlanInvest = yearPlanInvest;
-		this.monthPlanInvest = monthPlanInvest;
-		this.yearRealityInvest = yearRealityInvest;
-		this.monthRealityInvest = monthRealityInvest;
-		this.tendayRealityInvest = tendayRealityInvest;
-		this.earthwork = earthwork;
-		this.stonework = stonework;
-		this.beton = beton;
-		this.overallImageProgress = overallImageProgress;
-		this.nextMonthPlanInvest = nextMonthPlanInvest;
-		this.remark = remark;
-		this.year = year;
-		this.month = month;
-		this.priority = priority;
-		this.isDisabled = isDisabled;
-		this.operUser = operUser;
-		this.operDate = operDate;
+	private String isdisabled;//是否禁用
+	private String operuser;//修改人
+	private Date operdate;//修改时间
+	@Override
+	public Long getId() {
+		return subofficewriteid;
 	}
-	public int getSubofficeWriteId() {
-		return subofficeWriteId;
+	public long getSubofficewriteid() {
+		return subofficewriteid;
 	}
-	public void setSubofficeWriteId(int subofficeWriteId) {
-		this.subofficeWriteId = subofficeWriteId;
+	public void setSubofficewriteid(long subofficewriteid) {
+		this.subofficewriteid = subofficewriteid;
 	}
-	public int getContractId() {
-		return contractId;
+	public int getContractid() {
+		return contractid;
 	}
-	public void setContractId(int contractId) {
-		this.contractId = contractId;
+	public void setContractid(int contractid) {
+		this.contractid = contractid;
 	}
-	public String getConstructionContent() {
-		return constructionContent;
+	public String getConstructioncontent() {
+		return constructioncontent;
 	}
-	public void setConstructionContent(String constructionContent) {
-		this.constructionContent = constructionContent;
+	public void setConstructioncontent(String constructioncontent) {
+		this.constructioncontent = constructioncontent;
 	}
-	public Date getBeginDate() {
-		return beginDate;
+	public String getBegindate() {
+		return begindate;
 	}
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
+	public void setBegindate(String begindate) {
+		this.begindate = begindate;
 	}
-	public Date getPlanFinishDate() {
-		return planFinishDate;
+	public String getPlanfinishdate() {
+		return planfinishdate;
 	}
-	public void setPlanFinishDate(Date planFinishDate) {
-		this.planFinishDate = planFinishDate;
+	public void setPlanfinishdate(String planfinishdate) {
+		this.planfinishdate = planfinishdate;
 	}
-	public Double getBudgetInvest() {
-		return budgetInvest;
+	public Double getBudgetinvest() {
+		return budgetinvest;
 	}
-	public void setBudgetInvest(Double budgetInvest) {
-		this.budgetInvest = budgetInvest;
+	public void setBudgetinvest(Double budgetinvest) {
+		this.budgetinvest = budgetinvest;
 	}
-	public Double getContractAmount() {
-		return contractAmount;
+	public Double getFinishinvest() {
+		return finishinvest;
 	}
-	public void setContractAmount(Double contractAmount) {
-		this.contractAmount = contractAmount;
+	public void setFinishinvest(Double finishinvest) {
+		this.finishinvest = finishinvest;
 	}
-	public Double getFinishInvest() {
-		return finishInvest;
+	public Double getSurplusinvest() {
+		return surplusinvest;
 	}
-	public void setFinishInvest(Double finishInvest) {
-		this.finishInvest = finishInvest;
+	public void setSurplusinvest(Double surplusinvest) {
+		this.surplusinvest = surplusinvest;
 	}
-	public Double getSurplusInvest() {
-		return surplusInvest;
+	public Double getYearplaninvest() {
+		return yearplaninvest;
 	}
-	public void setSurplusInvest(Double surplusInvest) {
-		this.surplusInvest = surplusInvest;
+	public void setYearplaninvest(Double yearplaninvest) {
+		this.yearplaninvest = yearplaninvest;
 	}
-	public Double getYearPlanInvest() {
-		return yearPlanInvest;
+	public Double getMonthplaninvest() {
+		return monthplaninvest;
 	}
-	public void setYearPlanInvest(Double yearPlanInvest) {
-		this.yearPlanInvest = yearPlanInvest;
+	public void setMonthplaninvest(Double monthplaninvest) {
+		this.monthplaninvest = monthplaninvest;
 	}
-	public Double getMonthPlanInvest() {
-		return monthPlanInvest;
+	public Double getYearrealityinvest() {
+		return yearrealityinvest;
 	}
-	public void setMonthPlanInvest(Double monthPlanInvest) {
-		this.monthPlanInvest = monthPlanInvest;
+	public void setYearrealityinvest(Double yearrealityinvest) {
+		this.yearrealityinvest = yearrealityinvest;
 	}
-	public Double getYearRealityInvest() {
-		return yearRealityInvest;
+	public Double getMonthrealityinvest() {
+		return monthrealityinvest;
 	}
-	public void setYearRealityInvest(Double yearRealityInvest) {
-		this.yearRealityInvest = yearRealityInvest;
+	public void setMonthrealityinvest(Double monthrealityinvest) {
+		this.monthrealityinvest = monthrealityinvest;
 	}
-	public Double getMonthRealityInvest() {
-		return monthRealityInvest;
+	public Double getTendayrealityinvest() {
+		return tendayrealityinvest;
 	}
-	public void setMonthRealityInvest(Double monthRealityInvest) {
-		this.monthRealityInvest = monthRealityInvest;
-	}
-	public Double getTendayRealityInvest() {
-		return tendayRealityInvest;
-	}
-	public void setTendayRealityInvest(Double tendayRealityInvest) {
-		this.tendayRealityInvest = tendayRealityInvest;
+	public void setTendayrealityinvest(Double tendayrealityinvest) {
+		this.tendayrealityinvest = tendayrealityinvest;
 	}
 	public Double getEarthwork() {
 		return earthwork;
@@ -171,17 +135,17 @@ public class SubofficeWriteEntity implements Serializable {
 	public void setBeton(Double beton) {
 		this.beton = beton;
 	}
-	public String getOverallImageProgress() {
-		return overallImageProgress;
+	public String getOverallimageprogress() {
+		return overallimageprogress;
 	}
-	public void setOverallImageProgress(String overallImageProgress) {
-		this.overallImageProgress = overallImageProgress;
+	public void setOverallimageprogress(String overallimageprogress) {
+		this.overallimageprogress = overallimageprogress;
 	}
-	public Double getNextMonthPlanInvest() {
-		return nextMonthPlanInvest;
+	public Double getNextmonthplaninvest() {
+		return nextmonthplaninvest;
 	}
-	public void setNextMonthPlanInvest(Double nextMonthPlanInvest) {
-		this.nextMonthPlanInvest = nextMonthPlanInvest;
+	public void setNextmonthplaninvest(Double nextmonthplaninvest) {
+		this.nextmonthplaninvest = nextmonthplaninvest;
 	}
 	public String getRemark() {
 		return remark;
@@ -207,22 +171,23 @@ public class SubofficeWriteEntity implements Serializable {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	public String getIsDisabled() {
-		return isDisabled;
+	public String getIsdisabled() {
+		return isdisabled;
 	}
-	public void setIsDisabled(String isDisabled) {
-		this.isDisabled = isDisabled;
+	public void setIsdisabled(String isdisabled) {
+		this.isdisabled = isdisabled;
 	}
-	public String getOperUser() {
-		return operUser;
+	public String getOperuser() {
+		return operuser;
 	}
-	public void setOperUser(String operUser) {
-		this.operUser = operUser;
+	public void setOperuser(String operuser) {
+		this.operuser = operuser;
 	}
-	public Date getOperDate() {
-		return operDate;
+	public Date getOperdate() {
+		return operdate;
 	}
-	public void setOperDate(Date operDate) {
-		this.operDate = operDate;
+	public void setOperdate(Date operdate) {
+		this.operdate = operdate;
 	}
+	
 }
