@@ -17,6 +17,7 @@ String fule = base + contextPath + "/";
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-editable.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/the-modal.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/financingListDetail.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
@@ -24,7 +25,7 @@ String fule = base + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/modal.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/financingListDetail.js?ts=<%=request.getAttribute("ts") %>"></script>
 <style type="text/css">
@@ -32,6 +33,7 @@ String fule = base + contextPath + "/";
 </style>
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
+
 	<div id="head" >
 		<%@include file="../menu.jsp" %>
 	</div>
@@ -61,13 +63,13 @@ String fule = base + contextPath + "/";
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="txt_search_year">所属年份</label>
                         <div class="col-sm-1">
-                        	<select id="txt_search_year" name="txt_search_year" class="selectpicker" data-width="100px" >
+                        	<select id="txt_search_year" onchange="reloadtable()" name="txt_search_year" class="selectpicker" data-width="100px" >
                         	</select>
                             <input type="hidden" id="yeardefault" value="<%=request.getAttribute("year") %>" >
                         </div>
                         <label class="control-label col-sm-1" for="txt_search_ctype">费用类型</label>
                         <div class="col-sm-1">
-                        	<select id="txt_search_ctype" name="txt_search_ctype" class="selectpicker" data-width="150px" >
+                        	<select id="txt_search_ctype" onchange="reloadtable()" name="txt_search_ctype" class="selectpicker" data-width="150px" >
                         	</select>
                             <input type="hidden" id="ctypedefault" value="<%=request.getAttribute("costtype") %>" >
                         </div>

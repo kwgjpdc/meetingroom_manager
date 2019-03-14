@@ -10,8 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-13 23:19:28
+Date: 2019-03-14 16:56:07
 */
+
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
 -- Table structure for `t_f_financingwrite`
@@ -31,13 +33,18 @@ CREATE TABLE `t_f_financingwrite` (
   `operuser` int(11) DEFAULT NULL COMMENT '操作人',
   `cashierno` varchar(50) DEFAULT NULL COMMENT '出纳编号',
   `voucherno` varchar(50) DEFAULT NULL COMMENT '凭证编号',
+  `isdisabled` varchar(1) DEFAULT '0' COMMENT '是否删除（1为删除,0为正常）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='财务填报';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='财务填报';
 
 -- ----------------------------
 -- Records of t_f_financingwrite
 -- ----------------------------
-INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-03-07', '2019', '1', '02', '1', '1', '2', '321.000000', '2019-03-13 23:12:25', null, null, null);
+INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-01-07', '2019', '1', '02', '1', '1', '2', '31122321.000000', '2019-03-14 13:36:17', null, '', '', 0);
+INSERT INTO `t_f_financingwrite` VALUES ('6', '2019-01-13', '2019', '1', '02', '1', '1', '2', '42211321.000000', '2019-03-14 13:36:17', '1', 'nnn', 'ccc', 0);
+INSERT INTO `t_f_financingwrite` VALUES ('10', '2019-03-14', '2019', '3', '12', '2', null, null, '1111123.000000', '2019-03-14 16:42:33', null, '', '', 0);
+INSERT INTO `t_f_financingwrite` VALUES ('11', '2019-03-14', '2019', '3', '12', '2', null, null, '321.000000', '2019-03-14 16:42:33', null, '', '', 0);
+INSERT INTO `t_f_financingwrite` VALUES ('12', '2019-03-14', '2019', '3', '12', '2', null, null, '111.000000', '2019-03-14 16:42:33', null, '', '', 0);
 
 
 /*

@@ -20,18 +20,39 @@ function doexcel(){
 	alert('工程师正在努力实现中');
 }
 
-function modalTitle(_msg,_type){
-	$("#rightBtn").hide();
-	$("#modalfooter").show();
+function modalTitle(_msg,_type,_width,_height){
 	$("#infobody").html(_msg);
-	if(_type == 2){
-		$("#rightBtn").show();
+	$("#rightBtn1").hide();
+	$("#rightBtn2").hide();
+
+	if(_type == 3){
+		$("#rightBtn2").show();
+	}if(_type == 2){
+		$("#rightBtn1").show();
 	}
+	$('#show-modal').modal().open();
 }
 function showloding(){
-	$("#modalfooter").hide();
+	$("#rightBtn1").hide();
 	$("#infobody").html("处理中，请稍等！");
+	$('#show-modal').modal().open();
 }
 function closeloding(){
-	$('#myModal').modal('hide');
+	$.modal().close();
+}
+
+function fmoney(s, n) {
+	if(s == null || s == undefined || s == '') return '';
+	
+	while((""+s).indexOf(",") != -1){
+		s = s.replace(",","");
+	}
+	n = n > 0 && n <= 20 ? n : 2;
+	s = parseFloat((s + "").replace(/[^\d\.-]/g, "")).toFixed(n) + "";
+	var l = s.split(".")[0].split("").reverse(), r = s.split(".")[1];
+	t = "";
+	for (i = 0; i < l.length; i++) {
+		t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
+	}
+	return t.split("").reverse().join("") + "." + r;
 }

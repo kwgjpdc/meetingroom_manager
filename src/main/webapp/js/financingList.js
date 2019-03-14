@@ -53,11 +53,15 @@ var TableInit = function () {
 							return _writeyear;
 						}
 				  },
-				  {field: 'total',align: 'center',title: '累计金额' ,width : 150},
+				  {field: 'total',align: 'right',title: '累计金额' ,width : 150,
+						formatter:function (value, row, index, field) {
+							return fmoney(value,2);
+						}
+				  },
 				  {field: '',align: 'center',title: '操作' ,width : 150,
 						formatter:function (value, row, index, field) {
 					        return [
-							      '<button type="button" onclick="addDetail('+_writeyear+',\''+row["costType"]+'\')" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;">增加明细</button>',
+							      //'<button type="button" onclick="addDetail('+_writeyear+',\''+row["costType"]+'\')" class="RoleOfdelete btn btn-primary  btn-sm" style="margin-right:15px;">增加明细</button>',
 							      '<button type="button" onclick="showDetail('+_writeyear+',\''+row["costType"]+'\')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">查看明细</button>'
 							      ].join('');
 					    }

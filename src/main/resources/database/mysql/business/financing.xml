@@ -7,7 +7,7 @@
 			,st.writeyear as year,sum(st.money) as total
 		from t_s_code t 
 		 left join t_f_financingwrite st on t.key = st.costtype
-	       and st.writeyear = #{writeyear}
+	       and st.writeyear = #{writeyear} and st.isdisabled = 0
 		where t.codetype = 'costtype' 
 	    group by t.key,t.value,t.maintype,t.maintypedescribe ,st.writeyear
 	    order by t.orderby
@@ -18,7 +18,7 @@
 		from t_f_financingwrite t 
 		left join t_s_code st on t.costtype = st.key
 			and st.codetype = 'costtype' 
-		where t.writeyear = #{year} and t.costtype = #{costtype}
+		where t.isdisabled = '0' and t.writeyear = #{year} and t.costtype = #{costtype}
 	</select>
 	
 	<insert id="financingWriteInsert" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
@@ -29,8 +29,26 @@
    	</insert>
 	
 	<update id="financingWriteUpdate" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
-    	udpate t_f_financingwrite
-    	set id = #id#
-    	where id = #id#
+    	update t_f_financingwrite
+    		set 
+    		 payfordate = #{payfordate}
+    		,costtype = #{costtype}
+    		,maintype = #{maintype}
+    		,contractid = #{contractid}
+    		,subofficeid = #{subofficeid}
+    		,money = #{money}
+    		,operdate = now()
+    		,operuser = #{operuser}
+    		,writeyear = #{writeyear}
+    		,writemonth = #{writemonth}
+    		,cashierno = #{cashierno}
+    		,voucherno  = #{voucherno}
+    	where id = #{id}
     </update>
+    
+	<delete id="financingWriteDelete" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity" >
+		update t_f_financingwrite
+    		set isdisabled = 1
+    	where id = #{id}
+    </delete>
 </mapper>

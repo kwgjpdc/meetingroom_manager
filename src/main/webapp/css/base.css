@@ -24,3 +24,18 @@ body,html,div{
 	outline:0px;
 	padding:2px; 
 }
+.modal {
+    background: #eee;
+    width: 400px;
+    height: 250px;
+    margin: 20px auto;
+    border: 3px solid #666;
+    padding: 20px;
+}
+
+.modal .close {
+    float: right;
+    text-decoration: none;
+    font-size: 40px;
+    cursor: pointer;
+}

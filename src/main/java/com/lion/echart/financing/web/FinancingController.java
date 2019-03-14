@@ -2,6 +2,7 @@ package com.lion.echart.financing.web;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.base.logic.BaseService;
+import com.lion.echart.financing.entity.FinancingWriteEntity;
 import com.lion.echart.financing.entity.FinancingWritesView;
 
 import net.sf.json.JSONObject;
@@ -62,12 +64,12 @@ public class FinancingController {
 	public @ResponseBody List<Map<String, Object>> getflistDetailData(HttpServletRequest req,
 			HttpServletResponse resp, HttpSession session,String year, String costtype) throws IOException {
 		HashMap<String, Object> param = new HashMap<String, Object>();
+		
 		param.put("year", year);
 		param.put("costtype", costtype);
 		List<Map<String, Object>> list = baseService.queryList("comle.financing.getflistDetailData", param);
 		return list;
 	}
-	
 	
 	//财务填报保存
 	@RequestMapping(value = "/insertFinancing.json",method=RequestMethod.POST)
@@ -75,14 +77,30 @@ public class FinancingController {
 			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		JSONObject obj = new JSONObject();
 		try {
-			if(list != null && list.getList() != null) {
-				for (int i = list.getList().size() - 1; i > 0; i--) {
-					if(list.getList().get(i).getMoney() == null) {
-						list.getList().remove(i);
+			if(list!= null && list.getList()!=null) {
+				for (int i = 0; i < list.getList().size(); i++) {
+					if(list.getList().get(i).getPayfordateStr() == null ||
+							list.getList().get(i).getPayfordateStr().isEmpty()) {
+						list.getList().get(i).setPayfordate(new Date());
 					}
 				}
 			}
 			baseService.insertOupdates("comle.financing.financingWrite", list.getList());
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
+	}
+	
+	//财务填报保存
+	@RequestMapping(value = "/deleteFinancing.json",method=RequestMethod.POST)
+	public @ResponseBody String deleteFinancing(FinancingWritesView list
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session, FinancingWriteEntity entity) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			baseService.updateObject("comle.financing.financingWriteDelete", entity);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
