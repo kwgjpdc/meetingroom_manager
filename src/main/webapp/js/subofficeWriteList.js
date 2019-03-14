@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-400)});
 	var oTable = new TableInit();
 	initSelectPicker();
 	initTableSelect();
@@ -54,20 +55,35 @@ var TableInit = function () {
 					valign : "middle",
 					width : 250,
 					rowspan: 2,
-				       // return '<select class="subofficeinputsel" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
 					formatter:function (value, row, index, field) {
-				        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+$("#subofficedata").html()+'</select>';
+						var subofficedataStr = $("#subofficedata").html();
+						var indexSelect = subofficedataStr.indexOf('<option value="'+value+'">');
+						subofficedataStr = subofficedataStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
+				        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+subofficedataStr+'</select>';
 					}
 				  },
 				  {
-					field: 'contractname',
+					field: 'contractid',
 					align: 'center',
 					title: '合同名称' ,
 					valign : "middle",
 					width : 250,
 					rowspan: 2,
 					formatter:function (value, row, index, field) {
-						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" ></select>';
+						var subofficeid = $("#subofficeid"+index).val();
+						var strHtml= '<option value="0">-请选择-</option>';
+						if(subofficeid==0){
+							
+						}else{
+							var data = loadContractDataBySubofficeid(row["subofficeid"]);
+							$.each(data, function(key,value2){
+								if(value2.contractid==value){
+									strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'"  amount="'+value2.amount+'" selected="selected">'+value2.contractname+'</option>';
+								}
+								strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'" amount="'+value2.amount+'">'+value2.contractname+'</option>';
+							});
+						}
+						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" >'+strHtml+'</select>';
 					}
 				  },
 				  {
@@ -78,7 +94,6 @@ var TableInit = function () {
 					width : 220,
 					rowspan: 2,
 					formatter:function (value, row, index, field) {
-				       // return '<div contenteditable="true">' + (value || "") + '</div>';
 						return '<span id="contractnum'+index+'">' + (value || "") + '</span>';
 				    }
 				  },
@@ -193,7 +208,7 @@ var TableInit = function () {
 						title: '合同金额<br/>（万元）' ,
 						width : 80,
 						formatter:function (value, row, index, field) {
-					        return '<div contenteditable="true">' + (value || "") + '</div>';
+							return '<span id="contractamount'+index+'">' + (value || "") + '</span>';
 					    }
 				  }
 				 ,{
@@ -319,6 +334,7 @@ function subofficeDataInit(){
 		data: {},
 		dataType: "json",
 		success: function (data) {
+			$("#subofficedata").append('<option value="0">-请选择-</option>');
 			for(var i=0;i<data.length;i++){
 				$("#subofficedata").append('<option value="'
 						+data[i].subofficeid+'">'+data[i].subofficename+'</option>');
@@ -331,33 +347,43 @@ function initTableSelect(){
 	$(".subofficeinputsel").html($("#subofficedata").html());
 	
 	//初始合同
-	contracinputsel(null);
+	//contracinputsel(null);
 }
 function contracinputsel(_one){
 	var subofficeid = $("#subofficeid"+_one).val();
+	var data = loadContractDataBySubofficeid(subofficeid);
+	var strHtml= '<option value="0">-请选择-</option>';
+	$.each(data, function(key,value){
+		strHtml+='<option value="'+value.contractid+'" title="'+value.contractnum+'" amount="'+value.amount+'">'+value.contractname+'</option>';
+	});
+	$("#contractid_"+_one).html(strHtml);
+}
+function loadContractDataBySubofficeid(subofficeid){
+	var returnData;
 	$.ajax({
-		url: $("#fule").val()+'contract/contractSignedListGetDatBySuboffice.json',
+		url:"/echart/contract/contractSignedListGetDatBySuboffice.json",
 		type:"POST",
 		dataType:"json",
+		async :false,
 		data: {subofficeid : subofficeid},
 		success:function(data){
-			var strHtml= '<option value="0">-请选择-</option>';
-			$.each(data, function(key,value){
-				strHtml+='<option value="'+value.contractid+'" title="'+value.contractnum+'">'+value.contractname+'</option>';
-			});
-			$("#contractid_"+_one).html(strHtml);
+			returnData = data;
 		},
 		error:function(){
 			
 		}
 	});
+	return returnData;
 }
 function setcontractnum(_this){
 	$("#contractnum"+_index).html("");
 	var index = _this.selectedIndex ;
 	var _contractnum = $(_this.options[index]).attr("title");
+	var _contractamount = $(_this.options[index]).attr("amount");
 	var _index = $(_this).attr("id").split("_")[1];
 	$("#contractnum"+_index).html(_contractnum);
+	$("#contractamount"+_index).html(_contractamount);
+	
 }
 /**
  * 新增一行数据
@@ -368,9 +394,9 @@ function addRow(){
     $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
 	$("#subofficeid"+count).html($("#subofficedata").html());
     //$("#subofficeid"+count).selectpicker("refresh");
+	$("#contractid_"+count).html('<option value="0">-请选择-</option>');
     $("#begindate"+count).datepicker();
     $("#planfinishdate"+count).datepicker();
-    contracinputsel(count);
 }
 /**
  * 删除一行数据
@@ -388,4 +414,20 @@ function delRow(){
         info("已经是最后一条，不能删除!");
         return;
     }
+}
+function saveFun(){
+	showloding();
+	$.ajax({
+		url: $("#fule").val()+'subofficewrite/insertSubofficewrite.json',
+		type: 'post',
+		data: $("#editForm").serialize(),
+		dataType: "json",
+		success: function (data) {
+			closeloding();
+			modalTitle("操作成功",1);
+		},error:function(data){
+			closeloding();
+			modalTitle("操作失败，请重试",1);
+		}
+	});
 }
