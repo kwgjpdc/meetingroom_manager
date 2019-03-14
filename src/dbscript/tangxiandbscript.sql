@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2019-03-14 17:08:13
+Date: 2019-03-14 17:19:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_c_contract`;
 CREATE TABLE `t_c_contract` (
-  `contractid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `contractid` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `contractname` varchar(200) DEFAULT NULL COMMENT '合同名称',
   `contractnum` varchar(200) DEFAULT NULL COMMENT '合同编码',
   `amount` double DEFAULT NULL COMMENT '合同金额',
@@ -28,12 +28,12 @@ CREATE TABLE `t_c_contract` (
   `signtime` datetime DEFAULT NULL COMMENT '签订日期',
   `contractpartyb` varchar(200) DEFAULT NULL COMMENT '合同乙方',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
-  `priority` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-  `status` int(10) NOT NULL COMMENT '状态',
-  `isdisabled` varchar(20) NOT NULL DEFAULT '0' COMMENT '是否禁用',
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT '0' COMMENT '排序',
+  `status` int(10) DEFAULT NULL COMMENT '状态',
+  `isdisabled` varchar(20) DEFAULT '0' COMMENT '是否禁用',
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
-  `subofficeid` int(11) NOT NULL COMMENT '所属分局ID',
+  `subofficeid` bigint(11) NOT NULL COMMENT '所属分局ID',
   PRIMARY KEY (`contractid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
@@ -55,15 +55,15 @@ INSERT INTO `t_c_contract` VALUES ('9', '云南省滇中引水工程施工准备
 -- ----------------------------
 DROP TABLE IF EXISTS `t_c_contractexecute`;
 CREATE TABLE `t_c_contractexecute` (
-  `contractexecuteid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `contractid` int(11) NOT NULL COMMENT '合同ID',
+  `contractexecuteid` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `contractid` bigint(11) NOT NULL COMMENT '合同ID',
   `monthamount` double DEFAULT NULL COMMENT '当月结算',
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
-  `priority` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-  `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT '0' COMMENT '排序',
+  `isdisabled` varchar(20) DEFAULT NULL,
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`contractexecuteid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
@@ -76,8 +76,6 @@ INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null,
 INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:49');
 INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:19:52');
 
-
-
 -- ----------------------------
 -- Table structure for `t_sys_menu`
 -- ----------------------------
@@ -86,14 +84,14 @@ CREATE TABLE `t_sys_menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `menuname` varchar(200) NOT NULL COMMENT '菜单名称',
   `url` varchar(200) DEFAULT NULL COMMENT '访问地址',
-  `ismenu` int(10) NOT NULL COMMENT '是否菜单',
-  `pid` int(10) NOT NULL COMMENT '上级菜单ID',
+  `ismenu` int(10) DEFAULT NULL COMMENT '是否菜单',
+  `pid` int(10) DEFAULT NULL COMMENT '上级菜单ID',
   `createdate` datetime DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
-  `priority` int(11) NOT NULL COMMENT '排序',
-  `status` int(10) NOT NULL COMMENT '状态',
-  `isdisabled` varchar(20) NOT NULL COMMENT '是否禁用',
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT NULL COMMENT '排序',
+  `status` int(10) DEFAULT NULL COMMENT '状态',
+  `isdisabled` varchar(20) DEFAULT NULL COMMENT '是否禁用',
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
@@ -111,10 +109,10 @@ CREATE TABLE `t_sys_role` (
   `rolename` varchar(200) NOT NULL COMMENT '角色名称',
   `createdate` datetime DEFAULT NULL COMMENT '创建时间',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
-  `priority` int(11) NOT NULL COMMENT '排序',
-  `status` int(10) NOT NULL COMMENT '状态',
-  `isdisabled` varchar(20) NOT NULL COMMENT '是否禁用',
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT NULL COMMENT '排序',
+  `status` int(10) DEFAULT NULL COMMENT '状态',
+  `isdisabled` varchar(20) DEFAULT NULL COMMENT '是否禁用',
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
@@ -122,6 +120,8 @@ CREATE TABLE `t_sys_role` (
 -- ----------------------------
 -- Records of t_sys_role
 -- ----------------------------
+INSERT INTO `t_sys_role` VALUES ('1', '超级管理员', '2019-03-14 17:12:45', null, '0', '1', '0', '1', '2019-03-14 17:13:02');
+INSERT INTO `t_sys_role` VALUES ('2', '分局用户', '2019-03-14 17:17:20', null, '0', '1', '0', '1', '2019-03-14 17:17:34');
 
 -- ----------------------------
 -- Table structure for `t_sys_role_menu`
@@ -149,12 +149,12 @@ CREATE TABLE `t_sys_user` (
   `password` varchar(200) NOT NULL COMMENT '密码',
   `sex` varchar(20) NOT NULL COMMENT '性别',
   `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
-  `createdate` datetime DEFAULT NULL COMMENT '创建时间',
+  `createdate` datetime NOT NULL COMMENT '创建时间',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
-  `priority` int(11) NOT NULL COMMENT '排序',
-  `status` int(10) NOT NULL COMMENT '状态',
-  `isdisabled` varchar(20) NOT NULL COMMENT '是否禁用',
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT NULL COMMENT '排序',
+  `status` int(10) DEFAULT NULL COMMENT '状态',
+  `isdisabled` varchar(20) DEFAULT NULL COMMENT '是否禁用',
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
@@ -162,6 +162,7 @@ CREATE TABLE `t_sys_user` (
 -- ----------------------------
 -- Records of t_sys_user
 -- ----------------------------
+INSERT INTO `t_sys_user` VALUES ('1', 'admin', '管理员', '1', 'M', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
 
 -- ----------------------------
 -- Table structure for `t_sys_user_role`
@@ -178,17 +179,18 @@ CREATE TABLE `t_sys_user_role` (
 -- Records of t_sys_user_role
 -- ----------------------------
 
+
 -- ----------------------------
 -- Table structure for `t_s_suboffice`
 -- ----------------------------
 DROP TABLE IF EXISTS `t_s_suboffice`;
 CREATE TABLE `t_s_suboffice` (
-  `subofficeid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `subofficeid` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `subofficename` varchar(20) DEFAULT NULL COMMENT '分局名称',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
-  `priority` int(11) NOT NULL COMMENT '排序',
-  `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT NULL COMMENT '排序',
+  `isdisabled` varchar(20) DEFAULT NULL,
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficeid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
@@ -208,8 +210,8 @@ INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', 'false', 'ad
 -- ----------------------------
 DROP TABLE IF EXISTS `t_s_subofficewrite`;
 CREATE TABLE `t_s_subofficewrite` (
-  `subofficewriteid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `contractid` int(11) NOT NULL COMMENT '合同ID',
+  `subofficewriteid` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `contractid` bigint(11) NOT NULL COMMENT '合同ID',
   `constructioncontent` longtext COMMENT '主要建设内容',
   `begindate` datetime DEFAULT NULL COMMENT '开工时间',
   `planfinishdate` datetime DEFAULT NULL COMMENT '计划完工时间',
@@ -229,9 +231,9 @@ CREATE TABLE `t_s_subofficewrite` (
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
-  `priority` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
-  `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `priority` int(11) DEFAULT '0' COMMENT '排序',
+  `isdisabled` varchar(20) DEFAULT NULL,
+  `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficewriteid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
