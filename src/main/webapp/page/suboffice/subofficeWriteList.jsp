@@ -38,9 +38,14 @@ String fule = base + "/" + contextPath + "/";
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
             	填报管理 / 分局填报 
+            	<span id="operinfo" >编辑数据后，请执行保存操作，以免数据丢失造成不便！</span >
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		            </button>
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="saveRow()"
+		            	data-toggle="modal" data-target="#myModal" >
+		                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>保存
 		            </button>
 		            <button id="btn_delete" type="button" class="btn btn-default" onclick="delRow()">
 		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
@@ -63,11 +68,12 @@ String fule = base + "/" + contextPath + "/";
         </div>       
 
         <div id="contentTablediv" style="overflow-y: auto;">
-        	<table id="t_datagrid"></table>
+        	<form style="border:none;margin:0px;padding:0px;" id="editForm" target="myajaxfor"
+				action="<%=fule %>subofficewrite/insertSubofficewrite.json" method="post" >
+        		<table id="t_datagrid"></table>
+			</form>
         </div>
         <select id="subofficedata" style="display:none;" >
-        </select>
-        <select id="contractdata" style="display:black;" >
         </select>
 	</div>
 </div>

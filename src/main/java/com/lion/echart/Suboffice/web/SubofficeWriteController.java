@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.Suboffice.entity.SubofficeWriteEntity;
+import com.lion.echart.Suboffice.entity.SubofficeWriteView;
 import com.lion.echart.base.logic.BaseService;
+import com.lion.echart.financing.entity.FinancingWritesView;
 import com.lion.echart.project.entity.MonthTotalEntity;
 import com.lion.echart.project.entity.PayforEntity;
+
+import net.sf.json.JSONObject;
 
 /**
  * 分局填报相关跳转控制
@@ -42,5 +46,25 @@ public class SubofficeWriteController {
 	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", null);
 		return list;
+	}
+	
+	//分局填报保存
+	@RequestMapping(value = "subofficewrite/insertSubofficewrite.json",method=RequestMethod.POST)
+	public @ResponseBody String insertSubofficewrite(SubofficeWriteView list
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			if(list != null && list.getList() != null) {
+				for (int i = list.getList().size() - 1; i > 0; i--) {
+					
+				}
+			}
+			baseService.insertOupdates("comle.financing.financingWrite", list.getList());
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
 	}
 }
