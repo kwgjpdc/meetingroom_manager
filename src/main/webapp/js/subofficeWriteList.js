@@ -454,6 +454,7 @@ function delRow(){
         info("已经是最后一条，不能删除!");
         return;
     }
+    hasnosave = false;
 }
 function saveRow(){
 	var length = 0;
