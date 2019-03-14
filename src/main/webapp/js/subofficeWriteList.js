@@ -46,6 +46,7 @@ var TableInit = function () {
 				[
 				  {                    
                     checkbox: true,
+                    valign : "middle",
                     formatter:function (value, row, index, field) {
                     	var defaultValue = row["subofficewriteid"];
 						if(defaultValue==undefined){
@@ -429,7 +430,7 @@ function addRow(){
 	}else{
 		var count = $('#t_datagrid').bootstrapTable('getData').length;
 	    // newFlag == 1的数据为新规的数据
-	    $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1"}});
+	    $('#t_datagrid').bootstrapTable('insertRow',{index:count,row:{newFlag:"1",index:count}});
 		$("#subofficeid"+count).html($("#subofficedata").html());
 	    //$("#subofficeid"+count).selectpicker("refresh");
 		$("#contractid_"+count).html('<option value="0">-请选择-</option>');

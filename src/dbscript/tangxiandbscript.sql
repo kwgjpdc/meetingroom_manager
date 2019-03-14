@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2019-03-13 18:06:16
+Date: 2019-03-14 17:08:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,20 +20,20 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `t_c_contract`;
 CREATE TABLE `t_c_contract` (
-  `contractid` int(11) NOT NULL AUTO_INCREMENT,
-  `contractname` varchar(200) DEFAULT NULL,
-  `contractnum` varchar(200) DEFAULT NULL,
-  `amount` double DEFAULT NULL,
-  `durationtime` varchar(20) DEFAULT NULL,
-  `signtime` datetime DEFAULT NULL,
-  `contractpartyb` varchar(200) DEFAULT NULL,
-  `remark` varchar(200) DEFAULT NULL,
-  `priority` int(11) NOT NULL,
-  `status` int(10) NOT NULL,
-  `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL,
-  `operdate` datetime DEFAULT NULL,
-  `subofficeid` int(11) NOT NULL,
+  `contractid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `contractname` varchar(200) DEFAULT NULL COMMENT '合同名称',
+  `contractnum` varchar(200) DEFAULT NULL COMMENT '合同编码',
+  `amount` double DEFAULT NULL COMMENT '合同金额',
+  `durationtime` varchar(20) DEFAULT NULL COMMENT '合同工期',
+  `signtime` datetime DEFAULT NULL COMMENT '签订日期',
+  `contractpartyb` varchar(200) DEFAULT NULL COMMENT '合同乙方',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `priority` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` int(10) NOT NULL COMMENT '状态',
+  `isdisabled` varchar(20) NOT NULL DEFAULT '0' COMMENT '是否禁用',
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
+  `subofficeid` int(11) NOT NULL COMMENT '所属分局ID',
   PRIMARY KEY (`contractid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
@@ -55,18 +55,18 @@ INSERT INTO `t_c_contract` VALUES ('9', '云南省滇中引水工程施工准备
 -- ----------------------------
 DROP TABLE IF EXISTS `t_c_contractexecute`;
 CREATE TABLE `t_c_contractexecute` (
-  `contractexecuteid` int(11) NOT NULL AUTO_INCREMENT,
-  `contractid` int(11) NOT NULL,
-  `monthamount` double DEFAULT NULL,
+  `contractexecuteid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `contractid` int(11) NOT NULL COMMENT '合同ID',
+  `monthamount` double DEFAULT NULL COMMENT '当月结算',
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
-  `remark` varchar(200) DEFAULT NULL,
-  `priority` int(11) NOT NULL,
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `priority` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL,
-  `operdate` datetime DEFAULT NULL,
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`contractexecuteid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_c_contractexecute
@@ -76,30 +76,106 @@ INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null,
 INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:49');
 INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:19:52');
 
--- ----------------------------
--- Table structure for `t_p_monthtotal`
--- ----------------------------
-DROP TABLE IF EXISTS `t_p_monthtotal`;
-CREATE TABLE `t_p_monthtotal` (
-  `id` int(11) NOT NULL COMMENT '主键',
-  `depart` int(11) DEFAULT NULL COMMENT '所属分局',
-  `year` int(4) DEFAULT NULL COMMENT '所属年份',
-  `month` int(2) DEFAULT NULL COMMENT '所属月份',
-  `contracttotal` double DEFAULT NULL COMMENT '合同总金额',
-  `thisyearplan` double DEFAULT NULL COMMENT '本年计划完成投资',
-  `thismonthinvest` double DEFAULT NULL COMMENT '当月完成投资',
-  `thisytmtotal` double DEFAULT NULL COMMENT '本年至当月实际完成投资',
-  `investtotal` double DEFAULT NULL COMMENT '开工以来累计完成投资',
-  `balancetotal` double DEFAULT NULL COMMENT '累计结算工程款',
-  `payfortotal` double DEFAULT NULL COMMENT '累计支付情况',
-  `describe` varchar(2000) DEFAULT NULL COMMENT '工程形象进度描述',
-  `comment` varchar(200) DEFAULT NULL COMMENT '备注',
-  `operuser` int(11) DEFAULT NULL COMMENT '操作人',
-  `operdate` datetime DEFAULT NULL COMMENT '操作时间'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 -- ----------------------------
--- Records of t_p_monthtotal
+-- Table structure for `t_sys_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sys_menu`;
+CREATE TABLE `t_sys_menu` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `menuname` varchar(200) NOT NULL COMMENT '菜单名称',
+  `url` varchar(200) DEFAULT NULL COMMENT '访问地址',
+  `ismenu` int(10) NOT NULL COMMENT '是否菜单',
+  `pid` int(10) NOT NULL COMMENT '上级菜单ID',
+  `createdate` datetime DEFAULT NULL COMMENT '创建时间',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `priority` int(11) NOT NULL COMMENT '排序',
+  `status` int(10) NOT NULL COMMENT '状态',
+  `isdisabled` varchar(20) NOT NULL COMMENT '是否禁用',
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sys_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_sys_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sys_role`;
+CREATE TABLE `t_sys_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `rolename` varchar(200) NOT NULL COMMENT '角色名称',
+  `createdate` datetime DEFAULT NULL COMMENT '创建时间',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `priority` int(11) NOT NULL COMMENT '排序',
+  `status` int(10) NOT NULL COMMENT '状态',
+  `isdisabled` varchar(20) NOT NULL COMMENT '是否禁用',
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sys_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_sys_role_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sys_role_menu`;
+CREATE TABLE `t_sys_role_menu` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `roleid` int(11) NOT NULL COMMENT '角色ID',
+  `menuid` int(11) NOT NULL COMMENT '菜单ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sys_role_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_sys_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sys_user`;
+CREATE TABLE `t_sys_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `username` varchar(200) NOT NULL COMMENT '用户名',
+  `realname` varchar(200) DEFAULT NULL COMMENT '真实姓名',
+  `password` varchar(200) NOT NULL COMMENT '密码',
+  `sex` varchar(20) NOT NULL COMMENT '性别',
+  `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
+  `createdate` datetime DEFAULT NULL COMMENT '创建时间',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `priority` int(11) NOT NULL COMMENT '排序',
+  `status` int(10) NOT NULL COMMENT '状态',
+  `isdisabled` varchar(20) NOT NULL COMMENT '是否禁用',
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sys_user
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `t_sys_user_role`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_sys_user_role`;
+CREATE TABLE `t_sys_user_role` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) NOT NULL COMMENT '用户ID',
+  `roleid` int(11) NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_sys_user_role
 -- ----------------------------
 
 -- ----------------------------
@@ -107,13 +183,13 @@ CREATE TABLE `t_p_monthtotal` (
 -- ----------------------------
 DROP TABLE IF EXISTS `t_s_suboffice`;
 CREATE TABLE `t_s_suboffice` (
-  `subofficeid` int(11) NOT NULL AUTO_INCREMENT,
-  `subofficename` varchar(20) DEFAULT NULL,
-  `remark` varchar(200) DEFAULT NULL,
-  `priority` int(11) NOT NULL,
+  `subofficeid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `subofficename` varchar(20) DEFAULT NULL COMMENT '分局名称',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
+  `priority` int(11) NOT NULL COMMENT '排序',
   `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL,
-  `operdate` datetime DEFAULT NULL,
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficeid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
@@ -132,37 +208,38 @@ INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', 'false', 'ad
 -- ----------------------------
 DROP TABLE IF EXISTS `t_s_subofficewrite`;
 CREATE TABLE `t_s_subofficewrite` (
-  `subofficewriteid` int(11) NOT NULL AUTO_INCREMENT,
-  `contractid` int(11) NOT NULL,
-  `constructioncontent` longtext,
-  `begindate` datetime DEFAULT NULL,
-  `planfinishdate` datetime DEFAULT NULL,
-  `budgetinvest` double DEFAULT NULL,
-  `finishinvest` double DEFAULT NULL,
-  `surplusinvest` double DEFAULT NULL,
-  `yearplaninvest` double DEFAULT NULL,
-  `monthplaninvest` double DEFAULT NULL,
-  `yearrealityinvest` double DEFAULT NULL,
-  `monthrealityinvest` double DEFAULT NULL,
-  `tendayrealityinvest` double DEFAULT NULL,
-  `earthwork` double DEFAULT NULL,
-  `stonework` double DEFAULT NULL,
-  `beton` double DEFAULT NULL,
-  `overallimageprogress` longtext,
-  `nextmonthplaninvest` double DEFAULT NULL,
-  `remark` varchar(200) DEFAULT NULL,
+  `subofficewriteid` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `contractid` int(11) NOT NULL COMMENT '合同ID',
+  `constructioncontent` longtext COMMENT '主要建设内容',
+  `begindate` datetime DEFAULT NULL COMMENT '开工时间',
+  `planfinishdate` datetime DEFAULT NULL COMMENT '计划完工时间',
+  `budgetinvest` double DEFAULT NULL COMMENT '概算投资',
+  `finishinvest` double DEFAULT NULL COMMENT '自开工以来累计完成投资',
+  `surplusinvest` double DEFAULT NULL COMMENT '剩余投资',
+  `yearplaninvest` double DEFAULT NULL COMMENT '本年度计划完成投资',
+  `monthplaninvest` double DEFAULT NULL COMMENT '本月计划完成投资',
+  `yearrealityinvest` double DEFAULT NULL COMMENT '本年度实际完成投资',
+  `monthrealityinvest` double DEFAULT NULL COMMENT '本月实际完成投资',
+  `tendayrealityinvest` double DEFAULT NULL COMMENT '本旬实际完成投资',
+  `earthwork` double DEFAULT NULL COMMENT '土方',
+  `stonework` double DEFAULT NULL COMMENT '石方',
+  `beton` double DEFAULT NULL COMMENT '混凝土',
+  `overallimageprogress` longtext COMMENT '总体形象进度',
+  `nextmonthplaninvest` double DEFAULT NULL COMMENT '下一月度计划完成投资',
+  `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
-  `priority` int(11) NOT NULL,
+  `priority` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   `isdisabled` varchar(20) NOT NULL,
-  `operuser` varchar(20) NOT NULL,
-  `operdate` datetime DEFAULT NULL,
+  `operuser` varchar(20) NOT NULL COMMENT '操作人',
+  `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficewriteid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_s_subofficewrite
 -- ----------------------------
-INSERT INTO `t_s_subofficewrite` VALUES ('1', '2', '龙泉倒虹吸始发井围护结构和主体结构施工，接收井围护结构和主体结构施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '9787','7367.76', '1926.18', '1662.61', '115.08', '152.08', '36.76', '10.35', '2.11', '0.48', '1.33', '龙泉倒虹吸始发井本旬进行基坑开挖及钢支撑安装施工，始发井基坑开挖共计19155.5m³，本旬完成610m³，累计完成9776m³，占比51%，剩余9379.5m³，分三区开挖，西侧第一区（1号井）已开挖至基底，深度17.5m，中部第二区（2号井西侧）已开挖至第三道砼支撑，深度13m，东侧第三区（2号井东侧）已开挖至第二道钢支撑，深度8m。第二道钢支撑本旬完成1榀直撑安装，已累计完成2榀角撑、2榀斜撑及7榀直撑安装，第三道钢支撑本旬完成2榀直撑安装，已累计完成2榀角撑、2榀斜撑、5榀直撑安装。\r\n龙泉倒虹吸接收井本旬进行降水井施工及冠梁基础面清理施工，降水井共计632m，本旬完成155m，累计完成365m，完成率57.7%，剩余267m。', '183.06', null, '2019', '2', '1', 'false', 'admin', '2019-02-25 00:00:00');
-INSERT INTO `t_s_subofficewrite` VALUES ('2', '8', '路基土石方开挖、防护工程、路基路面等', '2018-08-20 00:00:00', '2019-12-31 00:00:00', '6085.51', '3731.64', '1535.38', '2348.47', '420.28', '813.09', '265.21', '105.07', '8.3138', '46.0165', '0.5028', '进场道路总长11.419公里，累计完成毛路开挖9.695公里，占84.90%，其中路基开挖完成8.289公里，占72.58%。', '654.58', null, '2019', '2', '1', 'false', 'admin', '2019-02-25 00:00:00');
-INSERT INTO `t_s_subofficewrite` VALUES ('3', '9', '路基土石方开挖、防护工程、路基路面等', '2019-01-07 00:00:00', '2019-12-31 00:00:00', '7250', '873.41', '3361.54', '160', '3584.95', '223.41', '23.41', '0.41', '2.16', '8.64', '0', '进场道路完成松林1#支洞和龙庆1#支洞进场道路复测放线，龙庆1#支洞毛路开挖完成1.5公里，土方开挖完成2.16万方，石方开挖完成8.64万方。', '180', null, '2019', '2', '1', 'false', 'admin', '2019-02-25 00:00:00');
+INSERT INTO `t_s_subofficewrite` VALUES ('1', '2', '龙泉倒虹吸始发井围护结构和主体结构施工，接收井围护结构和主体结构施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '9787', '7367.76', '1926.18', '1662.61', '115.08', '152.08', '36.76', '10.35', '2.11', '0.48', '1.33', '龙泉倒虹吸始发井本旬进行基坑开挖及钢支撑安装施工，始发井基坑开挖共计19155.5m³，本旬完成610m³，累计完成9776m³，占比51%，剩余9379.5m³，分三区开挖，西侧第一区（1号井）已开挖至基底，深度17.5m，中部第二区（2号井西侧）已开挖至第三道砼支撑，深度13m，东侧第三区（2号井东侧）已开挖至第二道钢支撑，深度8m。第二道钢支撑本旬完成1榀直撑安装，已累计完成2榀角撑、2榀斜撑及7榀直撑安装，第三道钢支撑本旬完成2榀直撑安装，已累计完成2榀角撑、2榀斜撑、5榀直撑安装。\r\n龙泉倒虹吸接收井本旬进行降水井施工及冠梁基础面清理施工，降水井共计632m，本旬完成155m，累计完成365m，完成率57.7%，剩余267m。', '183.06', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('2', '8', '路基土石方开挖、防护工程、路基路面等', '2018-08-20 00:00:00', '2019-12-31 00:00:00', '6085.51', '3731.64', '1535.38', '2348.47', '420.28', '813.09', '265.21', '105.07', '8.3138', '46.0165', '0.5028', '进场道路总长11.419公里，累计完成毛路开挖9.695公里，占84.90%，其中路基开挖完成8.289公里，占72.58%。', '654.58', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('3', '9', '路基土石方开挖、防护工程、路基路面等', '2019-01-07 00:00:00', '2019-12-31 00:00:00', '7250', '873.41', '3361.54', '160', '3584.95', '223.41', '23.41', '0.41', '2.16', '8.64', '2.9', '进场道路完成松林1#支洞和龙庆1#支洞进场道路复测放线，龙庆1#支洞毛路开挖完成1.5公里，土方开挖完成2.16万方，石方开挖完成8.64万方。', '180', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('4', '3', '55', '2019-02-24 00:00:00', '2019-03-02 00:00:00', '43', '33', '33', '23', '333', '33', '33', '33', '3', '3', '3', '333334', '3', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
