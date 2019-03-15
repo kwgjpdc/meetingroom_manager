@@ -2,6 +2,11 @@ package com.lion.echart.global;
 
 import java.util.HashMap;
 
+/**
+ * * 全局缓存 
+ * @author lion-y
+ *
+ */
 public class GlobalThings {
 	private static HashMap<String, Object> cash = new HashMap<String, Object>();
 

@@ -1,8 +1,25 @@
 $(document).ready(function(){
+	yaerSelect();
 	var oTable = new TableInit();
 	oTable.Init();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
+	$("#excelbtn").attr("lang",$("#writeyear").val()+"财务填报费用类型分类汇总表");
 });
+function yaerSelect(){
+	var _nowyear = parseInt($("#writeyear").attr("lang"));
+	
+	for(var i = 20; i > 0; i--){
+		$("#writeyear").append("<option value='"+(_nowyear-i)+"'>"+(_nowyear-i)+"</option>");
+	}
+	$("#writeyear").append('<option selected value="'+_nowyear+'">'+_nowyear+'</option>');
+	for(var i = 1; i <= 20; i++){
+		$("#writeyear").append("<option value='"+(_nowyear+i)+"'>"+(_nowyear+i)+"</option>");
+	
+	}
+
+	//刷新select
+	$("#writeyear").selectpicker("refresh");
+}
 function showDetail(_year,_costType){
 	window.location.href = $("#fule").val()+'financing/financingListDetail.web?year='+_year+'&costtype='+_costType;
 }
@@ -13,7 +30,7 @@ var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
 	oTableInit.Init = function () {
-		var _writeyear = $("#txt_search_year").val();
+		var _writeyear = $("#writeyear").val();
 		$('#t_datagrid').bootstrapTable({
 			url: '/echart/financing/getfinancingListData.json?writeyear='+_writeyear,         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）

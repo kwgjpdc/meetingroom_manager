@@ -1,7 +1,7 @@
 $(document).ready(function(){
+	initSelectPicker();
 	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-400)});
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
-	initSelectPicker();
 	initDateTable();
 });
 function initSelectPicker(){
@@ -14,16 +14,16 @@ function yaerSelect(){
 	var _nowyear = parseInt($("#yeardefault").val());
 	
 	for(var i = 20; i > 0; i--){
-		$("#txt_search_year").append("<option value='"+(_nowyear-i)+"'>"+(_nowyear-i)+"</option>");
+		$("#year").append("<option value='"+(_nowyear-i)+"'>"+(_nowyear-i)+"</option>");
 	}
-	$("#txt_search_year").append('<option selected value="'+_nowyear+'">'+_nowyear+'</option>');
+	$("#year").append('<option selected value="'+_nowyear+'">'+_nowyear+'</option>');
 	for(var i = 1; i <= 20; i++){
-		$("#txt_search_year").append("<option value='"+(_nowyear+i)+"'>"+(_nowyear+i)+"</option>");
+		$("#year").append("<option value='"+(_nowyear+i)+"'>"+(_nowyear+i)+"</option>");
 	
 	}
 
 	//刷新select
-	$("#txt_search_year").selectpicker("refresh");
+	$("#year").selectpicker("refresh");
 }
 function typeSelect(){
 	$.ajax({
@@ -33,17 +33,18 @@ function typeSelect(){
 		dataType: "json",
 		success: function (data) {
 			var checked = '';
+			var nowcheck = $("#costtypedefault").val();
 			for(var i=0;i<data.length;i++){
-				if($("#ctypedefault").val() == data[i].key){
+				if(nowcheck == data[i].key){
 					checked = 'selected';
 				}else{
 					checked = '';
 				}
-				$("#txt_search_ctype").append('<option lang="'+data[i].maintype+'" label="'+data[i].maintypedescribe
+				$("#costtype").append('<option lang="'+data[i].maintype+'" label="'+data[i].maintypedescribe
 						+'" '+checked+' value="'+data[i].key+'">'+data[i].value+'</option>');
 			}
 			//这一步不要忘记 不然下拉框没有数据
-			$("#txt_search_ctype").selectpicker("refresh");
+			$("#costtype").selectpicker("refresh");
 		}
 	});
 }
@@ -180,7 +181,7 @@ function setcontractno(_this){
 }
 function initDateTable(){
 	var _url = $("#fule").val()+'financing/getflistDetailData.json';
-	//_url = _url + '?year='+$("#yeardefault").val()+'&costtype='+$("#ctypedefault").val();
+	//_url = _url + '?year='+$("#txt_search_year").val()+'&costtype='+$("#txt_search_ctype").val();
 	var TableInit = function () {
 		var oTableInit = new Object();
 		//初始化Table
@@ -197,11 +198,9 @@ function initDateTable(){
 				sortable: false,                    //是否启用排序
 				sortOrder: "asc",                   //排序方式
 				queryParamsType: "limit", 			//参数格式,发送标准的RESTFul类型的参数请求  
-				queryParams:function(params) {
-					return {
-						year:$("#yeardefault").val(),
-						costtype:$("#ctypedefault").val()
-					};
+				queryParams:{
+					year:$("#yeardefault").val(),
+					costtype:$("#costtypedefault").val()
 				},//传递参数（*）
 				sidePagination: "server",			//分页方式：client客户端分页，server服务端分页（*）
 				pageNumber: 1,         				//初始化加载第一页，默认第一页
@@ -227,14 +226,14 @@ function initDateTable(){
 							formatter:function (value, row, index, field) {
 								var _val = row["maintype"];
 								if(_val == undefined || _val == ''){
-									var _index = document.getElementById("txt_search_ctype").selectedIndex;
-									_val = $(document.getElementById("txt_search_ctype").options[_index]).attr("lang");
+									var _index = document.getElementById("costtype").selectedIndex;
+									_val = $(document.getElementById("costtype").options[_index]).attr("lang");
 								}
 								if(value == undefined) value = '';
 								return (index+1)+'<input type="hidden" value="'+value+'" name="list['+index+'].id" />' 
-								+'<input type="hidden" value="'+$("#txt_search_ctype").val()+'" name="list['+index+'].costtype" />'
+								+'<input type="hidden" value="'+$("#costtype").val()+'" name="list['+index+'].costtype" />'
 								+'<input type="hidden" value="'+_val+'" name="list['+index+'].maintype" />'
-								+'<input type="hidden" value="'+$("#txt_search_year").val()+'" name="list['+index+'].writeyear" />';
+								+'<input type="hidden" value="'+$("#year").val()+'" name="list['+index+'].writeyear" />';
 							}
 					  },
 					  {field:'costtype',visible:false},
@@ -242,8 +241,8 @@ function initDateTable(){
 							field: 'costtypeStr',align: 'center',title: '款项类型' ,valign : "middle",width : 100,
 							formatter:function (value, row, index, field) {
 								var _val = value;
-								var _index = document.getElementById("txt_search_ctype").selectedIndex;
-								_val = document.getElementById("txt_search_ctype").options[_index].text;
+								var _index = document.getElementById("costtype").selectedIndex;
+								_val = document.getElementById("costtype").options[_index].text;
 								return _val;
 						    }
 					  },
@@ -253,8 +252,8 @@ function initDateTable(){
 							formatter:function (value, row, index, field) {
 								var _show = value;
 								if(value == undefined || value == ''){
-									var _index = document.getElementById("txt_search_ctype").selectedIndex;
-									_show = document.getElementById("txt_search_ctype").options[_index].getAttribute("label");
+									var _index = document.getElementById("costtype").selectedIndex;
+									_show = document.getElementById("costtype").options[_index].getAttribute("label");
 								}
 								return _show;
 						    }
@@ -440,13 +439,12 @@ function deleteFun(){
 
 function reloadtable(){
     hasnosave = false;
-	var _year= $('#txt_search_year').val();
-    var _costtype= $('#txt_search_ctype').val();
+	var _year= $('#year').val();
+    var _costtype= $('#costtype').val();
     var options = $('#t_datagrid').bootstrapTable('refresh', {
-        query: 
-        {
-        	year:_year,
-        	costtype:_costtype
-        }
+        query: {
+			year:_year,
+			costtype:_costtype,
+    	}
     });
 }

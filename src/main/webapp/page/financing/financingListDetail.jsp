@@ -43,7 +43,7 @@ String fule = base + contextPath + "/";
 		
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
-            	填报管理 / 财务填报明细
+            	填报管理 / 财务填报 / 查看明细
             	<span id="operinfo" >编辑数据后，请执行保存操作，以免数据丢失造成不便！</span >
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
@@ -59,19 +59,19 @@ String fule = base + contextPath + "/";
 		        </div>
             </div>
             <div class="panel-body">
+                 <input type="hidden" id="yeardefault" value="<%=request.getAttribute("year") %>" >
+                 <input type="hidden" id="costtypedefault" value="<%=request.getAttribute("costtype") %>" >
                 <form id="formSearch" class="form-horizontal">
                     <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="txt_search_year">所属年份</label>
+                        <label class="control-label col-sm-1" for="year">所属年份</label>
                         <div class="col-sm-1">
-                        	<select id="txt_search_year" onchange="reloadtable()" name="txt_search_year" class="selectpicker" data-width="100px" >
+                        	<select id="year" onchange="reloadtable()" name="year" class="selectpicker" data-width="100px" >
                         	</select>
-                            <input type="hidden" id="yeardefault" value="<%=request.getAttribute("year") %>" >
                         </div>
-                        <label class="control-label col-sm-1" for="txt_search_ctype">费用类型</label>
+                        <label class="control-label col-sm-1" for="costtype">费用类型</label>
                         <div class="col-sm-1">
-                        	<select id="txt_search_ctype" onchange="reloadtable()" name="txt_search_ctype" class="selectpicker" data-width="150px" >
+                        	<select id="costtype" onchange="reloadtable()" name="costtype" class="selectpicker" data-width="150px" >
                         	</select>
-                            <input type="hidden" id="ctypedefault" value="<%=request.getAttribute("costtype") %>" >
                         </div>
                     </div>
                 </form>

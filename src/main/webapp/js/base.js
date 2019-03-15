@@ -16,8 +16,10 @@ function print(){
 	alert('工程师正在努力实现中');
 }
 
-function doexcel(){
-	alert('工程师正在努力实现中');
+function doexcel(_this){
+	$("#formSearch").attr('action',$("#fule").val()+"excel/toExcelXlsExecute.web");
+	$("#fileName").val(encodeURI($(_this).attr("lang")));
+	$("#formSearch").submit();
 }
 
 function modalTitle(_msg,_type,_width,_height){

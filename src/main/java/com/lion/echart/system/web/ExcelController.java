@@ -1,13 +1,15 @@
 package com.lion.echart.system.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URLDecoder;
+import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lion.echart.base.logic.BaseService;
-import com.lion.echart.system.entity.SelectOption;
-
-import net.sf.json.JSONObject;
+import com.mchange.v3.decode.Decoder;
 
 @Controller
 public class ExcelController {
@@ -33,41 +33,47 @@ public class ExcelController {
 	 */
 	@RequestMapping(value="/excel/toExcelXlsExecute.web",method=RequestMethod.POST)
 	public String proExcelXlsExecute(HttpServletRequest request,HttpServletResponse response,Model model,
-			String exportType,String qparam,String fileName){
+			String dcdytype,String qparam,String fileName){
 		boolean goon = true;
-		String errorMsg = "";
-		
+		String message = "";
+		fileName = URLDecoder.decode(fileName);
 		model.addAttribute("fileName", fileName);
-		
-		HashMap param = new HashMap();
-		param.put("exportType", exportType);
-		List<SelectOption> optionpts = baseService.queryList("getTitle", param);
-		
-		if(optionpts == null || optionpts.isEmpty()) {
-			goon = false;
-			errorMsg = "没有设置对应的表头格式";
-		}
+		model.addAttribute("msgType", 1); 
 
-		String ibitisSql = "";
-		if(goon) {
-			Object temp = baseService.queryObject("getSqlid", param);
-			if(temp != null) {
-				ibitisSql = temp.toString();
-			}else {
-				errorMsg = "没有设置对应的数据交本";
-				goon = false;
-			}
+		Enumeration paramkey = request.getParameterNames();
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		String keyname = "";
+		while(paramkey.hasMoreElements()) {
+			keyname = paramkey.nextElement().toString();
+			param.put(keyname, request.getParameter(keyname));
 		}
 		
-		if(goon && qparam != null && !qparam.isEmpty()){
-			JSONObject paramjson = JSONObject.fromObject(qparam);
-			if(paramjson != null && !paramjson.isEmpty()){
-				Iterator iterator = paramjson.keys();
-				String key = null;
-				param = new HashMap();
-				while(iterator.hasNext()){
-					key = iterator.next().toString();
-					param.put(key, paramjson.get(key));
+		List<HashMap<String,Object>> titles = baseService.queryList("com.system.eap.getTitle", param);
+		if(titles == null || titles.isEmpty()) {
+			goon = false;
+			message = "没有设置对应的表头格式";
+		}
+		
+		List<HashMap<String,Object>> propertys = baseService.queryList("com.system.eap.getSqlproerty", param);
+		if(propertys == null || propertys.isEmpty()) {
+			goon = false;
+			message = "没有设置对应的取值属性";
+		}
+		
+		List<HashMap<String,Object>> ibitisSqls = baseService.queryList("com.system.eap.getSqlid", param);
+		String ibitisSql = "";
+		String ibitisTitleSql = "";
+		if(ibitisSqls == null || ibitisSqls.isEmpty()) {
+			goon = false;
+			message = "没有设置对应的取值逻辑";
+		}else {
+			for (int i = 0; i < ibitisSqls.size(); i++) {
+				if(ibitisSqls.get(i).get("sqlid") != null) {
+					if("1".equals(ibitisSqls.get(i).get("sqltype"))){
+						ibitisSql = ibitisSqls.get(i).get("sqlid").toString();
+					}else {
+						ibitisTitleSql = ibitisSqls.get(i).get("sqlid").toString();
+					}
 				}
 			}
 		}
@@ -78,22 +84,29 @@ public class ExcelController {
 			if(listData != null && listData.size() > 0) {
 				listcount = listData.size();
 			}else{
-				errorMsg = "没有查询到对应结果";
+				message = "没有查询到对应结果";
+				goon = false;
 			}
-			
-			model.addAttribute("columns", optionpts);
+
+			model.addAttribute("propertys", propertys);
+			model.addAttribute("titles", titles);
 			model.addAttribute("listData", listData);
 			model.addAttribute("listcount", listcount); 
 		}
 		
 		try {
+			if(!goon) {
+				model.addAttribute("msgType", 0); 
+			}
+			model.addAttribute("message", message); 
+			
 			response.setContentType("application/octet-stream");
 			fileName=new String(fileName.getBytes("utf-8"),"iso-8859-1");
-			response.addHeader("Content-Disposition", "attachment; filename="+fileName);
+			response.addHeader("Content-Disposition", "attachment; filename="+fileName+".exls");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return "/business/projectInitial/proExcelXlsFun";
+		return "/page/base/excelBase";
 	}
 }
