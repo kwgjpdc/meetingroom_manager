@@ -58,6 +58,13 @@ var TableInit = function () {
 				 ,{
 						field: 'createdateStr',
 						title: '创建时间'
+				  },
+				  {field: '',align: 'center',title: '操作' ,width : 150,
+						formatter:function (value, row, index, field) {
+					        return [
+							      '<button type="button" onclick="roleAssign('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">角色分配</button>'
+							      ].join('');
+					    }
 				  }
 				]
 			],
@@ -84,3 +91,7 @@ var TableInit = function () {
 	};
 	return oTableInit;
 };
+//角色分配
+function roleAssign(_id){
+	window.location.href = $("#fule").val()+'user/userRoleAssign.web?userid='+_id;
+}

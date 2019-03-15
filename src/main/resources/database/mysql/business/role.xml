@@ -11,4 +11,27 @@
            insert into t_sys_role(rolename, createdate, remark, priority, status, isdisabled, operuser, operdate) 
                values(#{rolename},  #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
    </insert>
+   <!-- 通过角色或菜单查询角色菜单表数据 -->
+   <select id="getRoleMenuListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select 
+			roleid,menuid
+		from t_sys_role_menu
+		where 1=1
+		<if test="roleid != null and roleid != 0">
+			and (roleid = #{roleid} )
+		</if>
+		<if test="menuid != null and menuid != 0">
+			and (menuid = #{menuid} )
+		</if>
+	</select>
+   <!-- 删除角色用户表数据 -->
+   <delete id="deleteRoleMenu" parameterType="java.util.Map" >
+		delete from t_sys_role_menu
+    	where roleid = #{roleid}
+    </delete>
+    <!-- 用户角色插入 -->
+	<insert id="insertRoleMenu" parameterType="com.lion.echart.system.entity.UserRoleEntity">
+           insert into t_sys_role_menu(roleid, menuid) 
+               values(#{roleid}, #{menuid})
+   </insert>
 </mapper>

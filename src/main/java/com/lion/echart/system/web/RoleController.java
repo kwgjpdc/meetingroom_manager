@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,9 @@ import com.lion.echart.base.logic.BaseService;
 import com.lion.echart.project.entity.MonthTotalEntity;
 import com.lion.echart.project.entity.PayforEntity;
 import com.lion.echart.system.entity.RoleEntity;
+import com.lion.echart.system.entity.RoleMenuEntity;
 import com.lion.echart.system.entity.UserEntity;
+import com.lion.echart.system.entity.UserRoleEntity;
 
 import net.sf.json.JSONObject;
 
@@ -66,6 +69,50 @@ public class RoleController {
 		try {
 			RoleEntity role = new RoleEntity(rolename, new Date(), "", 0, 1, "0", "1", new Date());
 			baseService.insertObject("comle.role.insertRole", role);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
+	}
+	
+	//角色菜单分配列表页 
+	@RequestMapping(value = "/role/roleMenuAssign.web",method=RequestMethod.GET)
+	public String roleMenuAssign(String roleid,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("roleid", roleid);
+		List<Map<String, Object>> list = baseService.queryList("comle.user.getRoleMenuListData", searchmap);
+		String menuListStr = "";
+		for(Map<String, Object> map : list){
+			menuListStr+=map.get("menuid")+",";
+		}
+		if(list.size()>0){
+			menuListStr=menuListStr.substring(0,menuListStr.length()-1);
+		}
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		req.setAttribute("roleid", roleid);
+		req.setAttribute("menuListStr", menuListStr);
+		return "/page/system/roleMenuAssign";
+	}
+	//用户角色分配添加保存
+	@RequestMapping(value = "/role/roleMenuSave.json",method=RequestMethod.POST)
+	public @ResponseBody String userRoleSave(String roleid,String menuidArrStr,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
+		JSONObject obj = new JSONObject();
+		try {
+			//先删除用户角色表，然后添加
+			//del
+			Map<String, Object> delmap = new HashMap<String, Object>();
+			delmap.put("roleid", roleid);
+			baseService.delete("comle.role.deleteRoleMenu", delmap);
+			//insert
+			String menuidArr[] = menuidArrStr.split(",");
+			for(String menuid : menuidArr){
+				RoleMenuEntity roleMenu = new RoleMenuEntity(Long.valueOf(roleid), Long.valueOf(menuid));
+				baseService.insertObject("comle.role.insertRoleMenu", roleMenu);
+			}
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
