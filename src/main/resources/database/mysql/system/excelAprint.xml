@@ -3,7 +3,7 @@
 
 <mapper namespace="com.system.eap">
 	<select id="getTitle" parameterType="java.util.Map" resultType="java.util.Map"  >
-		select showtitle,mrowspan,mcolspan
+		select tdid,showtitle,mrowspan,mcolspan,rowindex
 			from t_s_dcdytitles t
 		where t.dcdytype = #{dcdytype}
 		<if test="isdytype != null and isdytype != ''">

@@ -151,7 +151,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-15 11:44:56
+Date: 2019-03-15 15:44:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -193,7 +193,7 @@ CREATE TABLE `t_s_dcdysqlproperty` (
 INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'costTypeStr', 'left', null, '1', null, '1', '款项类型');
 INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'mainTypeStr', 'center', null, '2', null, '1', '款项所属');
 INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'year', 'center', null, '3', null, '1', '所属年份');
-INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'total', 'right', null, '4', null, '1', '累计金额');
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'total', 'right', 'vnd.ms-excel.numberformat:#,##0.00', '4', null, '1', '累计金额');
 
 -- ----------------------------
 -- Table structure for `t_s_dcdytitles`
@@ -201,6 +201,7 @@ INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'total', 'right', null, 
 DROP TABLE IF EXISTS `t_s_dcdytitles`;
 CREATE TABLE `t_s_dcdytitles` (
   `dcdytype` varchar(30) NOT NULL COMMENT '导出打印类型',
+  `tdid` varchar(30) DEFAULT NULL COMMENT '元素id',
   `showtitle` varchar(200) NOT NULL COMMENT '显示名称',
   `isdytype` varchar(1) NOT NULL DEFAULT '' COMMENT '是否为打印title，1为是',
   `isdctype` varchar(1) NOT NULL COMMENT '是否为导出title，1为是',
@@ -214,7 +215,8 @@ CREATE TABLE `t_s_dcdytitles` (
 -- ----------------------------
 -- Records of t_s_dcdytitles
 -- ----------------------------
-INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '款项类型', '1', '1', '1', '1', '1', '1', null);
-INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '款项所属', '1', '1', '1', '1', '1', '1', null);
-INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '所属年份', '1', '1', '1', '1', '1', '1', null);
-INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '累计金额', '1', '1', '1', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', null, '款项类型', '1', '1', '2', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', null, '款项所属', '1', '1', '2', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', null, '所属年份', '1', '1', '2', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', null, '累计金额', '1', '1', '2', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', 'filename', '文件名称', '1', '1', '1', '1', '1', '4', null);

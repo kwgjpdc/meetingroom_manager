@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 
 function print(){
-	alert('工程师正在努力实现中');
+	modalTitle('工程师正在努力实现中<br/>您可以导入后打印',1);
 }
 
 function doexcel(_this){
@@ -22,7 +22,7 @@ function doexcel(_this){
 	$("#formSearch").submit();
 }
 
-function modalTitle(_msg,_type,_width,_height){
+function modalTitle(_msg,_type){
 	$("#infobody").html(_msg);
 	$("#rightBtn1").hide();
 	$("#rightBtn2").hide();

@@ -14,7 +14,6 @@ function yaerSelect(){
 	$("#writeyear").append('<option selected value="'+_nowyear+'">'+_nowyear+'</option>');
 	for(var i = 1; i <= 20; i++){
 		$("#writeyear").append("<option value='"+(_nowyear+i)+"'>"+(_nowyear+i)+"</option>");
-	
 	}
 
 	//刷新select

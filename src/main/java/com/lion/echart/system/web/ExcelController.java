@@ -42,6 +42,8 @@ public class ExcelController {
 
 		Enumeration paramkey = request.getParameterNames();
 		HashMap<String, Object> param = new HashMap<String, Object>();
+		HashMap<String, Object> titlemap = new HashMap<String, Object>();
+		
 		String keyname = "";
 		while(paramkey.hasMoreElements()) {
 			keyname = paramkey.nextElement().toString();
@@ -93,6 +95,8 @@ public class ExcelController {
 			model.addAttribute("listData", listData);
 			model.addAttribute("listcount", listcount); 
 		}
+		titlemap.put("filename", fileName);
+		model.addAttribute("titlemap", titlemap);
 		
 		try {
 			if(!goon) {
@@ -102,7 +106,7 @@ public class ExcelController {
 			
 			response.setContentType("application/octet-stream");
 			fileName=new String(fileName.getBytes("utf-8"),"iso-8859-1");
-			response.addHeader("Content-Disposition", "attachment; filename="+fileName+".exls");
+			response.addHeader("Content-Disposition", "attachment; filename="+fileName+".xls");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
