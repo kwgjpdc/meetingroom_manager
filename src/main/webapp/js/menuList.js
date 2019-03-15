@@ -49,7 +49,7 @@ var TableInit = function () {
 				  }
 				 ,{
 						field: 'ismenu',
-						title: '是否菜单'
+						title: '是否父菜单'
 				  }
 				 ,{
 						field: 'pmenuname',

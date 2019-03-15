@@ -154,7 +154,7 @@ CREATE TABLE `t_sys_user` (
   `realname` varchar(200) DEFAULT NULL COMMENT '真实姓名',
   `password` varchar(200) NOT NULL COMMENT '密码',
   `sex` varchar(20) NOT NULL COMMENT '性别',
-  `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
+  `email` varchar(200) DEFAULT NULL COMMENT '邮箱',
   `createdate` datetime NOT NULL COMMENT '创建时间',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `priority` int(11) DEFAULT NULL COMMENT '排序',

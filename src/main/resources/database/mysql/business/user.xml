@@ -8,4 +8,9 @@
             else '男' end  sexStr
 		from t_sys_user
 	</select>
+	<!-- 用户插入 -->
+	<insert id="insertUser" parameterType="com.lion.echart.system.entity.UserEntity">
+           insert into t_sys_user(username, realname, password, sex, email, createdate, remark, priority, status, isdisabled, operuser, operdate) 
+               values(#{username}, #{realname}, #{password}, #{sex}, #{email}, #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
+   </insert>
 </mapper>

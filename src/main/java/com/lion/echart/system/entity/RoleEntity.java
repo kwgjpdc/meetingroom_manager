@@ -17,6 +17,19 @@ public class RoleEntity implements Serializable {
 	private String isdisabled;
 	private String operuser;
 	private Date operdate;
+	
+	public RoleEntity(String rolename, Date createdate, String remark, int priority, int status, String isdisabled,
+			String operuser, Date operdate) {
+		super();
+		this.rolename = rolename;
+		this.createdate = createdate;
+		this.remark = remark;
+		this.priority = priority;
+		this.status = status;
+		this.isdisabled = isdisabled;
+		this.operuser = operuser;
+		this.operdate = operdate;
+	}
 	public long getId() {
 		return id;
 	}

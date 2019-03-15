@@ -31,7 +31,7 @@ String fule = base + "/" + contextPath + "/";
             <div class="panel-heading">
             	系统管理 / 菜单管理
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>contract/contractSignedAdd.web'">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>menu/menuAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
 		            <button id="btn_edit" type="button" class="btn btn-default">

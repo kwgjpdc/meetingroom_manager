@@ -6,4 +6,9 @@
 			*,date_format(createdate, '%Y-%m-%d') createdateStr
 		from t_sys_role
 	</select>
+	<!-- 角色插入 -->
+	<insert id="insertRole" parameterType="com.lion.echart.system.entity.RoleEntity">
+           insert into t_sys_role(rolename, createdate, remark, priority, status, isdisabled, operuser, operdate) 
+               values(#{rolename},  #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
+   </insert>
 </mapper>

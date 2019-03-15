@@ -21,6 +21,23 @@ public class UserEntity implements Serializable {
 	private String isdisabled;
 	private String operuser;
 	private Date operdate;
+	
+	public UserEntity(String username, String realname, String password, String sex, String email, Date createdate,
+			String remark, int priority, int status, String isdisabled, String operuser, Date operdate) {
+		super();
+		this.username = username;
+		this.realname = realname;
+		this.password = password;
+		this.sex = sex;
+		this.email = email;
+		this.createdate = createdate;
+		this.remark = remark;
+		this.priority = priority;
+		this.status = status;
+		this.isdisabled = isdisabled;
+		this.operuser = operuser;
+		this.operdate = operdate;
+	}
 	public long getId() {
 		return id;
 	}

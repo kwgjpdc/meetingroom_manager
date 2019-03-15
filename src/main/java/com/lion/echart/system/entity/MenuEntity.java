@@ -20,6 +20,22 @@ public class MenuEntity implements Serializable {
 	private String isdisabled;
 	private String operuser;
 	private Date operdate;
+	
+	public MenuEntity(String menuname, String url, int ismenu, long pid, Date createdate, String remark, int priority,
+			int status, String isdisabled, String operuser, Date operdate) {
+		super();
+		this.menuname = menuname;
+		this.url = url;
+		this.ismenu = ismenu;
+		this.pid = pid;
+		this.createdate = createdate;
+		this.remark = remark;
+		this.priority = priority;
+		this.status = status;
+		this.isdisabled = isdisabled;
+		this.operuser = operuser;
+		this.operdate = operdate;
+	}
 	public long getId() {
 		return id;
 	}

@@ -5,4 +5,13 @@
 		select a.id,a.menuname,a.url,a.priority,case when a.ismenu = 1 then '是' 
             else '否' end  ismenu,a.pid,b.menuname pmenuname from t_sys_menu a left join t_sys_menu b on a.pid=b.id
 	</select>
+	<!-- 查询父菜单 -->
+	<select id="getMenuParentListData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select id,menuname from t_sys_menu where ismenu =1
+	</select>
+	<!--菜单户插入 -->
+	<insert id="insertMenu" parameterType="com.lion.echart.system.entity.MenuEntity">
+           insert into t_sys_menu(menuname, url, ismenu, pid, createdate, remark, priority, status, isdisabled, operuser, operdate) 
+               values(#{menuname}, #{url}, #{ismenu}, #{pid}, #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
+   </insert>
 </mapper>
