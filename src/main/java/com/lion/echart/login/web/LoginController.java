@@ -2,9 +2,11 @@ package com.lion.echart.login.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.base.logic.BaseService;
 import com.lion.echart.global.GlobalThings;
+import com.lion.echart.system.entity.UserEntity;
 import com.lion.echart.utils.ImageUtils;
 
 import net.sf.json.JSONObject;
@@ -43,17 +46,48 @@ public class LoginController {
 	}
 
 	//登陆验证 
-	@RequestMapping(value = "/login.json",method=RequestMethod.GET)
-	public String login(HttpServletResponse resp, HttpSession session) throws IOException { 
+	@RequestMapping(value = "/login.json",method=RequestMethod.POST)
+	public String login(String username,String password, HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException { 
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.accumulate("msgType", 0);
-
-		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCosttypes", null));
-		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
-		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
-		
-		return "/page/main";
+		//获取用户名和密码
+      //些处横板从数据库中获取对用户名和密码后进行判断
+        if(username!=null&&username.equals("admin")&&password!=null&&password.equals("111111")){
+        	Map<String, Object> searchmap = new HashMap<String, Object>();
+    		searchmap.put("username", username);
+        	UserEntity user = (UserEntity) baseService.queryObject("comle.user.getUserData", searchmap);
+            //将用户对象添加到Session中
+            session.setAttribute("USER_SESSION",user);
+            jsonObject.accumulate("msgType", 0);
+    		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCosttypes", null));
+    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
+    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
+            //重定向到主页面的跳转方法
+            return "/page/main";
+        }else{
+        	req.setAttribute("msg","用户名或密码错误，请重新登录！");
+        	return "login";
+        }
 	}
+	
+	/**
+     * 向用户登录页面跳转
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String toLogin(){
+        return  "login";
+    }
+    /**
+     * 退出登录
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/logout")
+    public String logout(HttpSession session){
+        //清除session
+        session.invalidate();
+        //重定向到登录页面的跳转方法
+        return "redirect:login";
+    }
 	
 	/**
 	 * 获取缓存数据

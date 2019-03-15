@@ -22,6 +22,9 @@ public class UserEntity implements Serializable {
 	private String operuser;
 	private Date operdate;
 	
+	public UserEntity(){
+		
+	}
 	public UserEntity(String username, String realname, String password, String sex, String email, Date createdate,
 			String remark, int priority, int status, String isdisabled, String operuser, Date operdate) {
 		super();

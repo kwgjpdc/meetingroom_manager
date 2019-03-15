@@ -9,7 +9,7 @@ $(document).ready(function(){
 });
 function loadSubofficeData(){
 	$.ajax({
-		url:"/echart/suboffice/subofficeGetData.json",
+		url:$("#fule").val()+"suboffice/subofficeGetData.json",
 		type:"POST",
 		dataType:"json",
 		success:function(data){
@@ -86,7 +86,7 @@ function save(){
         return false;
     }
 	$.ajax({
-		url: '/echart/contract/contractSignedSave.json',
+		url: $("#fule").val()+'contract/contractSignedSave.json',
 		type:"POST",
 		dataType:"json",
 		data: {
@@ -101,7 +101,7 @@ function save(){
         },
 		success:function(data){
 			 alert("操作成功");
-			 window.location.href="/echart/contract/contractSignedList.web";
+			 window.location.href=$("#fule").val()+"contract/contractSignedList.web";
 		},
 		error:function(){
 			console.log("失败");

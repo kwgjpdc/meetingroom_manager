@@ -31,7 +31,7 @@ var TableInit = function () {
 	oTableInit.Init = function () {
 		var _writeyear = $("#writeyear").val();
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/financing/getfinancingListData.json?writeyear='+_writeyear,         //请求后台的URL（*）
+			url: $("#fule").val()+'financing/getfinancingListData.json?writeyear='+_writeyear,         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			editable:true,//开启编辑模式
 			toolbar: false,                //工具按钮用哪个容器

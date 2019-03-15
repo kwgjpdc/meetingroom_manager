@@ -8,7 +8,7 @@ $(document).ready(function(){
 });
 function loadSubofficeData(){
 	$.ajax({
-		url:"/echart/suboffice/subofficeGetData.json",
+		url:$("#fule").val()+"suboffice/subofficeGetData.json",
 		type:"POST",
 		dataType:"json",
 		success:function(data){
@@ -25,7 +25,7 @@ function loadSubofficeData(){
 }
 function loadContractData(subofficeid){
 	$.ajax({
-		url:"/echart/contract/contractSignedListGetDatBySuboffice.json",
+		url:$("#fule").val()+"contract/contractSignedListGetDatBySuboffice.json",
 		type:"POST",
 		dataType:"json",
 		data: {subofficeid : subofficeid},
@@ -59,7 +59,7 @@ function save(){
         return false;
     }
 	$.ajax({
-		url: '/echart/contract/contractExecuteSave.json',
+		url: $("#fule").val()+'contract/contractExecuteSave.json',
 		type:"POST",
 		dataType:"json",
 		data: {
@@ -74,7 +74,7 @@ function save(){
             }else {
                alert("操作失败");
             }
-			 window.location.href="/echart/contract/contractExecuteList.web";
+			 window.location.href=$("#fule").val()+"contract/contractExecuteList.web";
 		},
 		error:function(){
 			console.log("失败");

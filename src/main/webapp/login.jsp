@@ -3,7 +3,7 @@
 <% 
 String base = "http://" + request.getLocalAddr()+":"+request.getLocalPort();
 String contextPath = this.getServletContext().getContextPath();
-String fule = base + "/" + contextPath + "/";
+String fule = base + "" + contextPath + "/";
 %>
 <!DOCTYPE html>
 <html style="height:100%;">
@@ -19,7 +19,7 @@ String fule = base + "/" + contextPath + "/";
 	<div class="bgdiv" style="background-image:url('/echart/image/loginbk1.jpg');" >
 		<div class="title" >滇中引水管理局</div>
 		<div class="row">
-			<form class="form-horizontal" autosubmit="return false;" >
+			<form class="form-horizontal"  method="post" action="<%=fule%>login.json" >
 				<div class="form-group">
 					<label class="col-lg-3 control-label" >用户名</label>
 					<div class="col-lg-9">
@@ -45,7 +45,7 @@ String fule = base + "/" + contextPath + "/";
 				</div>
 				
 				<div class="col-lg-9 col-lg-offset-4">
-					<button type="button" onclick="dologin()" class="btn btn-primary" style="width:50%" >登录</button>
+					<button type="submit" class="btn btn-primary" style="width:50%" >登录</button>
 				</div>
 			</form>
 		</div>

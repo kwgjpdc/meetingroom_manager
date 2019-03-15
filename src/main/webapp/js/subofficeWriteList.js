@@ -15,7 +15,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/subofficewrite/subofficewriteGetData.json',         //请求后台的URL（*）
+			url: $("#fule").val()+'subofficewrite/subofficewriteGetData.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			editable:true,//开启编辑模式
 			toolbar: false,                //工具按钮用哪个容器
@@ -396,7 +396,7 @@ function contracinputsel(_one){
 function loadContractDataBySubofficeid(subofficeid){
 	var returnData;
 	$.ajax({
-		url:"/echart/contract/contractSignedListGetDatBySuboffice.json",
+		url:$("#fule").val()+"contract/contractSignedListGetDatBySuboffice.json",
 		type:"POST",
 		dataType:"json",
 		async :false,

@@ -21,7 +21,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/moment-with-locales.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/menuAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/roleMenuAssign.js?ts=<%=request.getAttribute("ts") %>"></script>
 
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
@@ -32,36 +32,16 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	系统管理 / 菜单管理 / 菜单添加
+            	系统管理 / 角色管理 / 菜单分配
             </div>
             <div class="panel-body">
-                	
-					<div class="form-group">
-						<label for="menuname">菜单名称</label>
-						<input type="text" class="form-control" id="menuname" style="width: 400px;" placeholder="请输入菜单名称">
-					</div>
-					<div class="form-group">
-						<label for="url">URL</label>
-						<input type="text" class="form-control" id="url" style="width: 400px;" placeholder="请输入url">
-					</div>
-					<div class="form-group">
-						<label for="ismenu">是否父菜单</label>
-						<select class="form-control" id="ismenu" name="ismenu" style="width: 200px;">
-							<option value="1">是</option>
-							<option value="0">否</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="pid">上级菜单</label>
-						<select class="form-control" id="pid" name="pid" style="width: 200px;">
-							<option value=""></option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="priority">排序序号</label>
-						<input type="text" class="form-control" id="priority" value="0" style="width: 400px;" placeholder="请输入排序序号">
-					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
+            	<input type="hidden" name="roleid" id="roleid" value="<%=request.getAttribute("roleid") %>">
+            	<input type="hidden" name="menuList" id="menuList" value="<%=request.getAttribute("menuListStr") %>">
+               	<label for="name">菜单选择</label>
+				<div class="form-group" id="roleListDiv">
+					
+				</div>
+				<button onclick="save()" class="btn btn-primary">提交</button>
             </div>
         </div>       
 		</div>

@@ -82,7 +82,7 @@ public class RoleController {
 	public String roleMenuAssign(String roleid,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		Map<String, Object> searchmap = new HashMap<String, Object>();
 		searchmap.put("roleid", roleid);
-		List<Map<String, Object>> list = baseService.queryList("comle.user.getRoleMenuListData", searchmap);
+		List<Map<String, Object>> list = baseService.queryList("comle.role.getRoleMenuListData", searchmap);
 		String menuListStr = "";
 		for(Map<String, Object> map : list){
 			menuListStr+=map.get("menuid")+",";

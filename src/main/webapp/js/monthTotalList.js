@@ -181,7 +181,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: '/echart/report/monthTotal.json',         //请求后台的URL（*）
+			url: $("#fule").val()+'report/monthTotal.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
