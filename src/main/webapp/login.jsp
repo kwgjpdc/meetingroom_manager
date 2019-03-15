@@ -9,11 +9,10 @@ String fule = base + "" + contextPath + "/";
 <html style="height:100%;">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
-<link rel="stylesheet" href="<%=contextPath%>/css/login.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
-<link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
-<script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=fule%>/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=fule%>/css/base.css?ts=<%=request.getAttribute("ts") %>" />
+<link rel="stylesheet" type="text/css" href="<%=fule%>/css/login.css?ts=<%=request.getAttribute("ts") %>" />
+<script type="text/javascript" src="<%=fule%>/js/jquery-2.1.3.min.js"></script>
 </head>
 <body style="height:100%;">
 	<div class="bgdiv" style="background-image:url('/echart/image/loginbk1.jpg');" >
