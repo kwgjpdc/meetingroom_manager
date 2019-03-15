@@ -66,7 +66,7 @@ function changeImg(){
 }
 function dologin(){
 	if(check()){
-		window.location.href = '<%=fule%>/login.json';
+		window.location.href = '<%=fule%>login.json';
 	}
 }
 
