@@ -139,3 +139,82 @@ CREATE TABLE `t_f_financingwrite` (
 INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-03-07', '2019', '1', '02', '1', '1', '2', '321.000000', '2019-03-13 23:12:25', null, null, null);
 
 
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : MySQL57
+Source Server Version : 50725
+Source Host           : localhost:3306
+Source Database       : echart
+
+Target Server Type    : MYSQL
+Target Server Version : 50725
+File Encoding         : 65001
+
+Date: 2019-03-15 11:44:56
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `t_s_dcdysqlid`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_s_dcdysqlid`;
+CREATE TABLE `t_s_dcdysqlid` (
+  `dcdytype` varchar(30) NOT NULL COMMENT '导出打印类型',
+  `sqlid` varchar(50) NOT NULL COMMENT '导出类型对应的sqlid',
+  `sqltype` varchar(1) DEFAULT '' COMMENT '1为内容取值sql，2为表头填充取值',
+  `comment` varchar(200) DEFAULT NULL COMMENT '备注'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='导出打印对应的sqlid';
+
+-- ----------------------------
+-- Records of t_s_dcdysqlid
+-- ----------------------------
+INSERT INTO `t_s_dcdysqlid` VALUES ('cwtbhzczlb', 'comle.financing.getfinancingListData', '1', '财务填报汇总操作列表');
+
+-- ----------------------------
+-- Table structure for `t_s_dcdysqlproperty`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_s_dcdysqlproperty`;
+CREATE TABLE `t_s_dcdysqlproperty` (
+  `dcdytype` varchar(30) NOT NULL COMMENT '导出打印类型',
+  `keyname` varchar(30) NOT NULL COMMENT '获取字段',
+  `talign` varchar(10) NOT NULL COMMENT '对其方式',
+  `formartstr` varchar(50) DEFAULT NULL COMMENT '格式化',
+  `orderby` int(3) NOT NULL COMMENT '显示排序',
+  `sepcial` varchar(5) DEFAULT NULL COMMENT '特殊处理保留字段',
+  `protype` varchar(1) NOT NULL DEFAULT '' COMMENT '1为导出列表内容取值，2为表头内容对应属性',
+  `comment` varchar(200) DEFAULT NULL COMMENT '备注'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='导出打印对应sql的字段取值';
+
+-- ----------------------------
+-- Records of t_s_dcdysqlproperty
+-- ----------------------------
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'costTypeStr', 'left', null, '1', null, '1', '款项类型');
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'mainTypeStr', 'center', null, '2', null, '1', '款项所属');
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'year', 'center', null, '3', null, '1', '所属年份');
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwtbhzczlb', 'total', 'right', null, '4', null, '1', '累计金额');
+
+-- ----------------------------
+-- Table structure for `t_s_dcdytitles`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_s_dcdytitles`;
+CREATE TABLE `t_s_dcdytitles` (
+  `dcdytype` varchar(30) NOT NULL COMMENT '导出打印类型',
+  `showtitle` varchar(200) NOT NULL COMMENT '显示名称',
+  `isdytype` varchar(1) NOT NULL DEFAULT '' COMMENT '是否为打印title，1为是',
+  `isdctype` varchar(1) NOT NULL COMMENT '是否为导出title，1为是',
+  `rowindex` int(2) NOT NULL COMMENT '行序号',
+  `colindex` int(2) NOT NULL COMMENT '列序号',
+  `mrowspan` int(2) NOT NULL COMMENT '跨行',
+  `mcolspan` int(2) NOT NULL COMMENT '跨列',
+  `comment` varchar(200) DEFAULT NULL COMMENT '备注'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='打印导出表头';
+
+-- ----------------------------
+-- Records of t_s_dcdytitles
+-- ----------------------------
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '款项类型', '1', '1', '1', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '款项所属', '1', '1', '1', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '所属年份', '1', '1', '1', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwtbhzczlb', '累计金额', '1', '1', '1', '1', '1', '1', null);
