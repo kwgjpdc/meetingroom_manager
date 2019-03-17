@@ -1,6 +1,7 @@
 package com.lion.echart.financing.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -94,7 +95,7 @@ public class FinancingController {
 		return obj.toString();
 	}
 	
-	//财务填报保存
+	//财务填报明细数据删除
 	@RequestMapping(value = "/deleteFinancing.json",method=RequestMethod.POST)
 	public @ResponseBody String deleteFinancing(FinancingWritesView list
 			,HttpServletRequest req,HttpServletResponse resp, HttpSession session, FinancingWriteEntity entity) throws IOException { 
@@ -107,5 +108,37 @@ public class FinancingController {
 			obj.put("msgType", 0);
 		}
 		return obj.toString();
+	}
+	
+
+	//财务数据统计表 
+	@RequestMapping(value = "/financingReport.web",method=RequestMethod.GET)
+	public String financingReport(HttpServletRequest req,HttpServletResponse resp, 
+			HttpSession session, String year, String costtype) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "write");
+		return "/page/financing/financingReport";
+	}
+
+	//获取财务数据统计表列表数据
+	@RequestMapping(value = "/getFinancingReportData.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> getFinancingReportData(HttpServletRequest req,
+			HttpServletResponse resp, HttpSession session,String month,
+			String year1, String year2, String year3) throws IOException {
+		List<Map<String, Object>> list = null;
+		if(month == null) {
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			//报告日
+			param.put("year1", year1);
+			param.put("year2", year2);
+			param.put("year3", year3);
+			param.put("month", month);
+			
+			list = baseService.queryList("comle.financing.getFinancingReportData", param);
+		}else {
+			list = new ArrayList<Map<String,Object>>();
+		}
+		
+		return list;
 	}
 }

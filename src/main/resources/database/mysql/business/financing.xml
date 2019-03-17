@@ -51,4 +51,24 @@
     		set isdisabled = 1
     	where id = #{id}
     </delete>
+    
+    <select id="getFinancingReportData" parameterType="java.util.Map" resultType="java.util.Map" >
+	select tt.*,(money1+money2+money3+money4) as moneys from ( 
+		select t.value as costTypeStr,t.maintypedescribe as mainTypeStr
+			,sum(st1.money) as money1,sum(st2.money) as money2
+			,sum(st3.money) as money3,sum(st4.money) as money4
+		from t_s_code t 
+		 left join t_f_financingwrite st1 on t.key = st1.costtype
+	       and st1.writeyear = #{year1} and st1.isdisabled = 0
+		 left join t_f_financingwrite st2 on t.key = st2.costtype
+	       and st2.writeyear = #{year2} and st2.isdisabled = 0
+		 left join t_f_financingwrite st3 on t.key = st3.costtype
+	       and st3.writeyear = #{year3} and st3.writemonth <![CDATA[<=]]> #{month} and st3.isdisabled = 0
+		 left join t_f_financingwrite st4 on t.key = st4.costtype
+	       and st4.writeyear = #{year3} and st4.writemonth = #{month} and st4.isdisabled = 0
+		where t.codetype = 'costtype' 
+	    group by t.key,t.value,t.maintype,t.maintypedescribe 
+	    order by t.orderby ) tt
+	</select>
+    
 </mapper>

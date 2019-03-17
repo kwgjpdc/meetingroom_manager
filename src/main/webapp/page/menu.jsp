@@ -67,7 +67,7 @@
 	                    <li><a href="<%=fule %>report/monthTotalList.web">合同执行月统计</a></li>
 	                    <li><a href="#">建设资金支付统计表</a></li>
 	               	 	<li><a href="#">分局数据统计</a></li>
-	               	 	<li><a href="#">财务数据统计</a></li>
+	               	 	<li><a href="<%=fule %>financing/financingReport.web"">财务数据统计</a></li>
 	               	 	<li><a href="#">工程建设开工进度、投资完成情况月统计</a></li>
 	               	 	<li><a href="#">工程投资完成汇总月统计</a></li>
 	               	 	<li><a href="#">工程建设资金支付情况月统计</a></li>
