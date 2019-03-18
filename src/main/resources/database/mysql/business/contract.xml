@@ -12,7 +12,10 @@
             else '未审核' end  statusstr
 		from t_c_contract ct , t_s_suboffice sf where ct.subofficeid = sf.subofficeid
 		<if test="subofficeid != null and subofficeid != 0">
-			and (ct.subofficeid = #{subofficeid} )
+			and ct.subofficeid = #{subofficeid} 
+		</if>
+		<if test="contractname != null and contractname != ''">
+			and ct.contractname like CONCAT('%',#{contractname},'%')
 		</if>
 	</select>
 	<!-- 合同签订插入 -->

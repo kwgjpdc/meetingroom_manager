@@ -47,7 +47,7 @@ String fule = base + "" + contextPath + "/";
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="txt_search_departmentname">合同名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" id="txt_search_departmentname">
+                            <input type="text" class="form-control" id="contractname" name="contractname">
                         </div>
                         <label class="control-label col-sm-1" for="txt_search_statu">所属分局</label>
                         <div class="col-sm-2">
@@ -56,7 +56,7 @@ String fule = base + "" + contextPath + "/";
 							</select>
                         </div>
                         <div class="col-sm-2" style="text-align:left;">
-                            <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                            <button type="button" style="margin-left:50px" id="btn_query" onclick="reloadtable()" class="btn btn-primary">查询</button>
                         </div>
                     </div>
                 </form>
