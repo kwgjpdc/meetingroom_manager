@@ -54,9 +54,12 @@ public class SubofficeController {
 
 		List<Map<String, Object>> restuleList = null;
 		List<Map<String, Object>> templist = (List<Map<String, Object>>)GlobalThings.getCash("suboffices");
+		
 		for (int i = templist.size()-1; i >= 0; i--) {
-			if(user.getUsername().equals("admin") ) {
+			if(user.getUsername().equals("admin")) {
 				restuleList = (List<Map<String, Object>>)GlobalThings.getCash("suboffices");
+			}else if(user.getSubofficeid() == null)  {
+				break;
 			}else if(Integer.parseInt(templist.get(i).get("subofficeid").toString()) == user.getSubofficeid()) {
 				restuleList = new ArrayList<Map<String,Object>>();
 				restuleList.add(templist.get(i));

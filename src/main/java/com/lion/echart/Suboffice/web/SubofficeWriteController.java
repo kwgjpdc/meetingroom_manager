@@ -50,7 +50,12 @@ public class SubofficeWriteController {
 			HttpSession session, String subofficeid) throws IOException { 
 		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 		HashMap<String, Object> param = new HashMap<String, Object>();
-		param.put("subofficeid", user.getSubofficeid());
+		//系统管理员传入特殊分局条件0
+		if("admin".equals(user.getUsername())) {
+			param.put("subofficeid", 0);
+		}else {
+			param.put("subofficeid", user.getSubofficeid());
+		}
 		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", param);
 		return list;
 	}

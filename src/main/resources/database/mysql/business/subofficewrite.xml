@@ -30,13 +30,16 @@
 		<result property="month" column="month"/>
 		<result property="operDate" column="operdate" jdbcType="DATE"/>
 	</resultMap>
+	
+	<!-- 仅供分局填报查询列表使用 -->
 	<select id="getSubofficewriteListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
 			sw.*,ct.contractname,ct.contractnum,ct.subofficeid,ct.amount contractamount,
 			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
 			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr
 		from t_s_subofficewrite sw,t_c_contract ct where sw.contractid = ct.contractid
-		<if test="subofficeid != null and subofficeid != 0">
+		<!-- 0为系统管理员，可以看到所有分局，其他情况下，各分局只能看到自己分局的数据 -->
+		<if test="subofficeid != 0">
 			and subofficeid = #{subofficeid} 
 		</if>
 	</select>
