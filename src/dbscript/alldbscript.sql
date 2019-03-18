@@ -234,8 +234,8 @@ CREATE TABLE `t_sys_user` (
 -- Records of t_sys_user
 -- ----------------------------
 INSERT INTO `t_sys_user` VALUES ('1', null, 'admin', '管理员', '1', 'M', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
-INSERT INTO `t_sys_user` VALUES ('10', null, 'tangxian', '唐显', '123456', 'M', 'tangxianmail@vip.qq.com', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
-INSERT INTO `t_sys_user` VALUES ('11', null, 'xiaohong', '小红', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
+INSERT INTO `t_sys_user` VALUES ('10', '1', 'tangxian', '唐显', '123456', 'M', 'tangxianmail@vip.qq.com', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
+INSERT INTO `t_sys_user` VALUES ('11', '2', 'xiaohong', '小红', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
 
 -- ----------------------------
 -- Table structure for `t_sys_user_role`

@@ -36,29 +36,12 @@ var TableInit = function () {
 			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 			columns: [
 				[
-				  {                    
-                    checkbox: true
-	              }
-				  ,{
-						field: 'username',
-						title: '用户名'
-				  }
-				 ,{
-						field: 'realname',
-						title: '真实姓名'
-				  }
-				 ,{
-						field: 'sexStr',
-						title: '性别'
-				  }
-				 ,{
-						field: 'email',
-						title: '邮箱'
-				  }
-				 ,{
-						field: 'createdateStr',
-						title: '创建时间'
-				  },
+				  { checkbox: true}
+				 ,{field: 'username',title: '用户名'}
+				 ,{field: 'realname',title: '真实姓名'}
+				 ,{field: 'subofficename',title: '所属分局'}
+				 ,{field: 'email',title: '邮箱'}
+				 ,{field: 'createdateStr',title: '创建时间'},
 				  {field: '',align: 'center',title: '操作' ,width : 150,
 						formatter:function (value, row, index, field) {
 					        return [

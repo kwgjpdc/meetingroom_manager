@@ -2,12 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comle.user">
 	<select id="getUserListData" parameterType="java.util.Map" resultType="java.util.Map" >
-		select 
-			*,date_format(createdate, '%Y-%m-%d') createdateStr,
+		select st.subofficename,t.*
+			,date_format(createdate, '%Y-%m-%d') createdateStr,
 			case when sex = 'F' then '女' 
             else '男' end  sexStr
-		from t_sys_user
-		where 1=1
+		from t_sys_user t
+    	left join t_s_suboffice st on t.subofficeid = st.subofficeid
+			where 1=1
 		<if test="username != null and username != ''">
 			and (username = '#{username}' )
 		</if>
@@ -26,8 +27,8 @@
 	</select>
 	<!-- 用户插入 -->
 	<insert id="insertUser" parameterType="com.lion.echart.system.entity.UserEntity">
-           insert into t_sys_user(username, realname, password, sex, email, createdate, remark, priority, status, isdisabled, operuser, operdate) 
-               values(#{username}, #{realname}, #{password}, #{sex}, #{email}, #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
+           insert into t_sys_user(subofficeid, username, realname, password, sex, email, createdate, remark, priority, status, isdisabled, operuser, operdate) 
+               values(${subofficeid},#{username}, #{realname}, #{password}, #{sex}, #{email}, #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
    </insert>
    <!-- 通过用户或角色查询用户角色表数据 -->
    <select id="getUserRoleListData" parameterType="java.util.Map" resultType="java.util.Map" >

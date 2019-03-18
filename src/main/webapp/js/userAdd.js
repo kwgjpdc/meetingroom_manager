@@ -1,6 +1,24 @@
 $(document).ready(function(){
 	$("#content").height(window.innerHeight+60);
+	subofficeDataInit();
 });
+
+function subofficeDataInit(){
+	$.ajax({
+		url: $("#fule").val()+'/getCashListData.json',
+		type: 'post',
+		data: {"cashtype": "suboffices"},
+		dataType: "json",
+		success: function (data) {
+			for(var i=0;i<data.length;i++){
+				$("#subofficeid").append('<option value="'
+						+data[i].subofficeid+'">'+data[i].subofficename+'</option>');
+			}
+			$("#subofficeid").selectpicker("refresh");
+		}
+	});
+	
+}
 function validatef(){
 	$('#formInsert').bootstrapValidator({
 		message: 'This value is not valid',
@@ -35,6 +53,7 @@ function save(){
 	var sex = $("#sex").val();
 	var password = $("#password").val();
 	var email = $("#email").val();
+	var subofficeid = $("#subofficeid").val();
 	if(username == ''){
     	alert('请输入用户名');
         return false;
@@ -56,7 +75,8 @@ function save(){
 			realname : realname,
 			sex : sex,
 			password : password,
-        	email : email
+        	email : email,
+        	subofficeid : subofficeid
         },
 		success:function(data){
 			 alert("操作成功");

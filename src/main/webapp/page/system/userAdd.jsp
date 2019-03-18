@@ -15,11 +15,13 @@ String fule = base + "" + contextPath + "/";
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-select.min.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/moment-with-locales.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/userAdd.js?ts=<%=request.getAttribute("ts") %>"></script>
 
@@ -43,6 +45,11 @@ String fule = base + "" + contextPath + "/";
 					<div class="form-group">
 						<label for="realname">真实姓名</label>
 						<input type="text" class="form-control" id="realname" style="width: 400px;" placeholder="请输入真实姓名">
+					</div>
+					<div class="form-group">
+						<label for="subofficeid">所属分局</label><br/>
+				        <select id="subofficeid" class="form-control" style="width: 200px;" data-width="200px" >
+				        </select>
 					</div>
 					<div class="form-group">
 						<label for="sex">性别</label>

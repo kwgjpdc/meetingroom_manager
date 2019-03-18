@@ -8,7 +8,8 @@ import java.util.Date;
  *
  */
 public class UserEntity implements Serializable {
-	private long id;
+	private Long id;
+	private Long subofficeid;
 	private String username;
 	private String realname;
 	private String password;
@@ -41,10 +42,16 @@ public class UserEntity implements Serializable {
 		this.operuser = operuser;
 		this.operdate = operdate;
 	}
-	public long getId() {
+	public Long getSubofficeid() {
+		return subofficeid;
+	}
+	public void setSubofficeid(Long subofficeid) {
+		this.subofficeid = subofficeid;
+	}
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getUsername() {
