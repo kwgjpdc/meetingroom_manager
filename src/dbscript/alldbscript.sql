@@ -18,6 +18,26 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `t_c_contract`
 -- ----------------------------
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : localhost
+Source Server Version : 50157
+Source Host           : localhost:3306
+Source Database       : echart
+
+Target Server Type    : MYSQL
+Target Server Version : 50157
+File Encoding         : 65001
+
+Date: 2019-03-18 12:25:01
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `t_c_contract`
+-- ----------------------------
 DROP TABLE IF EXISTS `t_c_contract`;
 CREATE TABLE `t_c_contract` (
   `contractid` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
@@ -35,7 +55,7 @@ CREATE TABLE `t_c_contract` (
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   `subofficeid` bigint(11) NOT NULL COMMENT '所属分局ID',
   PRIMARY KEY (`contractid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_c_contract
@@ -49,6 +69,8 @@ INSERT INTO `t_c_contract` VALUES ('6', '玉溪段进场道路施工3标', 'DZYS
 INSERT INTO `t_c_contract` VALUES ('7', '红河段进场道路施工1标', 'DZYS-HH-GCBF-SG-DL001', '6587.799056', '365日历天', '2019-02-22 00:00:00', '中铁十二局集团有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:53:49', '6');
 INSERT INTO `t_c_contract` VALUES ('8', '云南省滇中引水工程施工准备工程昆明段进场道路施工1标', 'DZYS-KM-GCBF-SG-DL001', '5267.02', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 17:06:07', '4');
 INSERT INTO `t_c_contract` VALUES ('9', '云南省滇中引水工程施工准备工程昆明段进场道路施工2标', 'DZYS-KM-GCBF-SG-DL002', '4234.95', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 17:07:01', '4');
+INSERT INTO `t_c_contract` VALUES ('10', '滇中引水工程勘察试验性工程03标：香炉山隧洞2#施工支洞工程施工', 'DZYS-XL-SG-001', '3913.25', '1365日历天', '2015-09-09 00:00:00', '.', '', '0', '9', 'false', 'admin', '2019-03-18 12:23:34', '1');
+INSERT INTO `t_c_contract` VALUES ('11', '滇中引水工程扩大勘察试验性工程水源及香炉山隧洞（丽江段）施工供电工程施工', 'DZYS-XL-YD-004', '7486.66', '365日历天', '2018-01-01 00:00:00', '。', '', '0', '9', 'false', 'admin', '2019-03-18 12:24:25', '1');
 
 -- ----------------------------
 -- Table structure for `t_c_contractexecute`
