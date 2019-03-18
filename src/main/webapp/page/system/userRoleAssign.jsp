@@ -35,7 +35,7 @@ String fule = base + "" + contextPath + "/";
             	系统管理 / 用户管理 / 角色分配
             </div>
             <div class="panel-body">
-            	<input type="hidden" name="userid" id="userid" value="<%=request.getAttribute("userid") %>">
+            	<input type="hidden" name="edituserid" id="edituserid" value="<%=request.getAttribute("userid") %>">
             	<input type="hidden" name="roleList" id="roleList" value="<%=request.getAttribute("roleListStr") %>">
                	<label for="name">角色选择</label>
 				<div class="form-group" id="roleListDiv">

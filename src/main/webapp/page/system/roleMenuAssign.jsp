@@ -35,7 +35,7 @@ String fule = base + "" + contextPath + "/";
             	系统管理 / 角色管理 / 菜单分配
             </div>
             <div class="panel-body">
-            	<input type="hidden" name="roleid" id="roleid" value="<%=request.getAttribute("roleid") %>">
+            	<input type="hidden" name="editroleid" id="editroleid" value="<%=request.getAttribute("roleid") %>">
             	<input type="hidden" name="menuList" id="menuList" value="<%=request.getAttribute("menuListStr") %>">
                	<label for="name">菜单选择</label>
 				<div class="form-group" id="roleListDiv">

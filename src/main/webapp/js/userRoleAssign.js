@@ -33,7 +33,7 @@ function IsInArray(arr,val){
 　　return testStr.indexOf(","+val+",")!=-1; 
 }
 function save(){
-	var userid = $("#userid").val();
+	var userid = $("#edituserid").val();
 	var roleidArr =[]; 
     $('input[name="roleid"]:checked').each(function(){ 
     	roleidArr.push($(this).val()); 
