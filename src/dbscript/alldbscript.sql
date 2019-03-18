@@ -214,6 +214,7 @@ INSERT INTO `t_sys_role_menu` VALUES ('11', '1', '2');
 DROP TABLE IF EXISTS `t_sys_user`;
 CREATE TABLE `t_sys_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `subofficeid` int(11) DEFAULT NULL COMMENT '所属分局',
   `username` varchar(200) NOT NULL COMMENT '用户名',
   `realname` varchar(200) DEFAULT NULL COMMENT '真实姓名',
   `password` varchar(200) NOT NULL COMMENT '密码',
@@ -232,9 +233,9 @@ CREATE TABLE `t_sys_user` (
 -- ----------------------------
 -- Records of t_sys_user
 -- ----------------------------
-INSERT INTO `t_sys_user` VALUES ('1', 'admin', '管理员', '1', 'M', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
-INSERT INTO `t_sys_user` VALUES ('10', 'tangxian', '唐显', '123456', 'M', 'tangxianmail@vip.qq.com', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
-INSERT INTO `t_sys_user` VALUES ('11', 'xiaohong', '小红', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
+INSERT INTO `t_sys_user` VALUES ('1', null, 'admin', '管理员', '1', 'M', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
+INSERT INTO `t_sys_user` VALUES ('10', null, 'tangxian', '唐显', '123456', 'M', 'tangxianmail@vip.qq.com', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
+INSERT INTO `t_sys_user` VALUES ('11', null, 'xiaohong', '小红', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
 
 -- ----------------------------
 -- Table structure for `t_sys_user_role`
@@ -361,6 +362,7 @@ CREATE TABLE `t_s_suboffice` (
   `subofficename` varchar(20) DEFAULT NULL COMMENT '分局名称',
   `remark` varchar(200) DEFAULT NULL COMMENT '备注',
   `priority` int(11) DEFAULT NULL COMMENT '排序',
+  `isonlysubo` varchar(1) DEFAULT NULL COMMENT '仅为分局标记',
   `isdisabled` varchar(20) DEFAULT NULL,
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
@@ -370,12 +372,12 @@ CREATE TABLE `t_s_suboffice` (
 -- ----------------------------
 -- Records of t_s_suboffice
 -- ----------------------------
-INSERT INTO `t_s_suboffice` VALUES ('1', '丽江分局', null, '1', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('2', '大理分局', null, '2', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('3', '楚雄分局', null, '3', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('4', '昆明分局', null, '4', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('5', '玉溪分局', null, '5', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('1', '丽江分局', null, '1', '1', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('2', '大理分局', null, '2', '1', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('3', '楚雄分局', null, '3', '1', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('4', '昆明分局', null, '4', '1', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('5', '玉溪分局', null, '5', '1', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', '1', 'false', 'admin', null);
 
 -- ----------------------------
 -- Table structure for `t_s_subofficewrite`
