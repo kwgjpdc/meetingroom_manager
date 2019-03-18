@@ -1,5 +1,8 @@
 $(document).ready(function(){
-	$("#reportDate").datepicker();
+	$("#reportDate").datetimepicker({
+		startView:1,
+		language:'zh-CN'
+	});
 	$("#btn_query").click(initDateTable);
 });
 function setFormVal(_this){
@@ -76,22 +79,22 @@ function initDateTable(){
 					  {field: '',align: 'center',title: '支付金额' ,valign : "middle",colspan:5},
 					],
 					[
-					  {field: 'money1',align: 'center',title: namee1+'年' ,valign : "right",width : 100,
+					  {field: 'moneyyi',align: 'center',title: namee1+'年' ,valign : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'money2',align: 'center',title: namee2+'年' ,valign : "right",width : 100,
+					  {field: 'moneyer',align: 'center',title: namee2+'年' ,valign : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'money3',align: 'center',title: namee3 ,valign : "right",width : 100,
+					  {field: 'moneysan',align: 'center',title: namee3 ,valign : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'money4',align: 'center',title: namee4 ,valign : "right",width : 100,
+					  {field: 'moneysi',align: 'center',title: namee4 ,valign : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}

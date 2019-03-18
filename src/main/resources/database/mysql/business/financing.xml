@@ -55,8 +55,8 @@
     <select id="getFinancingReportData" parameterType="java.util.Map" resultType="java.util.Map" >
 	select tt.*,(money1+money2+money3+money4) as moneys from ( 
 		select t.value as costTypeStr,t.maintypedescribe as mainTypeStr
-			,sum(st1.money) as money1,sum(st2.money) as money2
-			,sum(st3.money) as money3,sum(st4.money) as money4
+			,sum(st1.money) as moneyyi,sum(st2.money) as moneyer
+			,sum(st3.money) as moneysan,sum(st4.money) as moneysi
 		from t_s_code t 
 		 left join t_f_financingwrite st1 on t.key = st1.costtype
 	       and st1.writeyear = #{year1} and st1.isdisabled = 0
