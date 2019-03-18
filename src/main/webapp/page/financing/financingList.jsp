@@ -50,14 +50,16 @@ String fule = base + "" + contextPath + "/";
                 	<input type="hidden" name="dcdytype" value="cwtbhzczlb" />
                 	<input type="hidden" name="fileName" id="fileName" />
                     <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="year">所属年份</label>
+                        <label class="control-label col-sm-1" for="year" >所属年份</label>
                         <div class="col-sm-2">
                         	<select id="writeyear" lang="<%=request.getAttribute("year") %>" onchange="reloadtable()" name="writeyear" class="selectpicker" data-width="100px" >
                         	</select>
                         </div>
+                        <!-- 
                         <div class="col-sm-2" style="text-align:left;">
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
                         </div>
+                         -->
                     </div>
                 </form>
             </div>
