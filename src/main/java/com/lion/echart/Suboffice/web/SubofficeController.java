@@ -52,10 +52,13 @@ public class SubofficeController {
 	public @ResponseBody List<Map<String, Object>> mysubofficeGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 
-		List<Map<String, Object>> restuleList = new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> restuleList = null;
 		List<Map<String, Object>> templist = (List<Map<String, Object>>)GlobalThings.getCash("suboffices");
 		for (int i = templist.size()-1; i >= 0; i--) {
-			if(Integer.parseInt(templist.get(i).get("subofficeid").toString()) == user.getSubofficeid()) {
+			if(user.getUsername().equals("admin") ) {
+				restuleList = (List<Map<String, Object>>)GlobalThings.getCash("suboffices");
+			}else if(Integer.parseInt(templist.get(i).get("subofficeid").toString()) == user.getSubofficeid()) {
+				restuleList = new ArrayList<Map<String,Object>>();
 				restuleList.add(templist.get(i));
 				break;
 			}

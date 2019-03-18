@@ -289,7 +289,7 @@ function initDateTable(){
 							formatter:function (value, row, index, field) {
 								//class="editDiv"
 								if(value == null || value == undefined) value = '';
-						        return '<div id="inputmoney_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))" >' + (fmoney(value,2) || "") + '</div>' + 
+						        return '<div id="inputmoney_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))" >' + fmoney(value,2) + '</div>' + 
 								'<input type="hidden" value="'+(value || "")+'" id="money'+index+'" name="list['+index+'].money" />';
 						    }
 					  },

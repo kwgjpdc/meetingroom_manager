@@ -47,7 +47,15 @@ function closeloding(){
 }
 
 function fmoney(s, n) {
-	if(s == null || s == undefined || s == '') return '0.00';
+	if(s == null || s == undefined || s == ''){
+		if(n != undefined && n != 2 && n > 0) {
+			var result = '';
+			while(result.length < n){
+				result = result + 0;
+			}
+			return '0.' + result;
+		}else return '0.00';
+	}
 	
 	while((""+s).indexOf(",") != -1){
 		s = s.replace(",","");

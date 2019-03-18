@@ -68,15 +68,17 @@
 	                </a>
 	                <ul class="dropdown-menu">
 	                    <li><a href="<%=fule %>contract/contractExecuteMonthTotalList.web">合同执行月统计</a></li>
+	               	 	<li><a href="<%=fule %>financing/financingReport.web"">财务数据统计</a></li>
+	               	 	<!-- 
 	                    <li><a href="#">建设资金支付统计表</a></li>
 	               	 	<li><a href="#">分局数据统计</a></li>
-	               	 	<li><a href="<%=fule %>financing/financingReport.web"">财务数据统计</a></li>
 	               	 	<li><a href="#">工程建设开工进度、投资完成情况月统计</a></li>
 	               	 	<li><a href="#">工程投资完成汇总月统计</a></li>
 	               	 	<li><a href="#">工程建设资金支付情况月统计</a></li>
 	               	 	<li><a href="#">招投标情况统计</a></li>
 	                    <li><a href="#">合同签订情况统计</a></li>
 	                    <li><a href="#">已签合同执行情况统计</a></li>
+	             		-->
 	                </ul>
 				</li>
 	            <li>
