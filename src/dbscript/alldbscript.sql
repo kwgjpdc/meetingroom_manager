@@ -10,27 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-18 10:18:48
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for `t_c_contract`
--- ----------------------------
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50157
-Source Host           : localhost:3306
-Source Database       : echart
-
-Target Server Type    : MYSQL
-Target Server Version : 50157
-File Encoding         : 65001
-
-Date: 2019-03-18 12:25:01
+Date: 2019-03-18 14:09:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -118,16 +98,17 @@ CREATE TABLE `t_f_financingwrite` (
   `voucherno` varchar(50) DEFAULT NULL COMMENT '凭证编号',
   `isdisabled` varchar(1) DEFAULT '0' COMMENT '是否删除（1为删除,0为正常）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='财务填报';
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='财务填报';
 
 -- ----------------------------
 -- Records of t_f_financingwrite
 -- ----------------------------
-INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-01-07', '2019', '1', '02', '1', '1', '2', '31122321.000000', '2019-03-14 13:36:17', null, '', '', '0');
-INSERT INTO `t_f_financingwrite` VALUES ('6', '2019-01-13', '2019', '1', '02', '1', '1', '2', '42211321.000000', '2019-03-14 13:36:17', '1', 'nnn', 'ccc', '0');
+INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-01-07', '2019', '1', '02', '1', '1', '2', '31122321.000000', '2019-03-18 12:06:52', null, '', '', '0');
+INSERT INTO `t_f_financingwrite` VALUES ('6', '2019-01-13', '2019', '1', '02', '1', '1', '2', '42211321.000000', '2019-03-18 12:06:52', null, 'nnn', 'ccc', '0');
 INSERT INTO `t_f_financingwrite` VALUES ('10', '2019-03-14', '2019', '3', '12', '2', null, null, '1111123.000000', '2019-03-14 17:30:51', null, '', '', '0');
 INSERT INTO `t_f_financingwrite` VALUES ('11', '2019-03-14', '2019', '3', '12', '2', null, null, '321.000000', '2019-03-14 17:30:51', null, '', '', '0');
 INSERT INTO `t_f_financingwrite` VALUES ('12', '2019-03-14', '2019', '3', '12', '2', null, null, '111.000000', '2019-03-14 17:23:53', null, '', '', '1');
+INSERT INTO `t_f_financingwrite` VALUES ('13', '2019-03-14', '2019', '3', '02', '1', null, '1', '1230.000000', '2019-03-18 12:06:52', null, '', '', '0');
 
 -- ----------------------------
 -- Table structure for `t_p_monthtotal`
@@ -264,6 +245,7 @@ INSERT INTO `t_sys_user` VALUES ('14', null, 'chuxiong', '楚雄分局用户', '
 INSERT INTO `t_sys_user` VALUES ('15', null, 'kunming', '昆明分局用户', '1', 'M', '', '2019-03-18 12:10:56', '', '0', '1', '0', '1', '2019-03-18 12:10:56');
 INSERT INTO `t_sys_user` VALUES ('16', null, 'yuxi', '玉溪分局用户', '1', 'M', '', '2019-03-18 12:11:09', '', '0', '1', '0', '1', '2019-03-18 12:11:09');
 INSERT INTO `t_sys_user` VALUES ('17', null, 'honghe', '红河分局用户', '1', 'M', '', '2019-03-18 12:11:42', '', '0', '1', '0', '1', '2019-03-18 12:11:42');
+
 -- ----------------------------
 -- Table structure for `t_sys_user_role`
 -- ----------------------------
