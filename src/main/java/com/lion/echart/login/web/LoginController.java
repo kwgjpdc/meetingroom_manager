@@ -44,37 +44,47 @@ public class LoginController {
 		String ckcode = ImageUtils.generateVerifyCode(4);
 		resp.getOutputStream().write(ckcode.getBytes());
 	}
-	
-	//登陆验证 
-		@RequestMapping(value = "/login.json",method=RequestMethod.GET)
-		public String login_get(String username,String password, HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException { 
-			JSONObject jsonObject = new JSONObject();
-			//先判断session中有没有用户信息
-			if(session.getAttribute("USER_SESSION")!=null){
-				//重定向到主页面的跳转方法
-	            return "/page/main";
-			}else{
-				//获取用户名和密码
-				//从数据库中获取对用户名和密码后进行判断
-				Map<String, Object> searchmap = new HashMap<String, Object>();
-				searchmap.put("username", username);
-				searchmap.put("password", password);
-		    	UserEntity user = (UserEntity) baseService.queryObject("comle.user.getUserData", searchmap);
-		        if(user!=null){
-		            //将用户对象添加到Session中
-		            session.setAttribute("USER_SESSION",user);
-		            jsonObject.accumulate("msgType", 0);
-		    		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCosttypes", null));
-		    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
-		    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
-		            //重定向到主页面的跳转方法
-		            return "/page/main";
-		        }else{
-		        	req.setAttribute("msg","用户名或密码错误，请重新登录！");
-		        	return "login";
-		        }
-			}
+	@RequestMapping(value = "/",method=RequestMethod.GET)
+	public String login_main(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject jsonObject = new JSONObject();
+		//先判断session中有没有用户信息
+		if(session.getAttribute("USER_SESSION")!=null){
+			//重定向到主页面的跳转方法
+            return "/page/main";
+		}else{
+	        return "login";
 		}
+	}
+	//登陆验证 
+	@RequestMapping(value = "/login.json",method=RequestMethod.GET)
+	public String login_get(String username,String password, HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject jsonObject = new JSONObject();
+		//先判断session中有没有用户信息
+		if(session.getAttribute("USER_SESSION")!=null){
+			//重定向到主页面的跳转方法
+            return "/page/main";
+		}else{
+			//获取用户名和密码
+			//从数据库中获取对用户名和密码后进行判断
+			Map<String, Object> searchmap = new HashMap<String, Object>();
+			searchmap.put("username", username);
+			searchmap.put("password", password);
+	    	UserEntity user = (UserEntity) baseService.queryObject("comle.user.getUserData", searchmap);
+	        if(user!=null){
+	            //将用户对象添加到Session中
+	            session.setAttribute("USER_SESSION",user);
+	            jsonObject.accumulate("msgType", 0);
+	    		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCosttypes", null));
+	    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
+	    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
+	            //重定向到主页面的跳转方法
+	            return "/page/main";
+	        }else{
+	        	req.setAttribute("msg","用户名或密码错误，请重新登录！");
+	        	return "login";
+	        }
+		}
+	}
 
 	//登陆验证 
 	@RequestMapping(value = "/login.json",method=RequestMethod.POST)
