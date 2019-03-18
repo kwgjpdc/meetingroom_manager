@@ -92,8 +92,9 @@ var TableInit = function () {
 							$.each(data, function(key,value2){
 								if(value2.contractid==value){
 									strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'"  amount="'+value2.amount+'" selected="selected">'+value2.contractname+'</option>';
+								}else{
+									strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'" amount="'+value2.amount+'">'+value2.contractname+'</option>';
 								}
-								strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'" amount="'+value2.amount+'">'+value2.contractname+'</option>';
 							});
 						}
 						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" >'+strHtml+'</select>';
@@ -158,7 +159,7 @@ var TableInit = function () {
 					title: '概算投资<br/>(万元)' ,
 					width : 100,
 					formatter:function (value, row, index, field) {
-				        return '<div id="budgetinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+				        return '<div id="budgetinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 						'<input type="hidden" value="'+(value || "")+'" id="budgetinvest'+index+'" name="list['+index+'].budgetinvest" />';
 				    },
 					rowspan: 2
@@ -186,12 +187,12 @@ var TableInit = function () {
 				  },
 				  {
 					field: 'nextmonthplaninvest',
-					align: 'center',
+					align: 'right',
 					valign : "middle",
 					title: '下一月度计划<br/>完成投资（万元）' ,
 					width : 150,
 					formatter:function (value, row, index, field) {
-						return '<div id="nextmonthplaninvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+						return '<div id="nextmonthplaninvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 						'<input type="hidden" value="'+(value || "")+'" id="nextmonthplaninvest'+index+'" name="list['+index+'].nextmonthplaninvest" />';
 				    },
 					rowspan: 2
@@ -224,110 +225,110 @@ var TableInit = function () {
 				[
 				  {
 						field: 'contractamount',
-						align: 'center',
+						align: 'right',
 						title: '合同金额<br/>（万元）' ,
 						width : 80,
 						formatter:function (value, row, index, field) {
-							return '<span id="contractamount'+index+'">' + (value || "") + '</span>';
+							return '<span id="contractamount'+index+'" >' + fmoney(value,4) + '</span>';
 						}
 				  }
 				 ,{
 						field: 'finishinvest',
-						align: 'center',
+						align: 'right',
 						title: '自开工以来累计<br/>完成投资<br/>（万元）',
 						width : 120,
 						formatter:function (value, row, index, field) {
-							return '<div id="finishinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="finishinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="finishinvest'+index+'" name="list['+index+'].finishinvest" />';
 					    }
 				  }
 				 ,{
 						field: 'surplusinvest',
-						align: 'center',
+						align: 'right',
 						title: '剩余投资<br/>（万元）',
 						width : 80,
 						formatter:function (value, row, index, field) {
-							return '<div id="surplusinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="surplusinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="surplusinvest'+index+'" name="list['+index+'].surplusinvest" />';
 					    }
 				  }
 				 ,{
 						field: 'yearplaninvest',
-						align: 'center',
+						align: 'right',
 						title: '本年度计划<br/>完成投资<br/>（万元）' ,
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="yearplaninvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="yearplaninvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="yearplaninvest'+index+'" name="list['+index+'].yearplaninvest" />';
 					    }
 				  }
 				 ,{
 						field: 'monthplaninvest',
-						align: 'center',
+						align: 'right',
 						title: '本月计划<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="monthplaninvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="monthplaninvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4)+ '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="monthplaninvest'+index+'" name="list['+index+'].monthplaninvest" />';
 					    }
 				  }
 				 ,{
 						field: 'yearrealityinvest',
-						align: 'center',
+						align: 'right',
 						title: '本年度实际<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="yearrealityinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="yearrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="yearrealityinvest'+index+'" name="list['+index+'].yearrealityinvest" />';
 					    }
 				  }
 				 ,{
 						field: 'monthrealityinvest',
-						align: 'center',
+						align: 'right',
 						title: '本月实际<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="monthrealityinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="monthrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="monthrealityinvest'+index+'" name="list['+index+'].monthrealityinvest" />';
 					    }
 				  }
 				 ,{
 						field: 'tendayrealityinvest',
-						align: 'center',
+						align: 'right',
 						title: '本旬实际<br/>完成投资<br/>（万元）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="tendayrealityinvest_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="tendayrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="tendayrealityinvest'+index+'" name="list['+index+'].tendayrealityinvest" />';
 					    }
 				  }
 				 ,{
 						field: 'earthwork',
-						align: 'center',
+						align: 'right',
 						title: '土方<br/>（万方）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="earthwork_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="earthwork_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))">' + fmoney(value,2) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="earthwork'+index+'" name="list['+index+'].earthwork" />';
 					    }
 				  }
 				 ,{
 						field: 'stonework',
-						align: 'center',
+						align: 'right',
 						title: '石方<br/>（万方）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="stonework_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="stonework_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))">' + fmoney(value,2) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="stonework'+index+'" name="list['+index+'].stonework" />';
 					    }
 				  }
 				 ,{
 						field: 'beton',
-						align: 'center',
+						align: 'right',
 						title: '混凝土<br/>（万立方米）',
 						width : 100,
 						formatter:function (value, row, index, field) {
-							return '<div id="beton_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
+							return '<div id="beton_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))">' + fmoney(value,2) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="beton'+index+'" name="list['+index+'].beton" />';
 					    }
 				  }
@@ -393,9 +394,9 @@ function subofficeDataInit(){
 						+data[0].subofficeid+'">'+data[0].subofficename+'</option>');
 				$("#subofficeid").val(data[0].subofficeid);
 			}else{
+				$("#subofficedata").append('<option value="0">-请选择-</option>');
 				for(var i=0;i<data.length;i++){
-					$("#subofficedata").append('<option value="0">-请选择-</option>');
-					$("#subofficedata").append('<option selected value="'
+					$("#subofficedata").append('<option value="'
 							+data[i].subofficeid+'">'+data[i].subofficename+'</option>');
 				}
 			}
@@ -439,7 +440,7 @@ function setcontractnum(_this){
 	var _contractamount = $(_this.options[index]).attr("amount");
 	var _index = $(_this).attr("id").split("_")[1];
 	$("#contractnum"+_index).html(_contractnum);
-	$("#contractamount"+_index).html(_contractamount);
+	$("#contractamount"+_index).html(fmoney(_contractamount));
 	
 }
 /**
@@ -456,6 +457,7 @@ function addRow(){
 		$("#subofficeid"+count).html($("#subofficedata").html());
 	    //$("#subofficeid"+count).selectpicker("refresh");
 		$("#contractid_"+count).html('<option value="0">-请选择-</option>');
+		contracinputsel(count);
 	    $("#begindate"+count).datetimepicker({
 			autoclose:true,
 			minView:2,
