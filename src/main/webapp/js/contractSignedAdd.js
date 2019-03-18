@@ -1,8 +1,11 @@
 $(document).ready(function(){
 	$("#content").height(window.innerHeight+60);
 	$('#signTime').datetimepicker({
-        format: 'YYYY-MM-DD',
-        locale: moment.locale('zh-cn')
+		minView: 2,
+		startView: 2,
+		language:'zh-CN',
+		autoclose: true,
+		format: 'yyyy-mm-dd' 
     });
 	loadSubofficeData();
 	//validatef();
