@@ -209,19 +209,19 @@ var TableInit = function () {
 			columns: [
 				[
 				  {field: 'departStr',title: '直属分局' ,align:'center'}
-				 ,{field: 'contractTotal',hiden:'true'}
+				 //,{field: 'contractTotal',hiden:'true'}
 				 ,{field: 'contractTotalStr',title: '合同总金额（万元）',align:'right'}
-				 ,{field: 'thisYearPlan',hiden:'right'}
+				 //,{field: 'thisYearPlan',hiden:'right'}
 				 ,{field: 'thisYearPlanStr',title: '本年度计划完成投资（万元）',align:'right'}
-				 ,{field: 'thisMonthInvest',hiden:'right'}
+				 //,{field: 'thisMonthInvest',hiden:'right'}
 				 ,{field: 'thisMonthInvestStr',title: '2月完成投资（万元）',align:'right'}
-				 ,{field: 'thisYtmTotal',hiden:'right'}
+				 //,{field: 'thisYtmTotal',hiden:'right'}
 				 ,{field: 'thisYtmTotalStr',title: '2019年至2月实际完成投资（万元）',align:'right'}
-				 ,{field: 'investTotal',hiden:'right'}
+				 //,{field: 'investTotal',hiden:'right'}
 				 ,{field: 'investTotalStr',title: '自开工以来累计完成投资（万元）',align:'right'}
-				 ,{field: 'balanceTotal',hiden:'right'}
+				 //,{field: 'balanceTotal',hiden:'right'}
 				 ,{field: 'balanceTotalStr',title: '累计结算工程款额（万元）',align:'right'}
-				 ,{field: 'payforTotal',hiden:'right'}
+				 //,{field: 'payforTotal',hiden:'right'}
 				 ,{field: 'payforTotalStr',title: '工程款累计支付情况（万元）',align:'right'}
 				]
 			],

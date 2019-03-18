@@ -1,9 +1,10 @@
 $(document).ready(function(){
 	$("#content").height(window.innerHeight+60);
 	$('#belongTime').datetimepicker({
-        format: 'YYYY-MM',
-        locale: moment.locale('zh-cn')
-    });
+		minView: 3,
+		startView: 3,
+		autoclose: true,
+		format: 'yyyy-mm' });
 	loadSubofficeData();
 });
 function loadSubofficeData(){
