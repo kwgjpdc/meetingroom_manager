@@ -155,9 +155,9 @@ var TableInit = function () {
 				  },
 				  {
 					field: 'budgetinvest',
-					align: 'center',
+					align: 'right',
 					title: '概算投资<br/>(万元)' ,
-					width : 100,
+					width : 120,
 					formatter:function (value, row, index, field) {
 				        return '<div id="budgetinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 						'<input type="hidden" value="'+(value || "")+'" id="budgetinvest'+index+'" name="list['+index+'].budgetinvest" />';
@@ -165,11 +165,21 @@ var TableInit = function () {
 					rowspan: 2
 				  },
 				  {
+						field: 'contractamount',
+						align: 'right',
+						title: '合同金额<br/>（万元）' ,
+						width : 120,
+						formatter:function (value, row, index, field) {
+							return '<span id="contractamount'+index+'" >' + fmoney(value,4) + '</span>';
+						},
+						rowspan: 2
+				  },
+				  {
 					field: '',
 					align: 'center',
 					title: '投资完成情况' ,
 					width : 280,
-					colspan: 3
+					colspan: 2
 				  },
 				  {
 					field: '',
@@ -222,17 +232,7 @@ var TableInit = function () {
 					rowspan: 2
 				  }
 				],
-				[
-				  {
-						field: 'contractamount',
-						align: 'right',
-						title: '合同金额<br/>（万元）' ,
-						width : 80,
-						formatter:function (value, row, index, field) {
-							return '<span id="contractamount'+index+'" >' + fmoney(value,4) + '</span>';
-						}
-				  }
-				 ,{
+				[{
 						field: 'finishinvest',
 						align: 'right',
 						title: '自开工以来累计<br/>完成投资<br/>（万元）',
