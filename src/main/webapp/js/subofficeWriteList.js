@@ -4,7 +4,12 @@ $(document).ready(function(){
 	initSelectPicker();
 	initTableSelect();
 	oTable.Init();
-	$(".datetimepicker").datepicker();
+	$(".datetimepicker").datetimepicker({
+		autoclose:true,
+		minView:2,
+		startView:2,
+		language:'zh-CN'
+	});
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 function initSelectPicker(){
@@ -358,11 +363,21 @@ function laterinitplanfinishdate(_one){
 	setTimeout("inputplanfinishdate("+_one+")",300);
 }
 function inputbegindate(_one){
-	$("#begindate"+_one).datepicker();
+	$("#begindate"+_one).datetimepicker({
+		autoclose:true,
+		minView:2,
+		startView:2,
+		language:'zh-CN'
+	});
 	$("#begindate"+_one).width(110);
 }
 function inputplanfinishdate(_one){
-	$("#planfinishdate"+_one).datepicker();
+	$("#planfinishdate"+_one).datetimepicker({
+		autoclose:true,
+		minView:2,
+		startView:2,
+		language:'zh-CN'
+	});
 	$("#planfinishdate"+_one).width(110);
 }
 function subofficeDataInit(){
@@ -434,8 +449,18 @@ function addRow(){
 		$("#subofficeid"+count).html($("#subofficedata").html());
 	    //$("#subofficeid"+count).selectpicker("refresh");
 		$("#contractid_"+count).html('<option value="0">-请选择-</option>');
-	    $("#begindate"+count).datepicker();
-	    $("#planfinishdate"+count).datepicker();
+	    $("#begindate"+count).datetimepicker({
+			autoclose:true,
+			minView:2,
+			startView:2,
+			language:'zh-CN'
+		});
+	    $("#planfinishdate"+count).datetimepicker({
+			autoclose:true,
+			minView:2,
+			startView:2,
+			language:'zh-CN'
+		});
 	    hasnosave = true;
 	}
 }
