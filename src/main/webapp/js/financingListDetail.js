@@ -86,7 +86,12 @@ function laterinitpayfordate(_one){
 	setTimeout("inputpayfordate("+_one+")",300);
 }
 function inputpayfordate(_one){
-	$("#payfordate"+_one).datepicker();
+	$("#payfordate"+_one).datetimepicker({
+		autoclose:true,
+		minView:2,
+		startView:2,
+		language:'zh-CN'
+	});
 }
 function subofficeinputsel(_one){
 
@@ -350,7 +355,12 @@ function addRow(){
 		$("#subofficeid"+count).html($("#subofficedata").html());
 	    $("#subofficeid"+count).selectpicker("refresh");
 	    contracinputsel(count);
-	    $("#payfordate"+count).datepicker();
+	    $("#payfordate"+count).datetimepicker({
+			autoclose:true,
+			minView:2,
+			startView:2,
+			language:'zh-CN'
+		});
 	    hasnosave = true;
 	}
 }
