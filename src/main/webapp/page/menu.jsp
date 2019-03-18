@@ -1,6 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <input type="hidden" name="userid" id="userid" value="${USER_SESSION.id}">
+<script>
+	//通过用户加载动态菜单加载菜单
+	var userid = $("#userid").val();
+	$.ajax({
+		url:"<%=fule %>menu/menuGetDataByUserId.json",
+		type:"POST",
+		dataType:"json",
+		data:{"userid":userid},
+		success:function(data){
+			var strHtml= '<li id="mainpli" ><a href="#">首页</a></li>';
+			var sondate = data;
+			$.each(data, function(key,value){
+				if(value.ismenu==1){
+					//是父级菜单
+					strHtml+='<li>';
+						strHtml+='<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
+						strHtml+=value.menuname+'<b class="caret"></b>';
+						strHtml+='</a>';
+						strHtml+='<ul class="dropdown-menu">';
+						var pid=value.id;
+						$.each(sondate, function(sonkey,sonvalue){
+							if(sonvalue.pid==pid){
+								strHtml+='<li><a href="<%=fule %>'+sonvalue.url+'">'+sonvalue.menuname+'</a></li>';
+							}
+						});
+						strHtml+='</ul>';
+					strHtml+='</li>';
+				}
+			});
+			$("#menuUl").html(strHtml);
+		},
+		error:function(){
+			
+		}
+	});
+</script>
 <iframe style="display:none" id="myajaxfor" name="myajaxfor" ></iframe>
 <input type="hidden" id="who" value="<%=request.getAttribute("who") %>" />
 <input type="hidden" id="fule" value="<%=fule %>" />
@@ -16,7 +52,7 @@
 	    </div>
 	     -->
 	    <div>
-	        <ul class="nav navbar-nav">
+	        <ul class="nav navbar-nav" id="menuUl">
 	            <li id="mainpli" ><a href="#">首页</a></li>
 	            <li id="writeli" >
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,5 +81,13 @@ public class MenuController {
 			obj.put("msgType", 0);
 		}
 		return obj.toString();
+	}
+	//通过userid菜单信息列表数据
+	@RequestMapping(value = "/menu/menuGetDataByUserId.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> menuGetDataByUserId(String userid, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("userid", userid);
+		List<Map<String, Object>> list = baseService.queryList("comle.menu.getMenuListDataByUserId", searchmap);
+		return list;
 	}
 }
