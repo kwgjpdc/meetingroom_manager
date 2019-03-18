@@ -3,6 +3,7 @@ package com.lion.echart.Suboffice.web;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import com.lion.echart.base.logic.BaseService;
 import com.lion.echart.financing.entity.FinancingWritesView;
 import com.lion.echart.project.entity.MonthTotalEntity;
 import com.lion.echart.project.entity.PayforEntity;
+import com.lion.echart.system.entity.UserEntity;
 
 import net.sf.json.JSONObject;
 
@@ -44,8 +46,12 @@ public class SubofficeWriteController {
 	
 	//获取分局填报列表数据
 	@RequestMapping(value = "/subofficewrite/subofficewriteGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", null);
+	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, 
+			HttpSession session, String subofficeid) throws IOException { 
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("subofficeid", user.getSubofficeid());
+		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", param);
 		return list;
 	}
 	

@@ -36,6 +36,9 @@
 			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
 			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr
 		from t_s_subofficewrite sw,t_c_contract ct where sw.contractid = ct.contractid
+		<if test="subofficeid != null and subofficeid != 0">
+			and subofficeid = #{subofficeid} 
+		</if>
 	</select>
 	
 	<insert id="subofficewriteInsert" parameterType="com.lion.echart.Suboffice.entity.SubofficeWriteEntity">

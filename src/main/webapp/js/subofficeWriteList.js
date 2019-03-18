@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-400)});
-	var oTable = new TableInit();
 	initSelectPicker();
 	initTableSelect();
+	var oTable = new TableInit();
 	oTable.Init();
 	$(".datetimepicker").datetimepicker({
 		autoclose:true,
@@ -21,9 +21,10 @@ var TableInit = function () {
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
 			url: $("#fule").val()+'subofficewrite/subofficewriteGetData.json',         //请求后台的URL（*）
-			method: 'post',                      //请求方式（*）
-			editable:true,//开启编辑模式
-			toolbar: false,                //工具按钮用哪个容器
+			method: 'post',                     //请求方式（*）
+			editable:true,						//开启编辑模式
+			contentType :'application/x-www-form-urlencoded; charset=UTF-8',
+			toolbar: false,                		//工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
 			cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 			pagination: true,                   //是否显示分页（*）
@@ -35,7 +36,6 @@ var TableInit = function () {
 			pageSize: 10,                       //每页的记录行数（*）
 			pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
 			search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-			contentType: "json",
 			strictSearch: false,
 			showColumns: false,                  //是否显示所有的列
 			showRefresh: false,                  //是否显示刷新按钮
@@ -72,7 +72,7 @@ var TableInit = function () {
 						var subofficedataStr = $("#subofficedata").html();
 						var indexSelect = subofficedataStr.indexOf('<option value="'+value+'">');
 						subofficedataStr = subofficedataStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
-				        return '<select name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+subofficedataStr+'</select>';
+				        return '<select readonly="true" name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+subofficedataStr+'</select>';
 					}
 				  },
 				  {
@@ -350,7 +350,8 @@ var TableInit = function () {
 	oTableInit.queryParams = function (params) {
 		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 			limit: params.limit,   //页面大小
-			offset:params.offset
+			offset:params.offset,
+			subofficeid:$("#subofficeid").val()
 		};
 		return temp;
 	};
@@ -382,15 +383,21 @@ function inputplanfinishdate(_one){
 }
 function subofficeDataInit(){
 	$.ajax({
-		url: $("#fule").val()+'suboffice/subofficeGetData.json',
+		url: $("#fule").val()+'suboffice/mysubofficeGetData.json',
 		type: 'post',
 		data: {},
 		dataType: "json",
 		success: function (data) {
-			$("#subofficedata").append('<option value="0">-请选择-</option>');
-			for(var i=0;i<data.length;i++){
-				$("#subofficedata").append('<option value="'
-						+data[i].subofficeid+'">'+data[i].subofficename+'</option>');
+			if(data.length == 1){
+				$("#subofficedata").append('<option selected value="'
+						+data[0].subofficeid+'">'+data[0].subofficename+'</option>');
+				$("#subofficeid").val(data[0].subofficeid);
+			}else{
+				for(var i=0;i<data.length;i++){
+					$("#subofficedata").append('<option value="0">-请选择-</option>');
+					$("#subofficedata").append('<option selected value="'
+							+data[i].subofficeid+'">'+data[i].subofficename+'</option>');
+				}
 			}
 		}
 	});

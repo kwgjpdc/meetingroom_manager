@@ -2,6 +2,7 @@ package com.lion.echart.Suboffice.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.Suboffice.entity.SubofficeWriteEntity;
 import com.lion.echart.base.logic.BaseService;
+import com.lion.echart.global.GlobalThings;
 import com.lion.echart.project.entity.MonthTotalEntity;
 import com.lion.echart.project.entity.PayforEntity;
+import com.lion.echart.system.entity.UserEntity;
 
 /**
  * 分局信息相关跳转控制
@@ -40,7 +43,23 @@ public class SubofficeController {
 	//获取分局列表数据
 	@RequestMapping(value = "/suboffice/subofficeGetData.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.Suboffice.getSubofficeListData", null);
+		List<Map<String, Object>> list = (List<Map<String, Object>>)GlobalThings.getCash("suboffices");
 		return list;
+	}
+	
+	//获取登录用户的分局列表数据
+	@RequestMapping(value = "/suboffice/mysubofficeGetData.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> mysubofficeGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
+
+		List<Map<String, Object>> restuleList = new ArrayList<Map<String,Object>>();
+		List<Map<String, Object>> templist = (List<Map<String, Object>>)GlobalThings.getCash("suboffices");
+		for (int i = templist.size()-1; i >= 0; i--) {
+			if(Integer.parseInt(templist.get(i).get("subofficeid").toString()) == user.getSubofficeid()) {
+				restuleList.add(templist.get(i));
+				break;
+			}
+		}
+		return restuleList;
 	}
 }

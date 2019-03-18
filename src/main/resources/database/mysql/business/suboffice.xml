@@ -2,8 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="comle.Suboffice">
 	<select id="getSubofficeListData" parameterType="java.util.Map" resultType="java.util.Map" >
-		select 
-			*
-		from t_s_suboffice
+		select * from t_s_suboffice
+		where isonlysubo = 1
+		<if test="subofficeid != null and subofficeid != 0">
+			and subofficeid = #{subofficeid} 
+		</if>
 	</select>
 </mapper>
