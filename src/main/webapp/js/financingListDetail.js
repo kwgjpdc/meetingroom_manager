@@ -449,12 +449,7 @@ function deleteFun(){
 
 function reloadtable(){
     hasnosave = false;
-	var _year= $('#year').val();
-    var _costtype= $('#costtype').val();
     var options = $('#t_datagrid').bootstrapTable('refresh', {
-        query: {
-			year:_year,
-			costtype:_costtype,
-    	}
+        query: $("#formSearch").serializeObj()
     });
 }
