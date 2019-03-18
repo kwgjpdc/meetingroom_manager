@@ -122,19 +122,35 @@ var TableInit = function () {
 				  }
 				 ,{
 						field: 'amount',
-						title: '合同金额(万元)'
+						align: 'right',
+						title: '合同金额(万元)',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
 				  }
 				 ,{
 						field: 'monthamount',
-						title: '当月结算(万元)'
+						align: 'right',
+						title: '当月结算(万元)',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
 				  }
 				 ,{
 						field: 'amountyear',
-						title: '累计结算额(万元)'
+						align: 'right',
+						title: '累计结算额(万元)',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
 				  }
 				 ,{
 						field: 'percent',
-						title: '累计结算额占合同额百分比%'
+						align: 'right',
+						title: '累计结算额占合同额百分比%',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,2)+"%";
+						}
 				  }
 				 ,{
 						field: 'remark',

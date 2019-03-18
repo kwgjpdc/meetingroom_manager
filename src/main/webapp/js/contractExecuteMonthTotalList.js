@@ -214,19 +214,47 @@ var TableInit = function () {
 				[
 				  {field: 'departStr',title: '直属分局' ,align:'center'}
 				 //,{field: 'contractTotal',hiden:'true'}
-				 ,{field: 'contractTotalStr',title: '合同总金额（万元）',align:'right'}
+				 ,{field: 'contractTotalStr',title: '合同总金额（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				 //,{field: 'thisYearPlan',hiden:'right'}
-				 ,{field: 'thisYearPlanStr',title: '本年度计划完成投资（万元）',align:'right'}
+				 ,{field: 'thisYearPlanStr',title: '本年度计划完成投资（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				 //,{field: 'thisMonthInvest',hiden:'right'}
-				 ,{field: 'thisMonthInvestStr',title: '2月完成投资（万元）',align:'right'}
+				 ,{field: 'thisMonthInvestStr',title: '2月完成投资（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				 //,{field: 'thisYtmTotal',hiden:'right'}
-				 ,{field: 'thisYtmTotalStr',title: '2019年至2月实际完成投资（万元）',align:'right'}
+				 ,{field: 'thisYtmTotalStr',title: '2019年至2月实际完成投资（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				 //,{field: 'investTotal',hiden:'right'}
-				 ,{field: 'investTotalStr',title: '自开工以来累计完成投资（万元）',align:'right'}
+				 ,{field: 'investTotalStr',title: '自开工以来累计完成投资（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				 //,{field: 'balanceTotal',hiden:'right'}
-				 ,{field: 'balanceTotalStr',title: '累计结算工程款额（万元）',align:'right'}
+				 ,{field: 'balanceTotalStr',title: '累计结算工程款额（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				 //,{field: 'payforTotal',hiden:'right'}
-				 ,{field: 'payforTotalStr',title: '工程款累计支付情况（万元）',align:'right'}
+				 ,{field: 'payforTotalStr',title: '工程款累计支付情况（万元）',align:'right',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
+				 }
 				]
 			],
 			rowStyle: function (row, index) {

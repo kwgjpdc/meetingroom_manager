@@ -63,7 +63,8 @@ var TableInit = function () {
 				  }
 				 ,{
 						field: 'contractname',
-						title: '合同名称'
+						title: '合同名称',
+						width: 300
 				  }
 				 ,{
 						field: 'contractnum',
@@ -71,7 +72,11 @@ var TableInit = function () {
 				  }
 				 ,{
 						field: 'amount',
-						title: '合同金额(万元)'
+						align: 'right',
+						title: '合同金额(万元)',
+						formatter:function (value, row, index, field) {
+							return fmoney(value,4);
+						}
 				  }
 				 ,{
 						field: 'durationtime',
@@ -79,6 +84,7 @@ var TableInit = function () {
 				  }
 				 ,{
 						field: 'signtimestr',
+						align: 'center',
 						title: '合同签订日期'
 				  }
 				 ,{
@@ -91,6 +97,7 @@ var TableInit = function () {
 				  }
 				 ,{
 						field: 'statusstr',
+						align: 'center',
 						title: '状态'
 				  }
 				]
