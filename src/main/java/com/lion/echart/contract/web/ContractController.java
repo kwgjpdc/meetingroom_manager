@@ -47,16 +47,20 @@ public class ContractController {
 	
 	//获取合同签订列表数据
 	@RequestMapping(value = "/contract/contractSignedListGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> contractSignedListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", null);
+	public @ResponseBody List<Map<String, Object>> contractSignedListGetData(String contractname,String suboffice, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("subofficeid", suboffice);
+		searchmap.put("contractname", contractname);
+		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
 		return list;
 	}
 	
 	//通过分局ID获取合同签订列表数据
 	@RequestMapping(value = "/contract/contractSignedListGetDatBySuboffice.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> contractSignedListGetDatBySuboffice(Integer subofficeid, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public @ResponseBody List<Map<String, Object>> contractSignedListGetDatBySuboffice(String contractname,Integer suboffice, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		Map<String, Object> searchmap = new HashMap<String, Object>();
-		searchmap.put("subofficeid", subofficeid);
+		searchmap.put("subofficeid", suboffice);
+		searchmap.put("contractname", contractname);
 		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
 		return list;
 	}
