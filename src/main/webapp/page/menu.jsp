@@ -36,6 +36,7 @@
 	                    <li><a href="<%=fule %>contract/contractExecuteList.web" >合同执行</a></li>
 	                </ul>
 	            </li>
+	            <!-- 
 	            <li id="projectli" > 
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
 	                	项目管理 <b class="caret"></b>
@@ -59,6 +60,8 @@
 	                    <li><a href="#">付费管理</a></li>
 	                </ul>
 	            </li>
+	            <li><a href="#">流程管理</a></li>
+	             -->
 	            <li id="reportli" >
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	                	统计报表<b class="caret"></b>
@@ -76,7 +79,6 @@
 	                    <li><a href="#">已签合同执行情况统计</a></li>
 	                </ul>
 				</li>
-	            <li><a href="#">流程管理</a></li>
 	            <li>
 	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 	                	系统管理 <b class="caret"></b>

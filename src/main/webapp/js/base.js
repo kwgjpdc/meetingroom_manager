@@ -8,7 +8,7 @@ $(document).ready(function(){
 	}else{
 		$("#mainpli").addClass("active");
 	}
-	
+	$(".icon-arrow-right").addClass("icon-angle-right");
 });
 
 
@@ -47,7 +47,7 @@ function closeloding(){
 }
 
 function fmoney(s, n) {
-	if(s == null || s == undefined || s == '') return '';
+	if(s == null || s == undefined || s == '') return '0.00';
 	
 	while((""+s).indexOf(",") != -1){
 		s = s.replace(",","");

@@ -126,7 +126,8 @@ public class FinancingController {
 			HttpServletResponse resp, HttpSession session,String month,
 			String year1, String year2, String year3) throws IOException {
 		List<Map<String, Object>> list = null;
-		if(month == null) {
+		if(month != null && year1 != null && year2 != null && year3 != null && 
+				!month.isEmpty() && !year1.isEmpty() && !year2.isEmpty() && !year3.isEmpty()) {
 			HashMap<String, Object> param = new HashMap<String, Object>();
 			//报告日
 			param.put("year1", year1);
