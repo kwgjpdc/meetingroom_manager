@@ -8,7 +8,7 @@
 .title{
 	position:absolute;
 	top:50px;
-	left:100px;
+	left:200px;
 	font-size: 90px;
 	font-weight: bolder;	
 	font-family: '华文行楷';
@@ -17,5 +17,5 @@
 .row{
 	position:absolute;
 	top:250px;
-	left:100px;
+	left:200px;
 }

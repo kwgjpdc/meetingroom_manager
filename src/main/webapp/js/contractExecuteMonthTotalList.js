@@ -13,7 +13,14 @@ $(document).ready(function(){
 	$("#pieEchartdiv1").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 	$("#pieEchartdiv2").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
+	
+	$("#formSearch").submit(function(e){
+	    e.preventDefault();//必须添加，不然就重复提交
+	});
 });
+function setFileName(){
+	$("#excelbtn").attr("lang",$("#year").val()+"年"+$("#month").val()+"月"+"合同执行月统计表");
+}
 function changeView(){
 	if($("#btnLabber").html() == '图表视图'){
 		$("#btnLabber").html('列表视图');

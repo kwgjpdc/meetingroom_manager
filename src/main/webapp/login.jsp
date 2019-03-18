@@ -13,6 +13,12 @@ String fule = base + "" + contextPath + "/";
 <link rel="stylesheet" type="text/css" href="<%=fule%>/css/base.css?ts=<%=request.getAttribute("ts") %>" />
 <link rel="stylesheet" type="text/css" href="<%=fule%>/css/login.css?ts=<%=request.getAttribute("ts") %>" />
 <script type="text/javascript" src="<%=fule%>/js/jquery-2.1.3.min.js"></script>
+
+<style type="text/css">
+	.control-label{
+		font-size: 20px;
+	}
+</style>
 </head>
 <body style="height:100%;">
 	<div class="bgdiv" style="background-image:url('/echart/image/loginbk1.jpg');" >
@@ -39,12 +45,12 @@ String fule = base + "" + contextPath + "/";
 					</div>
 					<div class="col-lg-5" style="padding-top:6px;" >
 						<span id="ckcode" ></span>
-						<a href="javascript:void(0);" onclick="changeImg()" >换一张</a>
+						<a style="color:red;" href="javascript:void(0);" onclick="changeImg()" >换一张</a>
 					</div>
 				</div>
 				
 				<div class="col-lg-9 col-lg-offset-4">
-					<button type="submit" class="btn btn-primary" style="width:50%" >登录</button>
+					<button type="submit" class="btn btn-primary" style="width:50%;" >登录</button>
 				</div>
 			</form>
 		</div>
