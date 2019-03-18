@@ -24,12 +24,21 @@
 		<if test="password != null and password != ''">
 			and password = #{password} 
 		</if>
+		<if test="userid != null and userid != 0">
+			and id = #{userid} 
+		</if>
 	</select>
 	<!-- 用户插入 -->
 	<insert id="insertUser" parameterType="com.lion.echart.system.entity.UserEntity">
            insert into t_sys_user(subofficeid, username, realname, password, sex, email, createdate, remark, priority, status, isdisabled, operuser, operdate) 
                values(${subofficeid},#{username}, #{realname}, #{password}, #{sex}, #{email}, #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
    </insert>
+   <update id="updateUser" parameterType="com.lion.echart.system.entity.UserEntity">
+   		update t_sys_user 
+   		set subofficeid = #{subofficeid},username = #{username},realname = #{realname},password = #{password},
+   		sex = #{sex},email = #{email}
+   		where id=#{id}
+   </update>
    <!-- 通过用户或角色查询用户角色表数据 -->
    <select id="getUserRoleListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 

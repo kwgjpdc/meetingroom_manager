@@ -37,14 +37,15 @@ var TableInit = function () {
 			columns: [
 				[
 				  { checkbox: true}
-				 ,{field: 'username',title: '用户名'}
-				 ,{field: 'realname',title: '真实姓名'}
-				 ,{field: 'subofficename',title: '所属分局'}
-				 ,{field: 'email',title: '邮箱'}
-				 ,{field: 'createdateStr',title: '创建时间'},
+				 ,{field: 'username',width : 100,title: '用户名'}
+				 ,{field: 'realname',width : 150,title: '真实姓名'}
+				 ,{field: 'subofficename',width : 100,title: '所属分局'}
+				 ,{field: 'email',width : 150,title: '邮箱'}
+				 ,{field: 'createdateStr',width : 100,title: '创建时间'},
 				  {field: '',align: 'center',title: '操作' ,width : 150,
 						formatter:function (value, row, index, field) {
 					        return [
+					        	'<button type="button" onclick="userEdit('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">修改</button>',
 							      '<button type="button" onclick="roleAssign('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">角色分配</button>'
 							      ].join('');
 					    }
@@ -77,4 +78,8 @@ var TableInit = function () {
 //角色分配
 function roleAssign(_id){
 	window.location.href = $("#fule").val()+'user/userRoleAssign.web?userid='+_id;
+}
+//修改用户
+function userEdit(_id){
+	window.location.href = $("#fule").val()+'user/userEdit.web?userid='+_id;
 }
