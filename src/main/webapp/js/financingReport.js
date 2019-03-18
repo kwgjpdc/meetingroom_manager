@@ -1,6 +1,8 @@
 $(document).ready(function(){
 	$("#reportDate").datetimepicker({
-		startView:1,
+		autoclose:true,
+		minView:2,
+		startView:2,
 		language:'zh-CN'
 	});
 	$("#btn_query").click(initDateTable);
@@ -53,6 +55,10 @@ function initDateTable(){
 				sortOrder: "asc",                   //排序方式
 				queryParamsType: "limit", 			//参数格式,发送标准的RESTFul类型的参数请求  
 				queryParams:{
+					year1:namee1,
+					year2:namee2,
+					year3:_year,
+					month:arrstr[1],
 					reportDate:$("#reportDate").val()
 				},//传递参数（*）
 				sidePagination: "server",			//分页方式：client客户端分页，server服务端分页（*）
@@ -74,32 +80,36 @@ function initDateTable(){
 				//如果没有设置height属性，表格自动根据记录条数觉得表格高度
 				columns: [
 					[
-					  {title: '序号',field:'id',align:'center',width:50,rowspan:2},
-					  {field: 'costtypeStr',align: 'center',title: '支付款项' ,valign : "middle",width : 100,rowspan:2},
-					  {field: '',align: 'center',title: '支付金额' ,valign : "middle",colspan:5},
+					  {title: '序号',field:'id',align:'center',width:50,rowspan:2,
+						  formatter:function (value, row, index, field) {
+							  return index+1;
+						  }
+					  },
+					  {field: 'costTypeStr',align: 'center',title: '支付款项' ,width : 100,rowspan:2},
+					  {field: '',align: 'center',title: '支付金额' ,colspan:5},
 					],
 					[
-					  {field: 'moneyyi',align: 'center',title: namee1+'年' ,valign : "right",width : 100,
+					  {field: 'moneyyi',align: 'center',title: namee1+'年' ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneyer',align: 'center',title: namee2+'年' ,valign : "right",width : 100,
+					  {field: 'moneyer',align: 'center',title: namee2+'年' ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneysan',align: 'center',title: namee3 ,valign : "right",width : 100,
+					  {field: 'moneysan',align: 'center',title: namee3 ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneysi',align: 'center',title: namee4 ,valign : "right",width : 100,
+					  {field: 'moneysi',align: 'center',title: namee4 ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneys',align: 'center',title: '累计' ,valign : "right",width : 100,
+					  {field: 'moneys',align: 'center',title: '累计' ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
