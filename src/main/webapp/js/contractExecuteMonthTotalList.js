@@ -17,7 +17,21 @@ $(document).ready(function(){
 	$("#formSearch").submit(function(e){
 	    e.preventDefault();//必须添加，不然就重复提交
 	});
+	
+	$("#btn_query").click(reloadtable);
 });
+
+function reloadtable(){
+	$.ajax({
+		url: $("#fule").val()+'contract/contractExecuteMonthTotalListGetDat.json',
+		data: $("#formSearch").serializeObj(),
+		type: "post",
+		dataType:"json",
+		success : function(json) {
+			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
+}
 function setFileName(){
 	$("#excelbtn").attr("lang",$("#year").val()+"年"+$("#month").val()+"月"+"合同执行月统计表");
 }
@@ -40,6 +54,7 @@ function changeView(){
 	}
 }
 function validatef(){
+	/*
 	$('#formSearch').bootstrapValidator({
 		message: 'This value is not valid',
 		feedbackIcons: {
@@ -82,6 +97,7 @@ function validatef(){
 			}
 		}
 	});
+	*/
 }
 function echartinitpie(){
 	var rows = $('#t_datagrid').bootstrapTable('getData');
@@ -198,10 +214,7 @@ var TableInit = function () {
 			sortable: false,                     //是否启用排序
 			sortOrder: "asc",                   //排序方式
 			queryParamsType: "limit", 			//参数格式,发送标准的RESTFul类型的参数请求  
-			queryParams:{
-				year:$("#year").val(),
-				month:$("#month").val()
-			},//传递参数（*）
+			queryParams:$("#formSearch").serialize(),//传递参数（*）
 			sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
 			pageNumber: 1,                       //初始化加载第一页，默认第一页
 			pageSize: 10,                       //每页的记录行数（*）
@@ -277,13 +290,5 @@ var TableInit = function () {
 		});
 	};
 	
-	//得到查询的参数
-	oTableInit.queryParams = function (params) {
-		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
-			limit: params.limit,   //页面大小
-			offset:params.offset
-		};
-		return temp;
-	};
 	return oTableInit;
 };
