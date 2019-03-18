@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-18 10:11:32
+Date: 2019-03-18 10:18:48
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -132,7 +132,6 @@ CREATE TABLE `t_p_monthtotal` (
 -- ----------------------------
 -- Records of t_p_monthtotal
 -- ----------------------------
-INSERT INTO `t_p_monthtotal` VALUES ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '2019-03-11 18:02:35');
 
 -- ----------------------------
 -- Table structure for `t_sys_menu`
@@ -152,7 +151,7 @@ CREATE TABLE `t_sys_menu` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_menu
@@ -163,6 +162,10 @@ INSERT INTO `t_sys_menu` VALUES ('3', '财务填报', 'financing/financingList.w
 INSERT INTO `t_sys_menu` VALUES ('4', '合同管理', null, '1', '0', '2019-03-14 21:23:43', null, '2', '1', '0', '1', '2019-03-14 21:23:35');
 INSERT INTO `t_sys_menu` VALUES ('5', '合同签订', 'contract/contractSignedList.web', '0', '4', '2019-03-14 21:24:55', null, '0', '1', '0', '1', '2019-03-14 21:25:00');
 INSERT INTO `t_sys_menu` VALUES ('6', '合同执行', 'contract/contractExecuteList.web', '0', '4', '2019-03-14 21:42:11', null, '0', '1', '0', '1', '2019-03-14 21:42:08');
+INSERT INTO `t_sys_menu` VALUES ('10', '系统管理', '', '1', '0', '2019-03-15 11:00:48', '', '0', '1', '0', '1', '2019-03-15 11:00:48');
+INSERT INTO `t_sys_menu` VALUES ('11', '用户管理', 'user/userList.web', '0', '10', '2019-03-15 11:02:50', '', '0', '1', '0', '1', '2019-03-15 11:02:50');
+INSERT INTO `t_sys_menu` VALUES ('12', '角色管理', 'role/roleList.web', '0', '10', '2019-03-15 11:03:14', '', '0', '1', '0', '1', '2019-03-15 11:03:14');
+INSERT INTO `t_sys_menu` VALUES ('13', '菜单管理', 'menu/menuList.web', '0', '10', '2019-03-15 11:03:38', '', '0', '1', '0', '1', '2019-03-15 11:03:38');
 
 -- ----------------------------
 -- Table structure for `t_sys_role`
@@ -179,13 +182,14 @@ CREATE TABLE `t_sys_role` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role
 -- ----------------------------
 INSERT INTO `t_sys_role` VALUES ('1', '超级管理员', '2019-03-14 17:12:45', null, '0', '1', '0', '1', '2019-03-14 17:13:02');
 INSERT INTO `t_sys_role` VALUES ('2', '分局用户', '2019-03-14 17:17:20', null, '0', '1', '0', '1', '2019-03-14 17:17:34');
+INSERT INTO `t_sys_role` VALUES ('10', '测试角色', '2019-03-15 10:28:52', '', '0', '1', '0', '1', '2019-03-15 10:28:52');
 
 -- ----------------------------
 -- Table structure for `t_sys_role_menu`
@@ -196,11 +200,13 @@ CREATE TABLE `t_sys_role_menu` (
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   `menuid` int(11) NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role_menu
 -- ----------------------------
+INSERT INTO `t_sys_role_menu` VALUES ('10', '1', '1');
+INSERT INTO `t_sys_role_menu` VALUES ('11', '1', '2');
 
 -- ----------------------------
 -- Table structure for `t_sys_user`
@@ -221,12 +227,14 @@ CREATE TABLE `t_sys_user` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_user
 -- ----------------------------
 INSERT INTO `t_sys_user` VALUES ('1', 'admin', '管理员', '1', 'M', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
+INSERT INTO `t_sys_user` VALUES ('10', 'tangxian', '唐显', '123456', 'M', 'tangxianmail@vip.qq.com', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
+INSERT INTO `t_sys_user` VALUES ('11', 'xiaohong', '小红', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
 
 -- ----------------------------
 -- Table structure for `t_sys_user_role`
@@ -237,11 +245,16 @@ CREATE TABLE `t_sys_user_role` (
   `userid` int(11) NOT NULL COMMENT '用户ID',
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_user_role
 -- ----------------------------
+INSERT INTO `t_sys_user_role` VALUES ('16', '10', '2');
+INSERT INTO `t_sys_user_role` VALUES ('17', '10', '10');
+INSERT INTO `t_sys_user_role` VALUES ('18', '11', '1');
+INSERT INTO `t_sys_user_role` VALUES ('22', '1', '2');
+INSERT INTO `t_sys_user_role` VALUES ('23', '1', '10');
 
 -- ----------------------------
 -- Table structure for `t_s_code`
