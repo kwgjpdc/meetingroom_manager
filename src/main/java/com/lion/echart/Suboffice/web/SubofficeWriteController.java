@@ -82,4 +82,73 @@ public class SubofficeWriteController {
 		}
 		return obj.toString();
 	}
+	
+	//分局填报提交
+	@RequestMapping(value = "subofficewrite/submitSubofficewrite.json",method=RequestMethod.POST)
+	public void submitSubofficewrite(SubofficeWriteView list
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			ArrayList<Long> ids = new ArrayList<Long>();
+			if(list != null && list.getList() != null) {
+				for (int i = 0; i < list.getList().size(); i++) {
+					if(list.getList().get(i).getId() != null)
+					ids.add(list.getList().get(i).getId());
+				}
+				
+				if(ids.isEmpty()) {
+					obj.put("msgType", 0);
+					obj.put("message", "请先保存数据");
+				}else {
+					HashMap<String, Object> param = new HashMap<String, Object>();
+					param.put("ids", ids);
+					List<Map<String, Object>> checkresults = 
+							baseService.queryList("comle.SubofficeWrite.subofficewritecheck", param);
+					
+					boolean hasError = false;
+					if(checkresults != null && !checkresults.isEmpty()) {
+						StringBuffer sb = new StringBuffer();
+						for (int i = 0; i < checkresults.size(); i++) {
+							
+							if(!checkresults.get(i).get("yearrealityinvest").equals(checkresults.get(i).get("fornowsumyear"))
+									|| !checkresults.get(i).get("finishinvest").equals(checkresults.get(i).get("fornowall"))) {
+								sb.append("<br/>合同："+checkresults.get(i).get("contractname"));
+								if(!checkresults.get(i).get("yearrealityinvest").equals(checkresults.get(i).get("fornowsumyear"))){
+									sb.append("[今年累计完成："+checkresults.get(i).get("yearrealityinvest")+"]与实际数据["+
+											checkresults.get(i).get("fornowsumyear")+"]不符，请重新填写");
+								}
+								if(!checkresults.get(i).get("finishinvest").equals(checkresults.get(i).get("fornowall"))) {
+									sb.append(";[合同累计完成："+checkresults.get(i).get("finishinvest")+"]与实际数据["+
+											checkresults.get(i).get("fornowall")+"]不符，请重新填写");
+								}
+								hasError = true;	
+							}
+
+						}
+						
+						if(hasError) {
+							obj.put("msgType", 0);
+							obj.put("message", sb.toString());
+						}else {
+							//TODO 请完善提交逻辑
+							//baseService.insertOupdates("comle.SubofficeWrite.submitSubofficewrite", list.getList());
+							obj.put("msgType", 1);
+						}
+					}else {
+						obj.put("msgType", 0);
+						obj.put("message", "数据校验发生异常，请联维护人员");
+					}
+				}
+			}else {
+				obj.put("msgType", 0);
+				obj.put("message", "没有数据");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
+	}
 }

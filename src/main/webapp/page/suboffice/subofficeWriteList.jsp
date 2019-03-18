@@ -16,6 +16,7 @@ String fule = base + "" + contextPath + "/";
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-editable.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-datetimepicker.min.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/the-modal.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/financingListDetail.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
@@ -23,7 +24,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/modal.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteList.js?ts=<%=request.getAttribute("ts") %>"></script>
 <style type="text/css">
@@ -41,6 +42,9 @@ String fule = base + "" + contextPath + "/";
             	填报管理 / 分局填报 
             	<span id="operinfo" >编辑数据后，请执行保存操作，以免数据丢失造成不便！</span >
             	<div id="toolbar" class="btn-group btn-group-right" >
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="showSubmit()">
+		                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>提交
+		            </button>
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
@@ -53,9 +57,10 @@ String fule = base + "" + contextPath + "/";
 		            </button>
 		        </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" style="display:none;" >
                 <form id="formSearch" class="form-horizontal">
                     <input type="hidden" id="subofficeid">
+                    <!-- 
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="txt_search_statu">合同名称</label>
                         <div class="col-sm-2">
@@ -65,6 +70,7 @@ String fule = base + "" + contextPath + "/";
                             <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
                         </div>
                     </div>
+                     -->
                 </form>
             </div>
         </div>       

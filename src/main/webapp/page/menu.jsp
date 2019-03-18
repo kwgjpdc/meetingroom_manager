@@ -142,8 +142,9 @@
             <div class="modal-body" id="infobody" style="text-align:center;font-size: large;" >提示消息</div>
             <div class="modal-footer">
                 <button id="leftBtn" type="button" class="btn btn-default" onclick="closeloding()" data-dismiss="modal">关闭</button>
-                <button id="rightBtn1" type="button" class="btn btn-primary" onclick="saveFun()" >确定</button>
-                <button id="rightBtn2" sytle="display:none;" type="button" class="btn btn-primary" onclick="deleteFun()" >确定</button>
+                <button id="rightBtn2" type="button" class="rightBtn btn btn-primary" onclick="saveFun()" >确定</button>
+                <button id="rightBtn3" sytle="display:none;" type="button" class="rightBtn btn btn-primary" onclick="deleteFun()" >确定</button>
+                <button id="rightBtn4" sytle="display:none;" type="button" class="rightBtn btn btn-primary" onclick="submitFun()" >确定</button>
             </div>
         </div>
     </div>

@@ -64,4 +64,21 @@
     		year = #{year},month = #{month},priority = #{priority},isdisabled = #{isdisabled},operuser = #{operuser},operdate = #{operdate}
     	where subofficewriteid = #{subofficewriteid}
     </update>
+    
+    <!-- 校验当月提报的数据 -->
+	<select id="subofficewritecheck" parameterType="java.util.Map" resultType="java.util.Map" >
+		select ct.contractname,yearrealityinvest,finishinvest,
+			(select sum(monthrealityinvest) from t_s_subofficewrite where contractid = sw.contractid 
+				and year = sw.year and month <![CDATA[<=]]> sw.month) as fornowsumyear,
+			(select sum(monthrealityinvest) from t_s_subofficewrite where contractid = sw.contractid 
+				and (year <![CDATA[<]]> sw.year or (year = sw.year and month <![CDATA[<=]]> sw.month))) as fornowall
+		  from t_s_subofficewrite sw 
+		join t_c_contract ct on sw.contractid = ct.contractid
+		<if test="ids.size()!=0">
+			and sw.subofficewriteid in
+			<foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+			</foreach>
+		</if>
+	</select>
 </mapper>

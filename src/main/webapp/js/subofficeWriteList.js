@@ -27,7 +27,7 @@ var TableInit = function () {
 			toolbar: false,                		//工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
 			cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-			pagination: true,                   //是否显示分页（*）
+			pagination: false,                   //是否显示分页（*）
 			sortable: false,                     //是否启用排序
 			sortOrder: "asc",                   //排序方式
 			queryParams: oTableInit.queryParams,//传递参数（*）
@@ -38,26 +38,40 @@ var TableInit = function () {
 			search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
 			strictSearch: false,
 			showColumns: false,                  //是否显示所有的列
+			showFooter: true,		                  
 			showRefresh: false,                  //是否显示刷新按钮
 			minimumCountColumns: 2,             //最少允许的列数
 			clickToSelect: true,                //是否启用点击选中行
-			//height: 700,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
 			uniqueId: "no",                     //每一行的唯一标识，一般为主键列
 			showToggle: false,                    //是否显示详细视图和列表视图的切换按钮
 			cardView: false,                    //是否显示详细视图
 			detailView: false,                   //是否显示父子表
 			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
+			onLoadSuccess: function(data){
+	            var footths = $(".fixed-table-footer").find("th");
+	            var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
+	            
+	            if(bodytds != undefined){
+	            	for(var i = 0; i < bodytds.length; i++){
+	            		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
+	            	}
+	            }
+	        },
 			columns: [
 				[
 				  {                    
                     checkbox: true,
                     valign : "middle",
+                    width : 40,
                     formatter:function (value, row, index, field) {
                     	var defaultValue = row["subofficewriteid"];
 						if(defaultValue==undefined){
 							defaultValue="0";
 						}
 						return '<input type="hidden" name="list['+index+'].subofficewriteid" value="'+defaultValue+'" />'; 
+				    },
+				    footerFormatter: function (value) {
+				    	return '-';
 				    },
                     rowspan: 2
 	              },
@@ -73,7 +87,10 @@ var TableInit = function () {
 						var indexSelect = subofficedataStr.indexOf('<option value="'+value+'">');
 						subofficedataStr = subofficedataStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
 				        return '<select readonly="true" name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+subofficedataStr+'</select>';
-					}
+					},
+				    footerFormatter: function (value) {
+				    	return '-';
+				    }
 				  },
 				  {
 					field: 'contractid',
@@ -98,7 +115,10 @@ var TableInit = function () {
 							});
 						}
 						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" >'+strHtml+'</select>';
-					}
+					},
+				    footerFormatter: function (value) {
+				    	return '-';
+				    }
 				  },
 				  {
 					field: 'contractnum',
@@ -109,6 +129,9 @@ var TableInit = function () {
 					rowspan: 2,
 					formatter:function (value, row, index, field) {
 						return '<span id="contractnum'+index+'">' + (value || "") + '</span>';
+				    },
+				    footerFormatter: function (value) {
+				    	return '-';
 				    }
 				  },
 				  {
@@ -120,6 +143,9 @@ var TableInit = function () {
 					formatter:function (value, row, index, field) {
 				        return '<div id="constructioncontent_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
 						'<input type="hidden" value="'+(value || "")+'" id="constructioncontent'+index+'" name="list['+index+'].constructioncontent" />';
+				    },
+				    footerFormatter: function (value) {
+				    	return '-';
 				    },
 					rowspan: 2
 				  },
@@ -136,6 +162,9 @@ var TableInit = function () {
 						}
 						laterinitbegindate(index);
 				        return '<input name="list['+index+'].begindate" readonly="readonly" style="width: 90px;" type="text" value="'+value+'" id="begindate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" >';
+				    },
+				    footerFormatter: function (value) {
+				    	return '-';
 				    }
 				  },
 				  {
@@ -151,6 +180,9 @@ var TableInit = function () {
 						}
 						laterinitplanfinishdate(index);
 				        return '<input name="list['+index+'].planfinishdate" readonly="readonly" style="width: 90px;" type="text" value="'+value+'" id="planfinishdate'+index+'" class="datetimepicker" data-date-format="yyyy-mm-dd" >';
+				    },
+				    footerFormatter: function (value) {
+				    	return '合计';
 				    }
 				  },
 				  {
@@ -162,6 +194,13 @@ var TableInit = function () {
 				        return '<div id="budgetinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 						'<input type="hidden" value="'+(value || "")+'" id="budgetinvest'+index+'" name="list['+index+'].budgetinvest" />';
 				    },
+				    footerFormatter: function (value) {
+				        var summ = 0;
+				        for (var i in value) {
+				        	summ += parseFloat(value[i].budgetinvest);
+				        }
+				        return fmoney(summ,4);
+				    },
 					rowspan: 2
 				  },
 				  {
@@ -172,27 +211,34 @@ var TableInit = function () {
 						formatter:function (value, row, index, field) {
 							return '<span id="contractamount'+index+'" >' + fmoney(value,4) + '</span>';
 						},
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].contractamount);
+					        }
+					        return fmoney(summ,4);
+					    },
 						rowspan: 2
 				  },
 				  {
 					field: '',
 					align: 'center',
 					title: '投资完成情况' ,
-					width : 280,
+					width : 270,
 					colspan: 2
 				  },
 				  {
 					field: '',
 					align: 'center',
 					title: '计划执行情况' ,
-					width : 500,
+					width : 600,
 					colspan: 5
 				  },
 				  {
 					field: '',
 					align: 'center',
 					title: '累计完成实物工程量' ,
-					width : 300,
+					width : 350,
 					colspan: 3
 				  },
 				  {
@@ -224,7 +270,7 @@ var TableInit = function () {
 					align: 'center',
 					valign : "middle",
 					title: '总体形象进度（已完成的单项工程、正在进行的单项工程，完成工程占总工程的百分比）' ,
-					width : 950,
+					width : 1200,
 					formatter:function (value, row, index, field) {
 						return '<div id="overallimageprogress_'+index+'" contenteditable="true">' + (value || "") + '</div>' + 
 						'<input type="hidden" value="'+(value || "")+'" id="overallimageprogress'+index+'" name="list['+index+'].overallimageprogress" />';
@@ -235,11 +281,18 @@ var TableInit = function () {
 				[{
 						field: 'finishinvest',
 						align: 'right',
-						title: '自开工以来累计<br/>完成投资<br/>（万元）',
-						width : 120,
+						title: '自开工以来累计<br/>完成投资（万元）',
+						width : 190,
 						formatter:function (value, row, index, field) {
 							return '<div id="finishinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="finishinvest'+index+'" name="list['+index+'].finishinvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].finishinvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
@@ -250,56 +303,98 @@ var TableInit = function () {
 						formatter:function (value, row, index, field) {
 							return '<div id="surplusinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="surplusinvest'+index+'" name="list['+index+'].surplusinvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].surplusinvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
 						field: 'yearplaninvest',
 						align: 'right',
-						title: '本年度计划<br/>完成投资<br/>（万元）' ,
-						width : 100,
+						title: '本年度计划完成<br/>投资（万元）' ,
+						width : 120,
 						formatter:function (value, row, index, field) {
 							return '<div id="yearplaninvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="yearplaninvest'+index+'" name="list['+index+'].yearplaninvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].yearplaninvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
 						field: 'monthplaninvest',
 						align: 'right',
-						title: '本月计划<br/>完成投资<br/>（万元）',
-						width : 100,
+						title: '本月计划完成<br/>投资（万元）',
+						width : 120,
 						formatter:function (value, row, index, field) {
 							return '<div id="monthplaninvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4)+ '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="monthplaninvest'+index+'" name="list['+index+'].monthplaninvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].monthplaninvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
 						field: 'yearrealityinvest',
 						align: 'right',
-						title: '本年度实际<br/>完成投资<br/>（万元）',
-						width : 100,
+						title: '本年度实际完成<br/>投资（万元）',
+						width : 120,
 						formatter:function (value, row, index, field) {
 							return '<div id="yearrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="yearrealityinvest'+index+'" name="list['+index+'].yearrealityinvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].yearrealityinvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
 						field: 'monthrealityinvest',
 						align: 'right',
-						title: '本月实际<br/>完成投资<br/>（万元）',
-						width : 100,
+						title: '本月实际完成<br/>投资（万元）',
+						width : 120,
 						formatter:function (value, row, index, field) {
 							return '<div id="monthrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="monthrealityinvest'+index+'" name="list['+index+'].monthrealityinvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].monthrealityinvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
 						field: 'tendayrealityinvest',
 						align: 'right',
-						title: '本旬实际<br/>完成投资<br/>（万元）',
-						width : 100,
+						title: '本旬实际完成<br/>投资（万元）',
+						width : 120,
 						formatter:function (value, row, index, field) {
 							return '<div id="tendayrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="tendayrealityinvest'+index+'" name="list['+index+'].tendayrealityinvest" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].tendayrealityinvest);
+					        }
+					        return fmoney(summ,4);
 					    }
 				  }
 				 ,{
@@ -310,6 +405,13 @@ var TableInit = function () {
 						formatter:function (value, row, index, field) {
 							return '<div id="earthwork_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))">' + fmoney(value,2) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="earthwork'+index+'" name="list['+index+'].earthwork" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].earthwork);
+					        }
+					        return fmoney(summ,2);
 					    }
 				  }
 				 ,{
@@ -320,20 +422,35 @@ var TableInit = function () {
 						formatter:function (value, row, index, field) {
 							return '<div id="stonework_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))">' + fmoney(value,2) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="stonework'+index+'" name="list['+index+'].stonework" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].stonework);
+					        }
+					        return fmoney(summ,2);
 					    }
 				  }
 				 ,{
 						field: 'beton',
 						align: 'right',
 						title: '混凝土<br/>（万立方米）',
-						width : 100,
+						width : 150,
 						formatter:function (value, row, index, field) {
 							return '<div id="beton_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),2))">' + fmoney(value,2) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="beton'+index+'" name="list['+index+'].beton" />';
+					    },
+					    footerFormatter: function (value) {
+					        var summ = 0;
+					        for (var i in value) {
+					        	summ += parseFloat(value[i].beton);
+					        }
+					        return fmoney(summ,2);
 					    }
 				  }
 				]
 			],
+			//隔行变色
 			rowStyle: function (row, index) {
 				var classesArr = ['oddn', 'evenn'];
 				var strclass = "";
@@ -343,7 +460,7 @@ var TableInit = function () {
 					strclass = classesArr[1];
 				}
 				return { classes: strclass };
-			},//隔行变色
+			}
 		});
 	};
 	
@@ -528,6 +645,30 @@ function saveFun(){
 			closeloding();
 			modalTitle("操作成功",1);
 			window.location.reload();
+		},error:function(data){
+			closeloding();
+			modalTitle("操作失败，请重试",1);
+		}
+	});
+}
+function showSubmit(){
+	modalTitle("是否确定进行校验并提交当月数据",4);
+}
+function submitFun(){
+	showloding();
+	$.ajax({
+		url: $("#fule").val()+'subofficewrite/submitSubofficewrite.json',
+		type: 'post',
+		data: $("#editForm").serialize(),
+		dataType: "json",
+		success: function (data) {
+			console.log(data)
+			if(data.msgType == 1){
+				modalTitle("操作成功",1);
+				window.location.reload();
+			}else{
+				modalTitle(data.message,1);
+			}
 		},error:function(data){
 			closeloding();
 			modalTitle("操作失败，请重试",1);

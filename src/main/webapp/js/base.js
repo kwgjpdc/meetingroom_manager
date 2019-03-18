@@ -42,21 +42,16 @@ function doexcel(_this){
 
 function modalTitle(_msg,_type){
 	$("#infobody").html(_msg);
-	$("#rightBtn1").hide();
-	$("#rightBtn2").hide();
+	$(".rightBtn").hide();
 	$("#leftBtn").show();
-
-	if(_type == 3){
-		$("#rightBtn2").show();
-	}if(_type == 2){
-		$("#rightBtn1").show();
+	if(_type != ''){
+		$("#rightBtn"+_type).show();
 	}
 	$('#show-modal').modal().open();
 }
 function showloding(){
 	$("#leftBtn").hide();
-	$("#rightBtn1").hide();
-	$("#rightBtn2").hide();
+	$(".rightBtn").hide();
 	$("#infobody").html('<img width="50" src="'+$("#fule").val()+'/image/loading.gif" />处理中，请稍等！');
 	$('#show-modal').modal().open();
 }
