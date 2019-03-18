@@ -19,7 +19,9 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/userList.js?ts=<%=request.getAttribute("ts") %>"></script>
-
+<style type="text/css">
+	.table {table-layout:fixed;}
+</style>
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
 	<div id="head" >

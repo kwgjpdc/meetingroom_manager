@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,12 +63,40 @@ public class UserController {
 	
 	//用户添加保存
 	@RequestMapping(value = "/user/userSave.json",method=RequestMethod.POST)
-	public @ResponseBody String userSave(String username,String realname,String sex,String email,String password,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public @ResponseBody String userSave(String username,String realname,String sex,String email,String password,String subofficeid,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
-			UserEntity user = new UserEntity(username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
+			UserEntity user = new UserEntity(null,Long.valueOf(subofficeid), username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
 			baseService.insertObject("comle.user.insertUser", user);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
+	}
+	
+	//用户信息修改列表页 
+	@RequestMapping(value = "/user/userEdit.web",method=RequestMethod.GET)
+	public String userEdit(String userid,HttpServletRequest req,HttpServletResponse resp, HttpSession session,Model model) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("userid", userid);
+		UserEntity user = (UserEntity)baseService.queryObject("comle.user.getUserData", searchmap);
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		model.addAttribute("user", user);
+		return "/page/system/userEdit";
+	}
+	
+	//用户添加保存
+	@RequestMapping(value = "/user/userEditSave.json",method=RequestMethod.POST)
+	public @ResponseBody String userEditSave(String userid,String username,String realname,String sex,String email,String password,String subofficeid,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
+		JSONObject obj = new JSONObject();
+		try {
+			UserEntity user = new UserEntity(Long.valueOf(userid),Long.valueOf(subofficeid), username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
+			baseService.updateObject("comle.user.updateUser", user);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();

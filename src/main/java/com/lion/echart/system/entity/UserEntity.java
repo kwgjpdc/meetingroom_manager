@@ -17,8 +17,8 @@ public class UserEntity implements Serializable {
 	private String email;
 	private Date createdate;
 	private String remark;
-	private int priority;
-	private int status;
+	private Integer priority;
+	private Integer status;
 	private String isdisabled;
 	private String operuser;
 	private Date operdate;
@@ -26,9 +26,13 @@ public class UserEntity implements Serializable {
 	public UserEntity(){
 		
 	}
-	public UserEntity(String username, String realname, String password, String sex, String email, Date createdate,
-			String remark, int priority, int status, String isdisabled, String operuser, Date operdate) {
+
+	public UserEntity(Long id, Long subofficeid, String username, String realname, String password, String sex,
+			String email, Date createdate, String remark, Integer priority, Integer status, String isdisabled,
+			String operuser, Date operdate) {
 		super();
+		this.id = id;
+		this.subofficeid = subofficeid;
 		this.username = username;
 		this.realname = realname;
 		this.password = password;
@@ -42,6 +46,7 @@ public class UserEntity implements Serializable {
 		this.operuser = operuser;
 		this.operdate = operdate;
 	}
+
 	public Long getSubofficeid() {
 		return subofficeid;
 	}
@@ -96,18 +101,23 @@ public class UserEntity implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getPriority() {
+	
+	public Integer getPriority() {
 		return priority;
 	}
-	public void setPriority(int priority) {
+
+	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
-	public int getStatus() {
+
+	public Integer getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
 	public String getIsdisabled() {
 		return isdisabled;
 	}
