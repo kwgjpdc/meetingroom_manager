@@ -124,4 +124,21 @@ public class ContractController {
 		}
 		return obj.toString();
 	}
+	
+	//合同月度统计表列表页 
+	@RequestMapping(value = "/contract/contractExecuteMonthTotalList.web",method=RequestMethod.GET)
+	public String contractExecutemonthTotalList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "report");
+		return "/page/contract/contractExecuteMonthTotalList";
+	}
+	//合同月度统计表数据
+	@RequestMapping(value = "/contract/contractExecuteMonthTotalListGetDat.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> contractExecutemonthTotalListGetData(Integer year, Integer month, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("year", year);
+		searchmap.put("month", month);
+		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractExecuteMonthTotalListData", searchmap);
+		return list;
+	}
 }

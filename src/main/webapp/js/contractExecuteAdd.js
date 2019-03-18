@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#belongTime').datetimepicker({
 		minView: 3,
 		startView: 3,
+		language:'zh-CN',
 		autoclose: true,
 		format: 'yyyy-mm' });
 	loadSubofficeData();

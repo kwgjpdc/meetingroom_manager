@@ -67,7 +67,7 @@
 	                	统计报表<b class="caret"></b>
 	                </a>
 	                <ul class="dropdown-menu">
-	                    <li><a href="<%=fule %>report/monthTotalList.web">合同执行月统计</a></li>
+	                    <li><a href="<%=fule %>contract/contractExecuteMonthTotalList.web">合同执行月统计</a></li>
 	                    <li><a href="#">建设资金支付统计表</a></li>
 	               	 	<li><a href="#">分局数据统计</a></li>
 	               	 	<li><a href="<%=fule %>financing/financingReport.web"">财务数据统计</a></li>
