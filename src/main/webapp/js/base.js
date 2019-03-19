@@ -86,3 +86,9 @@ function fmoney(s, n) {
 	}
 	return t.split("").reverse().join("") + "." + r;
 }
+function mparseFloat(_val){
+	if(_val == undefined) return 0;
+	if(_val == null) return 0;
+	if(_val == '') return 0;
+	return parseFloat(_val);
+}

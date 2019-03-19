@@ -15,6 +15,16 @@ $(document).ready(function(){
 function initSelectPicker(){
 	subofficeDataInit();
 }
+function setFootWidth(){
+    var footths = $(".fixed-table-footer").find("th");
+    var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
+    
+    if(bodytds != undefined){
+    	for(var i = 0; i < bodytds.length; i++){
+    		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
+    	}
+    }
+}
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
@@ -48,14 +58,7 @@ var TableInit = function () {
 			detailView: false,                   //是否显示父子表
 			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 			onLoadSuccess: function(data){
-	            var footths = $(".fixed-table-footer").find("th");
-	            var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
-	            
-	            if(bodytds != undefined){
-	            	for(var i = 0; i < bodytds.length; i++){
-	            		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
-	            	}
-	            }
+				setFootWidth();
 	        },
 			columns: [
 				[
@@ -205,7 +208,7 @@ var TableInit = function () {
 				    footerFormatter: function (value) {
 				        var summ = 0;
 				        for (var i in value) {
-				        	summ += parseFloat(value[i].budgetinvest);
+				        	summ += mparseFloat(value[i].budgetinvest);
 				        }
 				        return fmoney(summ,4);
 				    },
@@ -222,7 +225,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].contractamount);
+					        	summ += mparseFloat(value[i].contractamount);
 					        }
 					        return fmoney(summ,4);
 					    },
@@ -298,7 +301,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].finishinvest);
+					        	summ += mparseFloat(value[i].finishinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -315,7 +318,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].surplusinvest);
+					        	summ += mparseFloat(value[i].surplusinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -332,7 +335,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].yearplaninvest);
+					        	summ += mparseFloat(value[i].yearplaninvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -349,7 +352,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].monthplaninvest);
+					        	summ += mparseFloat(value[i].monthplaninvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -366,7 +369,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].yearrealityinvest);
+					        	summ += mparseFloat(value[i].yearrealityinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -383,7 +386,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].monthrealityinvest);
+					        	summ += mparseFloat(value[i].monthrealityinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -400,7 +403,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].tendayrealityinvest);
+					        	summ += mparseFloat(value[i].tendayrealityinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -417,7 +420,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].earthwork);
+					        	summ += mparseFloat(value[i].earthwork);
 					        }
 					        return fmoney(summ,2);
 					    }
@@ -434,7 +437,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].stonework);
+					        	summ += mparseFloat(value[i].stonework);
 					        }
 					        return fmoney(summ,2);
 					    }
@@ -451,7 +454,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].beton);
+					        	summ += mparseFloat(value[i].beton);
 					        }
 					        return fmoney(summ,2);
 					    }
@@ -597,6 +600,7 @@ function addRow(){
 		});
 	    hasnosave = true;
 	}
+	setFootWidth();
 }
 /**
  * 删除一行数据
