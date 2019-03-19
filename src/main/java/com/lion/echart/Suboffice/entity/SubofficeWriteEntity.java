@@ -11,7 +11,7 @@ import com.lion.echart.base.entity.BaseEntity;
  */
 public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	private long subofficewriteid;//分局填报ID
-	private int contractid;//合同ID
+	private long contractid;//合同ID
 	private String constructioncontent;//主要建设内容
 	private String begindate;//开工时间
 	private String planfinishdate;//计划完工时间
@@ -31,7 +31,8 @@ public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	private String remark;//备注
 	private String year;//所属年份
 	private String month;//所属月份
-	private int priority;//序号
+	private Integer priority;//序号
+	private Integer status;//状态 1已填报 2审核中 3审核通过 4审核不通过
 	private String isdisabled;//是否禁用
 	private String operuser;//修改人
 	private Date operdate;//修改时间
@@ -45,10 +46,10 @@ public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	public void setSubofficewriteid(long subofficewriteid) {
 		this.subofficewriteid = subofficewriteid;
 	}
-	public int getContractid() {
+	public long getContractid() {
 		return contractid;
 	}
-	public void setContractid(int contractid) {
+	public void setContractid(long contractid) {
 		this.contractid = contractid;
 	}
 	public String getConstructioncontent() {
@@ -165,11 +166,17 @@ public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	public void setMonth(String month) {
 		this.month = month;
 	}
-	public int getPriority() {
+	public Integer getPriority() {
 		return priority;
 	}
-	public void setPriority(int priority) {
+	public void setPriority(Integer priority) {
 		this.priority = priority;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 	public String getIsdisabled() {
 		return isdisabled;

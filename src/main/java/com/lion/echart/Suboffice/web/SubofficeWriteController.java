@@ -50,6 +50,10 @@ public class SubofficeWriteController {
 			HttpSession session, String subofficeid) throws IOException { 
 		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 		HashMap<String, Object> param = new HashMap<String, Object>();
+		List<Integer> ststusList = new ArrayList<Integer>();
+		ststusList.add(1);
+		ststusList.add(4);
+		param.put("status", ststusList);
 		//系统管理员传入特殊分局条件0
 		if("admin".equals(user.getUsername())) {
 			param.put("subofficeid", 0);
@@ -70,6 +74,12 @@ public class SubofficeWriteController {
 				s.setYear("2019");
 				s.setMonth("2");
 				s.setPriority(0);
+				if(s.getId()!= null&&s.getId()!=0){
+					//修改
+				}else{
+					//现在默认状态已填报
+					s.setStatus(1);
+				}
 				s.setIsdisabled("false");
 				s.setOperuser("admin");
 				s.setOperdate(new Date());
@@ -85,7 +95,7 @@ public class SubofficeWriteController {
 	
 	//分局填报提交
 	@RequestMapping(value = "subofficewrite/submitSubofficewrite.json",method=RequestMethod.POST)
-	public void submitSubofficewrite(SubofficeWriteView list
+	public void submitSubofficewrite(String checkIds,SubofficeWriteView list
 			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		JSONObject obj = new JSONObject();
 		try {
@@ -131,7 +141,15 @@ public class SubofficeWriteController {
 							obj.put("message", sb.toString());
 						}else {
 							//TODO 请完善提交逻辑
-							//baseService.insertOupdates("comle.SubofficeWrite.submitSubofficewrite", list.getList());
+							HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+							paramUpdate.put("status", 2);//审核中
+							List<Integer> subofficewriteList = new ArrayList<Integer>();
+							for(String s : checkIds.split(",")){
+								subofficewriteList.add(Integer.valueOf(s));
+							}
+							paramUpdate.put("subofficewriteList", subofficewriteList);
+							paramUpdate.put("subofficewriteid", "("+checkIds+")");
+							baseService.updateObject("comle.SubofficeWrite.subofficewriteStatusUpdate", paramUpdate);
 							obj.put("msgType", 1);
 						}
 					}else {
@@ -150,5 +168,77 @@ public class SubofficeWriteController {
 		resp.setContentType("text/html;charset=UTF-8");
 		resp.getWriter().print(obj.toString());
 		//return obj.toString();
+	}
+	
+	//分局填报审批列表页 
+	@RequestMapping(value = "/subofficewrite/subofficewriteApproveList.web",method=RequestMethod.GET)
+	public String subofficewriteApproveList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		return "/page/suboffice/subofficewriteApproveList";
+	}
+	//获取分局填报列表数据
+	@RequestMapping(value = "/subofficewrite/subofficewriteApproveGetData.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> subofficewriteApproveGetData(HttpServletRequest req,HttpServletResponse resp, 
+			HttpSession session, String subofficeid) throws IOException { 
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		List<Integer> ststusList = new ArrayList<Integer>();
+		ststusList.add(2);
+		param.put("status", ststusList);
+		param.put("subofficeid", 0);
+		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", param);
+		return list;
+	}
+	//分局填报审批通过or驳回
+	@RequestMapping(value = "subofficewrite/submitSubofficewriteApprove.json",method=RequestMethod.POST)
+	public void submitSubofficewriteApprove(String checkIds,String flag
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+			paramUpdate.put("status", Integer.valueOf(flag));
+			List<Integer> subofficewriteList = new ArrayList<Integer>();
+			for(String s : checkIds.split(",")){
+				subofficewriteList.add(Integer.valueOf(s));
+			}
+			paramUpdate.put("subofficewriteList", subofficewriteList);
+			paramUpdate.put("subofficewriteid", "("+checkIds+")");
+			baseService.updateObject("comle.SubofficeWrite.subofficewriteStatusUpdate", paramUpdate);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
+	}
+	//分局填报提交历史数据列表页 
+	@RequestMapping(value = "/subofficewrite/subofficewriteSubmitHisList.web",method=RequestMethod.GET)
+	public String subofficewriteSubmitHisList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		return "/page/suboffice/subofficewriteSubmitHisList";
+	}
+	//获取分局填报提交历史记录列表数据
+	@RequestMapping(value = "/subofficewrite/subofficewriteSubmitHisGetData.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> subofficewriteSubmitHisGetData(HttpServletRequest req,HttpServletResponse resp, 
+			HttpSession session, String subofficeid) throws IOException { 
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		List<Integer> ststusList = new ArrayList<Integer>();
+		ststusList.add(2);
+		ststusList.add(3);
+		ststusList.add(4);
+		param.put("status", ststusList);
+		//系统管理员传入特殊分局条件0
+		if("admin".equals(user.getUsername())) {
+			param.put("subofficeid", 0);
+		}else {
+			param.put("subofficeid", user.getSubofficeid());
+		}
+		List<Map<String, Object>> list = baseService.queryList("comle.SubofficeWrite.getSubofficewriteListData", param);
+		return list;
 	}
 }
