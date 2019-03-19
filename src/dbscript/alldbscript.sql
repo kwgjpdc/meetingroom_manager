@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-19 12:06:53
+Date: 2019-03-19 13:58:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -406,6 +406,7 @@ INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'year1n', '年份1', 'center', '1
 INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'year2n', '年份2', 'center', '1', '1', '4', '2', '1', '1', null);
 INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'monthn', '当月', 'center', '1', '1', '4', '3', '1', '1', null);
 INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'year3n', '当年至当月', 'center', '1', '1', '4', '4', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', null, '累计', 'center', '1', '1', '4', '5', '1', '1', null);
 
 -- ----------------------------
 -- Table structure for `t_s_suboffice`
