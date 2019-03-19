@@ -34,6 +34,7 @@
 	<!-- 仅供分局填报查询列表使用 -->
 	<select id="getSubofficewriteListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
+			concat(sw.year,'-',sw.month) belongTimeStr,
 			sw.*,ct.contractname,ct.contractnum,ct.amount contractamount,
 			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
 			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr,
@@ -62,19 +63,19 @@
 	</select>
 	
 	<insert id="subofficewriteInsert" parameterType="com.lion.echart.Suboffice.entity.SubofficeWriteEntity">
-           insert into t_s_subofficewrite(contractid, constructioncontent, begindate, planfinishdate, 
+           insert into t_s_subofficewrite(contractid,subofficeid, constructioncontent, begindate, planfinishdate, 
            	budgetinvest, finishinvest, surplusinvest, yearplaninvest, monthplaninvest, yearrealityinvest, monthrealityinvest, tendayrealityinvest,
            	earthwork, stonework, beton, overallimageprogress, nextmonthplaninvest, remark, 
-           	year, month, priority, isdisabled, operuser, operdate)  
-               values( #{contractid},  #{constructioncontent},  str_to_date(#{begindate},'%Y-%m-%d %H'), str_to_date(#{planfinishdate},'%Y-%m-%d %H'),
+           	year, month, priority, status, isdisabled, operuser, operdate)  
+               values( #{contractid}, #{subofficeid}, #{constructioncontent},  str_to_date(#{begindate},'%Y-%m-%d %H'), str_to_date(#{planfinishdate},'%Y-%m-%d %H'),
                #{budgetinvest},  #{finishinvest},  #{surplusinvest},  #{yearplaninvest},  #{monthplaninvest},  #{yearrealityinvest},  #{monthrealityinvest},  #{tendayrealityinvest},
                #{earthwork}, #{stonework}, #{beton}, #{overallimageprogress}, #{nextmonthplaninvest}, #{remark}, 
-           	   #{year}, #{month}, #{priority}, #{isdisabled}, #{operuser}, #{operdate})
+           	   #{year}, #{month}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
    	</insert>
 
 	<update id="subofficewriteUpdate" parameterType="com.lion.echart.Suboffice.entity.SubofficeWriteEntity">
     	update t_s_subofficewrite
-    	set contractid = #{contractid},constructioncontent = #{constructioncontent},begindate = #{begindate},planfinishdate = #{planfinishdate},
+    	set contractid = #{contractid},subofficeid =#{subofficeid}, constructioncontent = #{constructioncontent},begindate = #{begindate},planfinishdate = #{planfinishdate},
     		budgetinvest = #{budgetinvest},finishinvest = #{finishinvest},surplusinvest = #{surplusinvest},yearplaninvest = #{yearplaninvest},
     		monthplaninvest = #{monthplaninvest},yearrealityinvest = #{yearrealityinvest},monthrealityinvest = #{monthrealityinvest},tendayrealityinvest = #{tendayrealityinvest},
     		earthwork = #{earthwork},stonework = #{stonework},beton = #{beton},overallimageprogress = #{overallimageprogress},nextmonthplaninvest = #{nextmonthplaninvest},remark = #{remark},

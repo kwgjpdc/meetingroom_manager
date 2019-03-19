@@ -70,6 +70,22 @@ var TableInit = function () {
                     rowspan: 2
 	              },
 	              {
+					field: 'year',
+					align: 'center',
+					title: '年份' ,
+					valign : "middle",
+					width : 70,
+					rowspan: 2
+				  },
+				  {
+					field: 'month',
+					align: 'center',
+					title: '月份' ,
+					valign : "middle",
+					width : 50,
+					rowspan: 2
+				  },
+	              {
 					field: 'statusstr',
 					align: 'center',
 					title: '状态' ,

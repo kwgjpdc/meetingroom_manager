@@ -70,14 +70,23 @@ public class SubofficeWriteController {
 	
 	//分局填报保存
 	@RequestMapping(value = "subofficewrite/insertSubofficewrite.json",method=RequestMethod.POST)
-	public @ResponseBody String insertSubofficewrite(SubofficeWriteView list
+	public @ResponseBody String insertSubofficewrite(String belongTimeStr,SubofficeWriteView list
 			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 		JSONObject obj = new JSONObject();
 		try {
 			for(SubofficeWriteEntity s :list.getList()){
-				s.setYear("2019");
-				s.setMonth("2");
 				s.setPriority(0);
+				if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+					s.setYear(belongTimeStr.substring(0,4));
+					s.setMonth(belongTimeStr.substring(5,7));
+				}
+				if(s.getBegindate().equals("")){
+					s.setBegindate("1970-01-01");
+				}
+				if(s.getPlanfinishdate().equals("")){
+					s.setPlanfinishdate("1970-01-01");
+				}
 				if(s.getId()!= null&&s.getId()!=0){
 					//修改
 				}else{
@@ -85,7 +94,7 @@ public class SubofficeWriteController {
 					s.setStatus(1);
 				}
 				s.setIsdisabled("false");
-				s.setOperuser("admin");
+				s.setOperuser(user.getId()+"");
 				s.setOperdate(new Date());
 			}
 			baseService.insertOupdates("comle.SubofficeWrite.subofficewrite", list.getList());
