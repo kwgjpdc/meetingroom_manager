@@ -35,8 +35,12 @@ function print(){
 }
 
 function doexcel(_this){
+	if($("#fileName").val() == ''){
+		modalTitle('无法导出，请先设置关键查询条件',1);		
+		return;
+	}
+	
 	$("#formSearch").attr('action',$("#fule").val()+"excel/toExcelXlsExecute.web");
-	$("#fileName").val(encodeURI($(_this).attr("lang")));
 	$("#formSearch").submit();
 }
 

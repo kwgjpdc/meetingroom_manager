@@ -14,6 +14,7 @@ function setFormVal(_this){
 		$("#year2").val('');
 		$("#year1").val('');
 		$("#month").val('');
+		$("#fileName").val('');
 	}else{
 		var arrstr = _reportDate.split("-");
 		var _year3 = parseInt(arrstr[0]);
@@ -23,6 +24,13 @@ function setFormVal(_this){
 		$("#year2").val(_year2);
 		$("#year1").val(_year1);
 		$("#month").val(arrstr[1]);
+		
+		$("#year3n").val(_year3+"年至"+arrstr[1]+"月");
+		$("#year2n").val(_year2+"年");
+		$("#year1n").val(_year1+"年");
+		$("#monthn").val(_year3+"年"+arrstr[1]+"月");
+		$("#reportDaten").val(_year3+"年"+arrstr[1]+"月"+arrstr[2]+"日");
+		$("#fileName").val("滇中引水工程建设资金支付情况统计表("+_year3+"年"+arrstr[1]+"月)");
 	}
 }
 function initDateTable(){
@@ -85,7 +93,7 @@ function initDateTable(){
 							  return index+1;
 						  }
 					  },
-					  {field: 'costTypeStr',align: 'center',title: '支付款项' ,width : 100,rowspan:2},
+					  {field: 'costTypeStr',align: 'left',title: '支付款项' ,width : 200,rowspan:2},
 					  {field: '',align: 'center',title: '支付金额' ,colspan:5},
 					],
 					[
@@ -99,12 +107,12 @@ function initDateTable(){
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneysan',align: 'center',title: namee3 ,align : "right",width : 100,
+					  {field: 'moneysi',align: 'center',title: namee4 ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneysi',align: 'center',title: namee4 ,align : "right",width : 100,
+					  {field: 'moneysan',align: 'center',title: namee3 ,align : "right",width : 100,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}

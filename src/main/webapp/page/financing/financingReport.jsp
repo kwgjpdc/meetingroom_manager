@@ -54,6 +54,11 @@ String fule = base + "" + contextPath + "/";
                 	<input type="hidden" name="year2" id="year2" />
                 	<input type="hidden" name="year3" id="year3" />
                 	<input type="hidden" name="month" id="month" />
+                	<input type="hidden" name="year1n" id="year1n" />
+                	<input type="hidden" name="year2n" id="year2n" />
+                	<input type="hidden" name="year3n" id="year3n" />
+                	<input type="hidden" name="monthn" id="monthn" />
+                	<input type="hidden" name="reportDaten" id="reportDaten" />
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="reportDate">填报截至日期</label>
                         <div class="col-sm-2">
@@ -61,7 +66,7 @@ String fule = base + "" + contextPath + "/";
                         		<button type="button" class="close" data-dismiss="modal" 
                         			onclick="$('#reportDate').val('')" aria-hidden="true">×</button>
                         	</div>
-							<input type="text" id="reportDate" name="reportDate" class="datetimepicker" onchang="setFormVal(this)"
+							<input type="text" id="reportDate" name="reportDate" class="datetimepicker" onchange="setFormVal(this)"
                         		readonly="true" data-date-format="yyyy-mm-dd" data-pure-clear-button />
                         </div>
                         <div class="col-sm-2" style="text-align:left;">

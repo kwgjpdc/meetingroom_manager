@@ -30,8 +30,7 @@
 					strHtml+='</li>';
 				}
 			});
-			//TODO 暂时放开菜单权限过滤
-			//$("#menuUl").html(strHtml);
+			$("#menuUl").html(strHtml);
 		},
 		error:function(){
 			

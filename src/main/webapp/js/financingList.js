@@ -3,10 +3,11 @@ $(document).ready(function(){
 	var oTable = new TableInit();
 	oTable.Init();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
-	$("#excelbtn").attr("lang",$("#writeyear").val()+"财务填报费用类型分类汇总表");
+	$("#fileName").val($("#writeyear").val()+"财务填报费用类型分类汇总表");
 });
 
 function reloadtable(){
+	$("#fileName").val($("#writeyear").val()+"财务填报费用类型分类汇总表");
     var options = $('#t_datagrid').bootstrapTable('refresh', {
         query: $("#formSearch").serializeObj()
     });
