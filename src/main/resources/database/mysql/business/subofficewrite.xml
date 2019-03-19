@@ -36,12 +36,21 @@
 		select 
 			sw.*,ct.contractname,ct.contractnum,ct.subofficeid,ct.amount contractamount,
 			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
-			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr
+			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr,
+			case when sw.status = '1' then '已填报' 
+                 when sw.status = '2' then '审核中'
+                 when sw.status = '3' then '审核通过'
+                 when sw.status = '4' then '审核驳回'
+            else '无' end  statusstr
 		from t_s_subofficewrite sw,t_c_contract ct where sw.contractid = ct.contractid
 		<!-- 0为系统管理员，可以看到所有分局，其他情况下，各分局只能看到自己分局的数据 -->
 		<if test="subofficeid != 0">
-			and subofficeid = #{subofficeid} 
+			and ct.subofficeid = #{subofficeid} 
 		</if>
+			and sw.status in 
+			<foreach collection="status" item="status" index="index" open="(" close=")" separator=",">
+			  #{status}
+			</foreach>
 	</select>
 	
 	<insert id="subofficewriteInsert" parameterType="com.lion.echart.Suboffice.entity.SubofficeWriteEntity">
@@ -81,4 +90,13 @@
 			</foreach>
 		</if>
 	</select>
+	<!-- 更改状态 -->
+	<update id="subofficewriteStatusUpdate" parameterType="java.util.Map">
+    	update t_s_subofficewrite
+    	set status = #{status}
+    	where subofficewriteid in
+			<foreach collection="subofficewriteList" item="subofficewriteList" index="index" open="(" close=")" separator=",">
+			  #{subofficewriteList}
+			</foreach>
+    </update>
 </mapper>

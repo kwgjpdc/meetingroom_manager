@@ -26,7 +26,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteList.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/subofficewriteApproveList.js?ts=<%=request.getAttribute("ts") %>"></script>
 <style type="text/css">
 	.table {table-layout:fixed;}
 </style>
@@ -39,24 +39,14 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
-            	填报管理 / 分局填报 
-            	<span id="operinfo" >编辑数据后，请执行保存操作，以免数据丢失造成不便！</span >
+            	审批管理 / 分局填报审批
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="btn_add" type="button" class="btn btn-default" onclick="showSubmit()">
-		                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>提交
-		            </button>
-		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
-		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-		            </button>
-		            <button id="btn_add" type="button" class="btn btn-default" onclick="saveRow()"
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="submitFun(3)"
 		            	data-toggle="modal" data-target="#myModal" >
-		                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>保存
+		                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>通过
 		            </button>
-		            <button id="btn_delete" type="button" class="btn btn-default" onclick="delRow()">
-		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-		            </button>
-		            <button id="btn_delete" type="button" class="btn btn-default" onclick="showHis()">
-		                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>提交历史
+		            <button id="btn_delete" type="button" class="btn btn-default" onclick="submitFun(4)">
+		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>驳回
 		            </button>
 		        </div>
             </div>

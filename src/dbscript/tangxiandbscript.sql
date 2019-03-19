@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2019-03-18 15:33:34
+Date: 2019-03-19 10:57:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,6 +78,8 @@ INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null,
 INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:49');
 INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:19:52');
 
+
+
 -- ----------------------------
 -- Table structure for `t_sys_menu`
 -- ----------------------------
@@ -96,7 +98,7 @@ CREATE TABLE `t_sys_menu` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_menu
@@ -114,6 +116,9 @@ INSERT INTO `t_sys_menu` VALUES ('13', '菜单管理', 'menu/menuList.web', '0',
 INSERT INTO `t_sys_menu` VALUES ('14', '统计报表', '', '1', '0', '2019-03-18 14:00:19', '', '7', '1', '0', '1', '2019-03-18 14:00:19');
 INSERT INTO `t_sys_menu` VALUES ('15', '合同执行月统计', 'contract/contractExecuteMonthTotalList.web', '0', '14', '2019-03-18 14:01:03', '', '8', '1', '0', '1', '2019-03-18 14:01:03');
 INSERT INTO `t_sys_menu` VALUES ('16', '财务数据统计', 'financing/financingReport.web', '0', '14', '2019-03-18 14:01:24', '', '9', '1', '0', '1', '2019-03-18 14:01:24');
+INSERT INTO `t_sys_menu` VALUES ('17', '审批管理', '', '1', '0', '2019-03-19 09:51:39', '', '14', '1', '0', '1', '2019-03-19 09:51:39');
+INSERT INTO `t_sys_menu` VALUES ('18', '分局填报审批', 'subofficewrite/subofficewriteApproveList.web', '0', '17', '2019-03-19 09:52:00', '', '15', '1', '0', '1', '2019-03-19 09:52:00');
+INSERT INTO `t_sys_menu` VALUES ('19', '财务填报审批', '', '0', '17', '2019-03-19 09:52:18', '', '16', '1', '0', '1', '2019-03-19 09:52:18');
 
 -- ----------------------------
 -- Table structure for `t_sys_role`
@@ -137,7 +142,7 @@ CREATE TABLE `t_sys_role` (
 -- ----------------------------
 INSERT INTO `t_sys_role` VALUES ('1', '超级管理员', '2019-03-14 17:12:45', null, '0', '1', '0', '1', '2019-03-14 17:13:02');
 INSERT INTO `t_sys_role` VALUES ('2', '分局用户', '2019-03-14 17:17:20', null, '0', '1', '0', '1', '2019-03-14 17:17:34');
-INSERT INTO `t_sys_role` VALUES ('10', '测试角色', '2019-03-15 10:28:52', '', '0', '1', '0', '1', '2019-03-15 10:28:52');
+INSERT INTO `t_sys_role` VALUES ('10', '审批用户', '2019-03-15 10:28:52', '', '0', '1', '0', '1', '2019-03-15 10:28:52');
 
 -- ----------------------------
 -- Table structure for `t_sys_role_menu`
@@ -148,7 +153,7 @@ CREATE TABLE `t_sys_role_menu` (
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   `menuid` int(11) NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role_menu
@@ -168,6 +173,9 @@ INSERT INTO `t_sys_role_menu` VALUES ('83', '1', '12');
 INSERT INTO `t_sys_role_menu` VALUES ('84', '1', '13');
 INSERT INTO `t_sys_role_menu` VALUES ('90', '2', '1');
 INSERT INTO `t_sys_role_menu` VALUES ('91', '2', '2');
+INSERT INTO `t_sys_role_menu` VALUES ('93', '10', '17');
+INSERT INTO `t_sys_role_menu` VALUES ('94', '10', '18');
+INSERT INTO `t_sys_role_menu` VALUES ('95', '10', '19');
 
 -- ----------------------------
 -- Table structure for `t_sys_user`
@@ -194,15 +202,15 @@ CREATE TABLE `t_sys_user` (
 -- ----------------------------
 -- Records of t_sys_user
 -- ----------------------------
-INSERT INTO `t_sys_user` VALUES ('1', null, 'admin', '管理员', '1', 'M', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
-INSERT INTO `t_sys_user` VALUES ('10', '1', 'tangxian', '唐显', '123456', 'M', 'tangxianmail@vip.qq.com', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
-INSERT INTO `t_sys_user` VALUES ('11', '2', 'xiaohong', '小红', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
-INSERT INTO `t_sys_user` VALUES ('12', null, 'lijiang', '丽江分局用户', '1', 'M', '', '2019-03-18 12:10:09', '', '0', '1', '0', '1', '2019-03-18 12:10:09');
-INSERT INTO `t_sys_user` VALUES ('13', null, 'dali', '大理分局用户', '1', 'M', '', '2019-03-18 12:10:26', '', '0', '1', '0', '1', '2019-03-18 12:10:26');
-INSERT INTO `t_sys_user` VALUES ('14', null, 'chuxiong', '楚雄分局用户', '1', 'M', '', '2019-03-18 12:10:41', '', '0', '1', '0', '1', '2019-03-18 12:10:41');
-INSERT INTO `t_sys_user` VALUES ('15', null, 'kunming', '昆明分局用户', '1', 'M', '', '2019-03-18 12:10:56', '', '0', '1', '0', '1', '2019-03-18 12:10:56');
-INSERT INTO `t_sys_user` VALUES ('16', null, 'yuxi', '玉溪分局用户', '1', 'M', '', '2019-03-18 12:11:09', '', '0', '1', '0', '1', '2019-03-18 12:11:09');
-INSERT INTO `t_sys_user` VALUES ('17', null, 'honghe', '红河分局用户', '1', 'M', '', '2019-03-18 12:11:42', '', '0', '1', '0', '1', '2019-03-18 12:11:42');
+INSERT INTO `t_sys_user` VALUES ('1', null, 'admin', '管理员', '1', 'F', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
+INSERT INTO `t_sys_user` VALUES ('10', '2', 'approve', '审批用户', '1', 'F', '', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
+INSERT INTO `t_sys_user` VALUES ('11', '2', 'caiwu', '财务用户', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
+INSERT INTO `t_sys_user` VALUES ('12', '1', 'lijiang', '丽江分局用户', '1', 'M', '', '2019-03-18 12:10:09', '', '0', '1', '0', '1', '2019-03-18 12:10:09');
+INSERT INTO `t_sys_user` VALUES ('13', '2', 'dali', '大理分局用户', '1', 'M', '', '2019-03-18 12:10:26', '', '0', '1', '0', '1', '2019-03-18 12:10:26');
+INSERT INTO `t_sys_user` VALUES ('14', '3', 'chuxiong', '楚雄分局用户', '1', 'M', '', '2019-03-18 12:10:41', '', '0', '1', '0', '1', '2019-03-18 12:10:41');
+INSERT INTO `t_sys_user` VALUES ('15', '4', 'kunming', '昆明分局用户', '1', 'M', '', '2019-03-18 12:10:56', '', '0', '1', '0', '1', '2019-03-18 12:10:56');
+INSERT INTO `t_sys_user` VALUES ('16', '5', 'yuxi', '玉溪分局用户', '1', 'M', '', '2019-03-18 12:11:09', '', '0', '1', '0', '1', '2019-03-18 12:11:09');
+INSERT INTO `t_sys_user` VALUES ('17', '6', 'honghe', '红河分局用户', '1', 'M', '', '2019-03-18 12:11:42', '', '0', '1', '0', '1', '2019-03-18 12:11:42');
 
 -- ----------------------------
 -- Table structure for `t_sys_user_role`
@@ -213,7 +221,7 @@ CREATE TABLE `t_sys_user_role` (
   `userid` int(11) NOT NULL COMMENT '用户ID',
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_user_role
@@ -225,38 +233,7 @@ INSERT INTO `t_sys_user_role` VALUES ('48', '17', '2');
 INSERT INTO `t_sys_user_role` VALUES ('49', '16', '2');
 INSERT INTO `t_sys_user_role` VALUES ('50', '15', '2');
 INSERT INTO `t_sys_user_role` VALUES ('51', '14', '2');
-
--- ----------------------------
--- Table structure for `t_s_code`
--- ----------------------------
-DROP TABLE IF EXISTS `t_s_code`;
-CREATE TABLE `t_s_code` (
-  `codetype` varchar(50) DEFAULT NULL COMMENT '字典类型',
-  `codedescribe` varchar(100) DEFAULT NULL COMMENT '字典描述备注',
-  `key` varchar(5) DEFAULT NULL COMMENT '字典值',
-  `value` varchar(200) DEFAULT NULL COMMENT '字典显示',
-  `maintype` varchar(2) DEFAULT NULL COMMENT '大类归类',
-  `maintypedescribe` varchar(50) DEFAULT NULL COMMENT '大类备注',
-  `orderby` varchar(5) DEFAULT NULL COMMENT '排序列'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
-
--- ----------------------------
--- Records of t_s_code
--- ----------------------------
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '01', '工程款', '1', '合同款项', '01');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '02', '监理费', '1', '合同款项', '02');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '03', '施工供电费', '1', '合同款项', '03');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '04', '勘察设计费', '2', '其他款项', '04');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '05', '征地拆迁安置补偿', '2', '其他款项', '05');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '06', '环境影响', '2', '其他款项', '06');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '07', '耕地占用税', '2', '其他款项', '07');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '08', '水土保持补偿费', '2', '其他款项', '08');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '09', '金中公司清算费用', '2', '其他款项', '09');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '10', '印花税', '2', '其他款项', '10');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '11', '其他技术服务合同款', '2', '其他款项', '11');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '12', '建设管理费', '2', '其他款项', '12');
-INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '13', '临时用地复垦保证金', '2', '其他款项', '13');
-
+INSERT INTO `t_sys_user_role` VALUES ('52', '10', '10');
 
 -- ----------------------------
 -- Table structure for `t_s_suboffice`
@@ -311,6 +288,7 @@ CREATE TABLE `t_s_subofficewrite` (
   `year` int(4) DEFAULT NULL COMMENT '所属年份',
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
   `priority` int(11) DEFAULT '0' COMMENT '排序',
+  `status` int(10) DEFAULT NULL COMMENT '状态',
   `isdisabled` varchar(20) DEFAULT NULL,
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
@@ -320,7 +298,7 @@ CREATE TABLE `t_s_subofficewrite` (
 -- ----------------------------
 -- Records of t_s_subofficewrite
 -- ----------------------------
-INSERT INTO `t_s_subofficewrite` VALUES ('1', '2', '龙泉倒虹吸始发井围护结构和主体结构施工，接收井围护结构和主体结构施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '9787', '7367.76', '1926.18', '1662.61', '115.08', '152.08', '36.76', '10.35', '2.11', '0.48', '1.33', '龙泉倒虹吸始发井本旬进行基坑开挖及钢支撑安装施工，始发井基坑开挖共计19155.5m³，本旬完成610m³，累计完成9776m³，占比51%，剩余9379.5m³，分三区开挖，西侧第一区（1号井）已开挖至基底，深度17.5m，中部第二区（2号井西侧）已开挖至第三道砼支撑，深度13m，东侧第三区（2号井东侧）已开挖至第二道钢支撑，深度8m。第二道钢支撑本旬完成1榀直撑安装，已累计完成2榀角撑、2榀斜撑及7榀直撑安装，第三道钢支撑本旬完成2榀直撑安装，已累计完成2榀角撑、2榀斜撑、5榀直撑安装。\r\n龙泉倒虹吸接收井本旬进行降水井施工及冠梁基础面清理施工，降水井共计632m，本旬完成155m，累计完成365m，完成率57.7%，剩余267m。', '183.06', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
-INSERT INTO `t_s_subofficewrite` VALUES ('2', '8', '路基土石方开挖、防护工程、路基路面等', '2018-08-20 00:00:00', '2019-12-31 00:00:00', '6085.51', '3731.64', '1535.38', '2348.47', '420.28', '813.09', '265.21', '105.07', '8.3138', '46.0165', '0.5028', '进场道路总长11.419公里，累计完成毛路开挖9.695公里，占84.90%，其中路基开挖完成8.289公里，占72.58%。', '654.58', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
-INSERT INTO `t_s_subofficewrite` VALUES ('3', '9', '路基土石方开挖、防护工程、路基路面等', '2019-01-07 00:00:00', '2019-12-31 00:00:00', '7250', '873.41', '3361.54', '160', '3584.95', '223.41', '23.41', '0.41', '2.16', '8.64', '2.9', '进场道路完成松林1#支洞和龙庆1#支洞进场道路复测放线，龙庆1#支洞毛路开挖完成1.5公里，土方开挖完成2.16万方，石方开挖完成8.64万方。', '180', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
-INSERT INTO `t_s_subofficewrite` VALUES ('4', '3', '55', '2019-02-24 00:00:00', '2019-03-02 00:00:00', '43', '33', '33', '23', '333', '33', '33', '33', '3', '3', '3', '333334', '3', '', '2019', '2', '0', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('1', '2', '龙泉倒虹吸始发井围护结构和主体结构施工，接收井围护结构和主体结构施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '9787', '7367.76', '1926.18', '1662.61', '115.08', '152.08', '36.76', '10.35', '2.11', '0.48', '1.33', '龙泉倒虹吸始发井本旬进行基坑开挖及钢支撑安装施工，始发井基坑开挖共计19155.5m³，本旬完成610m³，累计完成9776m³，占比51%，剩余9379.5m³，分三区开挖，西侧第一区（1号井）已开挖至基底，深度17.5m，中部第二区（2号井西侧）已开挖至第三道砼支撑，深度13m，东侧第三区（2号井东侧）已开挖至第二道钢支撑，深度8m。第二道钢支撑本旬完成1榀直撑安装，已累计完成2榀角撑、2榀斜撑及7榀直撑安装，第三道钢支撑本旬完成2榀直撑安装，已累计完成2榀角撑、2榀斜撑、5榀直撑安装。\r\n龙泉倒虹吸接收井本旬进行降水井施工及冠梁基础面清理施工，降水井共计632m，本旬完成155m，累计完成365m，完成率57.7%，剩余267m。', '183.06', '', '2019', '2', '0', '3', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('2', '8', '路基土石方开挖、防护工程、路基路面等', '2018-08-20 00:00:00', '2019-12-31 00:00:00', '6085.51', '3731.64', '1535.38', '2348.47', '420.28', '813.09', '265.21', '105.07', '8.3138', '46.0165', '0.5028', '进场道路总长11.419公里，累计完成毛路开挖9.695公里，占84.90%，其中路基开挖完成8.289公里，占72.58%。', '654.58', '', '2019', '2', '0', '4', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('3', '9', '路基土石方开挖、防护工程、路基路面等', '2019-01-07 00:00:00', '2019-12-31 00:00:00', '7250', '873.41', '3361.54', '160', '3584.95', '223.41', '23.41', '0.41', '2.16', '8.64', '2.9', '进场道路完成松林1#支洞和龙庆1#支洞进场道路复测放线，龙庆1#支洞毛路开挖完成1.5公里，土方开挖完成2.16万方，石方开挖完成8.64万方。', '180', '', '2019', '2', '0', '1', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('4', '3', '55', '2019-02-24 00:00:00', '2019-03-02 00:00:00', '43', '33', '33', '23', '333', '33', '33', '33', '3', '3', '3', '333334', '3', '', '2019', '2', '0', '1', 'false', 'admin', '2019-03-14 15:17:12');
