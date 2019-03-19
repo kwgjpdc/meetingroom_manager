@@ -142,19 +142,6 @@ public class SubofficeWriteController {
 						}
 						
 						if(hasError) {
-							HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
-							paramUpdate.put("status", 2);//审核中
-							if(belongTimeStr!=null&&!belongTimeStr.equals("")){
-								paramUpdate.put("year", belongTimeStr.substring(0,4));
-								paramUpdate.put("month", belongTimeStr.substring(5,7));
-							}
-							//系统管理员传入特殊分局条件0
-							if("admin".equals(user.getUsername())) {
-								paramUpdate.put("subofficeid", 0);
-							}else {
-								paramUpdate.put("subofficeid", user.getSubofficeid());
-							}
-							baseService.updateObject("comle.SubofficeWrite.subofficewriteStatusUpdate", paramUpdate);
 							obj.put("msgType", 0);
 							obj.put("message", sb.toString());
 						}else {
