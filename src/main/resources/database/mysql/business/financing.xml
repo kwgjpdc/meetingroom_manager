@@ -53,8 +53,9 @@
     </delete>
     
     <select id="getFinancingReportData" parameterType="java.util.Map" resultType="java.util.Map" >
-    select tt.*,ifnull(st4.money,0) as moneysi,(moneyyi+moneyer+moneysan) as moneys from ( 
-		select t.key,t.value as costTypeStr
+      select @rownum:=@rownum+1 as rnum,mmtt.* from (select mt.value as costTypeStr,tt.*,ifnull(st4.money,0) as moneysi,
+      	(moneyyi+moneyer+moneysan) as moneys from t_s_code mt
+		left join ( select t.key
 			,ifnull(sum(st1.money),0) as moneyyi,ifnull(sum(st2.money),0) as moneyer
 			,ifnull(sum(st3.money),0) as moneysan
 		from t_s_code t 
@@ -63,13 +64,14 @@
 		 left join t_f_financingwrite st2 on t.key = st2.costtype
 	       and st2.writeyear = #{year2} and st2.isdisabled = 0
 		 left join t_f_financingwrite st3 on t.key = st3.costtype
-	       and st3.writeyear = #{year3} and st3.writemonth <![CDATA[<=]]>  #{month} and st3.isdisabled = 0
+	       and st3.writeyear = #{year3} and st3.writemonth <![CDATA[<=]]> #{month} and st3.isdisabled = 0
 		where t.codetype = 'costtype' 
-	    group by t.key,t.value,t.maintype,t.maintypedescribe 
-	    order by t.orderby ) tt
+	    group by t.key ) tt on mt.key = tt.key
 		 left join (select costtype,sum(money) as money from t_f_financingwrite
 						where writeyear = #{year3} and writemonth = #{month} and isdisabled = 0 group by costtype)
 			st4 on tt.key = st4.costtype
+			where mt.codetype = 'costtype' 
+			order by orderby ) mmtt ,(select @rownum:=0) rt
 	</select>
     
 </mapper>

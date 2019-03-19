@@ -48,6 +48,7 @@ public class ExcelController {
 		while(paramkey.hasMoreElements()) {
 			keyname = paramkey.nextElement().toString();
 			param.put(keyname, request.getParameter(keyname));
+			titlemap.put(keyname, URLDecoder.decode(request.getParameter(keyname)));
 		}
 		
 		List<HashMap<String,Object>> titles = baseService.queryList("com.system.eap.getTitle", param);

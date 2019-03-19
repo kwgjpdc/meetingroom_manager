@@ -35,8 +35,12 @@ function print(){
 }
 
 function doexcel(_this){
+	if($("#fileName").val() == ''){
+		modalTitle('无法导出，请先设置关键查询条件',1);		
+		return;
+	}
+	
 	$("#formSearch").attr('action',$("#fule").val()+"excel/toExcelXlsExecute.web");
-	$("#fileName").val(encodeURI($(_this).attr("lang")));
 	$("#formSearch").submit();
 }
 
@@ -81,4 +85,10 @@ function fmoney(s, n) {
 		t += l[i] + ((i + 1) % 3 == 0 && (i + 1) != l.length ? "," : "");
 	}
 	return t.split("").reverse().join("") + "." + r;
+}
+function mparseFloat(_val){
+	if(_val == undefined) return 0;
+	if(_val == null) return 0;
+	if(_val == '') return 0;
+	return parseFloat(_val);
 }
