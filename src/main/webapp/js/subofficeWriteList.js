@@ -1,5 +1,12 @@
 $(document).ready(function(){
-	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-400)});
+	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-200)});
+	var date=new Date;
+	var year=date.getFullYear(); 
+	var month=date.getMonth()+1;
+	if(month<10){
+		month="0"+month;
+	}
+	$("#belongTimeStr").val(year+"-"+month);
 	initSelectPicker();
 	initTableSelect();
 	var oTable = new TableInit();
@@ -10,10 +17,27 @@ $(document).ready(function(){
 		startView:2,
 		language:'zh-CN'
 	});
+	$('#belongTime').datetimepicker({
+		minView: 3,
+		startView: 3,
+		language:'zh-CN',
+		autoclose: true,
+		format: 'yyyy-mm' 
+	});
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 function initSelectPicker(){
 	subofficeDataInit();
+}
+function setFootWidth(){
+    var footths = $(".fixed-table-footer").find("th");
+    var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
+    
+    if(bodytds != undefined){
+    	for(var i = 0; i < bodytds.length; i++){
+    		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
+    	}
+    }
 }
 var TableInit = function () {
 	var oTableInit = new Object();
@@ -48,14 +72,7 @@ var TableInit = function () {
 			detailView: false,                   //是否显示父子表
 			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 			onLoadSuccess: function(data){
-	            var footths = $(".fixed-table-footer").find("th");
-	            var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
-	            
-	            if(bodytds != undefined){
-	            	for(var i = 0; i < bodytds.length; i++){
-	            		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
-	            	}
-	            }
+				setFootWidth();
 	        },
 			columns: [
 				[
@@ -205,7 +222,7 @@ var TableInit = function () {
 				    footerFormatter: function (value) {
 				        var summ = 0;
 				        for (var i in value) {
-				        	summ += parseFloat(value[i].budgetinvest);
+				        	summ += mparseFloat(value[i].budgetinvest);
 				        }
 				        return fmoney(summ,4);
 				    },
@@ -222,7 +239,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].contractamount);
+					        	summ += mparseFloat(value[i].contractamount);
 					        }
 					        return fmoney(summ,4);
 					    },
@@ -298,7 +315,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].finishinvest);
+					        	summ += mparseFloat(value[i].finishinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -315,7 +332,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].surplusinvest);
+					        	summ += mparseFloat(value[i].surplusinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -332,7 +349,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].yearplaninvest);
+					        	summ += mparseFloat(value[i].yearplaninvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -349,7 +366,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].monthplaninvest);
+					        	summ += mparseFloat(value[i].monthplaninvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -366,7 +383,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].yearrealityinvest);
+					        	summ += mparseFloat(value[i].yearrealityinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -383,7 +400,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].monthrealityinvest);
+					        	summ += mparseFloat(value[i].monthrealityinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -400,7 +417,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].tendayrealityinvest);
+					        	summ += mparseFloat(value[i].tendayrealityinvest);
 					        }
 					        return fmoney(summ,4);
 					    }
@@ -417,7 +434,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].earthwork);
+					        	summ += mparseFloat(value[i].earthwork);
 					        }
 					        return fmoney(summ,2);
 					    }
@@ -434,7 +451,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].stonework);
+					        	summ += mparseFloat(value[i].stonework);
 					        }
 					        return fmoney(summ,2);
 					    }
@@ -451,7 +468,7 @@ var TableInit = function () {
 					    footerFormatter: function (value) {
 					        var summ = 0;
 					        for (var i in value) {
-					        	summ += parseFloat(value[i].beton);
+					        	summ += mparseFloat(value[i].beton);
 					        }
 					        return fmoney(summ,2);
 					    }
@@ -477,7 +494,7 @@ var TableInit = function () {
 		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 			limit: params.limit,   //页面大小
 			offset:params.offset,
-			subofficeid:$("#subofficeid").val()
+			belongTimeStr:$("#belongTimeStr").val()
 		};
 		return temp;
 	};
@@ -597,6 +614,7 @@ function addRow(){
 		});
 	    hasnosave = true;
 	}
+	setFootWidth();
 }
 /**
  * 删除一行数据
@@ -660,23 +678,10 @@ function saveFun(){
 	});
 }
 function showSubmit(){
-	var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
-	if(checkRow.length<=0){
-		modalTitle("请选择一行",1);
-		 return;
+	if(hasnosave){
+		modalTitle("您尚有未完成的操作，请保存当前行",1);
 	}else{
-		var issave = 0;
-		$.each(checkRow,function(key,value){
-			if(value.newFlag!=null){
-				alert(value.newFlag);
-				issave = 1;
-			}
-		});
-		if(issave == 1){
-			modalTitle("请先保存数据",1);
-		}else{
-			modalTitle("是否确定进行校验并提交当月数据",4);
-		}
+		modalTitle("是否确定进行校验并提交当月数据",4);
 	}
 }
 function submitFun(){
@@ -690,7 +695,7 @@ function submitFun(){
 	}
 	showloding();
 	$.ajax({
-		url: $("#fule").val()+'subofficewrite/submitSubofficewrite.json?checkIds='+checkIds,
+		url: $("#fule").val()+'subofficewrite/submitSubofficewrite.json?belongTimeStr='+$("#belongTimeStr").val()+'&checkIds='+checkIds,
 		type: 'post',
 		data: $("#editForm").serialize(),
 		dataType: "json",
@@ -713,4 +718,15 @@ function submitFun(){
  */
 function showHis(){
 	window.location.href = $("#fule").val()+'subofficewrite/subofficewriteSubmitHisList.web';
+}
+function reloadtable(){
+	$.ajax({
+		url: $("#fule").val()+'subofficewrite/subofficewriteGetData.json',
+		data: {belongTimeStr:$("#belongTimeStr").val()},
+		type: "post",
+		dataType:"json",
+		success : function(json) {
+			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
 }

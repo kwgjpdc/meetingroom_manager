@@ -12,6 +12,7 @@ import com.lion.echart.base.entity.BaseEntity;
 public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	private long subofficewriteid;//分局填报ID
 	private long contractid;//合同ID
+	private long subofficeid;//分局ID
 	private String constructioncontent;//主要建设内容
 	private String begindate;//开工时间
 	private String planfinishdate;//计划完工时间
@@ -51,6 +52,12 @@ public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	}
 	public void setContractid(long contractid) {
 		this.contractid = contractid;
+	}
+	public long getSubofficeid() {
+		return subofficeid;
+	}
+	public void setSubofficeid(long subofficeid) {
+		this.subofficeid = subofficeid;
 	}
 	public String getConstructioncontent() {
 		return constructioncontent;
