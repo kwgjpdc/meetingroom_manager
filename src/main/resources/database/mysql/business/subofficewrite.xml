@@ -43,7 +43,7 @@
                  when sw.status = '3' then '审核通过'
                  when sw.status = '4' then '审核驳回'
             else '无' end  statusstr
-		from t_s_subofficewrite sw,t_c_contract ct where sw.contractid = ct.contractid
+		from t_s_subofficewrite sw,t_c_contract ct where sw.contractid = ct.contractid and sw.isdisabled = 0
 		<!-- 0为系统管理员，可以看到所有分局，其他情况下，各分局只能看到自己分局的数据 -->
 		<if test="subofficeid != 0">
 			and ct.subofficeid = #{subofficeid} 
@@ -99,6 +99,18 @@
 			</foreach>
 		</if>
 	</select>
+	<!-- 删除分局填报 -->
+	<update id="deletesubofficewrite" parameterType="java.util.Map">
+    	update t_s_subofficewrite
+    	set isdisabled = 1
+    	where 1=1
+		<if test="subofficewriteList!=null and subofficewriteList.size()!=0">
+	    	and subofficewriteid in
+			<foreach collection="subofficewriteList" item="subofficewriteList" index="index" open="(" close=")" separator=",">
+			  #{subofficewriteList}
+			</foreach>
+		</if>
+    </update>
 	<!-- 更改状态 -->
 	<update id="subofficewriteStatusUpdate" parameterType="java.util.Map">
     	update t_s_subofficewrite

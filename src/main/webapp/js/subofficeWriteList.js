@@ -633,10 +633,44 @@ function delRow(){
     var count = $('#t_datagrid').bootstrapTable('getData').length;
     var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
     if(checkRow.length<=0){
-		 alert("请选中一行")
+    	modalTitle("请选中一条数据",1);
 	}else{
-		var check=JSON.stringify(checkRow);
-		console.log(check);
+		var issave = 0;
+		$.each(checkRow,function(key,value){
+			if(value.newFlag!=null){
+				issave = 1;
+			}
+		});
+		if(issave == 1){
+			modalTitle("请先保存数据",1);
+			return;
+		}else{
+			var checkIds = "";
+			$.each(checkRow,function(key,value){
+				checkIds+=value.subofficewriteid+",";
+			});
+			if(checkIds.length>0){
+				checkIds=checkIds.substring(0,checkIds.length-1);
+			}
+			showloding();
+			$.ajax({
+				url: $("#fule").val()+'subofficewrite/deleteSubofficewrite.json?checkIds='+checkIds,
+				type: 'post',
+				dataType: "json",
+				success: function (data) {
+					console.log(data)
+					if(data.msgType == 1){
+						modalTitle("操作成功",1);
+						window.location.reload();
+					}else{
+						modalTitle(data.message,1);
+					}
+				},error:function(data){
+					closeloding();
+					modalTitle("操作失败，请重试",1);
+				}
+			});
+		}
 	}
     if (count == 1) {
         info("已经是最后一条，不能删除!");
