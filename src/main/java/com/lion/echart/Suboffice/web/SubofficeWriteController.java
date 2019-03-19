@@ -46,7 +46,7 @@ public class SubofficeWriteController {
 	
 	//获取分局填报列表数据
 	@RequestMapping(value = "/subofficewrite/subofficewriteGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(HttpServletRequest req,HttpServletResponse resp, 
+	public @ResponseBody List<Map<String, Object>> subofficewriteGetData(String belongTimeStr,HttpServletRequest req,HttpServletResponse resp, 
 			HttpSession session, String subofficeid) throws IOException { 
 		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 		HashMap<String, Object> param = new HashMap<String, Object>();
@@ -54,6 +54,10 @@ public class SubofficeWriteController {
 		ststusList.add(1);
 		ststusList.add(4);
 		param.put("status", ststusList);
+		if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+			param.put("year", belongTimeStr.substring(0,4));
+			param.put("month", belongTimeStr.substring(5,7));
+		}
 		//系统管理员传入特殊分局条件0
 		if("admin".equals(user.getUsername())) {
 			param.put("subofficeid", 0);
@@ -95,8 +99,9 @@ public class SubofficeWriteController {
 	
 	//分局填报提交
 	@RequestMapping(value = "subofficewrite/submitSubofficewrite.json",method=RequestMethod.POST)
-	public void submitSubofficewrite(String checkIds,SubofficeWriteView list
-			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public void submitSubofficewrite(String belongTimeStr, String checkIds,SubofficeWriteView list
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException {
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 		JSONObject obj = new JSONObject();
 		try {
 			ArrayList<Long> ids = new ArrayList<Long>();
@@ -143,12 +148,16 @@ public class SubofficeWriteController {
 							//TODO 请完善提交逻辑
 							HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
 							paramUpdate.put("status", 2);//审核中
-							List<Integer> subofficewriteList = new ArrayList<Integer>();
-							for(String s : checkIds.split(",")){
-								subofficewriteList.add(Integer.valueOf(s));
+							if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+								paramUpdate.put("year", belongTimeStr.substring(0,4));
+								paramUpdate.put("month", belongTimeStr.substring(5,7));
 							}
-							paramUpdate.put("subofficewriteList", subofficewriteList);
-							paramUpdate.put("subofficewriteid", "("+checkIds+")");
+							//系统管理员传入特殊分局条件0
+							if("admin".equals(user.getUsername())) {
+								paramUpdate.put("subofficeid", 0);
+							}else {
+								paramUpdate.put("subofficeid", user.getSubofficeid());
+							}
 							baseService.updateObject("comle.SubofficeWrite.subofficewriteStatusUpdate", paramUpdate);
 							obj.put("msgType", 1);
 						}
@@ -203,7 +212,7 @@ public class SubofficeWriteController {
 				subofficewriteList.add(Integer.valueOf(s));
 			}
 			paramUpdate.put("subofficewriteList", subofficewriteList);
-			paramUpdate.put("subofficewriteid", "("+checkIds+")");
+			paramUpdate.put("subofficeid", 0);
 			baseService.updateObject("comle.SubofficeWrite.subofficewriteStatusUpdate", paramUpdate);
 			obj.put("msgType", 1);
 		} catch (Exception e) {

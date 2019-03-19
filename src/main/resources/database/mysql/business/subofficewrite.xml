@@ -34,7 +34,7 @@
 	<!-- 仅供分局填报查询列表使用 -->
 	<select id="getSubofficewriteListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
-			sw.*,ct.contractname,ct.contractnum,ct.subofficeid,ct.amount contractamount,
+			sw.*,ct.contractname,ct.contractnum,ct.amount contractamount,
 			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
 			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr,
 			case when sw.status = '1' then '已填报' 
@@ -47,10 +47,18 @@
 		<if test="subofficeid != 0">
 			and ct.subofficeid = #{subofficeid} 
 		</if>
+		<if test="year!=null and year!=''">
+			and sw.year = #{year} 
+		</if>
+		<if test="month!=null and month!=''">
+			and sw.month = #{month} 
+		</if>
+		<if test="status!=null and status.size()!=0">
 			and sw.status in 
 			<foreach collection="status" item="status" index="index" open="(" close=")" separator=",">
 			  #{status}
 			</foreach>
+		</if>
 	</select>
 	
 	<insert id="subofficewriteInsert" parameterType="com.lion.echart.Suboffice.entity.SubofficeWriteEntity">
@@ -94,9 +102,22 @@
 	<update id="subofficewriteStatusUpdate" parameterType="java.util.Map">
     	update t_s_subofficewrite
     	set status = #{status}
-    	where subofficewriteid in
+    	where 1=1
+    	<!-- 0为系统管理员，可以看到所有分局，其他情况下，各分局只能看到自己分局的数据 -->
+		<if test="subofficeid != 0">
+			and subofficeid = #{subofficeid} 
+		</if>
+		<if test="year!=null and year!=''">
+			and year = #{year} 
+		</if>
+		<if test="month!=null and month!=''">
+			and month = #{month} 
+		</if>
+		<if test="subofficewriteList!=null and subofficewriteList.size()!=0">
+	    	and subofficewriteid in
 			<foreach collection="subofficewriteList" item="subofficewriteList" index="index" open="(" close=")" separator=",">
 			  #{subofficewriteList}
 			</foreach>
+		</if>
     </update>
 </mapper>
