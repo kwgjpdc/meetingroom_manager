@@ -188,4 +188,13 @@ public class FinancingController {
 		return obj.toString();
 	}
 	
+
+	//工程投资完成汇总表页面跳转 
+	@RequestMapping(value = "/financingReportTwo.web",method=RequestMethod.GET)
+	public String financingReportTwo(HttpServletRequest req,HttpServletResponse resp, 
+			HttpSession session, String year, String costtype) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "write");
+		return "/page/financing/financingReportTwo";
+	}
 }
