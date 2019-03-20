@@ -26,6 +26,8 @@ public class FinancingWriteEntity extends BaseEntity{
 	private Double money;//金额
 	private String cashierno;//出纳编号
 	private String voucherno;//凭证编号
+	private String payee;//收款方
+	private String payeedescribe;//款项描述
 	private Date operdate;//操作时间
 	private Long operuser;//操作人
 	
@@ -125,6 +127,18 @@ public class FinancingWriteEntity extends BaseEntity{
 	}
 	public void setVoucherno(String voucherno) {
 		this.voucherno = voucherno;
+	}
+	public String getPayee() {
+		return payee;
+	}
+	public void setPayee(String payee) {
+		this.payee = payee;
+	}
+	public String getPayeedescribe() {
+		return payeedescribe;
+	}
+	public void setPayeedescribe(String payeedescribe) {
+		this.payeedescribe = payeedescribe;
 	}
 	public Date getOperdate() {
 		return operdate;

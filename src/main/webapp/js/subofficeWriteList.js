@@ -23,7 +23,7 @@ $(document).ready(function(){
 		language:'zh-CN',
 		autoclose: true,
 		format: 'yyyy-mm' 
-	});
+	}).on('changeDate',reloadtable);
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 });
 function initSelectPicker(){

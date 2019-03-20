@@ -23,9 +23,9 @@
 	
 	<insert id="financingWriteInsert" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
            insert into t_f_financingwrite(payfordate, costtype, maintype, contractid, 
-           	subofficeid, money, operdate, operuser, writeyear, writemonth, cashierno, voucherno) 
+           	subofficeid, money, operdate, operuser, writeyear, writemonth, cashierno, voucherno,payee,payeedescribe) 
                values(str_to_date(#{payfordateStr},'%Y-%m-%d %H'), #{costtype}, #{maintype}, #{contractid}, 
-            #{subofficeid}, #{money}, now(), #{operuser}, #{writeyear}, #{writemonth}, #{cashierno}, #{voucherno})
+            #{subofficeid}, #{money}, now(), #{operuser}, #{writeyear}, #{writemonth}, #{cashierno}, #{voucherno}, #{payee}, #{payeedescribe})
    	</insert>
 	
 	<update id="financingWriteUpdate" parameterType="com.lion.echart.financing.entity.FinancingWriteEntity">
@@ -43,6 +43,8 @@
     		,writemonth = #{writemonth}
     		,cashierno = #{cashierno}
     		,voucherno  = #{voucherno}
+    		,payee  = #{payee}
+    		,payeedescribe  = #{payeedescribe}
     	where id = #{id}
     </update>
     

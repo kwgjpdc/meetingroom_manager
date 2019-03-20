@@ -16,17 +16,22 @@
 				if(value.ismenu==1){
 					//是父级菜单
 					strHtml+='<li>';
+					if(value.url!=undefined&&value.url!=''){
+						strHtml+='<a href="<%=fule %>'+value.url+'">'+value.menuname+'</a>';
+					}else{
 						strHtml+='<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
 						strHtml+=value.menuname+'<b class="caret"></b>';
 						strHtml+='</a>';
 						strHtml+='<ul class="dropdown-menu">';
 						var pid=value.id;
+						//遍历子菜单
 						$.each(sondate, function(sonkey,sonvalue){
 							if(sonvalue.pid==pid){
 								strHtml+='<li><a href="<%=fule %>'+sonvalue.url+'">'+sonvalue.menuname+'</a></li>';
 							}
 						});
 						strHtml+='</ul>';
+					}
 					strHtml+='</li>';
 				}
 			});

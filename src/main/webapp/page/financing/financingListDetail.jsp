@@ -42,10 +42,26 @@ String fule = base + contextPath + "/";
 		
 		
         <div id="searchdiv" class="panel panel-default">
-            <div class="panel-heading">
-            	填报管理 / 财务填报 / 查看明细
-            	<span id="operinfo" >编辑数据后，请执行保存操作，以免数据丢失造成不便！</span >
-            	<div id="toolbar" class="btn-group btn-group-right" >
+            <div class="panel-heading" style="height: 41px;">
+            	财务填报 / 查看明细
+            	 <form id="formSearch" class="form-horizontal" style="margin-left: 130px;margin-top: -40px;">
+                	<input type="hidden" id="yeardefault" value="<%=request.getAttribute("year") %>" >
+                	 <input type="hidden" id="costtypedefault" value="<%=request.getAttribute("costtype") %>" >
+                    <div class="form-group" style="margin-top:15px">
+<!--                         <label class="control-label col-sm-1" for="year">所属年份</label> -->
+                        <div class="col-sm-1">
+                        	<select id="year" onchange="reloadtable()" name="year" class="selectpicker" data-width="100px" >
+                        	</select>
+                        </div>
+<!--                         <label class="control-label col-sm-1" for="costtype">费用类型</label> -->
+                        <div class="col-sm-1" style="margin-left: 5px;">
+                        	<select id="costtype" onchange="reloadtable()" name="costtype" class="selectpicker" data-width="150px" >
+                        	</select>
+                        </div>
+                    </div>
+                </form>
+            	<div id="operinfo" style="margin-top: -43px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
+            	<div id="toolbar" class="btn-group btn-group-right"  style="margin-top: -28px;">
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		            </button>
@@ -57,24 +73,6 @@ String fule = base + contextPath + "/";
 		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 		            </button>
 		        </div>
-            </div>
-            <div class="panel-body">
-                 <input type="hidden" id="yeardefault" value="<%=request.getAttribute("year") %>" >
-                 <input type="hidden" id="costtypedefault" value="<%=request.getAttribute("costtype") %>" >
-                <form id="formSearch" class="form-horizontal">
-                    <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="year">所属年份</label>
-                        <div class="col-sm-1">
-                        	<select id="year" onchange="reloadtable()" name="year" class="selectpicker" data-width="100px" >
-                        	</select>
-                        </div>
-                        <label class="control-label col-sm-1" for="costtype">费用类型</label>
-                        <div class="col-sm-1">
-                        	<select id="costtype" onchange="reloadtable()" name="costtype" class="selectpicker" data-width="150px" >
-                        	</select>
-                        </div>
-                    </div>
-                </form>
             </div>
         </div>       
 

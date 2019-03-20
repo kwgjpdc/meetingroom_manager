@@ -38,7 +38,7 @@ String fule = base + "" + contextPath + "/";
 	<div id="content" class="content" >
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading" style="height: 41px;">
             	填报管理 / 分局填报 
             	<div class='input-group date' id='belongTime' style="width: 200px;margin-left:150px;margin-top: -25px;">
 	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" />
@@ -46,9 +46,8 @@ String fule = base + "" + contextPath + "/";
 	                    <span class="glyphicon glyphicon-calendar"></span>
 	                </span>
 	            </div>
-	            <button type="button" style="margin-left:360px;margin-top: -55px;"  onclick="reloadtable()" class="btn btn-primary">查询</button>
-            	<div id="operinfo" style="margin-top: -43px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
-            	<div id="toolbar" class="btn-group btn-group-right" style="margin-top: -32px;">
+            	<div id="operinfo" style="margin-top: -30px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
+            	<div id="toolbar" class="btn-group btn-group-right" style="margin-top: -28px;">
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="showSubmit()">
 		                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>提交
 		            </button>

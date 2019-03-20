@@ -34,9 +34,19 @@ String fule = base + "" + contextPath + "/";
 	<div id="content" class="content" >
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
-            <div class="panel-heading">
-            	填报管理 / 财务填报 
-            	<div id="toolbar" class="btn-group btn-group-right" >
+            <div class="panel-heading" style="height: 41px;">
+            	财务填报 
+            	 <form id="formSearch" class="form-horizontal" autosubmit="return false;" style="margin-left: 80px;margin-top: -40px;" method="post" >
+                	<input type="hidden" name="dcdytype" value="cwtbhzczlb" />
+                	<input type="hidden" name="fileName" id="fileName" />
+                    <div class="form-group" style="margin-top:15px">
+                        <div class="col-sm-2">
+                        	<select id="writeyear" lang="<%=request.getAttribute("year") %>" onchange="reloadtable()" name="writeyear" class="selectpicker" data-width="100px" >
+                        	</select>
+                        </div>
+                    </div>
+                </form>
+            	<div id="toolbar" class="btn-group btn-group-right" style="margin-top: -50px;" >
 		            <button id="printbtn" type="button" class="btn btn-default" onclick="print()" >
 		                <span class="glyphicon" aria-hidden="true" >打印</span>
 		            </button>
@@ -45,24 +55,7 @@ String fule = base + "" + contextPath + "/";
 		            </button>
 		        </div>
             </div>
-            <div class="panel-body">
-                <form id="formSearch" class="form-horizontal" autosubmit="return false;" method="post" >
-                	<input type="hidden" name="dcdytype" value="cwtbhzczlb" />
-                	<input type="hidden" name="fileName" id="fileName" />
-                    <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="year" >所属年份</label>
-                        <div class="col-sm-2">
-                        	<select id="writeyear" lang="<%=request.getAttribute("year") %>" onchange="reloadtable()" name="writeyear" class="selectpicker" data-width="100px" >
-                        	</select>
-                        </div>
-                        <!-- 
-                        <div class="col-sm-2" style="text-align:left;">
-                            <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
-                        </div>
-                         -->
-                    </div>
-                </form>
-            </div>
+            
         </div>       
 
         <div id="bodydiv" >

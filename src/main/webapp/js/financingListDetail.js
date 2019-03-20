@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	initSelectPicker();
-	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-400)});
+	$("#operinfo").css({'color':'red','font-weight':'bold','margin-left':(window.innerWidth/2-250)});
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
 	initDateTable();
 });
@@ -312,11 +312,27 @@ function initDateTable(){
 					    }
 					  },
 					  {
-						field: 'voucherno',align: 'center',title: '凭证号' ,
+						field: 'voucherno',align: 'center',title: '凭证号' ,width : 100,
 						formatter:function (value, row, index, field) {
 							//class="editDiv"
 					        return '<div id="inputvoucherno_'+index+'" contenteditable="true" >' + (value || "") + '</div>' +
 							'<input type="hidden" value="'+(value || "")+'" id="voucherno'+index+'" name="list['+index+'].voucherno" />';
+					    }
+					  },
+					  {
+						field: 'payee',align: 'center',title: '收款方' ,width : 100,
+						formatter:function (value, row, index, field) {
+							//class="editDiv"
+					        return '<div id="inputpayee_'+index+'" contenteditable="true" >' + (value || "") + '</div>' +
+							'<input type="hidden" value="'+(value || "")+'" id="payee'+index+'" name="list['+index+'].payee" />';
+					    }
+					  },
+					  {
+						field: 'payeedescribe',align: 'center',title: '款项描述' ,width : 100,
+						formatter:function (value, row, index, field) {
+							//class="editDiv"
+					        return '<div id="inputpayeedescribe_'+index+'" contenteditable="true" >' + (value || "") + '</div>' +
+							'<input type="hidden" value="'+(value || "")+'" id="payeedescribe'+index+'" name="list['+index+'].payeedescribe" />';
 					    }
 					  }
 					]
@@ -384,6 +400,8 @@ function saveRow(){
 		$("#money"+i).val(_money);
 		$("#voucherno"+i).val($("#inputvoucherno_"+i).html());
 		$("#cashierno"+i).val($("#inputcashierno_"+i).html());
+		$("#payee"+i).val($("#inputpayee_"+i).html());
+		$("#payeedescribe"+i).val($("#inputpayeedescribe_"+i).html());
 	}
 
 	modalTitle("未填写的支付日期会默认为当日，<br/>是否确定提交?",2);
