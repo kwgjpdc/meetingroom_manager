@@ -575,7 +575,7 @@ function loadContractDataBySubofficeid(subofficeid){
 		type:"POST",
 		dataType:"json",
 		async :false,
-		data: {subofficeid : subofficeid},
+		data: {suboffice : subofficeid},
 		success:function(data){
 			returnData = data;
 		},
@@ -633,10 +633,44 @@ function delRow(){
     var count = $('#t_datagrid').bootstrapTable('getData').length;
     var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
     if(checkRow.length<=0){
-		 alert("请选中一行")
+    	modalTitle("请选中一条数据",1);
 	}else{
-		var check=JSON.stringify(checkRow);
-		console.log(check);
+		var issave = 0;
+		$.each(checkRow,function(key,value){
+			if(value.newFlag!=null){
+				issave = 1;
+			}
+		});
+		if(issave == 1){
+			modalTitle("请先保存数据",1);
+			return;
+		}else{
+			var checkIds = "";
+			$.each(checkRow,function(key,value){
+				checkIds+=value.subofficewriteid+",";
+			});
+			if(checkIds.length>0){
+				checkIds=checkIds.substring(0,checkIds.length-1);
+			}
+			showloding();
+			$.ajax({
+				url: $("#fule").val()+'subofficewrite/deleteSubofficewrite.json?checkIds='+checkIds,
+				type: 'post',
+				dataType: "json",
+				success: function (data) {
+					console.log(data)
+					if(data.msgType == 1){
+						modalTitle("操作成功",1);
+						window.location.reload();
+					}else{
+						modalTitle(data.message,1);
+					}
+				},error:function(data){
+					closeloding();
+					modalTitle("操作失败，请重试",1);
+				}
+			});
+		}
 	}
     if (count == 1) {
         info("已经是最后一条，不能删除!");
@@ -650,30 +684,116 @@ function saveRow(){
 		var rows = $("#t_datagrid").bootstrapTable('getData');
 		length = rows.length; 
 	}
+	var _budgetinvest = '';
+	var _nextmonthplaninvest = '';
+	var _finishinvest = '';
+	var _surplusinvest = '';
+	var _yearplaninvest = '';
+	var _monthplaninvest = '';
+	var _yearrealityinvest = '';
+	var _monthrealityinvest = '';
+	var _tendayrealityinvest = '';
+	var _earthwork = '';
+	var _stonework = '';
+	var _beton = '';
 	for(var i = 0; i < length; i++){
 		$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
-		$("#budgetinvest"+i).val($("#budgetinvest_"+i).html());
-		$("#nextmonthplaninvest"+i).val($("#nextmonthplaninvest_"+i).html());
-		$("#finishinvest"+i).val($("#finishinvest_"+i).html());
-		$("#surplusinvest"+i).val($("#surplusinvest_"+i).html());
-		$("#yearplaninvest"+i).val($("#yearplaninvest_"+i).html());
-		$("#monthplaninvest"+i).val($("#monthplaninvest_"+i).html());
-		$("#yearrealityinvest"+i).val($("#yearrealityinvest_"+i).html());
-		$("#monthrealityinvest"+i).val($("#monthrealityinvest_"+i).html());
-		$("#tendayrealityinvest"+i).val($("#tendayrealityinvest_"+i).html());
-		$("#earthwork"+i).val($("#earthwork_"+i).html());
-		$("#stonework"+i).val($("#stonework_"+i).html());
-		$("#beton"+i).val($("#beton_"+i).html());
+		
+		_budgetinvest = $("#budgetinvest_"+i).html();
+		if(_budgetinvest != null && _budgetinvest != undefined)
+		while(_budgetinvest.indexOf(",") != -1){
+			_budgetinvest = _budgetinvest.replace(",","");
+		}
+		$("#budgetinvest"+i).val(_budgetinvest);
+		
+		_nextmonthplaninvest = $("#nextmonthplaninvest_"+i).html();
+		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined)
+		while(_nextmonthplaninvest.indexOf(",") != -1){
+			_nextmonthplaninvest = _nextmonthplaninvest.replace(",","");
+		}
+		$("#nextmonthplaninvest"+i).val(_nextmonthplaninvest);
+		
+		_finishinvest = $("#finishinvest_"+i).html();
+		if(_finishinvest != null && _finishinvest != undefined)
+		while(_finishinvest.indexOf(",") != -1){
+			_finishinvest = _finishinvest.replace(",","");
+		}
+		$("#finishinvest"+i).val(_finishinvest);
+		
+		_surplusinvest= $("#surplusinvest_"+i).html();
+		if(_surplusinvest != null && _surplusinvest != undefined)
+		while(_surplusinvest.indexOf(",") != -1){
+			_surplusinvest = _surplusinvest.replace(",","");
+		}
+		$("#surplusinvest"+i).val(_surplusinvest);
+		
+		_yearplaninvest= $("#yearplaninvest_"+i).html();
+		if(_yearplaninvest != null && _yearplaninvest != undefined)
+		while(_yearplaninvest.indexOf(",") != -1){
+			_yearplaninvest = _yearplaninvest.replace(",","");
+		}
+		$("#yearplaninvest"+i).val(_yearplaninvest);
+		
+		_monthplaninvest= $("#monthplaninvest_"+i).html();
+		if(_monthplaninvest != null && _monthplaninvest != undefined)
+		while(_monthplaninvest.indexOf(",") != -1){
+			_monthplaninvest = _monthplaninvest.replace(",","");
+		}
+		$("#monthplaninvest"+i).val(_monthplaninvest);
+		
+		_yearrealityinvest= $("#yearrealityinvest_"+i).html();
+		if(_yearrealityinvest != null && _yearrealityinvest != undefined)
+		while(_yearrealityinvest.indexOf(",") != -1){
+			_yearrealityinvest = _yearrealityinvest.replace(",","");
+		}
+		$("#yearrealityinvest"+i).val(_yearrealityinvest);
+		
+		_monthrealityinvest= $("#monthrealityinvest_"+i).html();
+		if(_monthrealityinvest != null && _monthrealityinvest != undefined)
+		while(_monthrealityinvest.indexOf(",") != -1){
+			_monthrealityinvest = _monthrealityinvest.replace(",","");
+		}
+		$("#monthrealityinvest"+i).val(_monthrealityinvest);
+		
+		_tendayrealityinvest= $("#tendayrealityinvest_"+i).html();
+		if(_tendayrealityinvest != null && _tendayrealityinvest != undefined)
+		while(_tendayrealityinvest.indexOf(",") != -1){
+			_tendayrealityinvest = _tendayrealityinvest.replace(",","");
+		}
+		$("#tendayrealityinvest"+i).val(_tendayrealityinvest);
+		
+		_earthwork= $("#earthwork_"+i).html();
+		if(_earthwork != null && _earthwork != undefined)
+		while(_earthwork.indexOf(",") != -1){
+			_earthwork = _earthwork.replace(",","");
+		}
+		$("#earthwork"+i).val(_earthwork);
+		
+		_stonework= $("#stonework_"+i).html();
+		if(_stonework != null && _stonework != undefined)
+		while(_stonework.indexOf(",") != -1){
+			_stonework = _stonework.replace(",","");
+		}
+		$("#stonework"+i).val(_stonework);
+		
+		_beton= $("#beton_"+i).html();
+		if(_beton != null && _beton != undefined)
+		while(_beton.indexOf(",") != -1){
+			_beton = _beton.replace(",","");
+		}
+		$("#beton"+i).val(_beton);
+		
+		
 		$("#remark"+i).val($("#remark_"+i).html());
 		$("#overallimageprogress"+i).val($("#overallimageprogress_"+i).html());
 	}
 	modalTitle("是否确定提交",2);
 }
 function saveFun(){
-	//console.log($("#editForm").serialize());
+	console.log($("#editForm").serialize());
 	showloding();
 	$.ajax({
-		url: $("#fule").val()+'subofficewrite/insertSubofficewrite.json',
+		url: $("#fule").val()+'subofficewrite/insertSubofficewrite.json?belongTimeStr='+$("#belongTimeStr").val(),
 		type: 'post',
 		data: $("#editForm").serialize(),
 		dataType: "json",

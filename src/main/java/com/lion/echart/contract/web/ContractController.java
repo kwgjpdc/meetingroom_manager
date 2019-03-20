@@ -79,7 +79,7 @@ public class ContractController {
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
-			ContractEntity contract = new ContractEntity(contractName, contractNum, amount, durationTime, si.parse(signTime), contractPartyB, remark, 0, 9, "false", "admin", new Date(), subofficeId);
+			ContractEntity contract = new ContractEntity(contractName, contractNum, amount, durationTime, si.parse(signTime), contractPartyB, remark, 0, 9, "0", "admin", new Date(), subofficeId);
 			baseService.insertObject("comle.contract.insertContractSigned", contract);
 			obj.put("flag", 1);
 		} catch (Exception e) {
@@ -118,7 +118,7 @@ public class ContractController {
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
-			ContractExecuteEntity contractExecute = new ContractExecuteEntity(contractId, monthamount, remark, belongTime.substring(0,4), belongTime.substring(5,7), 0, "false", "admin", new Date());
+			ContractExecuteEntity contractExecute = new ContractExecuteEntity(contractId, monthamount, remark, belongTime.substring(0,4), belongTime.substring(5,7), 0, "0", "admin", new Date());
 			//ContractEntity contract = new ContractEntity(contractName, contractNum, amount, durationTime, si.parse(signTime), contractPartyB, remark, 0, 9, "false", "admin", new Date(), subofficeId);
 			baseService.insertObject("comle.contract.insertContractExecute", contractExecute);
 			obj.put("flag", 1);
