@@ -54,7 +54,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: $("#fule").val()+'subofficewrite/subofficewriteGetData.json',         //请求后台的URL（*）
+			url: $("#fule").val()+'subofficewrite/subofficewriteTenDayGetData.json',         //请求后台的URL（*）
 			method: 'post',                     //请求方式（*）
 			editable:true,						//开启编辑模式
 			contentType :'application/x-www-form-urlencoded; charset=UTF-8',
@@ -110,6 +110,23 @@ var TableInit = function () {
 					width : 100,
 					rowspan: 2
 				  },
+				  {
+					field: 'tendaytype',
+					align: 'center',
+					title: '旬' ,
+					valign : "middle",
+					width : 100,
+					rowspan: 2,
+					formatter:function (value, row, index, field) {
+						var tendaytypeStr = '<option value="1">上旬</option><option value="2">中旬</option><option value="3">下旬</option>'
+						var indexSelect = tendaytypeStr.indexOf('<option value="'+value+'">');
+						tendaytypeStr = tendaytypeStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
+						return '<select readonly="true" name="list['+index+'].tendaytype" onchange="calculateAllInvest('+index+')" class="form-control" id="tendaytype'+index+'" data-width="100px" >'+tendaytypeStr+'</select>';
+					},
+				    footerFormatter: function (value) {
+				    	return '-';
+				    }
+				  },
 	              {
 					field: 'subofficeid',
 					align: 'center',
@@ -149,7 +166,7 @@ var TableInit = function () {
 								}
 							});
 						}
-						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" >'+strHtml+'</select>';
+						return '<select name="list['+index+'].contractid" onchange="setcontractnum(this,'+index+')" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" >'+strHtml+'</select>';
 					},
 				    footerFormatter: function (value) {
 				    	return '-';
@@ -319,7 +336,9 @@ var TableInit = function () {
 						title: '自开工以来累计<br/>完成投资（万元）',
 						width : 190,
 						formatter:function (value, row, index, field) {
-							return '<div id="finishinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
+							//ajax加载本月实际完成投资
+							var calculateData = calculateFinishInvest(row["contractid"],row["year"],row["month"],row["tendaytype"]);
+							return '<div id="finishinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(calculateData,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="finishinvest'+index+'" name="list['+index+'].finishinvest" />';
 					    },
 					    footerFormatter: function (value) {
@@ -387,7 +406,9 @@ var TableInit = function () {
 						title: '本年度实际完成<br/>投资（万元）',
 						width : 120,
 						formatter:function (value, row, index, field) {
-							return '<div id="yearrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
+							//ajax加载本年度实际完成投资
+							var calculateData = calculateYearRealityInvest(row["contractid"],row["year"],row["month"],row["tendaytype"]);
+							return '<div id="yearrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(calculateData,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="yearrealityinvest'+index+'" name="list['+index+'].yearrealityinvest" />';
 					    },
 					    footerFormatter: function (value) {
@@ -404,7 +425,9 @@ var TableInit = function () {
 						title: '本月实际完成<br/>投资（万元）',
 						width : 120,
 						formatter:function (value, row, index, field) {
-							return '<div id="monthrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
+							//ajax加载本月实际完成投资
+							var calculateData = calculateMonthRealityInvest(row["contractid"],row["year"],row["month"],row["tendaytype"]);
+							return '<div id="monthrealityinvest_'+index+'" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(calculateData,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="monthrealityinvest'+index+'" name="list['+index+'].monthrealityinvest" />';
 					    },
 					    footerFormatter: function (value) {
@@ -504,7 +527,8 @@ var TableInit = function () {
 		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 			limit: params.limit,   //页面大小
 			offset:params.offset,
-			belongTimeStr:$("#belongTimeStr").val()
+			belongTimeStr:$("#belongTimeStr").val(),
+			tendaytypeid:$("#tendaytypeid").val()
 		};
 		return temp;
 	};
@@ -585,7 +609,7 @@ function loadContractDataBySubofficeid(subofficeid){
 	});
 	return returnData;
 }
-function setcontractnum(_this){
+function setcontractnum(_this,index2,contractid,year,month,tendaytype){
 	$("#contractnum"+_index).html("");
 	var index = _this.selectedIndex ;
 	var _contractnum = $(_this.options[index]).attr("title");
@@ -593,7 +617,7 @@ function setcontractnum(_this){
 	var _index = $(_this).attr("id").split("_")[1];
 	$("#contractnum"+_index).html(_contractnum);
 	$("#contractamount"+_index).html(fmoney(_contractamount));
-	
+	calculateAllInvest(index2);
 }
 /**
  * 新增一行数据
@@ -793,7 +817,7 @@ function saveFun(){
 	console.log($("#editForm").serialize());
 	showloding();
 	$.ajax({
-		url: $("#fule").val()+'subofficewrite/insertSubofficewrite.json?belongTimeStr='+$("#belongTimeStr").val(),
+		url: $("#fule").val()+'subofficewrite/insertSubofficewriteTenDay.json?belongTimeStr='+$("#belongTimeStr").val(),
 		type: 'post',
 		data: $("#editForm").serialize(),
 		dataType: "json",
@@ -825,7 +849,7 @@ function submitFun(){
 	}
 	showloding();
 	$.ajax({
-		url: $("#fule").val()+'subofficewrite/submitSubofficewrite.json?belongTimeStr='+$("#belongTimeStr").val()+'&checkIds='+checkIds,
+		url: $("#fule").val()+'subofficewrite/submitSubofficewriteMonth.json?belongTimeStr='+$("#belongTimeStr").val()+'&checkIds='+checkIds,
 		type: 'post',
 		data: $("#editForm").serialize(),
 		dataType: "json",
@@ -851,12 +875,91 @@ function showHis(){
 }
 function reloadtable(){
 	$.ajax({
-		url: $("#fule").val()+'subofficewrite/subofficewriteGetData.json',
-		data: {belongTimeStr:$("#belongTimeStr").val()},
+		url: $("#fule").val()+'subofficewrite/subofficewriteTenDayGetData.json',
+		data: {belongTimeStr:$("#belongTimeStr").val(),tendaytypeid:$("#tendaytypeid").val()},
 		type: "post",
 		dataType:"json",
 		success : function(json) {
 			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
+}
+//计算本月实际完成投资
+function calculateMonthRealityInvest(contractid,year,month,tendaytype){
+	var returnData;
+	$.ajax({
+		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
+		type:"POST",
+		dataType:"json",
+		async :false,
+		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
+		success:function(data){
+			returnData=data.calculateMonthRealityInvestData;
+		},
+		error:function(){
+			
+		}
+	});
+	return returnData;
+}
+//计算本年实际完成投资
+function calculateYearRealityInvest(contractid,year,month,tendaytype){
+	var returnData;
+	$.ajax({
+		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
+		type:"POST",
+		dataType:"json",
+		async :false,
+		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
+		success:function(data){
+			returnData=data.calculateYearRealityInvestData;
+		},
+		error:function(){
+			
+		}
+	});
+	return returnData;
+}
+//计算自开工以来实际完成投资
+function calculateFinishInvest(contractid,year,month,tendaytype){
+	var returnData;
+	$.ajax({
+		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
+		type:"POST",
+		dataType:"json",
+		async :false,
+		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
+		success:function(data){
+			returnData=data.calculateFinishInvestData;
+		},
+		error:function(){
+			
+		}
+	});
+	return returnData;
+}
+//计算本月实际完成投资、本年度实际完成投资、自开工以来实际完成投资
+function calculateAllInvest(index){
+	var contractid = $("#contractid_"+index).val();
+	var year = $("#year"+index).val();
+	var month = $("#month"+index).val();
+	var tendaytype = $("#tendaytype"+index).val();
+	$.ajax({
+		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
+		type:"POST",
+		dataType:"json",
+		async :false,
+		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
+		success:function(data){
+			var calculateMonthRealityInvestData=data.calculateMonthRealityInvestData;
+			$("#monthrealityinvest_"+index).html(fmoney(calculateMonthRealityInvestData,4));
+			var calculateYearRealityInvestData=data.calculateYearRealityInvestData;
+			$("#yearrealityinvest_"+index).html(fmoney(calculateYearRealityInvestData,4));
+			var calculateFinishInvestData=data.calculateFinishInvestData;
+			$("#finishinvest_"+index).html(fmoney(calculateFinishInvestData,4));
+		},
+		error:function(){
+			
 		}
 	});
 }

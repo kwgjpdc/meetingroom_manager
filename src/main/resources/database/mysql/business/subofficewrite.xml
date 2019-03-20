@@ -38,6 +38,10 @@
 			sw.*,ct.contractname,ct.contractnum,ct.amount contractamount,
 			DATE_FORMAT(sw.begindate, '%Y-%m-%d') begindatestr,
 			DATE_FORMAT(sw.planfinishdate, '%Y-%m-%d') planfinishdatestr,
+			case when sw.tendaytype = '1' then '上旬' 
+                 when sw.tendaytype = '2' then '中旬'
+                 when sw.tendaytype = '3' then '下旬'
+            else '无' end  tendaytypestr,
 			case when sw.status = '1' then '已填报' 
                  when sw.status = '2' then '审核中'
                  when sw.status = '3' then '审核通过'
@@ -54,6 +58,12 @@
 		<if test="month!=null and month!=''">
 			and sw.month = #{month} 
 		</if>
+		<if test="type!=null and type!=''">
+			and sw.type = #{type} 
+		</if>
+		<if test="tendaytype!=null and tendaytype!=0">
+			and sw.tendaytype = #{tendaytype} 
+		</if>
 		<if test="status!=null and status.size()!=0">
 			and sw.status in 
 			<foreach collection="status" item="status" index="index" open="(" close=")" separator=",">
@@ -66,11 +76,11 @@
            insert into t_s_subofficewrite(contractid,subofficeid, constructioncontent, begindate, planfinishdate, 
            	budgetinvest, finishinvest, surplusinvest, yearplaninvest, monthplaninvest, yearrealityinvest, monthrealityinvest, tendayrealityinvest,
            	earthwork, stonework, beton, overallimageprogress, nextmonthplaninvest, remark, 
-           	year, month, priority, status, isdisabled, operuser, operdate)  
+           	year, month, priority, status, type, tendaytype, isdisabled, operuser, operdate)  
                values( #{contractid}, #{subofficeid}, #{constructioncontent},  str_to_date(#{begindate},'%Y-%m-%d %H'), str_to_date(#{planfinishdate},'%Y-%m-%d %H'),
                #{budgetinvest},  #{finishinvest},  #{surplusinvest},  #{yearplaninvest},  #{monthplaninvest},  #{yearrealityinvest},  #{monthrealityinvest},  #{tendayrealityinvest},
                #{earthwork}, #{stonework}, #{beton}, #{overallimageprogress}, #{nextmonthplaninvest}, #{remark}, 
-           	   #{year}, #{month}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
+           	   #{year}, #{month}, #{priority}, #{status}, #{type}, #{tendaytype}, #{isdisabled}, #{operuser}, #{operdate})
    	</insert>
 
 	<update id="subofficewriteUpdate" parameterType="com.lion.echart.Suboffice.entity.SubofficeWriteEntity">
@@ -79,7 +89,7 @@
     		budgetinvest = #{budgetinvest},finishinvest = #{finishinvest},surplusinvest = #{surplusinvest},yearplaninvest = #{yearplaninvest},
     		monthplaninvest = #{monthplaninvest},yearrealityinvest = #{yearrealityinvest},monthrealityinvest = #{monthrealityinvest},tendayrealityinvest = #{tendayrealityinvest},
     		earthwork = #{earthwork},stonework = #{stonework},beton = #{beton},overallimageprogress = #{overallimageprogress},nextmonthplaninvest = #{nextmonthplaninvest},remark = #{remark},
-    		year = #{year},month = #{month},priority = #{priority},isdisabled = #{isdisabled},operuser = #{operuser},operdate = #{operdate}
+    		year = #{year},month = #{month},priority = #{priority},tendaytype = #{tendaytype},isdisabled = #{isdisabled},operuser = #{operuser},operdate = #{operdate}
     	where subofficewriteid = #{subofficewriteid}
     </update>
     
@@ -133,4 +143,43 @@
 			</foreach>
 		</if>
     </update>
+    <!-- 加载计算本月实际完成投资 -->
+	<select id="calculateMonthRealityInvest" parameterType="java.util.Map" resultType="java.util.Map" >
+		select ifnull(sum(tendayrealityinvest), 0.00) calculatemonthrealityinvest 
+		from t_s_subofficewrite where type=1
+		<if test="contractid != 0">
+			and contractid = #{contractid} 
+		</if>
+		<if test="year!=null and year!=''">
+			and year = #{year} 
+		</if>
+		<if test="month!=null and month!=''">
+			and month = #{month} 
+		</if>
+		<if test="tendaytype!=null and tendaytype!=0">
+			and tendaytype &lt;= #{tendaytype} 
+		</if>
+	</select>
+	<!-- 加载计算本年实际完成投资 -->
+	<select id="calculateYearRealityInvest" parameterType="java.util.Map" resultType="java.util.Map" >
+		select ifnull(sum(tendayrealityinvest), 0.00) calculateyearrealityinvest 
+		from t_s_subofficewrite where type=1
+		<if test="contractid != 0">
+			and contractid = #{contractid} 
+		</if>
+		<if test="year!=null and year!=''">
+			and year = #{year} 
+		</if>
+	</select>
+	<!-- 计算自开工以来实际完成投资 -->
+	<select id="calculateFinishInvest" parameterType="java.util.Map" resultType="java.util.Map" >
+		select ifnull(sum(tendayrealityinvest), 0.00) calculatefinishinvest 
+		from t_s_subofficewrite where type=1
+		<if test="contractid != 0">
+			and contractid = #{contractid} 
+		</if>
+		<if test="year!=null and year!=''">
+			and year = #{year} 
+		</if>
+	</select>
 </mapper>

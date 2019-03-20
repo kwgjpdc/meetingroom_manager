@@ -34,6 +34,8 @@ public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	private String month;//所属月份
 	private Integer priority;//序号
 	private Integer status;//状态 1已填报 2审核中 3审核通过 4审核不通过
+	private Integer type;//状态 1旬报 2月报 
+	private Integer tendaytype;//旬状态 1上旬 2中旬 3下旬 
 	private String isdisabled;//是否禁用
 	private String operuser;//修改人
 	private Date operdate;//修改时间
@@ -184,6 +186,18 @@ public class SubofficeWriteEntity extends BaseEntity implements Serializable {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public Integer getType() {
+		return type;
+	}
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	public Integer getTendaytype() {
+		return tendaytype;
+	}
+	public void setTendaytype(Integer tendaytype) {
+		this.tendaytype = tendaytype;
 	}
 	public String getIsdisabled() {
 		return isdisabled;

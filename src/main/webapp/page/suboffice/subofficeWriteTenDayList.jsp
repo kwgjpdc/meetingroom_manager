@@ -26,7 +26,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/subofficewriteSubmitHisList.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteTenDayList.js?ts=<%=request.getAttribute("ts") %>"></script>
 <style type="text/css">
 	.table {table-layout:fixed;}
 </style>
@@ -38,9 +38,33 @@ String fule = base + "" + contextPath + "/";
 	<div id="content" class="content" >
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
-            <div class="panel-heading">
-            	分局填报 / 提交历史记录
-            	<div id="toolbar" class="btn-group btn-group-right" >
+            <div class="panel-heading" style="height: 41px;">
+            	分局管理 / 旬填报 
+            	<div class='input-group date' id='belongTime' style="width: 120px;margin-left:150px;margin-top: -25px;">
+	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" />
+	                <span class="input-group-addon">
+	                    <span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+	            </div>
+	            <div class="form-group" style="margin-top:-34px;margin-left: 260px;">
+                    <div class="col-sm-2">
+                    	<select class="form-control" data-width="80px" id="tendaytypeid" name="tendaytypeid" onchange="reloadtable()">
+                    		<option value="0">-请选择-</option><option value="1">上旬</option><option value="2">中旬</option><option value="3">下旬</option>
+                    	</select>
+                    </div>
+                </div>
+	            <div id="operinfo" style="margin-top: -42px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
+            	<div id="toolbar" class="btn-group btn-group-right" style="margin-top: -28px;">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
+		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		            </button>
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="saveRow()"
+		            	data-toggle="modal" data-target="#myModal" >
+		                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>保存
+		            </button>
+		            <button id="btn_delete" type="button" class="btn btn-default" onclick="delRow()">
+		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		            </button>
 		        </div>
             </div>
             <div class="panel-body" style="display:none;" >

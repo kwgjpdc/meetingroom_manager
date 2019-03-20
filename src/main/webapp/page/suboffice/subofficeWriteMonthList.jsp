@@ -26,7 +26,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteList.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/subofficeWriteMonthList.js?ts=<%=request.getAttribute("ts") %>"></script>
 <style type="text/css">
 	.table {table-layout:fixed;}
 </style>
@@ -39,7 +39,7 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading" style="height: 41px;">
-            	填报管理 / 分局填报 
+            	分局管理 / 月填报 
             	<div class='input-group date' id='belongTime' style="width: 200px;margin-left:150px;margin-top: -25px;">
 	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" />
 	                <span class="input-group-addon">
