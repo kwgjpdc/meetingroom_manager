@@ -75,5 +75,13 @@
 			where mt.codetype = 'costtype' 
 			order by orderby ) mmtt ,(select @rownum:=0) rt
 	</select>
+	
+    <select id="getFinancingRepairData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select st.* from t_s_code t
+			left join t_f_financingrepair st on t.key = st.ctype
+			where t.codetype = 'costtypesub' and classes = #{classes}
+				and year = #{year} and month = #{month}
+			order by orderby 
+	</select>
     
 </mapper>

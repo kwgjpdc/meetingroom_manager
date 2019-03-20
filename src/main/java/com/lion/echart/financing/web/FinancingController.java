@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.base.logic.BaseService;
+import com.lion.echart.financing.entity.FinancingRepairView;
 import com.lion.echart.financing.entity.FinancingWriteEntity;
 import com.lion.echart.financing.entity.FinancingWritesView;
 
@@ -142,4 +143,49 @@ public class FinancingController {
 		
 		return list;
 	}
+
+	//工程投资完成汇总财务补录页面跳转 
+	@RequestMapping(value = "/financingRepair.web",method=RequestMethod.GET)
+	public String financingRepair(HttpServletRequest req,HttpServletResponse resp, 
+			HttpSession session, String year, String costtype) throws IOException { 
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "write");
+		return "/page/financing/financingRepair";
+	}
+
+	//获取工程投资完成汇总补录数据
+	@RequestMapping(value = "/getFinancingRepair.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> getFinancingRepair(HttpServletRequest req,
+			HttpServletResponse resp, HttpSession session, String month, String year, String classes) throws IOException {
+		List<Map<String, Object>> list = null;
+		if(month != null && year != null && 
+				!month.isEmpty() && !year.isEmpty() ) {
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			param.put("year", year);
+			param.put("month", month);
+			param.put("classes", classes);
+			
+			list = baseService.queryList("comle.financing.getFinancingRepairData", param);
+		}else {
+			list = new ArrayList<Map<String,Object>>();
+		}
+		
+		return list;
+	}
+	
+	//工程投资完成汇总补录数据保存
+	@RequestMapping(value = "/insertFRepair.json",method=RequestMethod.POST)
+	public @ResponseBody String insertFRepair(FinancingRepairView list
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			baseService.insertOupdates("comle.financing.insertFRepair", list.getList());
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
+	}
+	
 }

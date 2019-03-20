@@ -74,7 +74,17 @@ public class LoginController {
 	            //将用户对象添加到Session中
 	            session.setAttribute("USER_SESSION",user);
 	            jsonObject.accumulate("msgType", 0);
-	    		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCosttypes", null));
+	    		
+	            List<HashMap<String, Object>> codetypes = baseService.queryList("com.system.code.getCodetypes", null);
+	            String codetype = "";
+	            for (int i = 0; i < codetypes.size(); i++) {
+	            	codetype = codetypes.get(i).get("codetype").toString();
+	            	if(GlobalThings.getCash(codetype) == null) {
+	            		GlobalThings.putCash(codetype,new ArrayList<HashMap<String, Object>>());
+	            	}
+	            	((List<HashMap<String, Object>>)GlobalThings.getCash(codetype)).add(codetypes.get(i));
+	            }
+	    		
 	    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
 	    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
 	            //重定向到主页面的跳转方法
@@ -105,7 +115,8 @@ public class LoginController {
 	            //将用户对象添加到Session中
 	            session.setAttribute("USER_SESSION",user);
 	            jsonObject.accumulate("msgType", 0);
-	    		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCosttypes", null));
+	    		GlobalThings.putCash("costtypes", baseService.queryList("com.system.code.getCodetypes", null));
+	    		
 	    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
 	    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
 	            //重定向到主页面的跳转方法

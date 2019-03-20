@@ -387,7 +387,7 @@ function saveRow(){
 		length = rows.length; 
 	}
 	if(length == 0){
-		modalTitle("没有可提交得数据",1,800,600);
+		modalTitle("没有可提交得数据",1);
 		return;
 	}
 	var _money = '';

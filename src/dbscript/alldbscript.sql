@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-19 13:58:10
+Date: 2019-03-20 21:58:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,17 +40,17 @@ CREATE TABLE `t_c_contract` (
 -- ----------------------------
 -- Records of t_c_contract
 -- ----------------------------
-INSERT INTO `t_c_contract` VALUES ('1', '大理Ⅱ段进场道路施工3标', 'DZYS-DLⅡ-GCBF-SG-DL003', '3271.069711', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', null, '1', '9', 'false', 'admin', null, '2');
-INSERT INTO `t_c_contract` VALUES ('2', '云南省滇中引水工程施工准备工程龙泉倒虹吸始发井和接收井施工', 'DZYS-ZHBF-JSGL-FLFW-004', '9293.94', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', null, '2', '9', 'false', 'admin', null, '4');
-INSERT INTO `t_c_contract` VALUES ('3', '大理Ⅱ段进场道路3标施工监理', 'DZYS-DLⅡ-GCBF-JL-008', '64.1487', '自合同签订之日起至缺陷责任期满止', '2019-02-03 00:00:00', '云南伟德工程监理有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:20:48', '2');
-INSERT INTO `t_c_contract` VALUES ('4', '玉溪段进场道路施工1标', 'DZYS-YX-GCBF-SG-DL001', '1177.761026', '180日历天', '2019-02-15 00:00:00', '云南昊滇建设工程集团有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:22:31', '5');
-INSERT INTO `t_c_contract` VALUES ('5', '玉溪段进场道路施工2标', 'DZYS-YX-GCBF-SG-DL002', '3182.822905', '300日历天', '2019-02-15 00:00:00', '云南恩途建设工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:52:18', '5');
-INSERT INTO `t_c_contract` VALUES ('6', '玉溪段进场道路施工3标', 'DZYS-YX-GCBF-SG-DL003', '7164.867295', '365日历天', '2019-02-15 00:00:00', '云南交通建设工程公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:53:00', '5');
-INSERT INTO `t_c_contract` VALUES ('7', '红河段进场道路施工1标', 'DZYS-HH-GCBF-SG-DL001', '6587.799056', '365日历天', '2019-02-22 00:00:00', '中铁十二局集团有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 16:53:49', '6');
-INSERT INTO `t_c_contract` VALUES ('8', '云南省滇中引水工程施工准备工程昆明段进场道路施工1标', 'DZYS-KM-GCBF-SG-DL001', '5267.02', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 17:06:07', '4');
-INSERT INTO `t_c_contract` VALUES ('9', '云南省滇中引水工程施工准备工程昆明段进场道路施工2标', 'DZYS-KM-GCBF-SG-DL002', '4234.95', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', 'false', 'admin', '2019-03-12 17:07:01', '4');
-INSERT INTO `t_c_contract` VALUES ('10', '滇中引水工程勘察试验性工程03标：香炉山隧洞2#施工支洞工程施工', 'DZYS-XL-SG-001', '3913.25', '1365日历天', '2015-09-09 00:00:00', '.', '', '0', '9', 'false', 'admin', '2019-03-18 12:23:34', '1');
-INSERT INTO `t_c_contract` VALUES ('11', '滇中引水工程扩大勘察试验性工程水源及香炉山隧洞（丽江段）施工供电工程施工', 'DZYS-XL-YD-004', '7486.66', '365日历天', '2018-01-01 00:00:00', '。', '', '0', '9', 'false', 'admin', '2019-03-18 12:24:25', '1');
+INSERT INTO `t_c_contract` VALUES ('1', '大理Ⅱ段进场道路施工3标', 'DZYS-DLⅡ-GCBF-SG-DL003', '3271.069711', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', null, '1', '9', '0', 'admin', null, '2');
+INSERT INTO `t_c_contract` VALUES ('2', '云南省滇中引水工程施工准备工程龙泉倒虹吸始发井和接收井施工', 'DZYS-ZHBF-JSGL-FLFW-004', '9293.94', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', null, '2', '9', '0', 'admin', null, '4');
+INSERT INTO `t_c_contract` VALUES ('3', '大理Ⅱ段进场道路3标施工监理', 'DZYS-DLⅡ-GCBF-JL-008', '64.1487', '自合同签订之日起至缺陷责任期满止', '2019-02-03 00:00:00', '云南伟德工程监理有限公司', '', '0', '9', '0', 'admin', '2019-03-12 16:20:48', '2');
+INSERT INTO `t_c_contract` VALUES ('4', '玉溪段进场道路施工1标', 'DZYS-YX-GCBF-SG-DL001', '1177.761026', '180日历天', '2019-02-15 00:00:00', '云南昊滇建设工程集团有限公司', '', '0', '9', '0', 'admin', '2019-03-12 16:22:31', '5');
+INSERT INTO `t_c_contract` VALUES ('5', '玉溪段进场道路施工2标', 'DZYS-YX-GCBF-SG-DL002', '3182.822905', '300日历天', '2019-02-15 00:00:00', '云南恩途建设工程有限公司', '', '0', '9', '0', 'admin', '2019-03-12 16:52:18', '5');
+INSERT INTO `t_c_contract` VALUES ('6', '玉溪段进场道路施工3标', 'DZYS-YX-GCBF-SG-DL003', '7164.867295', '365日历天', '2019-02-15 00:00:00', '云南交通建设工程公司', '', '0', '9', '0', 'admin', '2019-03-12 16:53:00', '5');
+INSERT INTO `t_c_contract` VALUES ('7', '红河段进场道路施工1标', 'DZYS-HH-GCBF-SG-DL001', '6587.799056', '365日历天', '2019-02-22 00:00:00', '中铁十二局集团有限公司', '', '0', '9', '0', 'admin', '2019-03-12 16:53:49', '6');
+INSERT INTO `t_c_contract` VALUES ('8', '云南省滇中引水工程施工准备工程昆明段进场道路施工1标', 'DZYS-KM-GCBF-SG-DL001', '5267.02', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', '0', 'admin', '2019-03-12 17:06:07', '4');
+INSERT INTO `t_c_contract` VALUES ('9', '云南省滇中引水工程施工准备工程昆明段进场道路施工2标', 'DZYS-KM-GCBF-SG-DL002', '4234.95', '365日历天', '2019-02-22 00:00:00', '中铁二十四局集团南昌铁路工程有限公司', '', '0', '9', '0', 'admin', '2019-03-12 17:07:01', '4');
+INSERT INTO `t_c_contract` VALUES ('10', '滇中引水工程勘察试验性工程03标：香炉山隧洞2#施工支洞工程施工', 'DZYS-XL-SG-001', '3913.25', '1365日历天', '2015-09-09 00:00:00', '.', '', '0', '9', '0', 'admin', '2019-03-18 12:23:34', '1');
+INSERT INTO `t_c_contract` VALUES ('11', '滇中引水工程扩大勘察试验性工程水源及香炉山隧洞（丽江段）施工供电工程施工', 'DZYS-XL-YD-004', '7486.66', '365日历天', '2018-01-01 00:00:00', '。', '', '0', '9', '0', 'admin', '2019-03-18 12:24:25', '1');
 
 -- ----------------------------
 -- Table structure for `t_c_contractexecute`
@@ -73,10 +73,32 @@ CREATE TABLE `t_c_contractexecute` (
 -- ----------------------------
 -- Records of t_c_contractexecute
 -- ----------------------------
-INSERT INTO `t_c_contractexecute` VALUES ('1', '1', '376.18', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:11:22');
-INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:10');
-INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', 'false', 'admin', '2019-03-13 17:16:49');
-INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', 'false', 'admin', '2019-03-13 17:19:52');
+INSERT INTO `t_c_contractexecute` VALUES ('1', '1', '376.18', '2019', '2', null, '1', '0', 'admin', '2019-03-13 17:11:22');
+INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null, '1', '0', 'admin', '2019-03-13 17:16:10');
+INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', '0', 'admin', '2019-03-13 17:16:49');
+INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', '0', 'admin', '2019-03-13 17:19:52');
+
+-- ----------------------------
+-- Table structure for `t_f_financingrepair`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_f_financingrepair`;
+CREATE TABLE `t_f_financingrepair` (
+  `id` int(11) DEFAULT NULL COMMENT '自增主键',
+  `year` int(4) DEFAULT NULL COMMENT '年份',
+  `month` int(2) DEFAULT NULL COMMENT '月份',
+  `ctype` varchar(2) DEFAULT NULL COMMENT '款项类型',
+  `classes` varchar(2) DEFAULT NULL COMMENT '大类',
+  `cmoney` double(19,6) DEFAULT NULL COMMENT '合同金额',
+  `summoney` double(19,6) DEFAULT NULL COMMENT '累计金额',
+  `tytmmoney` double(19,6) DEFAULT NULL COMMENT 'this year to month 本年至当月完成金额',
+  `mmoney` double(19,6) DEFAULT NULL COMMENT '当月金额',
+  `operdate` date DEFAULT NULL COMMENT '操作时间',
+  `operuser` int(11) DEFAULT NULL COMMENT '操作人'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_f_financingrepair
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `t_f_financingwrite`
@@ -97,18 +119,21 @@ CREATE TABLE `t_f_financingwrite` (
   `cashierno` varchar(50) DEFAULT NULL COMMENT '出纳编号',
   `voucherno` varchar(50) DEFAULT NULL COMMENT '凭证编号',
   `isdisabled` varchar(1) DEFAULT '0' COMMENT '是否删除（1为删除,0为正常）',
+  `payee` varchar(500) DEFAULT NULL COMMENT '收款方',
+  `payeedescribe` longtext COMMENT '款项描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COMMENT='财务填报';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='财务填报';
 
 -- ----------------------------
 -- Records of t_f_financingwrite
 -- ----------------------------
-INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-01-07', '2019', '1', '02', '1', '1', '2', '31122321.000000', '2019-03-18 12:06:52', null, '', '', '0');
-INSERT INTO `t_f_financingwrite` VALUES ('6', '2019-01-13', '2019', '1', '02', '1', '1', '2', '42211321.000000', '2019-03-18 12:06:52', null, 'nnn', 'ccc', '0');
-INSERT INTO `t_f_financingwrite` VALUES ('10', '2019-03-14', '2019', '3', '12', '2', null, null, '1111123.000000', '2019-03-14 17:30:51', null, '', '', '0');
-INSERT INTO `t_f_financingwrite` VALUES ('11', '2019-03-14', '2019', '3', '12', '2', null, null, '321.000000', '2019-03-14 17:30:51', null, '', '', '0');
-INSERT INTO `t_f_financingwrite` VALUES ('12', '2019-03-14', '2019', '3', '12', '2', null, null, '111.000000', '2019-03-14 17:23:53', null, '', '', '1');
-INSERT INTO `t_f_financingwrite` VALUES ('13', '2019-03-14', '2019', '3', '02', '1', null, '1', '1230.000000', '2019-03-18 12:06:52', null, '', '', '0');
+INSERT INTO `t_f_financingwrite` VALUES ('4', '2019-01-07', '2019', '1', '02', '1', '1', '2', '31122321.000000', '2019-03-20 10:42:55', null, '', '', '0', '云南XXX公司', '1');
+INSERT INTO `t_f_financingwrite` VALUES ('6', '2019-01-13', '2019', '1', '02', '1', '1', '2', '42211321.000000', '2019-03-20 10:42:55', null, 'nnn', 'ccc', '0', '云南XXX公司', '33');
+INSERT INTO `t_f_financingwrite` VALUES ('10', '2019-03-14', '2019', '3', '12', '2', null, null, '1111123.000000', '2019-03-14 17:30:51', null, '', '', '0', '云南XXX公司', '1');
+INSERT INTO `t_f_financingwrite` VALUES ('11', '2019-03-14', '2019', '3', '12', '2', null, null, '321.000000', '2019-03-14 17:30:51', null, '', '', '0', '云南XXX公司', '1');
+INSERT INTO `t_f_financingwrite` VALUES ('12', '2019-03-14', '2019', '3', '12', '2', null, null, '111.000000', '2019-03-14 17:23:53', null, '', '', '1', '云南XXX公司', '1');
+INSERT INTO `t_f_financingwrite` VALUES ('13', '2019-03-14', '2019', '3', '02', '1', '10', '1', '1230.000000', '2019-03-20 10:42:55', null, '', '', '0', '云南XXX公司', '4');
+INSERT INTO `t_f_financingwrite` VALUES ('14', '2019-03-06', '2019', '3', '01', '1', '3', '2', '0.000000', '2019-03-20 10:42:26', null, '22222', '', '0', '云南2XX公司', '2');
 
 -- ----------------------------
 -- Table structure for `t_p_monthtotal`
@@ -154,27 +179,31 @@ CREATE TABLE `t_sys_menu` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_menu
 -- ----------------------------
-INSERT INTO `t_sys_menu` VALUES ('1', '填报管理', null, '1', '0', '2019-03-14 21:20:12', null, '1', '1', '0', '1', '2019-03-14 21:20:35');
-INSERT INTO `t_sys_menu` VALUES ('2', '分局填报', 'subofficewrite/subofficewriteList.web', '0', '1', '2019-03-14 21:21:18', null, '2', '1', '0', '1', '2019-03-14 21:21:28');
-INSERT INTO `t_sys_menu` VALUES ('3', '财务填报', 'financing/financingList.web', '0', '1', '2019-03-14 21:22:05', null, '3', '1', '0', '1', '2019-03-14 21:22:15');
-INSERT INTO `t_sys_menu` VALUES ('4', '合同管理', null, '1', '0', '2019-03-14 21:23:43', null, '4', '1', '0', '1', '2019-03-14 21:23:35');
-INSERT INTO `t_sys_menu` VALUES ('5', '合同签订', 'contract/contractSignedList.web', '0', '4', '2019-03-14 21:24:55', null, '5', '1', '0', '1', '2019-03-14 21:25:00');
-INSERT INTO `t_sys_menu` VALUES ('6', '合同执行', 'contract/contractExecuteList.web', '0', '4', '2019-03-14 21:42:11', null, '6', '1', '0', '1', '2019-03-14 21:42:08');
-INSERT INTO `t_sys_menu` VALUES ('10', '系统管理', '', '1', '0', '2019-03-15 11:00:48', '', '10', '1', '0', '1', '2019-03-15 11:00:48');
-INSERT INTO `t_sys_menu` VALUES ('11', '用户管理', 'user/userList.web', '0', '10', '2019-03-15 11:02:50', '', '11', '1', '0', '1', '2019-03-15 11:02:50');
-INSERT INTO `t_sys_menu` VALUES ('12', '角色管理', 'role/roleList.web', '0', '10', '2019-03-15 11:03:14', '', '12', '1', '0', '1', '2019-03-15 11:03:14');
-INSERT INTO `t_sys_menu` VALUES ('13', '菜单管理', 'menu/menuList.web', '0', '10', '2019-03-15 11:03:38', '', '13', '1', '0', '1', '2019-03-15 11:03:38');
-INSERT INTO `t_sys_menu` VALUES ('14', '统计报表', '', '1', '0', '2019-03-18 14:00:19', '', '7', '1', '0', '1', '2019-03-18 14:00:19');
-INSERT INTO `t_sys_menu` VALUES ('15', '合同执行月统计', 'contract/contractExecuteMonthTotalList.web', '0', '14', '2019-03-18 14:01:03', '', '8', '1', '0', '1', '2019-03-18 14:01:03');
-INSERT INTO `t_sys_menu` VALUES ('16', '财务数据统计', 'financing/financingReport.web', '0', '14', '2019-03-18 14:01:24', '', '9', '1', '0', '1', '2019-03-18 14:01:24');
-INSERT INTO `t_sys_menu` VALUES ('17', '审批管理', '', '1', '0', '2019-03-19 09:51:39', '', '14', '1', '0', '1', '2019-03-19 09:51:39');
-INSERT INTO `t_sys_menu` VALUES ('18', '分局填报审批', 'subofficewrite/subofficewriteApproveList.web', '0', '17', '2019-03-19 09:52:00', '', '15', '1', '0', '1', '2019-03-19 09:52:00');
-INSERT INTO `t_sys_menu` VALUES ('19', '财务填报审批', '', '0', '17', '2019-03-19 09:52:18', '', '16', '1', '0', '1', '2019-03-19 09:52:18');
+INSERT INTO `t_sys_menu` VALUES ('1', '分局填报', null, '1', '0', '2019-03-14 21:20:12', null, '1', '1', '0', '1', '2019-03-14 21:20:35');
+INSERT INTO `t_sys_menu` VALUES ('2', '月填报', 'subofficewrite/subofficewriteMonthList.web', '0', '1', '2019-03-14 21:21:18', null, '3', '1', '0', '1', '2019-03-14 21:21:28');
+INSERT INTO `t_sys_menu` VALUES ('3', '财务管理', '', '1', '0', '2019-03-14 21:22:05', null, '4', '1', '0', '1', '2019-03-14 21:22:15');
+INSERT INTO `t_sys_menu` VALUES ('4', '合同管理', null, '1', '0', '2019-03-14 21:23:43', null, '7', '1', '0', '1', '2019-03-14 21:23:35');
+INSERT INTO `t_sys_menu` VALUES ('5', '合同签订', 'contract/contractSignedList.web', '0', '4', '2019-03-14 21:24:55', null, '8', '1', '0', '1', '2019-03-14 21:25:00');
+INSERT INTO `t_sys_menu` VALUES ('6', '合同执行', 'contract/contractExecuteList.web', '0', '4', '2019-03-14 21:42:11', null, '9', '1', '0', '1', '2019-03-14 21:42:08');
+INSERT INTO `t_sys_menu` VALUES ('10', '系统管理', '', '1', '0', '2019-03-15 11:00:48', '', '14', '1', '0', '1', '2019-03-15 11:00:48');
+INSERT INTO `t_sys_menu` VALUES ('11', '用户管理', 'user/userList.web', '0', '10', '2019-03-15 11:02:50', '', '15', '1', '0', '1', '2019-03-15 11:02:50');
+INSERT INTO `t_sys_menu` VALUES ('12', '角色管理', 'role/roleList.web', '0', '10', '2019-03-15 11:03:14', '', '16', '1', '0', '1', '2019-03-15 11:03:14');
+INSERT INTO `t_sys_menu` VALUES ('13', '菜单管理', 'menu/menuList.web', '0', '10', '2019-03-15 11:03:38', '', '17', '1', '0', '1', '2019-03-15 11:03:38');
+INSERT INTO `t_sys_menu` VALUES ('14', '统计报表', '', '1', '0', '2019-03-18 14:00:19', '', '10', '1', '0', '1', '2019-03-18 14:00:19');
+INSERT INTO `t_sys_menu` VALUES ('15', '合同执行月统计', 'contract/contractExecuteMonthTotalList.web', '0', '14', '2019-03-18 14:01:03', '', '11', '1', '0', '1', '2019-03-18 14:01:03');
+INSERT INTO `t_sys_menu` VALUES ('16', '财务数据统计', 'financing/financingReport.web', '0', '14', '2019-03-18 14:01:24', '', '12', '1', '0', '1', '2019-03-18 14:01:24');
+INSERT INTO `t_sys_menu` VALUES ('17', '审批管理', '', '1', '0', '2019-03-19 09:51:39', '', '18', '1', '0', '1', '2019-03-19 09:51:39');
+INSERT INTO `t_sys_menu` VALUES ('18', '分局填报审批', 'subofficewrite/subofficewriteApproveList.web', '0', '17', '2019-03-19 09:52:00', '', '19', '1', '0', '1', '2019-03-19 09:52:00');
+INSERT INTO `t_sys_menu` VALUES ('19', '财务填报审批', '', '0', '17', '2019-03-19 09:52:18', '', '20', '1', '0', '1', '2019-03-19 09:52:18');
+INSERT INTO `t_sys_menu` VALUES ('20', '旬填报', 'subofficewrite/subofficewriteTenDayList.web', '0', '1', '2019-03-20 10:09:08', '', '2', '1', '0', '1', '2019-03-20 10:09:08');
+INSERT INTO `t_sys_menu` VALUES ('21', '工程投资完成汇总月统计', '', '0', '14', '2019-03-20 14:59:22', '', '13', '1', '0', '1', '2019-03-20 14:59:22');
+INSERT INTO `t_sys_menu` VALUES ('22', '财务填报', 'financing/financingList.web', '0', '3', '2019-03-20 14:59:58', '', '5', '1', '0', '1', '2019-03-20 14:59:58');
+INSERT INTO `t_sys_menu` VALUES ('23', '工程投资完成汇总数据补录', 'financing/financingRepair.web', '0', '3', '2019-03-20 15:00:27', '', '6', '1', '0', '1', '2019-03-20 15:00:27');
 
 -- ----------------------------
 -- Table structure for `t_sys_role`
@@ -209,29 +238,37 @@ CREATE TABLE `t_sys_role_menu` (
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   `menuid` int(11) NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role_menu
 -- ----------------------------
-INSERT INTO `t_sys_role_menu` VALUES ('72', '1', '1');
-INSERT INTO `t_sys_role_menu` VALUES ('73', '1', '2');
-INSERT INTO `t_sys_role_menu` VALUES ('74', '1', '3');
-INSERT INTO `t_sys_role_menu` VALUES ('75', '1', '4');
-INSERT INTO `t_sys_role_menu` VALUES ('76', '1', '5');
-INSERT INTO `t_sys_role_menu` VALUES ('77', '1', '6');
-INSERT INTO `t_sys_role_menu` VALUES ('78', '1', '14');
-INSERT INTO `t_sys_role_menu` VALUES ('79', '1', '15');
-INSERT INTO `t_sys_role_menu` VALUES ('80', '1', '16');
-INSERT INTO `t_sys_role_menu` VALUES ('81', '1', '10');
-INSERT INTO `t_sys_role_menu` VALUES ('82', '1', '11');
-INSERT INTO `t_sys_role_menu` VALUES ('83', '1', '12');
-INSERT INTO `t_sys_role_menu` VALUES ('84', '1', '13');
-INSERT INTO `t_sys_role_menu` VALUES ('90', '2', '1');
-INSERT INTO `t_sys_role_menu` VALUES ('91', '2', '2');
 INSERT INTO `t_sys_role_menu` VALUES ('93', '10', '17');
 INSERT INTO `t_sys_role_menu` VALUES ('94', '10', '18');
 INSERT INTO `t_sys_role_menu` VALUES ('95', '10', '19');
+INSERT INTO `t_sys_role_menu` VALUES ('110', '2', '20');
+INSERT INTO `t_sys_role_menu` VALUES ('111', '2', '1');
+INSERT INTO `t_sys_role_menu` VALUES ('112', '2', '2');
+INSERT INTO `t_sys_role_menu` VALUES ('122', '1', '1');
+INSERT INTO `t_sys_role_menu` VALUES ('123', '1', '20');
+INSERT INTO `t_sys_role_menu` VALUES ('124', '1', '2');
+INSERT INTO `t_sys_role_menu` VALUES ('125', '1', '3');
+INSERT INTO `t_sys_role_menu` VALUES ('126', '1', '22');
+INSERT INTO `t_sys_role_menu` VALUES ('127', '1', '23');
+INSERT INTO `t_sys_role_menu` VALUES ('128', '1', '4');
+INSERT INTO `t_sys_role_menu` VALUES ('129', '1', '5');
+INSERT INTO `t_sys_role_menu` VALUES ('130', '1', '6');
+INSERT INTO `t_sys_role_menu` VALUES ('131', '1', '14');
+INSERT INTO `t_sys_role_menu` VALUES ('132', '1', '15');
+INSERT INTO `t_sys_role_menu` VALUES ('133', '1', '16');
+INSERT INTO `t_sys_role_menu` VALUES ('134', '1', '21');
+INSERT INTO `t_sys_role_menu` VALUES ('135', '1', '10');
+INSERT INTO `t_sys_role_menu` VALUES ('136', '1', '11');
+INSERT INTO `t_sys_role_menu` VALUES ('137', '1', '12');
+INSERT INTO `t_sys_role_menu` VALUES ('138', '1', '13');
+INSERT INTO `t_sys_role_menu` VALUES ('139', '1', '17');
+INSERT INTO `t_sys_role_menu` VALUES ('140', '1', '18');
+INSERT INTO `t_sys_role_menu` VALUES ('141', '1', '19');
 
 -- ----------------------------
 -- Table structure for `t_sys_user`
@@ -277,19 +314,20 @@ CREATE TABLE `t_sys_user_role` (
   `userid` int(11) NOT NULL COMMENT '用户ID',
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_user_role
 -- ----------------------------
 INSERT INTO `t_sys_user_role` VALUES ('45', '12', '2');
-INSERT INTO `t_sys_user_role` VALUES ('46', '1', '1');
 INSERT INTO `t_sys_user_role` VALUES ('47', '13', '2');
 INSERT INTO `t_sys_user_role` VALUES ('48', '17', '2');
 INSERT INTO `t_sys_user_role` VALUES ('49', '16', '2');
 INSERT INTO `t_sys_user_role` VALUES ('50', '15', '2');
 INSERT INTO `t_sys_user_role` VALUES ('51', '14', '2');
 INSERT INTO `t_sys_user_role` VALUES ('52', '10', '10');
+INSERT INTO `t_sys_user_role` VALUES ('53', '11', '1');
+INSERT INTO `t_sys_user_role` VALUES ('54', '1', '1');
 
 -- ----------------------------
 -- Table structure for `t_s_code`
@@ -321,6 +359,10 @@ INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '10', '印花税', '2
 INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '11', '其他技术服务合同款', '2', '其他款项', '11');
 INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '12', '建设管理费', '2', '其他款项', '12');
 INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '13', '临时用地复垦保证金', '2', '其他款项', '13');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '01', '主体工程设计费', '1', '设计费用', '01');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '02', '二期工程设计费用', '1', '设计费用', '02');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '03', '施工控制网设计及建网', '1', '设计费用', '03');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '04', '其他咨询服务费用', '1', '设计费用', '04');
 
 -- ----------------------------
 -- Table structure for `t_s_dcdysqlid`
@@ -427,12 +469,12 @@ CREATE TABLE `t_s_suboffice` (
 -- ----------------------------
 -- Records of t_s_suboffice
 -- ----------------------------
-INSERT INTO `t_s_suboffice` VALUES ('1', '丽江分局', null, '1', '1', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('2', '大理分局', null, '2', '1', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('3', '楚雄分局', null, '3', '1', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('4', '昆明分局', null, '4', '1', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('5', '玉溪分局', null, '5', '1', 'false', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', '1', 'false', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('1', '丽江分局', null, '1', '1', '0', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('2', '大理分局', null, '2', '1', '0', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('3', '楚雄分局', null, '3', '1', '0', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('4', '昆明分局', null, '4', '1', '0', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('5', '玉溪分局', null, '5', '1', '0', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', '1', '0', 'admin', null);
 
 -- ----------------------------
 -- Table structure for `t_s_subofficewrite`
@@ -441,6 +483,7 @@ DROP TABLE IF EXISTS `t_s_subofficewrite`;
 CREATE TABLE `t_s_subofficewrite` (
   `subofficewriteid` bigint(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `contractid` bigint(11) NOT NULL COMMENT '合同ID',
+  `subofficeid` bigint(11) NOT NULL COMMENT '分局ID',
   `constructioncontent` longtext COMMENT '主要建设内容',
   `begindate` datetime DEFAULT NULL COMMENT '开工时间',
   `planfinishdate` datetime DEFAULT NULL COMMENT '计划完工时间',
@@ -462,16 +505,26 @@ CREATE TABLE `t_s_subofficewrite` (
   `month` int(2) DEFAULT NULL COMMENT '所属月份',
   `priority` int(11) DEFAULT '0' COMMENT '排序',
   `status` int(10) DEFAULT NULL COMMENT '状态',
+  `type` int(10) DEFAULT NULL COMMENT '状态 1旬报 2月报 ',
+  `tendaytype` int(10) DEFAULT NULL COMMENT '旬状态 1上旬 2中旬 3下旬 ',
   `isdisabled` varchar(20) DEFAULT NULL,
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficewriteid`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_s_subofficewrite
 -- ----------------------------
-INSERT INTO `t_s_subofficewrite` VALUES ('1', '2', '龙泉倒虹吸始发井围护结构和主体结构施工，接收井围护结构和主体结构施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '9787', '7367.76', '1926.18', '1662.61', '115.08', '152.08', '36.76', '10.35', '2.11', '0.48', '1.33', '龙泉倒虹吸始发井本旬进行基坑开挖及钢支撑安装施工，始发井基坑开挖共计19155.5m³，本旬完成610m³，累计完成9776m³，占比51%，剩余9379.5m³，分三区开挖，西侧第一区（1号井）已开挖至基底，深度17.5m，中部第二区（2号井西侧）已开挖至第三道砼支撑，深度13m，东侧第三区（2号井东侧）已开挖至第二道钢支撑，深度8m。第二道钢支撑本旬完成1榀直撑安装，已累计完成2榀角撑、2榀斜撑及7榀直撑安装，第三道钢支撑本旬完成2榀直撑安装，已累计完成2榀角撑、2榀斜撑、5榀直撑安装。\r\n龙泉倒虹吸接收井本旬进行降水井施工及冠梁基础面清理施工，降水井共计632m，本旬完成155m，累计完成365m，完成率57.7%，剩余267m。', '183.06', '', '2019', '2', '0', '3', 'false', 'admin', '2019-03-14 15:17:12');
-INSERT INTO `t_s_subofficewrite` VALUES ('2', '8', '路基土石方开挖、防护工程、路基路面等', '2018-08-20 00:00:00', '2019-12-31 00:00:00', '6085.51', '3731.64', '1535.38', '2348.47', '420.28', '813.09', '265.21', '105.07', '8.3138', '46.0165', '0.5028', '进场道路总长11.419公里，累计完成毛路开挖9.695公里，占84.90%，其中路基开挖完成8.289公里，占72.58%。', '654.58', '', '2019', '2', '0', '4', 'false', 'admin', '2019-03-14 15:17:12');
-INSERT INTO `t_s_subofficewrite` VALUES ('3', '9', '路基土石方开挖、防护工程、路基路面等', '2019-01-07 00:00:00', '2019-12-31 00:00:00', '7250', '873.41', '3361.54', '160', '3584.95', '223.41', '23.41', '0.41', '2.16', '8.64', '2.9', '进场道路完成松林1#支洞和龙庆1#支洞进场道路复测放线，龙庆1#支洞毛路开挖完成1.5公里，土方开挖完成2.16万方，石方开挖完成8.64万方。', '180', '', '2019', '2', '0', '1', 'false', 'admin', '2019-03-14 15:17:12');
-INSERT INTO `t_s_subofficewrite` VALUES ('4', '3', '55', '2019-02-24 00:00:00', '2019-03-02 00:00:00', '43', '33', '33', '23', '333', '33', '33', '33', '3', '3', '3', '333334', '3', '', '2019', '2', '0', '1', 'false', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('1', '2', '4', '龙泉倒虹吸始发井围护结构和主体结构施工，接收井围护结构和主体结构施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '9787', '7367.76', '1926.18', '1662.61', '115.08', '152.08', '36.76', '10.35', '2.11', '0.48', '1.33', '龙泉倒虹吸始发井本旬进行基坑开挖及钢支撑安装施工，始发井基坑开挖共计19155.5m³，本旬完成610m³，累计完成9776m³，占比51%，剩余9379.5m³，分三区开挖，西侧第一区（1号井）已开挖至基底，深度17.5m，中部第二区（2号井西侧）已开挖至第三道砼支撑，深度13m，东侧第三区（2号井东侧）已开挖至第二道钢支撑，深度8m。第二道钢支撑本旬完成1榀直撑安装，已累计完成2榀角撑、2榀斜撑及7榀直撑安装，第三道钢支撑本旬完成2榀直撑安装，已累计完成2榀角撑、2榀斜撑、5榀直撑安装。\r\n龙泉倒虹吸接收井本旬进行降水井施工及冠梁基础面清理施工，降水井共计632m，本旬完成155m，累计完成365m，完成率57.7%，剩余267m。', '183.06', '', '2019', '2', '0', '3', '2', null, '0', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('2', '8', '4', '路基土石方开挖、防护工程、路基路面等', '2018-08-20 00:00:00', '2019-12-31 00:00:00', '6085.51', '3731.64', '1535.38', '2348.47', '420.28', '813.09', '265.21', '105.07', '8.31', '46.02', '0.5', '进场道路总长11.419公里，累计完成毛路开挖9.695公里，占84.90%，其中路基开挖完成8.289公里，占72.58%。', '654.58', '', '2019', '2', '0', '4', '2', null, '0', '15', '2019-03-19 16:31:53');
+INSERT INTO `t_s_subofficewrite` VALUES ('3', '9', '4', '路基土石方开挖、防护工程、路基路面等', '2019-01-07 00:00:00', '2019-12-31 00:00:00', '7250', '873.41', '3361.54', '160', '3584.95', '223.41', '23.41', '0.41', '2.16', '8.64', '2.9', '进场道路完成松林1#支洞和龙庆1#支洞进场道路复测放线，龙庆1#支洞毛路开挖完成1.5公里，土方开挖完成2.16万方，石方开挖完成8.64万方。', '180', '', '2019', '2', '0', '1', '2', null, '0', '15', '2019-03-19 16:31:53');
+INSERT INTO `t_s_subofficewrite` VALUES ('4', '3', '2', '55', '2019-02-24 00:00:00', '2019-03-02 00:00:00', '43', '33', '33', '23', '333', '33', '33', '33', '3', '3', '3', '333334', '3', '', '2019', '3', '0', '1', '2', null, '0', 'admin', '2019-03-14 15:17:12');
+INSERT INTO `t_s_subofficewrite` VALUES ('23', '2', '4', '施工内容', '2019-03-19 00:00:00', '2019-03-19 00:00:00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '2', null, '0', '15', '2019-03-19 16:31:53');
+INSERT INTO `t_s_subofficewrite` VALUES ('24', '9', '4', '施工ssss', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '2', null, '1', '15', '2019-03-19 16:31:53');
+INSERT INTO `t_s_subofficewrite` VALUES ('25', '1', '2', '33333', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '2', null, '0', '13', '2019-03-19 16:34:33');
+INSERT INTO `t_s_subofficewrite` VALUES ('26', '9', '4', '2标施工', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '', '2019', '2', '0', '1', '2', null, '0', '15', '2019-03-19 16:31:53');
+INSERT INTO `t_s_subofficewrite` VALUES ('27', '3', '2', '施工监理', '2017-11-30 00:00:00', '2020-06-30 00:00:00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '2', null, '0', '13', '2019-03-19 16:36:37');
+INSERT INTO `t_s_subofficewrite` VALUES ('28', '10', '1', '丽江建设', '2018-02-01 00:00:00', '1970-01-01 00:00:00', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '2', null, '0', '12', '2019-03-19 16:39:14');
+INSERT INTO `t_s_subofficewrite` VALUES ('29', '8', '4', '建设内容上旬', '2019-01-01 00:00:00', '2020-08-13 00:00:00', '0', '118.05', '0', '0', '0', '118.05', '12.98', '12.98', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '1', '1', '0', '15', '2019-03-20 15:56:01');
+INSERT INTO `t_s_subofficewrite` VALUES ('30', '8', '4', '建设内容中旬', '2019-01-01 00:00:00', '2020-08-13 00:00:00', '0', '0', '0', '0', '0', '0', '0', '22.34', '0', '0', '0', '', '0', '', '2019', '3', '0', '1', '1', '2', '0', '15', '2019-03-20 15:56:01');
