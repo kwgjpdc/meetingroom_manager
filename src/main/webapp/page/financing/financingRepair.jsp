@@ -10,18 +10,20 @@ String fule = base + contextPath + "/";
 <head>
 <meta charset="UTF-8">
 <title>滇中引水管理局</title>
+<link rel="stylesheet" href="<%=contextPath%>/css/the-modal.css">
+<link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
+<link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-table.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-select.min.css">
 <link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-editable.css">
-<link rel="stylesheet" href="<%=contextPath%>/css/the-modal.css">
-<link rel="stylesheet" href="<%=contextPath%>/css/base.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
-<link rel="stylesheet" href="<%=contextPath%>/css/main.css?ts=<%=request.getAttribute("ts") %>" type="text/css" />
+<link rel="stylesheet" href="<%=contextPath%>/css/bootstrap-datetimepicker.min.css">
 <script type="text/javascript" src="<%=contextPath%>/js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/financingRepair.js?ts=<%=request.getAttribute("ts") %>"></script>
@@ -41,19 +43,15 @@ String fule = base + contextPath + "/";
             	财务填报 / 工程投资完成汇总数据补录
             	 <form id="formSearch" class="form-horizontal" style="margin-left: 130px;margin-top: -40px;">
                 	<input type="hidden" id="yeardefault" value="<%=request.getAttribute("year") %>" >
-                	 <input type="hidden" id="costtypedefault" value="<%=request.getAttribute("costtype") %>" >
-                    <div class="form-group" style="margin-top:15px">
-                        <div class="col-sm-1">
-                        	<select id="year" onchange="reloadtable()" name="year" class="selectpicker" data-width="100px" >
-                        	</select>
-                        </div>
-                        <div class="col-sm-1" style="margin-left: 5px;">
-                        	<select id="month" onchange="reloadtable()" name="month" class="selectpicker" data-width="50px" >
-                        	</select>
-                        </div>
-                    </div>
+                	<input type="hidden" id="costtypedefault" value="<%=request.getAttribute("costtype") %>" >
+                    <div class='input-group date' id='belongTime' style="width: 120px;margin-left:150px;margin-top: 13px;">
+		                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" />
+		                <span class="input-group-addon">
+		                    <span class="glyphicon glyphicon-calendar"></span>
+		                </span>
+	           		</div>
                 </form>
-            	<div id="operinfo" style="margin-top: -43px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
+            	<div id="operinfo" style="margin-top: -27px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
             	<div id="toolbar" class="btn-group btn-group-right"  style="margin-top: -28px;">
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="saveRow()"
 		            	data-toggle="modal" data-target="#myModal" >

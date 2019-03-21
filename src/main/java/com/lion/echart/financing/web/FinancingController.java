@@ -155,19 +155,18 @@ public class FinancingController {
 
 	//获取工程投资完成汇总补录数据
 	@RequestMapping(value = "/getFinancingRepair.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> getFinancingRepair(HttpServletRequest req,
-			HttpServletResponse resp, HttpSession session, String month, String year, String classes) throws IOException {
+	public @ResponseBody List<Map<String, Object>> getFinancingRepair(String belongTimeStr, String classes,HttpServletRequest req,
+			HttpServletResponse resp, HttpSession session) throws IOException {
 		List<Map<String, Object>> list = null;
-		if(month != null && year != null && 
-				!month.isEmpty() && !year.isEmpty() ) {
+		if(belongTimeStr!=null&&!belongTimeStr.equals("")){
 			HashMap<String, Object> param = new HashMap<String, Object>();
-			param.put("year", year);
-			param.put("month", month);
+			param.put("year", belongTimeStr.substring(0,4));
+			param.put("month", belongTimeStr.substring(5,7));
 			param.put("classes", classes);
-			
 			list = baseService.queryList("comle.financing.getFinancingRepairData", param);
-		}else {
-			list = new ArrayList<Map<String,Object>>();
+			if(list.size()==0){
+				list = baseService.queryList("comle.financing.getFinancingRepairData", null);
+			}
 		}
 		
 		return list;
