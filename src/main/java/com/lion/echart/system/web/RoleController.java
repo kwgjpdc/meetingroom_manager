@@ -48,8 +48,10 @@ public class RoleController {
 	
 	//角色信息列表数据
 	@RequestMapping(value = "/role/roleGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> roleGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.role.getRoleListData", null);
+	public @ResponseBody List<Map<String, Object>> roleGetData(String rolename,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("rolename", rolename);
+		List<Map<String, Object>> list = baseService.queryList("comle.role.getRoleListData", param);
 		return list;
 	}
 	

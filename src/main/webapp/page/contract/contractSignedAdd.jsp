@@ -61,7 +61,7 @@ String fule = base + "" + contextPath + "/";
 					<div class="form-group">
 						<label for="signTime">合同签订日期</label>
 						<div class='input-group date' id='signTime' style="width: 200px;">
-			                <input type='text' class="form-control" name="signTimeStr" id="signTimeStr"/>
+			                <input type='text' readonly="readonly" class="form-control" name="signTimeStr" id="signTimeStr"/>
 			                <span class="input-group-addon">
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>

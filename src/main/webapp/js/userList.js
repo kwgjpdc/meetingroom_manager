@@ -75,6 +75,17 @@ var TableInit = function () {
 	};
 	return oTableInit;
 };
+function reloadtable(){
+	$.ajax({
+		url: $("#fule").val()+'user/userGetData.json',
+		data: $("#formSearch").serializeObj(),
+		type: "post",
+		dataType:"json",
+		success : function(json) {
+			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
+}
 //角色分配
 function roleAssign(_id){
 	window.location.href = $("#fule").val()+'user/userRoleAssign.web?userid='+_id;
@@ -82,4 +93,37 @@ function roleAssign(_id){
 //修改用户
 function userEdit(_id){
 	window.location.href = $("#fule").val()+'user/userEdit.web?userid='+_id;
+}
+//删除用户
+function delUser(){
+    var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+    if(checkRow.length<=0){
+    	modalTitle("请选中一条数据",1);
+	}else{
+		var checkIds = "";
+		$.each(checkRow,function(key,value){
+			checkIds+=value.id+",";
+		});
+		if(checkIds.length>0){
+			checkIds=checkIds.substring(0,checkIds.length-1);
+		}
+		showloding();
+		$.ajax({
+			url: $("#fule").val()+'user/userDel.json?checkIds='+checkIds,
+			type: 'post',
+			dataType: "json",
+			success: function (data) {
+				console.log(data)
+				if(data.msgType == 1){
+					modalTitle("操作成功",1);
+					window.location.reload();
+				}else{
+					modalTitle(data.message,1);
+				}
+			},error:function(data){
+				closeloding();
+				modalTitle("操作失败，请重试",1);
+			}
+		});
+	}
 }

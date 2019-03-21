@@ -54,7 +54,28 @@ public class ContractController {
 		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
 		return list;
 	}
-	
+	//删除合同签订
+	@RequestMapping(value = "contract/contractSignedDel.json",method=RequestMethod.POST)
+	public void contractSignedDel(String checkIds
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+			List<Integer> idList = new ArrayList<Integer>();
+			for(String s : checkIds.split(",")){
+				idList.add(Integer.valueOf(s));
+			}
+			paramUpdate.put("idList", idList);
+			baseService.updateObject("comle.contract.deleteContractSigned", paramUpdate);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
+	}
 	//通过分局ID获取合同签订列表数据
 	@RequestMapping(value = "/contract/contractSignedListGetDatBySuboffice.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> contractSignedListGetDatBySuboffice(String contractname,Integer suboffice, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
@@ -99,8 +120,15 @@ public class ContractController {
 	
 	//获取合同执行列表数据
 	@RequestMapping(value = "/contract/contractExecuteListGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> contractExecuteListGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractExecuteListData", null);
+	public @ResponseBody List<Map<String, Object>> contractExecuteListGetData(String contractname,String suboffice,String belongTimeStr,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("subofficeid", suboffice);
+		searchmap.put("contractname", contractname);
+		if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+			searchmap.put("year", belongTimeStr.substring(0,4));
+			searchmap.put("month", belongTimeStr.substring(5,7));
+		}
+		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractExecuteListData", searchmap);
 		return list;
 	}
 	
@@ -128,7 +156,28 @@ public class ContractController {
 		}
 		return obj.toString();
 	}
-	
+	//删除合同执行
+	@RequestMapping(value = "contract/contractExecuteDel.json",method=RequestMethod.POST)
+	public void contractExecuteDel(String checkIds
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+			List<Integer> idList = new ArrayList<Integer>();
+			for(String s : checkIds.split(",")){
+				idList.add(Integer.valueOf(s));
+			}
+			paramUpdate.put("idList", idList);
+			baseService.updateObject("comle.contract.deleteContractExecute", paramUpdate);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
+	}
 	//合同月度统计表列表页 
 	@RequestMapping(value = "/contract/contractExecuteMonthTotalList.web",method=RequestMethod.GET)
 	public String contractExecutemonthTotalList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 

@@ -48,8 +48,10 @@ public class UserController {
 	
 	//用户信息列表数据
 	@RequestMapping(value = "/user/userGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> userGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.user.getUserListData", null);
+	public @ResponseBody List<Map<String, Object>> userGetData(String username,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("username", username);
+		List<Map<String, Object>> list = baseService.queryList("comle.user.getUserListData", param);
 		return list;
 	}
 	
@@ -67,7 +69,7 @@ public class UserController {
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
-			UserEntity user = new UserEntity(null,Long.valueOf(subofficeid), username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
+			UserEntity user = new UserEntity(null,Long.valueOf(subofficeid),null, username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
 			baseService.insertObject("comle.user.insertUser", user);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
@@ -89,13 +91,13 @@ public class UserController {
 		return "/page/system/userEdit";
 	}
 	
-	//用户添加保存
+	//用户修改保存
 	@RequestMapping(value = "/user/userEditSave.json",method=RequestMethod.POST)
 	public @ResponseBody String userEditSave(String userid,String username,String realname,String sex,String email,String password,String subofficeid,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
-			UserEntity user = new UserEntity(Long.valueOf(userid),Long.valueOf(subofficeid), username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
+			UserEntity user = new UserEntity(Long.valueOf(userid),Long.valueOf(subofficeid),null, username, realname, password, sex, email, new Date(), "", 0, 1, "0", "1", new Date());
 			baseService.updateObject("comle.user.updateUser", user);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
@@ -147,5 +149,27 @@ public class UserController {
 			obj.put("msgType", 0);
 		}
 		return obj.toString();
+	}
+	//删除用户
+	@RequestMapping(value = "user/userDel.json",method=RequestMethod.POST)
+	public void userDel(String checkIds
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+			List<Integer> idList = new ArrayList<Integer>();
+			for(String s : checkIds.split(",")){
+				idList.add(Integer.valueOf(s));
+			}
+			paramUpdate.put("idList", idList);
+			baseService.updateObject("comle.user.deleteUser", paramUpdate);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
 	}
 }

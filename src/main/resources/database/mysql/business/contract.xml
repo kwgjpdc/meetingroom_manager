@@ -11,6 +11,7 @@
                  when ct.status = '2' then '审核中'
             else '未审核' end  statusstr
 		from t_c_contract ct , t_s_suboffice sf where ct.subofficeid = sf.subofficeid
+		 and ct.isdisabled=0
 		<if test="subofficeid != null and subofficeid != 0">
 			and ct.subofficeid = #{subofficeid} 
 		</if>
@@ -23,22 +24,58 @@
            insert into t_c_contract(contractname, contractnum, amount, durationtime, signtime, contractpartyb, remark, priority, status, isdisabled, operuser, operdate, subofficeid) 
                values(#{contractName}, #{contractNum}, #{amount}, #{durationTime}, #{signTime}, #{contractPartyB}, #{remark}, #{priority}, #{status}, #{isDisabled}, #{operUser}, #{operDate}, #{subofficeId})
    </insert>
+   <!-- 删除合同签订 -->
+   <update id="deleteContractSigned" parameterType="java.util.Map">
+    	update t_c_contract
+    	set isdisabled = 1
+    	where 1=1
+		<if test="idList!=null and idList.size()!=0">
+	    	and contractid in
+			<foreach collection="idList" item="idList" index="index" open="(" close=")" separator=",">
+			  #{idList}
+			</foreach>
+		</if>
+    </update>
    <!-- 合同执行查询 -->
    <select id="getcontractExecuteListData" parameterType="java.util.Map" resultType="java.util.Map" >
-		select b.*,a.monthamount,a.year,a.month from t_c_contractexecute a,(
+		select b.*,a.monthamount,a.year,a.month,a.contractexecuteid from t_c_contractexecute a,(
 			select ct.contractid,ct.contractname,ct.contractnum,s.subofficeid,s.subofficename,
 			ct.amount,sum(cte.monthamount) amountyear,
 			convert(sum(cte.monthamount)/ct.amount*100,decimal(15,2))percent
 			from t_c_contractexecute cte,t_c_contract ct,t_s_suboffice s
-			where cte.contractid=ct.contractid and ct.subofficeid=s.subofficeid
+			where cte.contractid=ct.contractid and ct.subofficeid=s.subofficeid and cte.isdisabled=0
 			group by cte.contractid) b 
-		where a.contractid = b.contractid and a.year=2019 and a.month=2
+		where a.contractid = b.contractid  and a.isdisabled=0
+		<if test="year != null and year != 0">
+			and a.year = #{year} 
+		</if>
+		<if test="month != null and month != 0">
+			and a.month = #{month} 
+		</if>
+		<if test="subofficeid != null and subofficeid != 0">
+			and b.subofficeid = #{subofficeid} 
+		</if>
+		<if test="contractname != null and contractname != ''">
+			and b.contractname like CONCAT('%',#{contractname},'%')
+		</if>
 	</select>
 	<!-- 合同执行插入 -->
 	<insert id="insertContractExecute" parameterType="com.lion.echart.contract.entity.ContractEntity">
            insert into t_c_contractexecute(contractid, monthamount, year, month, remark, priority, isdisabled, operuser, operdate) 
                values(#{contractId}, #{monthamount}, #{year}, #{month},  #{remark}, #{priority}, #{isDisabled}, #{operUser}, #{operDate})
    </insert>
+   <!-- 删除合同执行 -->
+   <update id="deleteContractExecute" parameterType="java.util.Map">
+    	update t_c_contractexecute
+    	set isdisabled = 1
+    	where 1=1
+		<if test="idList!=null and idList.size()!=0">
+	    	and contractexecuteid in
+			<foreach collection="idList" item="idList" index="index" open="(" close=")" separator=",">
+			  #{idList}
+			</foreach>
+		</if>
+    </update>
    <!-- 合同执行月统计查询 -->
 	<select id="getcontractExecuteMonthTotalListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select a.subofficename departStr,a.subofficeid,b.*,c.balanceTotalStr,c.payforTotalStr 
@@ -48,7 +85,7 @@
 				sum(ct.amount) contractTotalStr,sum(sw.monthrealityinvest) thisMonthInvestStr,
 				sum(sw.yearrealityinvest) thisYtmTotalStr,sum(sw.finishinvest) investTotalStr
 			from t_s_subofficewrite sw,t_c_contract ct,t_s_suboffice su 
-			where sw.contractid = ct.contractid and su.subofficeid=ct.subofficeid
+			where sw.contractid = ct.contractid and su.subofficeid=ct.subofficeid and sw.isdisabled=0
 			<if test="year != null and year != 0">
 				and (sw.year = #{year} )
 			</if>
