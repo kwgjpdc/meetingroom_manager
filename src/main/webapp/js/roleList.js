@@ -47,9 +47,10 @@ var TableInit = function () {
 						field: 'createdateStr',
 						title: '创建时间'
 				  },
-				  {field: '',align: 'center',title: '操作' ,width : 150,
+				  {field: '',align: 'center',title: '操作' ,width : 250,
 						formatter:function (value, row, index, field) {
 					        return [
+					        	  '<button type="button" onclick="roleEdit('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">修改</button>',
 							      '<button type="button" onclick="menuAssign('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">权限分配</button>'
 							      ].join('');
 					    }
@@ -90,7 +91,43 @@ function reloadtable(){
 		}
 	});
 }
+//修改用户
+function roleEdit(_id){
+	window.location.href = $("#fule").val()+'role/roleEdit.web?roleid='+_id;
+}
 //角色分配
 function menuAssign(_id){
 	window.location.href = $("#fule").val()+'role/roleMenuAssign.web?roleid='+_id;
+}
+//角色删除
+function delRole(){
+	var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+    if(checkRow.length<=0){
+    	modalTitle("请选中一条数据",1);
+	}else{
+		var checkIds = "";
+		$.each(checkRow,function(key,value){
+			checkIds+=value.id+",";
+		});
+		if(checkIds.length>0){
+			checkIds=checkIds.substring(0,checkIds.length-1);
+		}
+		showloding();
+		$.ajax({
+			url: $("#fule").val()+'role/roleDel.json?checkIds='+checkIds,
+			type: 'post',
+			dataType: "json",
+			success: function (data) {
+				if(data.msgType == 1){
+					modalTitle("操作成功",1);
+					window.location.reload();
+				}else{
+					modalTitle(data.message,1);
+				}
+			},error:function(data){
+				closeloding();
+				modalTitle("操作失败，请重试",1);
+			}
+		});
+	}
 }

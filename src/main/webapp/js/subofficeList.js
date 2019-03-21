@@ -8,7 +8,7 @@ var TableInit = function () {
 	//初始化Table
 	oTableInit.Init = function () {
 		$('#t_datagrid').bootstrapTable({
-			url: $("#fule").val()+"user/userGetData.json",       //请求后台的URL（*）
+			url: $("#fule").val()+"suboffice/subofficeGetDBData.json",       //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
@@ -36,17 +36,21 @@ var TableInit = function () {
 			height: window.innerHeight-$("#head").height()-$("#searchdiv").height()-50,
 			columns: [
 				[
-				  { checkbox: true}
-				 ,{field: 'username',width : 100,title: '用户名'}
-				 ,{field: 'realname',width : 150,title: '真实姓名'}
-				 ,{field: 'subofficename',width : 100,title: '所属分局'}
-				 ,{field: 'email',width : 150,title: '邮箱'}
-				 ,{field: 'createdateStr',width : 100,title: '创建时间'},
-				  {field: '',align: 'center',title: '操作' ,width : 150,
+				  {                    
+                    checkbox: true
+	              }
+				  ,{
+						field: 'subofficename',
+						title: '部分名称'
+				  }
+				 ,{
+						field: 'isonlysubostr',
+						title: '是否分局'
+				  },
+				  {field: '',align: 'center',title: '操作' ,width : 250,
 						formatter:function (value, row, index, field) {
 					        return [
-					        	'<button type="button" onclick="userEdit('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">修改</button>',
-							      '<button type="button" onclick="roleAssign('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">角色分配</button>'
+					        	  '<button type="button" onclick="subofficeEdit('+row["subofficeid"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">修改</button>',
 							      ].join('');
 					    }
 				  }
@@ -77,7 +81,7 @@ var TableInit = function () {
 };
 function reloadtable(){
 	$.ajax({
-		url: $("#fule").val()+'user/userGetData.json',
+		url: $("#fule").val()+'suboffice/subofficeGetDBData.json',
 		data: $("#formSearch").serializeObj(),
 		type: "post",
 		dataType:"json",
@@ -86,30 +90,26 @@ function reloadtable(){
 		}
 	});
 }
-//角色分配
-function roleAssign(_id){
-	window.location.href = $("#fule").val()+'user/userRoleAssign.web?userid='+_id;
+//修改部门
+function subofficeEdit(_id){
+	window.location.href = $("#fule").val()+'suboffice/subofficeEdit.web?subofficeid='+_id;
 }
-//修改用户
-function userEdit(_id){
-	window.location.href = $("#fule").val()+'user/userEdit.web?userid='+_id;
-}
-//删除用户
-function delUser(){
-    var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+//角色删除
+function delSuboffice(){
+	var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
     if(checkRow.length<=0){
     	modalTitle("请选中一条数据",1);
 	}else{
 		var checkIds = "";
 		$.each(checkRow,function(key,value){
-			checkIds+=value.id+",";
+			checkIds+=value.subofficeid+",";
 		});
 		if(checkIds.length>0){
 			checkIds=checkIds.substring(0,checkIds.length-1);
 		}
 		showloding();
 		$.ajax({
-			url: $("#fule").val()+'user/userDel.json?checkIds='+checkIds,
+			url: $("#fule").val()+'suboffice/subofficeDel.json?checkIds='+checkIds,
 			type: 'post',
 			dataType: "json",
 			success: function (data) {

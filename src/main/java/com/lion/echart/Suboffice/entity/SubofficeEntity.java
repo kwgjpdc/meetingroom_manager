@@ -8,36 +8,40 @@ import java.util.Date;
  *
  */
 public class SubofficeEntity implements Serializable {
-	private int subofficeId;
-	private String subofficeName;
+	private Long subofficeid;
+	private String subofficename;
 	private String remark;
-	private int priority;
-	private String isDisabled;
-	private String operUser;
-	private Date operDate;
-	
-	public SubofficeEntity(int subofficeId, String subofficeName, String remark, int priority, String isDisabled,
-			String operUser, Date operDate) {
+	private Integer priority;
+	private String isonlysubo;//是否分局
+	private String isdisabled;
+	private String operuser;
+	private Date operdate;
+	public SubofficeEntity(){
+		
+	}
+	public SubofficeEntity(Long subofficeid, String subofficename, String remark, Integer priority, String isonlysubo,
+			String isdisabled, String operuser, Date operdate) {
 		super();
-		this.subofficeId = subofficeId;
-		this.subofficeName = subofficeName;
+		this.subofficeid = subofficeid;
+		this.subofficename = subofficename;
 		this.remark = remark;
 		this.priority = priority;
-		this.isDisabled = isDisabled;
-		this.operUser = operUser;
-		this.operDate = operDate;
+		this.isonlysubo = isonlysubo;
+		this.isdisabled = isdisabled;
+		this.operuser = operuser;
+		this.operdate = operdate;
 	}
-	public int getSubofficeId() {
-		return subofficeId;
+	public Long getSubofficeid() {
+		return subofficeid;
 	}
-	public void setSubofficeId(int subofficeId) {
-		this.subofficeId = subofficeId;
+	public void setSubofficeid(Long subofficeid) {
+		this.subofficeid = subofficeid;
 	}
-	public String getSubofficeName() {
-		return subofficeName;
+	public String getSubofficename() {
+		return subofficename;
 	}
-	public void setSubofficeName(String subofficeName) {
-		this.subofficeName = subofficeName;
+	public void setSubofficename(String subofficename) {
+		this.subofficename = subofficename;
 	}
 	public String getRemark() {
 		return remark;
@@ -45,29 +49,34 @@ public class SubofficeEntity implements Serializable {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public int getPriority() {
+	public Integer getPriority() {
 		return priority;
 	}
-	public void setPriority(int priority) {
+	public void setPriority(Integer priority) {
 		this.priority = priority;
 	}
-	public String getIsDisabled() {
-		return isDisabled;
+	public String getIsonlysubo() {
+		return isonlysubo;
 	}
-	public void setIsDisabled(String isDisabled) {
-		this.isDisabled = isDisabled;
+	public void setIsonlysubo(String isonlysubo) {
+		this.isonlysubo = isonlysubo;
 	}
-	public String getOperUser() {
-		return operUser;
+	public String getIsdisabled() {
+		return isdisabled;
 	}
-	public void setOperUser(String operUser) {
-		this.operUser = operUser;
+	public void setIsdisabled(String isdisabled) {
+		this.isdisabled = isdisabled;
 	}
-	public Date getOperDate() {
-		return operDate;
+	public String getOperuser() {
+		return operuser;
 	}
-	public void setOperDate(Date operDate) {
-		this.operDate = operDate;
+	public void setOperuser(String operuser) {
+		this.operuser = operuser;
 	}
-	
+	public Date getOperdate() {
+		return operdate;
+	}
+	public void setOperdate(Date operdate) {
+		this.operdate = operdate;
+	}
 }

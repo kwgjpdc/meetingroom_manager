@@ -85,6 +85,14 @@ var TableInit = function () {
 					width : 50,
 					rowspan: 2
 				  },
+				  {
+					field: 'typestr',
+					align: 'center',
+					title: '类型' ,
+					valign : "middle",
+					width : 50,
+					rowspan: 2
+				  },
 	              {
 					field: 'statusstr',
 					align: 'center',

@@ -8,11 +8,11 @@ import java.util.Date;
  *
  */
 public class MenuEntity implements Serializable {
-	private long id;
+	private Long id;
 	private String menuname;
 	private String url;
 	private int ismenu;
-	private long pid;
+	private Long pid;
 	private Date createdate;
 	private String remark;
 	private int priority;
@@ -21,9 +21,13 @@ public class MenuEntity implements Serializable {
 	private String operuser;
 	private Date operdate;
 	
-	public MenuEntity(String menuname, String url, int ismenu, long pid, Date createdate, String remark, int priority,
+	public MenuEntity(){
+		
+	}
+	public MenuEntity(Long id, String menuname, String url, int ismenu, Long pid, Date createdate, String remark, int priority,
 			int status, String isdisabled, String operuser, Date operdate) {
 		super();
+		this.id = id;
 		this.menuname = menuname;
 		this.url = url;
 		this.ismenu = ismenu;
@@ -36,10 +40,10 @@ public class MenuEntity implements Serializable {
 		this.operuser = operuser;
 		this.operdate = operdate;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getMenuname() {
@@ -60,10 +64,10 @@ public class MenuEntity implements Serializable {
 	public void setIsmenu(int ismenu) {
 		this.ismenu = ismenu;
 	}
-	public long getPid() {
+	public Long getPid() {
 		return pid;
 	}
-	public void setPid(long pid) {
+	public void setPid(Long pid) {
 		this.pid = pid;
 	}
 	public Date getCreatedate() {

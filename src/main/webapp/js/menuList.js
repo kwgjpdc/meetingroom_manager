@@ -58,6 +58,13 @@ var TableInit = function () {
 				 ,{
 						field: 'priority',
 						title: '排序序号'
+				  },
+				  {field: '',align: 'center',title: '操作' ,width : 100,
+						formatter:function (value, row, index, field) {
+					        return [
+					        	'<button type="button" onclick="menuEdit('+row["id"]+')" class="RoleOfedit btn btn-primary  btn-sm" style="margin-right:15px;">修改</button>',
+							      ].join('');
+					    }
 				  }
 				]
 			],
@@ -84,3 +91,50 @@ var TableInit = function () {
 	};
 	return oTableInit;
 };
+function reloadtable(){
+	$.ajax({
+		url: $("#fule").val()+'menu/menuGetData.json',
+		data: $("#formSearch").serializeObj(),
+		type: "post",
+		dataType:"json",
+		success : function(json) {
+			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
+}
+//修改用户
+function menuEdit(_id){
+	window.location.href = $("#fule").val()+'menu/menuEdit.web?menuid='+_id;
+}
+//菜单删除
+function delMenu(){
+	var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+  if(checkRow.length<=0){
+  	modalTitle("请选中一条数据",1);
+	}else{
+		var checkIds = "";
+		$.each(checkRow,function(key,value){
+			checkIds+=value.id+",";
+		});
+		if(checkIds.length>0){
+			checkIds=checkIds.substring(0,checkIds.length-1);
+		}
+		showloding();
+		$.ajax({
+			url: $("#fule").val()+'menu/menuDel.json?checkIds='+checkIds,
+			type: 'post',
+			dataType: "json",
+			success: function (data) {
+				if(data.msgType == 1){
+					modalTitle("操作成功",1);
+					window.location.reload();
+				}else{
+					modalTitle(data.message,1);
+				}
+			},error:function(data){
+				closeloding();
+				modalTitle("操作失败，请重试",1);
+			}
+		});
+	}
+}

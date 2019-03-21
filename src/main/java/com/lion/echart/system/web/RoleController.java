@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,8 +70,36 @@ public class RoleController {
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
-			RoleEntity role = new RoleEntity(rolename, new Date(), "", 0, 1, "0", "1", new Date());
+			RoleEntity role = new RoleEntity(null,rolename, new Date(), "", 0, 1, "0", "1", new Date());
 			baseService.insertObject("comle.role.insertRole", role);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
+	}
+	
+	//角色信息修改列表页 
+	@RequestMapping(value = "/role/roleEdit.web",method=RequestMethod.GET)
+	public String roleEdit(String roleid,HttpServletRequest req,HttpServletResponse resp, HttpSession session,Model model) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("roleid", roleid);
+		RoleEntity role = (RoleEntity)baseService.queryObject("comle.role.getRoleData", searchmap);
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		model.addAttribute("role", role);
+		return "/page/system/roleEdit";
+	}
+	
+	//角色修改保存
+	@RequestMapping(value = "/role/roleEditSave.json",method=RequestMethod.POST)
+	public @ResponseBody String roleEditSave(String roleid,String rolename,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
+		JSONObject obj = new JSONObject();
+		try {
+			RoleEntity role = new RoleEntity(Long.valueOf(roleid),rolename, new Date(), "", 0, 1, "0", "1", new Date());
+			baseService.updateObject("comle.role.updateRole", role);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,5 +150,27 @@ public class RoleController {
 			obj.put("msgType", 0);
 		}
 		return obj.toString();
+	}
+	//删除角色
+	@RequestMapping(value = "role/roleDel.json",method=RequestMethod.POST)
+	public void roleDel(String checkIds
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+			List<Integer> idList = new ArrayList<Integer>();
+			for(String s : checkIds.split(",")){
+				idList.add(Integer.valueOf(s));
+			}
+			paramUpdate.put("idList", idList);
+			baseService.updateObject("comle.role.deleteRole", paramUpdate);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
 	}
 }

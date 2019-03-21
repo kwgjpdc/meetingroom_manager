@@ -3,6 +3,15 @@ $(document).ready(function(){
 	loadParentMenuData();
 });
 function loadParentMenuData(){
+	var pidid = $("#pidid").val();
+	var ismenuid = $("#ismenuid").val();
+	$("#ismenu").val(ismenuid);
+	if(ismenuid==1){
+		$("#pid_div").hide();
+	}
+	if(ismenuid==0){
+		$("#pid_div").show();
+	}
 	$.ajax({
 		url:$("#fule").val()+"menu/menuParentGetData.json",
 		type:"POST",
@@ -10,7 +19,15 @@ function loadParentMenuData(){
 		success:function(data){
 			var strHtml= "";
 			$.each(data, function(key,value){
-				strHtml+='<option value="'+value.id+'">'+value.menuname+'</option>';
+				if(pidid!=''){
+					if(value.id==pid){
+						strHtml+='<option value="'+value.id+'" selected="selected">'+value.menuname+'</option>';
+					}else{
+						strHtml+='<option value="'+value.id+'">'+value.menuname+'</option>';
+					}
+				}else{
+					strHtml+='<option value="'+value.id+'">'+value.menuname+'</option>';
+				}
 			});
 			$("#pid").html(strHtml);
 		},
@@ -56,6 +73,7 @@ function changeIsMenu(value){
 	}
 }
 function save(){
+	var roleid = $("#id").val();
 	var menuname = $("#menuname").val();
 	var url = $("#url").val();
 	var ismenu = $("#ismenu").val();
@@ -66,10 +84,11 @@ function save(){
         return false;
     }
 	$.ajax({
-		url: $("#fule").val()+"menu/menuSave.json",
+		url: $("#fule").val()+"menu/menuEditSave.json",
 		type:"POST",
 		dataType:"json",
 		data: {
+			roleid : roleid,
 			menuname : menuname,
 			url : url,
 			ismenu : ismenu,

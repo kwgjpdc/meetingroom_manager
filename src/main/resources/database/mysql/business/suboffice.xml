@@ -3,9 +3,56 @@
 <mapper namespace="comle.Suboffice">
 	<select id="getSubofficeListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select * from t_s_suboffice
-		where isonlysubo = 1
+		where isonlysubo = 1 and isdisabled = 0
 		<if test="subofficeid != null and subofficeid != 0">
 			and subofficeid = #{subofficeid} 
 		</if>
 	</select>
+	<select id="getSubofficeListDBData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select *, 
+		case when isonlysubo = '1' then '是' 
+        else '否' end  isonlysubostr
+		from t_s_suboffice
+		where 1=1 and isdisabled = 0
+		<if test="subofficeid != null and subofficeid != 0">
+			and subofficeid = #{subofficeid} 
+		</if>
+		<if test="subofficename != null and subofficename != ''">
+			and subofficename like CONCAT('%',#{subofficename},'%')
+		</if>
+	</select>
+	<!-- 查询部门 -->
+	<select id="getSubofficeData" parameterType="java.util.Map" resultType="com.lion.echart.Suboffice.entity.SubofficeEntity" >
+		select 
+			*
+		from t_s_suboffice 
+		where 1=1
+		<if test="subofficeid != null and subofficeid != 0">
+			and subofficeid = #{subofficeid} 
+		</if>
+	</select>
+	<!-- 部门插入 -->
+	<insert id="insertSuboffice" parameterType="com.lion.echart.Suboffice.entity.SubofficeEntity">
+           insert into t_s_suboffice(subofficename, remark, priority, isonlysubo, isdisabled, operuser, operdate) 
+               values(#{subofficename}, #{remark}, #{priority}, #{isonlysubo}, #{isdisabled}, #{operuser}, #{operdate})
+   </insert>
+   <!-- 部门修改 -->
+   <update id="updateSuboffice" parameterType="com.lion.echart.Suboffice.entity.SubofficeEntity">
+   		update t_s_suboffice 
+   		set subofficename = #{subofficename},
+   		isonlysubo = #{isonlysubo}
+   		where subofficeid=#{subofficeid}
+   </update>
+      <!-- 删除部门 -->
+   <update id="deleteSuboffice" parameterType="java.util.Map">
+    	update t_s_suboffice
+    	set isdisabled = 1
+    	where 1=1
+		<if test="idList!=null and idList.size()!=0">
+	    	and subofficeid in
+			<foreach collection="idList" item="idList" index="index" open="(" close=")" separator=",">
+			  #{idList}
+			</foreach>
+		</if>
+    </update>
 </mapper>

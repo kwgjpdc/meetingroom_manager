@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,8 +47,10 @@ public class MenuController {
 	
 	//菜单信息列表数据
 	@RequestMapping(value = "/menu/menuGetData.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> menuGetData(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
-		List<Map<String, Object>> list = baseService.queryList("comle.menu.getMenuListData", null);
+	public @ResponseBody List<Map<String, Object>> menuGetData(String menuname,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("menuname", menuname);
+		List<Map<String, Object>> list = baseService.queryList("comle.menu.getMenuListData", param);
 		return list;
 	}
 	//父级菜单信息列表数据
@@ -66,15 +69,44 @@ public class MenuController {
 	
 	//菜单添加保存
 	@RequestMapping(value = "/menu/menuSave.json",method=RequestMethod.POST)
-	public @ResponseBody String userSave(String menuname,String url,Integer ismenu,Long pid,Integer priority,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public @ResponseBody String menuSave(String menuname,String url,Integer ismenu,Long pid,Integer priority,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
 		JSONObject obj = new JSONObject();
 		try {
 			if(ismenu==1){
 				pid=(long) 0;
 			}
-			MenuEntity menu = new MenuEntity(menuname, url, ismenu, pid, new Date(), "", priority, 1, "0", "1", new Date());
+			MenuEntity menu = new MenuEntity(null,menuname, url, ismenu, pid, new Date(), "", priority, 1, "0", "1", new Date());
 			baseService.insertObject("comle.menu.insertMenu", menu);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		return obj.toString();
+	}
+	//菜单信息修改列表页 
+	@RequestMapping(value = "/menu/menuEdit.web",method=RequestMethod.GET)
+	public String menuEdit(String menuid,HttpServletRequest req,HttpServletResponse resp, HttpSession session,Model model) throws IOException { 
+		Map<String, Object> searchmap = new HashMap<String, Object>();
+		searchmap.put("menuid", menuid);
+		MenuEntity menu = (MenuEntity)baseService.queryObject("comle.menu.getMenuData", searchmap);
+		req.setAttribute("ts", System.currentTimeMillis());
+		req.setAttribute("who", "contract");
+		model.addAttribute("menu", menu);
+		return "/page/system/menuEdit";
+	}
+	//菜单修改保存
+	@RequestMapping(value = "/menu/menuEditSave.json",method=RequestMethod.POST)
+	public @ResponseBody String menuEditSave(String roleid,String menuname,String url,Integer ismenu,Long pid,Integer priority,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd");
+		JSONObject obj = new JSONObject();
+		try {
+			if(ismenu==1){
+				pid=(long) 0;
+			}
+			MenuEntity menu = new MenuEntity(Long.valueOf(roleid),menuname, url, ismenu, pid, new Date(), "", priority, 1, "0", "1", new Date());
+			baseService.insertObject("comle.menu.updateMenu", menu);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -89,5 +121,27 @@ public class MenuController {
 		searchmap.put("userid", userid);
 		List<Map<String, Object>> list = baseService.queryList("comle.menu.getMenuListDataByUserId", searchmap);
 		return list;
+	}
+	//删除菜单
+	@RequestMapping(value = "menu/menuDel.json",method=RequestMethod.POST)
+	public void menuDel(String checkIds
+			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		JSONObject obj = new JSONObject();
+		try {
+			HashMap<String, Object> paramUpdate = new HashMap<String, Object>();
+			List<Integer> idList = new ArrayList<Integer>();
+			for(String s : checkIds.split(",")){
+				idList.add(Integer.valueOf(s));
+			}
+			paramUpdate.put("idList", idList);
+			baseService.updateObject("comle.menu.deleteMenu", paramUpdate);
+			obj.put("msgType", 1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
+		}
+		resp.setContentType("text/html;charset=UTF-8");
+		resp.getWriter().print(obj.toString());
+		//return obj.toString();
 	}
 }

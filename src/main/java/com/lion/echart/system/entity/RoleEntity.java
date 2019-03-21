@@ -8,7 +8,7 @@ import java.util.Date;
  *
  */
 public class RoleEntity implements Serializable {
-	private long id;
+	private Long id;
 	private String rolename;
 	private Date createdate;
 	private String remark;
@@ -18,9 +18,14 @@ public class RoleEntity implements Serializable {
 	private String operuser;
 	private Date operdate;
 	
-	public RoleEntity(String rolename, Date createdate, String remark, int priority, int status, String isdisabled,
+	public RoleEntity(){
+		
+	}
+	
+	public RoleEntity(Long id, String rolename, Date createdate, String remark, int priority, int status, String isdisabled,
 			String operuser, Date operdate) {
 		super();
+		this.id = id;
 		this.rolename = rolename;
 		this.createdate = createdate;
 		this.remark = remark;
@@ -30,10 +35,10 @@ public class RoleEntity implements Serializable {
 		this.operuser = operuser;
 		this.operdate = operdate;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getRolename() {

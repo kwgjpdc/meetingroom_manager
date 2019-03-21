@@ -42,6 +42,9 @@
                  when sw.tendaytype = '2' then '中旬'
                  when sw.tendaytype = '3' then '下旬'
             else '无' end  tendaytypestr,
+            case when sw.type = '1' then '旬报' 
+                 when sw.type = '2' then '月报'
+            else '无' end  typestr,
 			case when sw.status = '1' then '已填报' 
                  when sw.status = '2' then '审核中'
                  when sw.status = '3' then '审核通过'

@@ -9,11 +9,27 @@
 			and rolename like CONCAT('%',#{rolename},'%')
 		</if>
 	</select>
+	<!-- 查询角色 -->
+	<select id="getRoleData" parameterType="java.util.Map" resultType="com.lion.echart.system.entity.RoleEntity" >
+		select 
+			*
+		from t_sys_role 
+		where 1=1
+		<if test="roleid != null and roleid != 0">
+			and id = #{roleid} 
+		</if>
+	</select>
 	<!-- 角色插入 -->
 	<insert id="insertRole" parameterType="com.lion.echart.system.entity.RoleEntity">
            insert into t_sys_role(rolename, createdate, remark, priority, status, isdisabled, operuser, operdate) 
                values(#{rolename},  #{createdate}, #{remark}, #{priority}, #{status}, #{isdisabled}, #{operuser}, #{operdate})
    </insert>
+   <!-- 角色修改 -->
+   <update id="updateRole" parameterType="com.lion.echart.system.entity.RoleEntity">
+   		update t_sys_role 
+   		set rolename = #{rolename}
+   		where id=#{id}
+   </update>
    <!-- 通过角色或菜单查询角色菜单表数据 -->
    <select id="getRoleMenuListData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select 
@@ -37,4 +53,16 @@
            insert into t_sys_role_menu(roleid, menuid) 
                values(#{roleid}, #{menuid})
    </insert>
+   <!-- 删除角色 -->
+   <update id="deleteRole" parameterType="java.util.Map">
+    	update t_sys_role
+    	set isdisabled = 1
+    	where 1=1
+		<if test="idList!=null and idList.size()!=0">
+	    	and id in
+			<foreach collection="idList" item="idList" index="index" open="(" close=")" separator=",">
+			  #{idList}
+			</foreach>
+		</if>
+    </update>
 </mapper>

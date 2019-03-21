@@ -1,24 +1,7 @@
 $(document).ready(function(){
+	$("#isonlysubo").val($("#isonlysuboid").val());
 	$("#content").height(window.innerHeight+60);
-	loadParentMenuData();
 });
-function loadParentMenuData(){
-	$.ajax({
-		url:$("#fule").val()+"menu/menuParentGetData.json",
-		type:"POST",
-		dataType:"json",
-		success:function(data){
-			var strHtml= "";
-			$.each(data, function(key,value){
-				strHtml+='<option value="'+value.id+'">'+value.menuname+'</option>';
-			});
-			$("#pid").html(strHtml);
-		},
-		error:function(){
-			
-		}
-	});
-}
 function validatef(){
 	$('#formInsert').bootstrapValidator({
 		message: 'This value is not valid',
@@ -47,38 +30,26 @@ function validatef(){
 		}
 	});
 }
-function changeIsMenu(value){
-	if(value==1){
-		$("#pid_div").hide();
-	}
-	if(value==0){
-		$("#pid_div").show();
-	}
-}
 function save(){
-	var menuname = $("#menuname").val();
-	var url = $("#url").val();
-	var ismenu = $("#ismenu").val();
-	var pid = $("#pid").val();
-	var priority = $("#priority").val();
-	if(menuname == ''){
-    	alert('请输入菜单名称');
+	var subofficeid = $("#id").val();
+	var subofficename = $("#subofficename").val();
+	var isonlysubo = $("#isonlysubo").val();
+	if(subofficename == ''){
+    	alert('请输入部门名称');
         return false;
     }
 	$.ajax({
-		url: $("#fule").val()+"menu/menuSave.json",
+		url: $("#fule").val()+"suboffice/subofficeEditSave.json",
 		type:"POST",
 		dataType:"json",
 		data: {
-			menuname : menuname,
-			url : url,
-			ismenu : ismenu,
-			pid : pid,
-			priority : priority
+			subofficeid : subofficeid,
+			subofficename : subofficename,
+			isonlysubo : isonlysubo
         },
 		success:function(data){
 			 alert("操作成功");
-			 window.location.href=$("#fule").val()+"menu/menuList.web";
+			 window.location.href=$("#fule").val()+"suboffice/subofficeList.web";
 		},
 		error:function(){
 			console.log("失败");
