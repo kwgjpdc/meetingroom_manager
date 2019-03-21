@@ -83,5 +83,10 @@
 				and year = #{year} and month = #{month}
 			order by orderby 
 	</select>
+	
+	<insert id="insertFRepair" parameterType="com.lion.echart.financing.entity.FinancingRepairEntity">
+           insert into t_f_financingrepair(ctype) 
+               values(#{ctype})
+   	</insert>
     
 </mapper>
