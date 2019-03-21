@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-20 22:01:55
+Date: 2019-03-21 16:52:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -83,7 +83,7 @@ INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null,
 -- ----------------------------
 DROP TABLE IF EXISTS `t_f_financingrepair`;
 CREATE TABLE `t_f_financingrepair` (
-  `id` int(11) DEFAULT NULL COMMENT '自增主键',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
   `year` int(4) DEFAULT NULL COMMENT '年份',
   `month` int(2) DEFAULT NULL COMMENT '月份',
   `ctype` varchar(2) DEFAULT NULL COMMENT '款项类型',
@@ -93,7 +93,8 @@ CREATE TABLE `t_f_financingrepair` (
   `tytmmoney` double(19,6) DEFAULT NULL COMMENT 'this year to month 本年至当月完成金额',
   `mmoney` double(19,6) DEFAULT NULL COMMENT '当月金额',
   `operdate` date DEFAULT NULL COMMENT '操作时间',
-  `operuser` int(11) DEFAULT NULL COMMENT '操作人'
+  `operuser` int(11) DEFAULT NULL COMMENT '操作人',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -179,12 +180,12 @@ CREATE TABLE `t_sys_menu` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_menu
 -- ----------------------------
-INSERT INTO `t_sys_menu` VALUES ('1', '分局填报', null, '1', '0', '2019-03-14 21:20:12', null, '1', '1', '0', '1', '2019-03-14 21:20:35');
+INSERT INTO `t_sys_menu` VALUES ('1', '分局填报', '', '1', '0', '2019-03-14 21:20:12', null, '1', '1', '0', '1', '2019-03-14 21:20:35');
 INSERT INTO `t_sys_menu` VALUES ('2', '月填报', 'subofficewrite/subofficewriteMonthList.web', '0', '1', '2019-03-14 21:21:18', null, '3', '1', '0', '1', '2019-03-14 21:21:28');
 INSERT INTO `t_sys_menu` VALUES ('3', '财务管理', '', '1', '0', '2019-03-14 21:22:05', null, '4', '1', '0', '1', '2019-03-14 21:22:15');
 INSERT INTO `t_sys_menu` VALUES ('4', '合同管理', null, '1', '0', '2019-03-14 21:23:43', null, '7', '1', '0', '1', '2019-03-14 21:23:35');
@@ -204,6 +205,7 @@ INSERT INTO `t_sys_menu` VALUES ('20', '旬填报', 'subofficewrite/subofficewri
 INSERT INTO `t_sys_menu` VALUES ('21', '工程投资完成汇总月统计', 'financing/financingReportTwo', '0', '14', '2019-03-20 14:59:22', '', '13', '1', '0', '1', '2019-03-20 14:59:22');
 INSERT INTO `t_sys_menu` VALUES ('22', '财务填报', 'financing/financingList.web', '0', '3', '2019-03-20 14:59:58', '', '5', '1', '0', '1', '2019-03-20 14:59:58');
 INSERT INTO `t_sys_menu` VALUES ('23', '工程投资完成汇总数据补录', 'financing/financingRepair.web', '0', '3', '2019-03-20 15:00:27', '', '6', '1', '0', '1', '2019-03-20 15:00:27');
+INSERT INTO `t_sys_menu` VALUES ('28', '部门管理', 'suboffice/subofficeList.web', '0', '10', '2019-03-21 15:37:50', '', '17', '1', '0', '1', '2019-03-21 15:37:50');
 
 -- ----------------------------
 -- Table structure for `t_sys_role`
@@ -220,7 +222,7 @@ CREATE TABLE `t_sys_role` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role
@@ -238,7 +240,7 @@ CREATE TABLE `t_sys_role_menu` (
   `roleid` int(11) NOT NULL COMMENT '角色ID',
   `menuid` int(11) NOT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role_menu
@@ -249,26 +251,27 @@ INSERT INTO `t_sys_role_menu` VALUES ('95', '10', '19');
 INSERT INTO `t_sys_role_menu` VALUES ('110', '2', '20');
 INSERT INTO `t_sys_role_menu` VALUES ('111', '2', '1');
 INSERT INTO `t_sys_role_menu` VALUES ('112', '2', '2');
-INSERT INTO `t_sys_role_menu` VALUES ('122', '1', '1');
-INSERT INTO `t_sys_role_menu` VALUES ('123', '1', '20');
-INSERT INTO `t_sys_role_menu` VALUES ('124', '1', '2');
-INSERT INTO `t_sys_role_menu` VALUES ('125', '1', '3');
-INSERT INTO `t_sys_role_menu` VALUES ('126', '1', '22');
-INSERT INTO `t_sys_role_menu` VALUES ('127', '1', '23');
-INSERT INTO `t_sys_role_menu` VALUES ('128', '1', '4');
-INSERT INTO `t_sys_role_menu` VALUES ('129', '1', '5');
-INSERT INTO `t_sys_role_menu` VALUES ('130', '1', '6');
-INSERT INTO `t_sys_role_menu` VALUES ('131', '1', '14');
-INSERT INTO `t_sys_role_menu` VALUES ('132', '1', '15');
-INSERT INTO `t_sys_role_menu` VALUES ('133', '1', '16');
-INSERT INTO `t_sys_role_menu` VALUES ('134', '1', '21');
-INSERT INTO `t_sys_role_menu` VALUES ('135', '1', '10');
-INSERT INTO `t_sys_role_menu` VALUES ('136', '1', '11');
-INSERT INTO `t_sys_role_menu` VALUES ('137', '1', '12');
-INSERT INTO `t_sys_role_menu` VALUES ('138', '1', '13');
-INSERT INTO `t_sys_role_menu` VALUES ('139', '1', '17');
-INSERT INTO `t_sys_role_menu` VALUES ('140', '1', '18');
-INSERT INTO `t_sys_role_menu` VALUES ('141', '1', '19');
+INSERT INTO `t_sys_role_menu` VALUES ('142', '1', '1');
+INSERT INTO `t_sys_role_menu` VALUES ('143', '1', '20');
+INSERT INTO `t_sys_role_menu` VALUES ('144', '1', '2');
+INSERT INTO `t_sys_role_menu` VALUES ('145', '1', '3');
+INSERT INTO `t_sys_role_menu` VALUES ('146', '1', '22');
+INSERT INTO `t_sys_role_menu` VALUES ('147', '1', '23');
+INSERT INTO `t_sys_role_menu` VALUES ('148', '1', '4');
+INSERT INTO `t_sys_role_menu` VALUES ('149', '1', '5');
+INSERT INTO `t_sys_role_menu` VALUES ('150', '1', '6');
+INSERT INTO `t_sys_role_menu` VALUES ('151', '1', '14');
+INSERT INTO `t_sys_role_menu` VALUES ('152', '1', '15');
+INSERT INTO `t_sys_role_menu` VALUES ('153', '1', '16');
+INSERT INTO `t_sys_role_menu` VALUES ('154', '1', '21');
+INSERT INTO `t_sys_role_menu` VALUES ('155', '1', '10');
+INSERT INTO `t_sys_role_menu` VALUES ('156', '1', '11');
+INSERT INTO `t_sys_role_menu` VALUES ('157', '1', '12');
+INSERT INTO `t_sys_role_menu` VALUES ('158', '1', '13');
+INSERT INTO `t_sys_role_menu` VALUES ('159', '1', '28');
+INSERT INTO `t_sys_role_menu` VALUES ('160', '1', '17');
+INSERT INTO `t_sys_role_menu` VALUES ('161', '1', '18');
+INSERT INTO `t_sys_role_menu` VALUES ('162', '1', '19');
 
 -- ----------------------------
 -- Table structure for `t_sys_user`
@@ -290,14 +293,14 @@ CREATE TABLE `t_sys_user` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_user
 -- ----------------------------
 INSERT INTO `t_sys_user` VALUES ('1', null, 'admin', '管理员', '1', 'F', 'admin@admin.com', '2019-03-14 17:12:01', null, '0', '1', '0', 'admin', '2019-03-14 17:12:21');
 INSERT INTO `t_sys_user` VALUES ('10', '2', 'approve', '审批用户', '1', 'F', '', '2019-03-15 10:28:31', '', '0', '1', '0', '1', '2019-03-15 10:28:31');
-INSERT INTO `t_sys_user` VALUES ('11', '2', 'caiwu', '财务用户', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
+INSERT INTO `t_sys_user` VALUES ('11', '7', 'caiwu', '财务用户', '1', 'F', 'chenhao@node.com', '2019-03-15 10:51:31', '', '0', '1', '0', '1', '2019-03-15 10:51:31');
 INSERT INTO `t_sys_user` VALUES ('12', '1', 'lijiang', '丽江分局用户', '1', 'M', '', '2019-03-18 12:10:09', '', '0', '1', '0', '1', '2019-03-18 12:10:09');
 INSERT INTO `t_sys_user` VALUES ('13', '2', 'dali', '大理分局用户', '1', 'M', '', '2019-03-18 12:10:26', '', '0', '1', '0', '1', '2019-03-18 12:10:26');
 INSERT INTO `t_sys_user` VALUES ('14', '3', 'chuxiong', '楚雄分局用户', '1', 'M', '', '2019-03-18 12:10:41', '', '0', '1', '0', '1', '2019-03-18 12:10:41');
@@ -464,17 +467,18 @@ CREATE TABLE `t_s_suboffice` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_s_suboffice
 -- ----------------------------
-INSERT INTO `t_s_suboffice` VALUES ('1', '丽江分局', null, '1', '1', '0', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('2', '大理分局', null, '2', '1', '0', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('3', '楚雄分局', null, '3', '1', '0', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('4', '昆明分局', null, '4', '1', '0', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('5', '玉溪分局', null, '5', '1', '0', 'admin', null);
-INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', '1', '0', 'admin', null);
+INSERT INTO `t_s_suboffice` VALUES ('1', '丽江分局', null, '1', '1', '0', '1', null);
+INSERT INTO `t_s_suboffice` VALUES ('2', '大理分局', null, '2', '1', '0', '1', null);
+INSERT INTO `t_s_suboffice` VALUES ('3', '楚雄分局', null, '3', '1', '0', '1', null);
+INSERT INTO `t_s_suboffice` VALUES ('4', '昆明分局', null, '4', '1', '0', '1', null);
+INSERT INTO `t_s_suboffice` VALUES ('5', '玉溪分局', null, '5', '1', '0', '1', null);
+INSERT INTO `t_s_suboffice` VALUES ('6', '红河分局', null, '6', '1', '0', '1', null);
+INSERT INTO `t_s_suboffice` VALUES ('7', '财务处', null, '7', '0', '0', '1', null);
 
 -- ----------------------------
 -- Table structure for `t_s_subofficewrite`
