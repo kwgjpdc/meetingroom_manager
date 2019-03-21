@@ -8,24 +8,25 @@
             else '男' end  sexStr
 		from t_sys_user t
     	left join t_s_suboffice st on t.subofficeid = st.subofficeid
-			where 1=1
+			where 1=1 and t.isdisabled=0
 		<if test="username != null and username != ''">
-			and (username = '#{username}' )
+			and t.username like CONCAT('%',#{username},'%')
 		</if>
 	</select>
 	<select id="getUserData" parameterType="java.util.Map" resultType="com.lion.echart.system.entity.UserEntity" >
 		select 
-			*
-		from t_sys_user
+			t.*,st.subofficename
+		from t_sys_user t
+		left join t_s_suboffice st on t.subofficeid = st.subofficeid
 		where 1=1
 		<if test="username != null and username != ''">
-			and username = #{username} 
+			and t.username = #{username} 
 		</if>
 		<if test="password != null and password != ''">
-			and password = #{password} 
+			and t.password = #{password} 
 		</if>
 		<if test="userid != null and userid != 0">
-			and id = #{userid} 
+			and t.id = #{userid} 
 		</if>
 	</select>
 	<!-- 用户插入 -->
@@ -62,4 +63,16 @@
            insert into t_sys_user_role(userid, roleid) 
                values(#{userid}, #{roleid})
    </insert>
+   <!-- 删除用户 -->
+   <update id="deleteUser" parameterType="java.util.Map">
+    	update t_sys_user
+    	set isdisabled = 1
+    	where 1=1
+		<if test="idList!=null and idList.size()!=0">
+	    	and id in
+			<foreach collection="idList" item="idList" index="index" open="(" close=")" separator=",">
+			  #{idList}
+			</foreach>
+		</if>
+    </update>
 </mapper>

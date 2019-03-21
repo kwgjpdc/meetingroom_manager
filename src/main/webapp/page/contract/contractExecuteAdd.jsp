@@ -55,7 +55,7 @@ String fule = base + "" + contextPath + "/";
 					<div class="form-group">
 						<label for="signTime">所属年月</label>
 						<div class='input-group date' id='belongTime' style="width: 200px;">
-			                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr"/>
+			                <input type='text' readonly="readonly" class="form-control" name="belongTimeStr" id="belongTimeStr"/>
 			                <span class="input-group-addon">
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>

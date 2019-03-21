@@ -138,3 +138,36 @@ function reloadtable(){
 		}
 	});
 }
+//删除合同签订
+function delContractSigned(){
+	var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+    if(checkRow.length<=0){
+    	modalTitle("请选中一条数据",1);
+	}else{
+		var checkIds = "";
+		$.each(checkRow,function(key,value){
+			checkIds+=value.contractid+",";
+		});
+		if(checkIds.length>0){
+			checkIds=checkIds.substring(0,checkIds.length-1);
+		}
+		showloding();
+		$.ajax({
+			url: $("#fule").val()+'contract/contractSignedDel.json?checkIds='+checkIds,
+			type: 'post',
+			dataType: "json",
+			success: function (data) {
+				console.log(data)
+				if(data.msgType == 1){
+					modalTitle("操作成功",1);
+					window.location.reload();
+				}else{
+					modalTitle(data.message,1);
+				}
+			},error:function(data){
+				closeloding();
+				modalTitle("操作失败，请重试",1);
+			}
+		});
+	}
+}

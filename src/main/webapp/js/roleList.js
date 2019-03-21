@@ -79,6 +79,17 @@ var TableInit = function () {
 	};
 	return oTableInit;
 };
+function reloadtable(){
+	$.ajax({
+		url: $("#fule").val()+'role/roleGetData.json',
+		data: $("#formSearch").serializeObj(),
+		type: "post",
+		dataType:"json",
+		success : function(json) {
+			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
+}
 //角色分配
 function menuAssign(_id){
 	window.location.href = $("#fule").val()+'role/roleMenuAssign.web?roleid='+_id;

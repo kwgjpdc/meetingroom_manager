@@ -25,12 +25,12 @@ function loadSubofficeData(){
 		}
 	});
 }
-function loadContractData(subofficeid){
+function loadContractData(suboffice){
 	$.ajax({
 		url:$("#fule").val()+"contract/contractSignedListGetDatBySuboffice.json",
 		type:"POST",
 		dataType:"json",
-		data: {subofficeid : subofficeid},
+		data: {suboffice : suboffice},
 		success:function(data){
 			var strHtml= '<option value="0">-请选择-</option>';
 			$.each(data, function(key,value){
@@ -55,6 +55,10 @@ function save(){
 	if(monthamount == ''){
     	alert('请输入当月结算额');
         return false;
+    }
+	if(!isZsOrXs(monthamount)){
+		alert('请输入正确的当月结算额');
+		return false;
     }
 	if(belongTime == ''){
     	alert('请选择所属年月');

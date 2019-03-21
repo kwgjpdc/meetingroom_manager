@@ -92,3 +92,8 @@ function mparseFloat(_val){
 	if(_val == '') return 0;
 	return parseFloat(_val);
 }
+//判断是否为整数或者小数
+function isZsOrXs(s){
+	var re = /^[0-9]+([.]{1}[0-9]+){0,1}$/;
+	return re.test(s)
+}

@@ -1,14 +1,22 @@
 $(document).ready(function(){
 	var oTable = new TableInit();
+	loadSubofficeData();
+	var date=new Date;
+	var year=date.getFullYear(); 
+	var month=date.getMonth()+1;
+	if(month<10){
+		month="0"+month;
+	}
+	$("#belongTimeStr").val(year+"-"+month);
+	$('#belongTime').datetimepicker({
+		minView: 3,
+		startView: 3,
+		language:'zh-CN',
+		autoclose: true,
+		format: 'yyyy-mm' 
+	}).on();
 	oTable.Init();
 	$("#contentTablediv").height(window.innerHeight-$("#head").height()-$("#searchdiv").height()-40);
-	loadSubofficeData();
-	var now = new Date();
-	var year = now.getFullYear();
-	var month = now.getMonth();
-
-	$("#year").val(year);
-	$("#month").val(month);
 	validatef();
 });
 function validatef(){
@@ -79,6 +87,7 @@ var TableInit = function () {
 		$('#t_datagrid').bootstrapTable({
 			url: $("#fule").val()+'contract/contractExecuteListGetData.json',         //请求后台的URL（*）
 			method: 'post',                      //请求方式（*）
+			contentType :'application/x-www-form-urlencoded; charset=UTF-8',
 			toolbar: false,                //工具按钮用哪个容器
 			striped: true,                      //是否显示行间隔色
 			cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
@@ -91,7 +100,6 @@ var TableInit = function () {
 			pageSize: 10,                       //每页的记录行数（*）
 			pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
 			search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-			contentType: "json",
 			strictSearch: false,
 			showColumns: false,                  //是否显示所有的列
 			showRefresh: false,                  //是否显示刷新按钮
@@ -175,9 +183,56 @@ var TableInit = function () {
 	oTableInit.queryParams = function (params) {
 		var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
 			limit: params.limit,   //页面大小
-			offset:params.offset
+			offset:params.offset,
+			contractname:$("#contractname").val(),
+			suboffice:$("#suboffice").val(),
+			belongTimeStr:$("#belongTimeStr").val()
 		};
 		return temp;
 	};
 	return oTableInit;
 };
+function reloadtable(){
+	$.ajax({
+		url: $("#fule").val()+'contract/contractExecuteListGetData.json',
+		data: $("#formSearch").serializeObj(),
+		type: "post",
+		dataType:"json",
+		success : function(json) {
+			$("#t_datagrid").bootstrapTable('load', json);
+		}
+	});
+}
+//删除合同签订
+function delContractExecute(){
+	var checkRow= $("#t_datagrid").bootstrapTable('getSelections');
+    if(checkRow.length<=0){
+    	modalTitle("请选中一条数据",1);
+	}else{
+		var checkIds = "";
+		$.each(checkRow,function(key,value){
+			checkIds+=value.contractexecuteid+",";
+		});
+		if(checkIds.length>0){
+			checkIds=checkIds.substring(0,checkIds.length-1);
+		}
+		showloding();
+		$.ajax({
+			url: $("#fule").val()+'contract/contractExecuteDel.json?checkIds='+checkIds,
+			type: 'post',
+			dataType: "json",
+			success: function (data) {
+				console.log(data)
+				if(data.msgType == 1){
+					modalTitle("操作成功",1);
+					window.location.reload();
+				}else{
+					modalTitle(data.message,1);
+				}
+			},error:function(data){
+				closeloding();
+				modalTitle("操作失败，请重试",1);
+			}
+		});
+	}
+}

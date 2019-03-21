@@ -76,6 +76,10 @@ function save(){
     	alert('请输入合同金额');
         return false;
     }
+	if(!isZsOrXs(amount)){
+		alert('请输入正确的合同金额');
+		return false;
+    }
 	if(durationTime == ''){
     	alert('请输入工期');
         return false;

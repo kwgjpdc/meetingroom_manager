@@ -10,6 +10,7 @@ import java.util.Date;
 public class UserEntity implements Serializable {
 	private Long id;
 	private Long subofficeid;
+	private String subofficename;
 	private String username;
 	private String realname;
 	private String password;
@@ -27,12 +28,13 @@ public class UserEntity implements Serializable {
 		
 	}
 
-	public UserEntity(Long id, Long subofficeid, String username, String realname, String password, String sex,
+	public UserEntity(Long id, Long subofficeid, String subofficename, String username, String realname, String password, String sex,
 			String email, Date createdate, String remark, Integer priority, Integer status, String isdisabled,
 			String operuser, Date operdate) {
 		super();
 		this.id = id;
 		this.subofficeid = subofficeid;
+		this.subofficename = subofficename;
 		this.username = username;
 		this.realname = realname;
 		this.password = password;
@@ -53,6 +55,14 @@ public class UserEntity implements Serializable {
 	public void setSubofficeid(Long subofficeid) {
 		this.subofficeid = subofficeid;
 	}
+	public String getSubofficename() {
+		return subofficename;
+	}
+
+	public void setSuboffice(String subofficename) {
+		this.subofficename = subofficename;
+	}
+
 	public Long getId() {
 		return id;
 	}
