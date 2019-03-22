@@ -108,14 +108,14 @@ var TableInit = function () {
 					    }
 				  }
 				  ,{
-						field: 'tytmmoney',align: 'right',title: yearStr+'年至'+monthStr+'月完成<br/>投资(万元)' ,width : 100,
+						field: 'tytmmoney',align: 'right',title: '<span id="tytmmoneyTitle" >'+yearStr+'年至'+monthStr+'</span>月完成<br/>投资(万元)' ,width : 100,
 						formatter:function (value, row, index, field) {
 							return '<div id="tytmmoney_'+index+'" contenteditable="true" >' + fmoney(value,2) + '</div>' +
 							'<input type="hidden" value="'+(value || "")+'" id="tytmmoney'+index+'" name="list['+index+'].tytmmoney" />';
 					    }
 					}
 				  , {
-						field: 'mmoney',align: 'right',title: yearStr+'年'+monthStr+'月完成<br/>投资(万元)' ,width : 100,
+						field: 'mmoney',align: 'right',title: '<span id="mmoneyTitle" >'+yearStr+'年'+monthStr+'</span>月完成<br/>投资(万元)' ,width : 100,
 						formatter:function (value, row, index, field) {
 							return '<div id="mmoney_'+index+'" contenteditable="true" >' + fmoney(value,2) + '</div>' +
 							'<input type="hidden" value="'+(value || "")+'" id="mmoney'+index+'" name="list['+index+'].mmoney" />';
@@ -148,6 +148,9 @@ var TableInit = function () {
 	return oTableInit;
 };
 function reloadtable(){
+	var belongTimeStr = $("#belongTimeStr").val();
+	var yearStr = belongTimeStr.substring(0,4);
+	var monthStr = belongTimeStr.substring(5,7);
 	loadFinancingRepairSourceMoney();
 	$.ajax({
 		url: $("#fule").val()+'financing/getFinancingRepair.json',
@@ -158,6 +161,10 @@ function reloadtable(){
 			$("#t_datagrid").bootstrapTable('load', json);
 		}
 	});
+	setTimeout(function() {
+		$("#tytmmoneyTitle").html(yearStr+'年至'+monthStr);
+		$("#mmoneyTitle").html(yearStr+'年'+monthStr);
+	}, 300)
 }
 function saveRow(){
 	var length = 0;
