@@ -79,23 +79,42 @@
     <select id="getFinancingRepairData" parameterType="java.util.Map" resultType="java.util.Map" >
 		select t.key,t.value,t.maintype,st.* from t_s_code t
 			left join t_f_financingrepair st on t.key = st.ctype
-			where t.codetype = 'costtypesub' 
-			<if test="year!=null and year!=''">
+			<if test="classes!=null and classes!=''">
 				and st.classes = #{classes}
 			</if>
-				
 			<if test="year!=null and year!=''">
 				and st.year = #{year} 
 			</if>
 			<if test="month!=null and month!=''">
 				and st.month = #{month} 
 			</if>
+			where t.codetype in ('costtypesub','costtypetax')
 			order by t.orderby 
 	</select>
 	
-	<insert id="insertFRepair" parameterType="com.lion.echart.financing.entity.FinancingRepairEntity">
-           insert into t_f_financingrepair(ctype) 
-               values(#{ctype})
+	<select id="getFinancingRepairSourceMoneyData" parameterType="java.util.Map" resultType="java.util.Map" >
+		select * from t_f_financingrepair where 1=1
+		<if test="classes!=null and classes!=''">
+			and classes = #{classes}
+		</if>
+		<if test="year!=null and year!=''">
+			and year = #{year} 
+		</if>
+		<if test="month!=null and month!=''">
+			and month = #{month} 
+		</if>
+	</select>
+	
+	<insert id="FRepairInsert" parameterType="com.lion.echart.financing.entity.FinancingRepairEntity">
+           insert into t_f_financingrepair(year,month,ctype,classes,cmoney,summoney,tytmmoney,mmoney,sourcemoney,operdate,operuser) 
+               values(#{year},#{month},#{ctype},#{classes},#{cmoney},#{summoney},#{tytmmoney},#{mmoney},#{sourcemoney},#{operdate},#{operuser})
    	</insert>
     
+    <update id="FRepairUpdate" parameterType="com.lion.echart.financing.entity.FinancingRepairEntity">
+    	update t_f_financingrepair
+    	set year = #{year},month = #{month},ctype = #{ctype},classes = #{classes},
+    	cmoney = #{cmoney},summoney = #{summoney},tytmmoney = #{tytmmoney},mmoney = #{mmoney},
+    	sourcemoney = #{sourcemoney},operdate = #{operdate},operuser = #{operuser}
+    	where id = #{id}
+    </update>
 </mapper>

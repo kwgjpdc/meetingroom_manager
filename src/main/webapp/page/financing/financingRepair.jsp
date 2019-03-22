@@ -66,6 +66,13 @@ String fule = base + contextPath + "/";
 				action="<%=fule %>financing/insertRepair.json" method="post" >
         		<table id="t_datagrid"></table>
 			</form>
+			<input type="hidden" name="sourceMoneyId" id="sourceMoneyId">
+			资金来源：
+				截止2月25日，2019年累计到位 <input type="text" style="width: 100px;" id="totalmoney" name="totalmoney" value="0"/> 万元（2018年结余转结资金），
+				其中①中央补助 <input type="text" style="width: 100px;" id="centralmoney" name="centralmoney" value="0"/>      万元
+				②省级配套 <input type="text" style="width: 100px;" id="provincemoney" name="provincemoney" value="0"/>  万元
+				③地方水利建设基金 <input type="text" style="width: 100px;" id="localmoney" name="localmoney" value="0"/>  万元
+				④银行贷款 <input type="text" style="width: 100px;" id="bankmoney" name="bankmoney" value="0"/>  万元。
         </div>
 	</div>
 </div>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2019-03-21 16:45:52
+Date: 2019-03-22 15:38:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -77,6 +77,42 @@ INSERT INTO `t_c_contractexecute` VALUES ('1', '1', '376.18', '2019', '2', null,
 INSERT INTO `t_c_contractexecute` VALUES ('2', '1', '234.98', '2019', '1', null, '1', '0', 'admin', '2019-03-13 17:16:10');
 INSERT INTO `t_c_contractexecute` VALUES ('3', '2', '121.52', '2019', '1', null, '1', '0', 'admin', '2019-03-13 17:16:49');
 INSERT INTO `t_c_contractexecute` VALUES ('4', '2', '458.31', '2019', '2', null, '1', '0', 'admin', '2019-03-13 17:19:52');
+
+-- ----------------------------
+-- Table structure for `t_f_financingrepair`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_f_financingrepair`;
+CREATE TABLE `t_f_financingrepair` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
+  `year` int(4) DEFAULT NULL COMMENT '年份',
+  `month` int(2) DEFAULT NULL COMMENT '月份',
+  `ctype` varchar(2) DEFAULT NULL COMMENT '款项类型',
+  `classes` varchar(2) DEFAULT NULL COMMENT '大类',
+  `cmoney` double(19,6) DEFAULT NULL COMMENT '合同金额',
+  `summoney` double(19,6) DEFAULT NULL COMMENT '累计金额',
+  `tytmmoney` double(19,6) DEFAULT NULL COMMENT 'this year to month 本年至当月完成金额',
+  `mmoney` double(19,6) DEFAULT NULL COMMENT '当月金额',
+  `sourcemoney` varchar(200) DEFAULT NULL COMMENT '资金来源',
+  `operdate` date DEFAULT NULL COMMENT '操作时间',
+  `operuser` int(11) DEFAULT NULL COMMENT '操作人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of t_f_financingrepair
+-- ----------------------------
+INSERT INTO `t_f_financingrepair` VALUES ('19', '2019', '3', '01', '1', '120.000000', '0.000000', '0.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('20', '2019', '3', '02', '1', '0.000000', '0.000000', '34.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('21', '2019', '3', '03', '1', '0.000000', '450.000000', '12.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('22', '2019', '3', '04', '1', '0.000000', '65.000000', '0.000000', '67.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('23', '2019', '3', '14', '3', '0.000000', '0.000000', '0.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('24', '2019', '3', null, '2', null, null, null, null, '0##345##67.9##0##0', '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('25', '2019', '2', null, '2', null, null, null, null, '23##33##67.9##0##0', '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('26', '2019', '2', '01', '1', '120.000000', '34.000000', '0.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('27', '2019', '2', '02', '1', '0.000000', '0.000000', '0.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('28', '2019', '2', '03', '1', '0.000000', '560.000000', '0.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('29', '2019', '2', '04', '1', '0.000000', '0.000000', '990.000000', '0.000000', null, '2019-03-22', '1');
+INSERT INTO `t_f_financingrepair` VALUES ('30', '2019', '2', '14', '3', '45.000000', '0.000000', '0.000000', '0.000000', null, '2019-03-22', '1');
 
 -- ----------------------------
 -- Table structure for `t_sys_menu`
@@ -247,6 +283,42 @@ INSERT INTO `t_sys_user_role` VALUES ('51', '14', '2');
 INSERT INTO `t_sys_user_role` VALUES ('52', '10', '10');
 INSERT INTO `t_sys_user_role` VALUES ('53', '11', '1');
 INSERT INTO `t_sys_user_role` VALUES ('54', '1', '1');
+
+-- ----------------------------
+-- Table structure for `t_s_code`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_s_code`;
+CREATE TABLE `t_s_code` (
+  `codetype` varchar(50) DEFAULT NULL COMMENT '字典类型',
+  `codedescribe` varchar(100) DEFAULT NULL COMMENT '字典描述备注',
+  `key` varchar(5) DEFAULT NULL COMMENT '字典值',
+  `value` varchar(200) DEFAULT NULL COMMENT '字典显示',
+  `maintype` varchar(2) DEFAULT NULL COMMENT '大类归类',
+  `maintypedescribe` varchar(50) DEFAULT NULL COMMENT '大类备注',
+  `orderby` varchar(5) DEFAULT NULL COMMENT '排序列'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
+
+-- ----------------------------
+-- Records of t_s_code
+-- ----------------------------
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '01', '工程款', '1', '合同款项', '01');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '02', '监理费', '1', '合同款项', '02');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '03', '施工供电费', '1', '合同款项', '03');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '04', '勘察设计费', '2', '其他款项', '04');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '05', '征地拆迁安置补偿', '2', '其他款项', '05');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '06', '环境影响', '2', '其他款项', '06');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '07', '耕地占用税', '2', '其他款项', '07');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '08', '水土保持补偿费', '2', '其他款项', '08');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '09', '金中公司清算费用', '2', '其他款项', '09');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '10', '印花税', '2', '其他款项', '10');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '11', '其他技术服务合同款', '2', '其他款项', '11');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '12', '建设管理费', '2', '其他款项', '12');
+INSERT INTO `t_s_code` VALUES ('costtype', '费用类型', '13', '临时用地复垦保证金', '2', '其他款项', '13');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '01', '主体工程设计费', '1', '设计费用', '01');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '02', '二期工程设计费用', '1', '设计费用', '02');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '03', '施工控制网设计及建网', '1', '设计费用', '03');
+INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '04', '其他咨询服务费用', '1', '设计费用', '04');
+INSERT INTO `t_s_code` VALUES ('costtypetax', '印花税', '14', '印花税', '1', '印花税', '14');
 
 
 -- ----------------------------
