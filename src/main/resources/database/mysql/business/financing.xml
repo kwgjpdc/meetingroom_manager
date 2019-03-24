@@ -117,6 +117,7 @@
     	sourcemoney = #{sourcemoney},operdate = #{operdate},operuser = #{operuser}
     	where id = #{id}
     </update>
+<<<<<<< HEAD
     
     <select id="getFinancingReportTwoData" parameterType="java.util.Map" resultType="java.util.Map" >
 		SELECT '一、工程合同投资（含监理费用）' AS typename
@@ -254,4 +255,6 @@
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
 			WHERE ts.codetype = 'costtype' AND ts.key = '10' 
 	</select>
+=======
+>>>>>>> branch 'master' of https://github.com/kwgjpdc/cswechart.git
 </mapper>
