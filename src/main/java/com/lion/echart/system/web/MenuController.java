@@ -118,7 +118,9 @@ public class MenuController {
 	@RequestMapping(value = "/menu/menuGetDataByUserId.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> menuGetDataByUserId(String userid, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		Map<String, Object> searchmap = new HashMap<String, Object>();
-		searchmap.put("userid", userid);
+		if(!"1".equals(userid))
+			searchmap.put("userid", userid);
+		
 		List<Map<String, Object>> list = baseService.queryList("comle.menu.getMenuListDataByUserId", searchmap);
 		return list;
 	}
