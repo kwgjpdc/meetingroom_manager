@@ -1,6 +1,7 @@
 package com.lion.echart.financing.web;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lion.echart.base.logic.BaseService;
+import com.lion.echart.financing.entity.FinancingRepairEntity;
 import com.lion.echart.financing.entity.FinancingRepairView;
 import com.lion.echart.financing.entity.FinancingWriteEntity;
 import com.lion.echart.financing.entity.FinancingWritesView;
+import com.lion.echart.system.entity.UserEntity;
 
 import net.sf.json.JSONObject;
 
@@ -168,17 +171,83 @@ public class FinancingController {
 				list = baseService.queryList("comle.financing.getFinancingRepairData", null);
 			}
 		}
-		
 		return list;
 	}
 	
+	//获取工程投资完成汇总补录数据
+		@RequestMapping(value = "/getFinancingRepairSourceMoney.json",method=RequestMethod.POST)
+		public @ResponseBody String getFinancingRepairSourceMoney(String belongTimeStr,HttpServletRequest req,
+				HttpServletResponse resp, HttpSession session) throws IOException {
+			JSONObject obj = new JSONObject();
+			try {
+				if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+					HashMap<String, Object> param = new HashMap<String, Object>();
+					param.put("year", belongTimeStr.substring(0,4));
+					param.put("month", belongTimeStr.substring(5,7));
+					param.put("classes", "2");
+					List<Map<String, Object>> list = baseService.queryList("comle.financing.getFinancingRepairSourceMoneyData", param);
+					if(list.size()>0){
+						obj.put("isCount", 1);
+					}else{
+						obj.put("isCount", 0);
+					}
+					for(Map<String, Object> map : list){
+						String sourcemoney = (String) map.get("sourcemoney");
+						String sourcemoneyArr [] = sourcemoney.split("##");
+						obj.put("totalmoney", sourcemoneyArr[0]);
+						obj.put("centralmoney", sourcemoneyArr[1]);
+						obj.put("provincemoney", sourcemoneyArr[2]);
+						obj.put("localmoney", sourcemoneyArr[3]);
+						obj.put("bankmoney", sourcemoneyArr[4]);
+						obj.put("sourceMoneyId", map.get("id"));
+					}
+					obj.put("msgType", 1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				obj.put("msgType", 0);
+			}
+			return obj.toString();
+		}
+	
 	//工程投资完成汇总补录数据保存
 	@RequestMapping(value = "/insertFRepair.json",method=RequestMethod.POST)
-	public @ResponseBody String insertFRepair(FinancingRepairView list
+	public @ResponseBody String insertFRepair(String belongTimeStr,String sourceMoneyId,String totalmoney,String centralmoney,String provincemoney,String localmoney,String bankmoney,FinancingRepairView list
 			,HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		JSONObject obj = new JSONObject();
+		UserEntity user = (UserEntity)session.getAttribute("USER_SESSION");
 		try {
-			baseService.insertOupdates("comle.financing.insertFRepair", list.getList());
+			SimpleDateFormat si_year = new SimpleDateFormat("yyyy");
+			SimpleDateFormat si_month = new SimpleDateFormat("MM");
+			int year = Integer.valueOf(si_year.format(new Date()));
+			int month = Integer.valueOf(si_month.format(new Date()));
+			if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+				year = Integer.valueOf(belongTimeStr.substring(0,4));
+				month = Integer.valueOf(belongTimeStr.substring(5,7));
+			}
+			List<FinancingRepairEntity> temp =list.getList();
+			for(FinancingRepairEntity en : temp){
+				if(en.getCtype().equals("14")){
+					//印花税
+					en.setClasses("3");
+				}else{
+					en.setClasses("1");
+				}
+				en.setYear((long)year);
+				en.setMonth((long)month);
+				en.setOperuser(user.getId()+"");
+				en.setOperdate(new Date());
+			}
+			FinancingRepairEntity  entity = new FinancingRepairEntity();
+			entity.setId(Long.valueOf(sourceMoneyId));
+			entity.setClasses("2");
+			entity.setYear((long)year);
+			entity.setMonth((long)month);
+			entity.setOperuser(user.getId()+"");
+			entity.setOperdate(new Date());
+			entity.setSourcemoney(totalmoney+"##"+centralmoney+"##"+provincemoney+"##"+localmoney+"##"+bankmoney);
+			temp.add(entity);
+			baseService.insertOupdates("comle.financing.FRepair", temp);
 			obj.put("msgType", 1);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,5 +264,24 @@ public class FinancingController {
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "write");
 		return "/page/financing/financingReportTwo";
+	}
+
+	//获取财务数据统计表列表数据
+	@RequestMapping(value = "/getFinancingReportTwoData.json",method=RequestMethod.POST)
+	public @ResponseBody List<Map<String, Object>> getFinancingReportTwoData(HttpServletRequest req,
+			HttpServletResponse resp, HttpSession session,String month, String year) throws IOException {
+		List<Map<String, Object>> list = null;
+		if(month != null && year != null  && !month.isEmpty() && !year.isEmpty() ) {
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			//报告日
+			param.put("year", year);
+			param.put("month", month);
+			
+			list = baseService.queryList("comle.financing.getFinancingReportTwoData", param);
+		}else {
+			list = new ArrayList<Map<String,Object>>();
+		}
+		
+		return list;
 	}
 }

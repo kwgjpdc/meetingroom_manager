@@ -1,50 +1,45 @@
 $(document).ready(function(){
 	$("#reportDate").datetimepicker({
 		autoclose:true,
-		minView:2,
-		startView:2,
+		minView:3,
+		startView:3,
 		language:'zh-CN'
 	});
 	$("#btn_query").click(reloadtable);
 	var now = new Date();
-	$("#reportDate").val(now.getFullYear()+'-'+(1+now.getMonth())+'-'+now.getDay());
+	$("#reportDate").val(now.getFullYear()+'-'+(1+now.getMonth()));
 	setFormVal("#reportDate");
 	initDateTable();
 });
-function reloadtable(){
-	$("#year1title").val($("#year1n").val());
-	$("#year2title").val($("#year2n").val());
-	$("#year3title").val($("#year3n").val());
-	$("#year4title").val($("#monthn").val());
-	var options = $('#t_datagrid').bootstrapTable('refresh', {
-        query: $("#formSearch").serializeObj()
-    });
-}
 function setFormVal(_this){
 	var _reportDate = $(_this).val();
 	if( _reportDate == ''){
-		$("#year3").val('');
-		$("#year2").val('');
-		$("#year1").val('');
+		$("#year").val('');
 		$("#month").val('');
-		$("#fileName").val('');
+		//$("#fileName").val('');
 	}else{
 		var arrstr = _reportDate.split("-");
-		var _year3 = parseInt(arrstr[0]);
-		var _year2 = _year3-1;
-		var _year1 = _year3-2;
-		$("#year3").val(_year3);
-		$("#year2").val(_year2);
-		$("#year1").val(_year1);
+		$("#year").val(arrstr[0]);
 		$("#month").val(arrstr[1]);
-		
+		/*
 		$("#year3n").val(_year3+"年至"+arrstr[1]+"月");
 		$("#year2n").val(_year2+"年");
 		$("#year1n").val(_year1+"年");
 		$("#monthn").val(_year3+"年"+arrstr[1]+"月");
 		$("#reportDaten").val(_year3+"年"+arrstr[1]+"月"+arrstr[2]+"日");
-		$("#fileName").val("滇中引水工程建设资金支付情况统计表("+_year3+"年"+arrstr[1]+"月)");
+		//$("#fileName").val("滇中引水工程建设资金支付情况统计表("+_year3+"年"+arrstr[1]+"月)");
+		*/
 	}
+}
+
+function reloadtable(){
+	var _reportDate = $("#reportDate").val();
+	var arrstr = _reportDate.split("-");
+	$(".changeyear").html(arrstr[0]);
+	$(".changemonth").html(arrstr[1]);
+	var options = $('#t_datagrid').bootstrapTable('refresh', {
+        query: $("#formSearch").serializeObj()
+    });
 }
 function initDateTable(){
 	var _reportDate = $("#reportDate").val();
@@ -64,7 +59,7 @@ function initDateTable(){
 		//初始化Table
 		oTableInit.Init = function () {
 			$('#t_datagrid').bootstrapTable({
-				url: $("#fule").val()+'financing/getFinancingReportData.json',//请求后台的URL（*）
+				url: $("#fule").val()+'financing/getFinancingReportTwoData.json',//请求后台的URL（*）
 				method: 'post',                    	//请求方式（*）
 				contentType :'application/x-www-form-urlencoded; charset=UTF-8',
 				editable:true,						//开启编辑模式
@@ -76,9 +71,7 @@ function initDateTable(){
 				sortOrder: "asc",                   //排序方式
 				queryParamsType: "limit", 			//参数格式,发送标准的RESTFul类型的参数请求  
 				queryParams:{
-					year1:namee1,
-					year2:namee2,
-					year3:_year,
+					year:arrstr[0],
 					month:arrstr[1],
 					reportDate:$("#reportDate").val()
 				},//传递参数（*）
@@ -101,40 +94,25 @@ function initDateTable(){
 				//如果没有设置height属性，表格自动根据记录条数觉得表格高度
 				columns: [
 					[
-					  {title: '序号',field:'id',align:'center',width:50,rowspan:2,
-						  formatter:function (value, row, index, field) {
-							  return index+1;
-						  }
-					  },
-					  {field: 'costTypeStr',align: 'left',title: '支付款项' ,width : 200,rowspan:2},
-					  {field: '',align: 'center',title: '支付金额' ,colspan:5},
-					],
-					[
-					  {field: 'moneyyi',align: 'center',align : "right",width : 100,
-						  title: '<span id="year1title" >'+namee1+'年</span>' ,
+					  {field:'typename',title: '序号-项目类型',align:'left',width:300},
+					  {field: 'contractmoney',title: '（合同、协议）<br/>总金额（万元）',align: 'right',align : "right",width : 120,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneyer',align: 'center',align : "right",width : 100,
-						  title: '<span id="year2title">'+namee2+'年</span>' ,
+					  {field: 'contractfinish',align: 'right',title: '开工以来累计<br/>完成投资（万元）' ,align : "right",width : 120,
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneysi',align: 'center',align : "right",width : 100,
-						  title: '<span id="year4title">'+namee4+'</span>',
+					  {field: 'nytnmmoney',align: 'right',align : "right",width : 120,
+						  title:'<span class="changeyear">'+arrstr[0]+'<span/>年至<span class="changemonth">'+arrstr[1]+'<span/>月<br/>完成投资（万元）',
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
 					  },
-					  {field: 'moneysan',align: 'center',align : "right",width : 100,
-						  title: '<span id="year3title">'+namee3+'</span>' ,
-							formatter:function (value, row, index, field) {
-								return fmoney(value,2);
-							}
-					  },
-					  {field: 'moneys',align: 'center',title: '累计' ,align : "right",width : 100,
+					  {field: 'nymonth',align: 'right',align : "right",width : 120,
+						  title:'<span class="changeyear">'+arrstr[0]+'<span/>年<span class="changemonth">'+arrstr[1]+'<span/>月<br/>完成投资（万元）',
 							formatter:function (value, row, index, field) {
 								return fmoney(value,2);
 							}
