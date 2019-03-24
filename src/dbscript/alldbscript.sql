@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-21 16:52:51
+Date: 2019-03-24 22:05:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -202,7 +202,7 @@ INSERT INTO `t_sys_menu` VALUES ('17', '审批管理', '', '1', '0', '2019-03-19
 INSERT INTO `t_sys_menu` VALUES ('18', '分局填报审批', 'subofficewrite/subofficewriteApproveList.web', '0', '17', '2019-03-19 09:52:00', '', '19', '1', '0', '1', '2019-03-19 09:52:00');
 INSERT INTO `t_sys_menu` VALUES ('19', '财务填报审批', '', '0', '17', '2019-03-19 09:52:18', '', '20', '1', '0', '1', '2019-03-19 09:52:18');
 INSERT INTO `t_sys_menu` VALUES ('20', '旬填报', 'subofficewrite/subofficewriteTenDayList.web', '0', '1', '2019-03-20 10:09:08', '', '2', '1', '0', '1', '2019-03-20 10:09:08');
-INSERT INTO `t_sys_menu` VALUES ('21', '工程投资完成汇总月统计', 'financing/financingReportTwo', '0', '14', '2019-03-20 14:59:22', '', '13', '1', '0', '1', '2019-03-20 14:59:22');
+INSERT INTO `t_sys_menu` VALUES ('21', '工程投资完成汇总月统计', 'financing/financingReportTwo.web', '0', '14', '2019-03-20 14:59:22', '', '13', '1', '0', '1', '2019-03-20 14:59:22');
 INSERT INTO `t_sys_menu` VALUES ('22', '财务填报', 'financing/financingList.web', '0', '3', '2019-03-20 14:59:58', '', '5', '1', '0', '1', '2019-03-20 14:59:58');
 INSERT INTO `t_sys_menu` VALUES ('23', '工程投资完成汇总数据补录', 'financing/financingRepair.web', '0', '3', '2019-03-20 15:00:27', '', '6', '1', '0', '1', '2019-03-20 15:00:27');
 INSERT INTO `t_sys_menu` VALUES ('28', '部门管理', 'suboffice/subofficeList.web', '0', '10', '2019-03-21 15:37:50', '', '17', '1', '0', '1', '2019-03-21 15:37:50');
@@ -222,7 +222,7 @@ CREATE TABLE `t_sys_role` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_role
@@ -293,7 +293,7 @@ CREATE TABLE `t_sys_user` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_sys_user
@@ -366,6 +366,9 @@ INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '01', '主体工�
 INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '02', '二期工程设计费用', '1', '设计费用', '02');
 INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '03', '施工控制网设计及建网', '1', '设计费用', '03');
 INSERT INTO `t_s_code` VALUES ('costtypesub', '设计费用', '04', '其他咨询服务费用', '1', '设计费用', '04');
+INSERT INTO `t_s_code` VALUES ('costtypejgf', '建管费描述', '01', '六州市滇引办工作经费', '1', '建管费', '01');
+INSERT INTO `t_s_code` VALUES ('costtypejgf', '建管费描述', '02', '工程建设管理费', '1', '建管费', '02');
+INSERT INTO `t_s_code` VALUES ('costtypejgf', '建管费描述', '03', '建设管理调度中心建设费', '1', '建管费', '03');
 
 -- ----------------------------
 -- Table structure for `t_s_dcdysqlid`
@@ -467,7 +470,7 @@ CREATE TABLE `t_s_suboffice` (
   `operuser` varchar(20) DEFAULT NULL COMMENT '操作人',
   `operdate` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`subofficeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_s_suboffice
