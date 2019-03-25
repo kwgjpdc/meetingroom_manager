@@ -16,7 +16,7 @@ String fule = base + "" + contextPath + "/";
 
 <style type="text/css">
 	.control-label{
-		font-size: 20px;
+		font-size: 22px;
 	}
 </style>
 </head>
