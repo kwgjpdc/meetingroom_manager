@@ -49,8 +49,22 @@
 	<div class="title" >
 		滇中引水管理局
 		<div class="userinfo" >您好：
-		<%=((UserEntity)request.getSession().getAttribute("USER_SESSION")).getSubofficename()%> 
-		<%=((UserEntity)request.getSession().getAttribute("USER_SESSION")).getUsername()%> <a href="<%=fule%>logout">退出登录</a></div>
+		<% 
+			//获取到服务器中的用户对象 
+			UserEntity userSession=(UserEntity)request.getSession().getAttribute("USER_SESSION");
+			//初始值为空
+			String subofficename="";
+			String username="";
+			//判断是否有值 如果有则赋值
+		 	if(userSession.getSubofficename()!=null){
+		 		subofficename=userSession.getSubofficename();
+		 	}
+		 	if(userSession.getUsername()!=null){
+		 		username=userSession.getUsername();
+		 	}
+		%>
+		<%=subofficename%> 
+		<%=username %> <a href="<%=fule%>logout">退出登录</a></div>
 	</div>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
 	    <div class="container-fluid">
