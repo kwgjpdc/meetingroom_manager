@@ -116,7 +116,10 @@ public class MenuController {
 	}
 	//通过userid菜单信息列表数据
 	@RequestMapping(value = "/menu/menuGetDataByUserId.json",method=RequestMethod.POST)
-	public @ResponseBody List<Map<String, Object>> menuGetDataByUserId(String userid, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+	public @ResponseBody List<Map<String, Object>> menuGetDataByUserId(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+		String userid = "";
+		UserEntity user = (UserEntity)req.getSession().getAttribute("USER_SESSION");
+		userid = user.getId()+"";
 		Map<String, Object> searchmap = new HashMap<String, Object>();
 		if(!"1".equals(userid))
 			searchmap.put("userid", userid);
