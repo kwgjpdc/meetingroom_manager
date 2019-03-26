@@ -24,7 +24,7 @@ String fule = base + "" + contextPath + "/";
 	<div class="bgdiv" style="background-image:url('/echart/image/loginbk1.jpg');" >
 		<div class="title" >滇中引水管理局</div>
 		<div class="row">
-			<form class="form-horizontal"  method="post" action="<%=fule%>login.json" >
+			<form class="form-horizontal"  method="post" action="<%=fule%>login.json"  id="form">
 				<div class="form-group">
 					<label class="col-lg-3 control-label" >用户名</label>
 					<div class="col-lg-9">
@@ -50,13 +50,32 @@ String fule = base + "" + contextPath + "/";
 				</div>
 				
 				<div class="col-lg-9 col-lg-offset-4">
-					<button type="submit" class="btn btn-primary" style="width:50%;" >登录</button>
+					<input type="button"  class="btn btn-primary" style="width:35%;" onclick="dologin()" value="登录" />
+				</div>
+				<div style="color:red">
+					<% 
+						String msg=(String)request.getAttribute("msg");
+						if(msg==null){
+							msg="";
+						}
+					%>
+					<%=msg %>
 				</div>
 			</form>
 		</div>
 	</div>
 </body>
 <script type="text/javascript">
+$(function(){
+	//按Enter键可以登陆
+	$("input").keyup(function(event){
+		if(event.keyCode == 13){
+			dologin();
+		}
+	});	
+	
+});
+
 function changeImg(){
 	$.ajax({
         url:"drawcheckcode.json",
@@ -71,12 +90,14 @@ function changeImg(){
 }
 function dologin(){
 	if(check()){
-		window.location.href = '<%=fule%>login.json';
+		$("#form ").submit()
+	}else{
+		return;
 	}
 }
 
 function check(){
-	/*
+	
 	if($("#username").val() == ''){
 		alert('请输入用户名');
 		return false;
@@ -93,7 +114,7 @@ function check(){
 		alert('验证码不正确');
 		return false;
 	}
-	*/
+	
 	return true;
 }
 $(document).ready(function(){
