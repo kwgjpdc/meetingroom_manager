@@ -33,7 +33,12 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
-            	系统管理 / 用户管理
+            	 <!--系统管理 / 用户管理 -->
+            	 <a href="http://127.0.0.1:8080/echart/login.json"
+						style="color: #000; text-decoration: none;">系统管理</a> /
+						<a href="http://127.0.0.1:8080/echart/user/userList.web"
+						style="color: #000; text-decoration: none;">用户管理</a> 
+            	 
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>user/userAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增

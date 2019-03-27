@@ -34,7 +34,13 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	系统管理 / 用户管理 / 用户修改
+            	<!--系统管理 / 用户管理 / 用户修改 -->
+            	<a href="http://127.0.0.1:8080/echart/login.json"
+						style="color: #000; text-decoration: none;">系统管理</a> /
+						<a href="http://127.0.0.1:8080/echart/user/userList.web"
+						style="color: #000; text-decoration: none;">用户管理</a> /
+						<a href="#"
+						style="color: #000; text-decoration: none;">用户修改</a>
             </div>
             <div class="panel-body">
                 	<input type="hidden" name="id" id="id" value="${user.id}">

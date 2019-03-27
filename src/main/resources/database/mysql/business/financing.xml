@@ -119,13 +119,14 @@
     </update>
 
     <select id="getFinancingReportTwoData" parameterType="java.util.Map" resultType="java.util.Map" >
-		SELECT '一、工程合同投资（含监理费用）' AS typename
+		SELECT * FROM (
+	SELECT 0 AS orderby,'一、工程合同投资（含监理费用）' AS typename
 			,( SELECT SUM(amount) FROM t_c_contract ) AS contractmoney
 			,(SELECT SUM(money) FROM t_f_financingwrite) AS contractfinish
 			,(SELECT SUM(money) FROM t_f_financingwrite WHERE writeyear = 2019 AND writemonth <![CDATA[<]]> 3) AS nytnmmoney
 			,(SELECT SUM(money) FROM t_f_financingwrite WHERE writeyear = 2019 AND writemonth = 3) AS nymonth
 		UNION
-		SELECT 
+		(SELECT ts.subofficeid AS o,
 			CONCAT(ts.subofficeid,'.',ts.subofficename,'工程投资')
 			,SUM(tc.amount) AS contractmoney
 			,SUM(tf.money) AS contractfinish
@@ -138,10 +139,10 @@
 			LEFT JOIN t_f_financingwrite tfo ON tfo.subofficeid = ts.subofficeid AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
 			LEFT JOIN t_f_financingwrite tft ON tft.subofficeid = ts.subofficeid AND tft.writeyear = 2019 AND tft.writemonth = 2
 			WHERE ts.isonlysubo = '1'
-			GROUP BY ts.subofficeid
+			GROUP BY ts.subofficeid)
 		UNION
-		SELECT
-			CONCAT(CASE ts.key WHEN '03' THEN '7' ELSE '8' END ,'.',ts.value) AS typename
+		(SELECT (CASE ts.key WHEN '03' THEN 7 ELSE 8 END ) AS orderby
+			,CONCAT(CASE ts.key WHEN '03' THEN '7' ELSE '8' END ,'.',ts.value) AS typename
 			,SUM(tc.amount) AS contractmoney
 			,SUM(tf.money) AS contractfinish
 			,SUM(tfo.money) AS nytnmmoney
@@ -153,21 +154,21 @@
 			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
 			WHERE ts.codetype = 'costtype' AND ts.key IN ('03','02')
-			GROUP BY ts.key
+			GROUP BY ts.key)
 		UNION
-		SELECT '二、设计费用' AS typename
-			,sum(tf.cmoney),sum(tf.summoney),sum(tf.tytmmoney),sum(tf.mmoney) from t_s_code ts
-			left join t_f_financingrepair tf on ts.`key` = tf.ctype
-				and tf.classes = 1 and tf.`year` = 2019 and tf.`month` = 3
-			where ts.codetype = 'costtypesub'
-			UNION
-			select concat(right(ts.key,1),'.',ts.`value`),tf.cmoney,tf.summoney,tf.tytmmoney,tf.mmoney from t_s_code ts
-			left join t_f_financingrepair tf on ts.`key` = tf.ctype
-				and tf.classes = 1 and tf.`year` = 2019 and tf.`month` = 3
-		where ts.codetype = 'costtypesub'
+		(SELECT 9 AS orderby, '二、设计费用' AS typename
+			,SUM(tf.cmoney),SUM(tf.summoney),SUM(tf.tytmmoney),SUM(tf.mmoney) FROM t_s_code ts
+			LEFT JOIN t_f_financingrepair tf ON ts.`key` = tf.ctype
+				AND tf.classes = 1 AND tf.`year` = 2019 AND tf.`month` = 3
+			WHERE ts.codetype = 'costtypesub')
 		UNION
-		SELECT 
-			'三、征地移民安置补偿、环境保护、水土保持补偿及相关技术服务费用' AS typename
+			(SELECT (CAST(ts.key AS  SIGNED)+9) AS o,CONCAT(RIGHT(ts.key,1),'.',ts.`value`),tf.cmoney,tf.summoney,tf.tytmmoney,tf.mmoney FROM t_s_code ts
+			LEFT JOIN t_f_financingrepair tf ON ts.`key` = tf.ctype
+				AND tf.classes = 1 AND tf.`year` = 2019 AND tf.`month` = 3
+		WHERE ts.codetype = 'costtypesub')
+		UNION
+		(SELECT 
+			 14 AS orderby, '三、征地移民安置补偿、环境保护、水土保持补偿及相关技术服务费用' AS typename
 			,SUM(tc.amount) AS contractmoney
 			,SUM(tf.money) AS contractfinish
 			,SUM(tfo.money) AS nytnmmoney
@@ -178,9 +179,11 @@
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
 			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = t.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = t.key AND tft.writeyear = 2019 AND tft.writemonth = 2
-			WHERE t.codetype = 'costtype' AND t.key IN ('05','07','13','06','08','11')
+			WHERE t.codetype = 'costtype' AND t.key IN ('05','07','13','06','08','11'))
 		UNION
-		SELECT
+		(SELECT CASE ts.key WHEN '05' THEN 15 WHEN '07' THEN 16
+			WHEN '13' THEN 17 WHEN '06' THEN 18 WHEN '08' THEN 19
+			ELSE 20 END AS o,
 			CONCAT(CASE ts.key WHEN '05' THEN '1' WHEN '07' THEN '2'
 			WHEN '13' THEN '3' WHEN '06' THEN '4' WHEN '08' THEN '5' 
 			ELSE '6' END ,'.',ts.value) AS typename
@@ -192,42 +195,42 @@
 			LEFT JOIN t_f_financingwrite tf ON ts.key = tf.costtype AND (tf.writeyear <![CDATA[<]]> 2019 
 				OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3 
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
 			WHERE ts.codetype = 'costtype' AND ts.key IN ('05','07','13','06','08','11')
-			GROUP BY ts.key
+			GROUP BY ts.key)
 		UNION
-		SELECT
-			'四、建设管理费用' AS typename
+		(SELECT
+			21 AS orderby, '四、建设管理费用' AS typename
 			,SUM(tc.amount) AS contractmoney
 			,SUM(tf.money) AS contractfinish
 			,SUM(tfo.money) AS nytnmmoney
 			,SUM(tft.money) AS nymonthfrom
 			FROM t_s_code ts 
-			LEFT JOIN t_f_financingwrite tf ON tf.costtype = 12 and	ts.key = tf.payeedescribe
+			LEFT JOIN t_f_financingwrite tf ON tf.costtype = 12 AND	ts.key = tf.payeedescribe
 			 AND (tf.writeyear <![CDATA[<]]> 2019 OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
 			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
-			WHERE ts.codetype = 'costtypejgf' 
-		union 
-		(SELECT
-			concat(right(ts.key,1),'.',ts.value) AS typename
+			WHERE ts.codetype = 'costtypejgf' )
+		UNION 
+		(SELECT  (CAST(ts.key AS  SIGNED)+21) AS o,
+			CONCAT(RIGHT(ts.key,1),'.',ts.value) AS typename
 			,tc.amount AS contractmoney
 			,tf.money AS contractfinish
 			,tfo.money AS nytnmmoney
 			,tft.money AS nymonthfrom
 			FROM t_s_code ts 
-			LEFT JOIN t_f_financingwrite tf ON tf.costtype = 12 and	ts.key = tf.payeedescribe
-			 AND (tf.writeyear <![CDATA[<]]> 2019 OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
+			LEFT JOIN t_f_financingwrite tf ON tf.costtype = 12 AND	ts.key = tf.payeedescribe
+			 AND (tf.writeyear <![CDATA[<]]>  2019 OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
 			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
 			WHERE ts.codetype = 'costtypejgf' 
-			group by ts.key order by ts.key)
-		union 
+			GROUP BY ts.key ORDER BY ts.key)
+		UNION 
 		(SELECT 
-			'五、印花税' AS typename
+			26 AS orderby, '五、印花税' AS typename
 			,SUM(tc.amount) AS contractmoney
 			,SUM(tf.money) AS contractfinish
 			,SUM(tfo.money) AS nytnmmoney
@@ -240,8 +243,8 @@
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
 			WHERE ts.codetype = 'costtype' AND ts.key = '10')
 		UNION
-		SELECT 
-			'六、金中公司清算二阶段费用' AS typename
+		(SELECT 
+			27 AS orderby, '六、金中公司清算二阶段费用' AS typename
 			,0 AS contractmoney
 			,0 AS contractfinish
 			,17704.96 AS nytnmmoney
@@ -252,7 +255,9 @@
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid 
 			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
 			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
-			WHERE ts.codetype = 'costtype' AND ts.key = '10' 
+			WHERE ts.codetype = 'costtype' AND ts.key = '10')
+	) ttt ORDER BY ttt.orderby
+		
 	</select>
 
 </mapper>

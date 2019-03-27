@@ -53,7 +53,7 @@ String fule = base + "" + contextPath + "/";
                     	</select>
                     </div>
                 </div>
-	            <div id="operinfo" style="margin-top: -42px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
+	            <div id="operinfo" style="float:center;margin-top: -42px;">编辑数据后，请执行保存操作，以免数据丢失造成不便！</div >
             	<div id="toolbar" class="btn-group btn-group-right" style="margin-top: -28px;">
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增

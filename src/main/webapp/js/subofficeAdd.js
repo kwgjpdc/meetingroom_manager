@@ -30,6 +30,7 @@ function validatef(){
 	});
 }
 function save(){
+	
 	var subofficename = $("#subofficename").val();
 	var isonlysubo = $("#isonlysubo").val();
 	if(subofficename == ''){

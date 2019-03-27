@@ -9,17 +9,17 @@ import java.util.Date;
  */
 public class MenuEntity implements Serializable {
 	private Long id;
-	private String menuname;
-	private String url;
-	private int ismenu;
-	private Long pid;
-	private Date createdate;
-	private String remark;
-	private int priority;
-	private int status;
-	private String isdisabled;
-	private String operuser;
-	private Date operdate;
+	private String menuname;	//菜单名称  
+	private String url;			//访问地址  
+	private int ismenu;			//是否菜单  
+	private Long pid;			//上级菜单ID
+	private Date createdate;	//
+	private String remark;		//
+	private int priority;		//
+	private int status;			//
+	private String isdisabled;	//
+	private String operuser;	//
+	private Date operdate;		//
 	
 	public MenuEntity(){
 		

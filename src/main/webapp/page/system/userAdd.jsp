@@ -49,7 +49,16 @@
 	<div id="content" class="content">
 		<div class="panel-body" style="padding-bottom: 0px;">
 			<div class="panel panel-default">
-				<div class="panel-heading">系统管理 / 用户管理 / 用户添加
+				<div class="panel-heading">
+				<!-- 系统管理 / 用户管理 / 用户添加 -->
+				<a href="http://127.0.0.1:8080/echart/login.json"
+						style="color: #000; text-decoration: none;">系统管理</a> /
+						<a href="http://127.0.0.1:8080/echart/user/userList.web"
+						style="color: #000; text-decoration: none;">用户管理</a> /
+						<a href="#"
+						style="color: #000; text-decoration: none;">用户添加</a>
+				
+				
 				 	<input type="button" onclick="save()" class="btn btn-primary" style="float:right;border:1px" value="提交">
 				</div>
 				<div class="panel-body">

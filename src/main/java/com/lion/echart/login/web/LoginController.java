@@ -84,12 +84,12 @@ public class LoginController {
 	            	}
 	            	((List<HashMap<String, Object>>)GlobalThings.getCash(codetype)).add(codetypes.get(i));
 	            }
-	    		
 	    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
 	    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
 	            //重定向到主页面的跳转方法
 	            return "/page/main";
 	        }else{
+	        	System.out.println("密码");
 	        	req.setAttribute("msg","用户名或密码错误，请重新登录！");
 	        	return "login";
 	        }
@@ -119,6 +119,7 @@ public class LoginController {
 	    		
 	    		GlobalThings.putCash("suboffices", baseService.queryList("comle.Suboffice.getSubofficeListData", null));
 	    		GlobalThings.putCash("contracts", baseService.queryList("comle.contract.getcontractSignedListData", null));
+	    		req.removeAttribute("msg");
 	            //重定向到主页面的跳转方法
 	            return "/page/main";
 	        }else{

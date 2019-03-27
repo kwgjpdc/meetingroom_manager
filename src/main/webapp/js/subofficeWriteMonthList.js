@@ -685,7 +685,8 @@ function saveRow(){
 		$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		
 		_budgetinvest = $("#budgetinvest_"+i).html();
-		if(_budgetinvest != null && _budgetinvest != undefined && _budgetinvest !="0.0000"){
+		alert(_budgetinvest+"_budgetinvest1111111")
+		if(_budgetinvest != null && _budgetinvest != undefined){
 			while(_budgetinvest.indexOf(",") != -1){
 				_budgetinvest = _budgetinvest.replace(",","");
 			}
@@ -696,13 +697,13 @@ function saveRow(){
 		}
 		
 		_nextmonthplaninvest = $("#nextmonthplaninvest_"+i).html();
-		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined && _nextmonthplaninvest != "0.0000"){
+		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined){
 			while(_nextmonthplaninvest.indexOf(",") != -1){
 				_nextmonthplaninvest = _nextmonthplaninvest.replace(",","");
 			}
 			$("#nextmonthplaninvest"+i).val(_nextmonthplaninvest);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存2")
 			return;
 		}
 		
@@ -713,7 +714,7 @@ function saveRow(){
 			}
 			$("#finishinvest"+i).val(_finishinvest);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存3")
 			return;
 		}
 		
@@ -724,7 +725,7 @@ function saveRow(){
 			}
 			$("#surplusinvest"+i).val(_surplusinvest);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存4")
 			return;
 		}
 		
@@ -735,7 +736,7 @@ function saveRow(){
 			}
 			$("#yearplaninvest"+i).val(_yearplaninvest);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存5")
 			return;
 		}
 		
@@ -747,7 +748,7 @@ function saveRow(){
 			$("#monthplaninvest"+i).val(_monthplaninvest);
 			
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存6")
 			return;
 		}
 		
@@ -758,7 +759,7 @@ function saveRow(){
 			}
 			$("#yearrealityinvest"+i).val(_yearrealityinvest);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存7")
 			return;
 		}
 		
@@ -769,7 +770,7 @@ function saveRow(){
 			}
 			$("#monthrealityinvest"+i).val(_monthrealityinvest);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存8")
 			return;
 		}
 		
@@ -780,7 +781,7 @@ function saveRow(){
 			}
 			$("#earthwork"+i).val(_earthwork);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存9")
 			return;
 		}
 		
@@ -791,7 +792,7 @@ function saveRow(){
 			}
 			$("#stonework"+i).val(_stonework);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存10")
 			return;
 		}
 		
@@ -802,7 +803,7 @@ function saveRow(){
 			}
 			$("#beton"+i).val(_beton);
 		}else{
-			alert("保存失败,请重新保存")
+			alert("保存失败,请重新保存11")
 			return;
 		}
 		

@@ -31,7 +31,12 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
-            	系统管理 / 部门管理
+            	<!-- 系统管理 / 部门管理 -->
+            	<a href="http://127.0.0.1:8080/echart/login.json"
+						style="color: #000; text-decoration: none;">系统管理</a> / <a
+						href="http://127.0.0.1:8080/echart/suboffice/subofficeList.web"
+						style="color: #000; text-decoration: none;">部门管理</a> 
+            	
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="btn_add" type="button" class="btn btn-default" onclick="window.location.href='<%=fule %>suboffice/subofficeAdd.web'">
 		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增

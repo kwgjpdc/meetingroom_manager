@@ -32,7 +32,12 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div class="panel panel-default">
             <div class="panel-heading">
-            	系统管理 / 角色管理 / 角色修改
+            	<a href="http://127.0.0.1:8080/echart/login.json"
+						style="color: #000; text-decoration: none;">系统管理</a> /
+						<a href="http://127.0.0.1:8080/echart/role/roleList.web"
+						style="color: #000; text-decoration: none;">角色管理</a> /
+						<a href="#"
+						style="color: #000; text-decoration: none;">角色修改</a> 
             </div>
             <div class="panel-body">
                 	<input type="hidden" name="id" id="id" value="${role.id}">
