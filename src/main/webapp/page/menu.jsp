@@ -1,3 +1,4 @@
+<%@page import="com.lion.echart.system.entity.UserEntity"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <input type="hidden" name="userid" id="userid" value="${USER_SESSION.id}">
@@ -47,7 +48,23 @@
 <input type="hidden" id="fule" value="<%=fule %>" />
 	<div class="title" >
 		滇中引水管理局
-		<div class="userinfo" >您好：${USER_SESSION.subofficename} ${USER_SESSION.username} <a href="<%=fule %>logout">退出登录</a></div>
+		<div class="userinfo" >您好：
+		<% 
+			//获取到服务器中的用户对象 
+			UserEntity userSession=(UserEntity)request.getSession().getAttribute("USER_SESSION");
+			//初始值为空
+			String subofficename="";
+			String username="";
+			//判断是否有值 如果有则赋值
+		 	if(userSession.getSubofficename()!=null){
+		 		subofficename=userSession.getSubofficename();
+		 	}
+		 	if(userSession.getUsername()!=null){
+		 		username=userSession.getUsername();
+		 	}
+		%>
+		<%=subofficename%> 
+		<%=username %> <a href="<%=fule%>logout">退出登录</a></div>
 	</div>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
 	    <div class="container-fluid">

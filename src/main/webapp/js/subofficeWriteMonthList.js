@@ -661,6 +661,9 @@ function delRow(){
     }
     hasnosave = false;
 }
+/*
+ * 保存数据
+ */
 function saveRow(){
 	var length = 0;
 	if(true){
@@ -682,81 +685,126 @@ function saveRow(){
 		$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		
 		_budgetinvest = $("#budgetinvest_"+i).html();
-		if(_budgetinvest != null && _budgetinvest != undefined)
-		while(_budgetinvest.indexOf(",") != -1){
-			_budgetinvest = _budgetinvest.replace(",","");
+		if(_budgetinvest != null && _budgetinvest != undefined && _budgetinvest !="0.0000"){
+			while(_budgetinvest.indexOf(",") != -1){
+				_budgetinvest = _budgetinvest.replace(",","");
+			}
+			$("#budgetinvest"+i).val(_budgetinvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#budgetinvest"+i).val(_budgetinvest);
 		
 		_nextmonthplaninvest = $("#nextmonthplaninvest_"+i).html();
-		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined)
-		while(_nextmonthplaninvest.indexOf(",") != -1){
-			_nextmonthplaninvest = _nextmonthplaninvest.replace(",","");
+		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined && _nextmonthplaninvest != "0.0000"){
+			while(_nextmonthplaninvest.indexOf(",") != -1){
+				_nextmonthplaninvest = _nextmonthplaninvest.replace(",","");
+			}
+			$("#nextmonthplaninvest"+i).val(_nextmonthplaninvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#nextmonthplaninvest"+i).val(_nextmonthplaninvest);
 		
 		_finishinvest = $("#finishinvest_"+i).html();
-		if(_finishinvest != null && _finishinvest != undefined)
-		while(_finishinvest.indexOf(",") != -1){
-			_finishinvest = _finishinvest.replace(",","");
+		if(_finishinvest != null && _finishinvest != undefined && _finishinvest != "0.0000"){
+			while(_finishinvest.indexOf(",") != -1){
+				_finishinvest = _finishinvest.replace(",","");
+			}
+			$("#finishinvest"+i).val(_finishinvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#finishinvest"+i).val(_finishinvest);
 		
 		_surplusinvest= $("#surplusinvest_"+i).html();
-		if(_surplusinvest != null && _surplusinvest != undefined)
-		while(_surplusinvest.indexOf(",") != -1){
-			_surplusinvest = _surplusinvest.replace(",","");
+		if(_surplusinvest != null && _surplusinvest != undefined && _surplusinvest != "0.0000"){
+			while(_surplusinvest.indexOf(",") != -1){
+				_surplusinvest = _surplusinvest.replace(",","");
+			}
+			$("#surplusinvest"+i).val(_surplusinvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#surplusinvest"+i).val(_surplusinvest);
 		
 		_yearplaninvest= $("#yearplaninvest_"+i).html();
-		if(_yearplaninvest != null && _yearplaninvest != undefined)
-		while(_yearplaninvest.indexOf(",") != -1){
-			_yearplaninvest = _yearplaninvest.replace(",","");
+		if(_yearplaninvest != null && _yearplaninvest != undefined && _yearplaninvest != "0.0000"){
+			while(_yearplaninvest.indexOf(",") != -1){
+				_yearplaninvest = _yearplaninvest.replace(",","");
+			}
+			$("#yearplaninvest"+i).val(_yearplaninvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#yearplaninvest"+i).val(_yearplaninvest);
 		
 		_monthplaninvest= $("#monthplaninvest_"+i).html();
-		if(_monthplaninvest != null && _monthplaninvest != undefined)
-		while(_monthplaninvest.indexOf(",") != -1){
-			_monthplaninvest = _monthplaninvest.replace(",","");
+		if(_monthplaninvest != null && _monthplaninvest != undefined && _monthplaninvest != "0.0000"){
+			while(_monthplaninvest.indexOf(",") != -1){
+				_monthplaninvest = _monthplaninvest.replace(",","");
+			}
+			$("#monthplaninvest"+i).val(_monthplaninvest);
+			
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#monthplaninvest"+i).val(_monthplaninvest);
 		
 		_yearrealityinvest= $("#yearrealityinvest_"+i).html();
-		if(_yearrealityinvest != null && _yearrealityinvest != undefined)
-		while(_yearrealityinvest.indexOf(",") != -1){
-			_yearrealityinvest = _yearrealityinvest.replace(",","");
+		if(_yearrealityinvest != null && _yearrealityinvest != undefined && _yearrealityinvest != "0.0000"){
+			while(_yearrealityinvest.indexOf(",") != -1){
+				_yearrealityinvest = _yearrealityinvest.replace(",","");
+			}
+			$("#yearrealityinvest"+i).val(_yearrealityinvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#yearrealityinvest"+i).val(_yearrealityinvest);
 		
 		_monthrealityinvest= $("#monthrealityinvest_"+i).html();
-		if(_monthrealityinvest != null && _monthrealityinvest != undefined)
-		while(_monthrealityinvest.indexOf(",") != -1){
-			_monthrealityinvest = _monthrealityinvest.replace(",","");
+		if(_monthrealityinvest != null && _monthrealityinvest != undefined && _monthrealityinvest != "0.0000"){
+			while(_monthrealityinvest.indexOf(",") != -1){
+				_monthrealityinvest = _monthrealityinvest.replace(",","");
+			}
+			$("#monthrealityinvest"+i).val(_monthrealityinvest);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#monthrealityinvest"+i).val(_monthrealityinvest);
 		
 		_earthwork= $("#earthwork_"+i).html();
-		if(_earthwork != null && _earthwork != undefined)
-		while(_earthwork.indexOf(",") != -1){
-			_earthwork = _earthwork.replace(",","");
+		if(_earthwork != null && _earthwork != undefined && _earthwork != "0.0000"){
+			while(_earthwork.indexOf(",") != -1){
+				_earthwork = _earthwork.replace(",","");
+			}
+			$("#earthwork"+i).val(_earthwork);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#earthwork"+i).val(_earthwork);
 		
 		_stonework= $("#stonework_"+i).html();
-		if(_stonework != null && _stonework != undefined)
-		while(_stonework.indexOf(",") != -1){
-			_stonework = _stonework.replace(",","");
+		if(_stonework != null && _stonework != undefined && _stonework != ""){
+			while(_stonework.indexOf(",") != -1){
+				_stonework = _stonework.replace(",","");
+			}
+			$("#stonework"+i).val(_stonework);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#stonework"+i).val(_stonework);
 		
 		_beton= $("#beton_"+i).html();
-		if(_beton != null && _beton != undefined)
-		while(_beton.indexOf(",") != -1){
-			_beton = _beton.replace(",","");
+		if(_beton != null && _beton != undefined && _beton != ""){
+			while(_beton.indexOf(",") != -1){
+				_beton = _beton.replace(",","");
+			}
+			$("#beton"+i).val(_beton);
+		}else{
+			alert("保存失败,请重新保存")
+			return;
 		}
-		$("#beton"+i).val(_beton);
 		
 		
 		$("#remark"+i).val($("#remark_"+i).html());

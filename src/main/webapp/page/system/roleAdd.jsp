@@ -33,15 +33,21 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	系统管理 / 角色管理 / 角色添加
+            <button onclick="save()" class="btn btn-primary" style="float:right;border:1px">提交</button>
             </div>
-            <div class="panel-body">
-                	
-					<div class="form-group">
-						<label for="rolename">角色名称</label>
-						<input type="text" class="form-control" id="rolename" style="width: 400px;" placeholder="请输入角色名称">
-					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
-            </div>
+            <div class="container">
+					<h3></h3>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="rolename" class="col-sm-3 control-label">角色名称</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="rolename"
+									placeholder="请输入角色名称">
+							</div>
+							
+						</div>				
+					</form>
+				</div>        
         </div>       
 		</div>
 	</div>

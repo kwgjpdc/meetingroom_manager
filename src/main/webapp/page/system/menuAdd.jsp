@@ -33,36 +33,63 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	系统管理 / 菜单管理 / 菜单添加
-            </div>
-            <div class="panel-body">
-                	
-					<div class="form-group">
-						<label for="menuname">菜单名称</label>
-						<input type="text" class="form-control" id="menuname" style="width: 400px;" placeholder="请输入菜单名称">
-					</div>
-					<div class="form-group">
-						<label for="url">URL</label>
-						<input type="text" class="form-control" id="url" style="width: 400px;" placeholder="请输入url">
-					</div>
-					<div class="form-group">
-						<label for="ismenu">是否父菜单</label>
-						<select class="form-control" id="ismenu" name="ismenu" style="width: 200px;" onchange="changeIsMenu(this.value)">
-							<option value="1">是</option>
-							<option value="0">否</option>
-						</select>
-					</div>
-					<div class="form-group" id="pid_div" style="display: none;">
-						<label for="pid">上级菜单</label>
-						<select class="form-control" id="pid" name="pid" style="width: 200px;">
-							<option value=""></option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="priority">排序序号</label>
-						<input type="text" class="form-control" id="priority" value="0" style="width: 400px;" placeholder="请输入排序序号">
-					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
-            </div>
+            <button onclick="save()" class="btn btn-primary" style="float:right;border:1px">提交</button>
+				</div>
+				
+				<div class="container">
+					<h3></h3>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="menuname" class="col-sm-3 control-label">菜单名称</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="menuname"
+									placeholder="请输入菜单名称">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="url" class="col-sm-3 control-label">URL</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="url"
+									placeholder="请输入url">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="menuname" class="col-sm-3 control-label">菜单名称</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="menuname"
+									placeholder="请输入菜单名称">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="ismenu" class="col-sm-3 control-label">是否父菜单</label>
+							<div class="col-sm-6">
+								<select class="form-control" id="ismenu" name="ismenu"
+									onchange="changeIsMenu(this.value)">
+									<option value="1">是</option>
+									<option value="0">否</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="pid" class="col-sm-3 control-label">上级菜单</label>
+							<div class="col-sm-6">
+								<select class="form-control" id="pid" name="pid">
+									<option value=""></option>
+									</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="priority" class="col-sm-3 control-label">排序序号</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="menuname"
+									placeholder="请输入排序序号">
+							</div>
+						</div>
+						
+					</form>
+				</div>		
+			</div>
         </div>       
 		</div>
 	</div>
