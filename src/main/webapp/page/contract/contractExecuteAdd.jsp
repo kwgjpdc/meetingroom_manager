@@ -34,39 +34,54 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	合同管理 / 合同执行 / 合同执行添加
+           <button onclick="save()" class="btn btn-primary" style="float:right;border:1px">提交</button>
             </div>
-            <div class="panel-body">
-                	<div class="form-group">
-						<label for="suboffice">所属分局</label>
-						<select class="form-control" id="suboffice" name="suboffice" style="width: 200px;" onchange="loadContractData(this.value)">
+            
+            <div class="container">
+					<h3></h3>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="suboffice" class="col-sm-3 control-label">所属分局</label>
+							<div class="col-sm-6">
+								<select class="form-control" id="suboffice" name="suboffice" onchange="loadContractData(this.value)">
 							<option></option>
 						</select>
-					</div>
-					<div class="form-group">
-						<label for="contract">合同名称</label>
-						<select class="form-control" id="contract" name="contract" style="width: 500px;">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contract" class="col-sm-3 control-label">合同名称</label>
+							<div class="col-sm-6">
+								<select class="form-control" id="contract" name="contract">
 							<option></option>
 						</select>
-					</div>
-					<div class="form-group">
-						<label for="monthamount">当月结算额(万元)</label>
-						<input type="text" class="form-control" id="monthamount" style="width: 200px;" placeholder="请输入合同金额">
-					</div>
-					<div class="form-group">
-						<label for="signTime">所属年月</label>
-						<div class='input-group date' id='belongTime' style="width: 200px;">
+						
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="monthamount" class="col-sm-3 control-label">当月结算额(万元)</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="monthamount" placeholder="请输入合同金额">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="signTime" class="col-sm-3 control-label">所属年月</label>
+							<div class="col-sm-6">
+								<div class='input-group date' id='belongTime'>
 			                <input type='text' readonly="readonly" class="form-control" name="belongTimeStr" id="belongTimeStr"/>
 			                <span class="input-group-addon">
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>
-			            </div>
-					</div>
-					<div class="form-group">
-						<label for="remark">备注</label>
-						<input type="text" class="form-control" id="remark" style="width: 200px;" placeholder="请输入备注">
-					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
-            </div>
+			                </div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="remark" class="col-sm-3 control-label">备注</label>
+							<div class="col-sm-6">
+							 <input type="text" class="form-control" id="remark" placeholder="请输入备注">
+							</div>
+						</div>
+					</form>
+				</div>
         </div>       
 		</div>
 	</div>

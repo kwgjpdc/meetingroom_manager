@@ -33,22 +33,33 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	系统管理 / 部门管理 / 部门添加
+            系统管理 / 部门管理 / 部门添加
+            	<button onclick="save()" class="btn btn-primary" style="float:right;border:1px">提交</button>
             </div>
-            <div class="panel-body">
-                	
-					<div class="form-group">
-						<label for="subofficename">部门名称</label>
-						<input type="text" class="form-control" id="subofficename" style="width: 400px;" placeholder="请输入部门名称">
-					</div>
-					<div class="form-group">
-						<label for="isonlysubo">是否分局</label>
-						<select class="form-control" id="isonlysubo" name="isonlysubo" style="width: 200px;">
-							<option value="1">是</option>
+            
+            <div class="container">
+					<h3></h3>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="subofficename" class="col-sm-3 control-label">部门名称</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="subofficename"
+									placeholder="请输入部门名称">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="isonlysubo" class="col-sm-3 control-label">是否分局</label>
+							<div class="col-sm-6">
+							 <select class="form-control" id="isonlysubo"
+								name="isonlysubo">
+								<option value="1">是</option>
 							<option value="0">否</option>
-						</select>
-					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
-            </div>
+							</select>
+							</div>
+						</div>
+					</form>
+				</div>
         </div>       
 		</div>
 	</div>
