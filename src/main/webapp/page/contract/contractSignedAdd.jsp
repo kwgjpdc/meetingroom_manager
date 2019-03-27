@@ -34,49 +34,68 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	合同管理 / 合同签订 / 合同添加
+            	<button onclick="save()" class="btn btn-primary" style="float:right;border:1px">提交</button>
             </div>
-            <div class="panel-body">
-                	<div class="form-group">
-						<label for="suboffice">所属分局</label>
-						<select class="form-control" id="suboffice" name="suboffice" style="width: 200px;">
+            <div class="container">
+					<h3></h3>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="suboffice" class="col-sm-3 control-label">所属分局:</label>
+							<div class="col-sm-6">
+								<select class="form-control" id="suboffice" name="suboffice" >
 							<option></option>
 						</select>
-					</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contractName" class="col-sm-3 control-label">合同名称</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="contractName" placeholder="请输入合同名称">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="contractNum" class="col-sm-3 control-label">合同编号</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="contractNum" placeholder="请输入合同编号">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="amount" class="col-sm-3 control-label">合同金额(万元)</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="amount" placeholder="请输入合同金额">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="durationTime" class="col-sm-3 control-label">合同工期</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="durationTime" placeholder="请输入合同工期">
+							</div>
+						</div>
 					<div class="form-group">
-						<label for="contractName">合同名称</label>
-						<input type="text" class="form-control" id="contractName" style="width: 400px;" placeholder="请输入合同名称">
-					</div>
-					<div class="form-group">
-						<label for="contractNum">合同编号</label>
-						<input type="text" class="form-control" id="contractNum" style="width: 400px;" placeholder="请输入合同编号">
-					</div>
-					<div class="form-group">
-						<label for="amount">合同金额(万元)</label>
-						<input type="text" class="form-control" id="amount" style="width: 200px;" placeholder="请输入合同金额">
-					</div>
-					<div class="form-group">
-						<label for="durationTime">合同工期</label>
-						<input type="text" class="form-control" id="durationTime" style="width: 200px;" placeholder="请输入合同工期">
-					</div>
-					<div class="form-group">
-						<label for="signTime">合同签订日期</label>
-						<div class='input-group date' id='signTime' style="width: 200px;">
-			                <input type='text' readonly="readonly" class="form-control" name="signTimeStr" id="signTimeStr"/>
-			                <span class="input-group-addon">
-			                    <span class="glyphicon glyphicon-calendar"></span>
-			                </span>
+						<label for="signTime" class="col-sm-3 control-label">合同签订日期</label>
+						<div class="col-sm-6">
+							<div class='input-group date' id='signTime' >
+				                <input type='text' readonly="readonly" class="form-control" name="signTimeStr" id="signTimeStr"/>
+				                <span class="input-group-addon">
+				                    <span class="glyphicon glyphicon-calendar"></span>
+				                </span>
+				            </div>
 			            </div>
 					</div>
 					<div class="form-group">
-						<label for="contractPartyB">合同乙方</label>
-						<input type="text" class="form-control" id="contractPartyB" style="width: 200px;" placeholder="请输入合同乙方">
-					</div>
-					<div class="form-group">
-						<label for="remark">备注</label>
-						<input type="text" class="form-control" id="remark" style="width: 200px;" placeholder="请输入备注">
-					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
-            </div>
+							<label for="contractPartyB" class="col-sm-3 control-label">合同乙方</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="contractPartyB" placeholder="请输入合同乙方">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="remark" class="col-sm-3 control-label">备注</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="remark" placeholder="请输入备注">
+							</div>
+						</div>
+					</form>
+				</div>
         </div>       
 		</div>
 	</div>
