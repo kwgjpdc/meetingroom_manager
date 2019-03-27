@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50725
 File Encoding         : 65001
 
-Date: 2019-03-24 22:05:11
+Date: 2019-03-27 17:34:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -386,6 +386,7 @@ CREATE TABLE `t_s_dcdysqlid` (
 -- ----------------------------
 INSERT INTO `t_s_dcdysqlid` VALUES ('cwtbhzczlb', 'comle.financing.getfinancingListData', '1', '财务填报汇总操作列表');
 INSERT INTO `t_s_dcdysqlid` VALUES ('cwsjtj', 'comle.financing.getFinancingReportData', '1', '财务数据统计表列表');
+INSERT INTO `t_s_dcdysqlid` VALUES ('gctzwchzytj', 'comle.financing.getFinancingReportTwoData', '1', '工程投资完成汇总月统计');
 
 -- ----------------------------
 -- Table structure for `t_s_dcdysqlproperty`
@@ -416,6 +417,11 @@ INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwsjtj', 'moneysan', 'right', 'vnd.ms
 INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwsjtj', 'moneysi', 'right', 'vnd.ms-excel.numberformat:#,##0.00', '6', null, '1', '金额4');
 INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwsjtj', 'moneys', 'right', 'vnd.ms-excel.numberformat:#,##0.00', '7', null, '1', '累计');
 INSERT INTO `t_s_dcdysqlproperty` VALUES ('cwsjtj', 'rnum', 'left', null, '1', null, '1', '序号');
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('gctzwchzytj', 'typename', 'left', null, '1', null, '1', null);
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('gctzwchzytj', 'contractmoney', 'right', 'excel.numberformat:#,##0.00', '2', null, '1', null);
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('gctzwchzytj', 'contractfinish', 'right', 'excel.numberformat:#,##0.00', '3', null, '1', null);
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('gctzwchzytj', 'nytnmmoney', 'right', 'excel.numberformat:#,##0.00', '4', null, '1', null);
+INSERT INTO `t_s_dcdysqlproperty` VALUES ('gctzwchzytj', 'nymonth', 'right', 'excel.numberformat:#,##0.00', '5', null, '1', null);
 
 -- ----------------------------
 -- Table structure for `t_s_dcdytitles`
@@ -455,6 +461,17 @@ INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'year2n', '年份2', 'center', '1
 INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'monthn', '当月', 'center', '1', '1', '4', '3', '1', '1', null);
 INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', 'year3n', '当年至当月', 'center', '1', '1', '4', '4', '1', '1', null);
 INSERT INTO `t_s_dcdytitles` VALUES ('cwsjtj', null, '累计', 'center', '1', '1', '4', '5', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', 'filename', '文件名称', 'center', '1', '1', '1', '1', '1', '5', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', 'yearmonth', '年月', 'center', '1', '1', '2', '1', '1', '5', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', null, '填报单位（盖章）：', 'right', '1', '1', '3', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', null, '建设管理处', 'left', '1', '1', '3', '2', '1', '4', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', null, '填报时间：', 'right', '1', '1', '4', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', 'reportDaten', '填报时间的值', 'left', '1', '1', '4', '2', '1', '4', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', null, '序号-项目类型', 'center', '1', '1', '5', '1', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', null, '（合同、协议）总金额（万元）', 'center', '1', '1', '5', '2', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', null, '开工以来累计完成投资（万元）', 'center', '1', '1', '5', '3', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', 'yearn', '当年至当月', 'center', '1', '1', '5', '4', '1', '1', null);
+INSERT INTO `t_s_dcdytitles` VALUES ('gctzwchzytj', 'monthn', '当年的当月', 'center', '1', '1', '5', '5', '1', '1', null);
 
 -- ----------------------------
 -- Table structure for `t_s_suboffice`
