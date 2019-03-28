@@ -97,6 +97,10 @@ function dologin(){
 }
 
 function check(){
+	//把验证码转成小写
+	var code=$("#code").val();
+	//把输入的验证码转成小写
+	var ckcode=$("#ckcode").html();
 	
 	if($("#username").val() == ''){
 		alert('请输入用户名');
@@ -106,12 +110,15 @@ function check(){
 		alert('请输入密码');
 		return false;
 	}
+	//判断如果验证码为空就提示输入验证码
 	if($("#code").val() == ''){
 		alert('请输入验证码');
 		return false;
 	}
-	if($("#code").val() != $("#ckcode").html()){
+	//判断输入的验证码和验证码会否一致
+	if(code.toLowerCase()!=ckcode.toLowerCase()){
 		alert('验证码不正确');
+		changeImg();
 		return false;
 	}
 	
