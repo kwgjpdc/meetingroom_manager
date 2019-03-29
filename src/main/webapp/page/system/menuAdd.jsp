@@ -106,8 +106,8 @@
 						<div class="form-group">
 							<label for="priority" class="col-sm-3 control-label">排序序号</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="priority" name="priority"
-									placeholder="请输入排序序号">
+								<input type="text" class="form-control" id="priority"
+									name="priority" placeholder="请输入排序序号">
 							</div>
 						</div>
 

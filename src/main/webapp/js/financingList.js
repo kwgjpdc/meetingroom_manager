@@ -7,6 +7,7 @@ $(document).ready(function(){
 });
 
 function reloadtable(){
+	_writeyear=$("#writeyear").val();
 	$("#fileName").val($("#writeyear").val()+"财务填报费用类型分类汇总表");
     var options = $('#t_datagrid').bootstrapTable('refresh', {
         query: $("#formSearch").serializeObj()
@@ -36,7 +37,7 @@ var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
 	oTableInit.Init = function () {
-		var _writeyear = $("#writeyear").val();
+		_writeyear = $("#writeyear").val();
 		$('#t_datagrid').bootstrapTable({
 			url: $("#fule").val()+'financing/getfinancingListData.json',         //请求后台的URL（*）
 			method: 'post',      				//请求方式（*）
