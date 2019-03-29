@@ -1,3 +1,4 @@
+<%@page import="com.lion.echart.Suboffice.entity.SubofficeEntity"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -5,6 +6,7 @@
 	String contextPath = this.getServletContext().getContextPath();
 	String fule = base + "" + contextPath + "/";
 %>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,12 +55,15 @@
 						style="color: #000; text-decoration: none;">部门管理</a> / <a href="#"
 						style="color: #000; text-decoration: none;">部门修改</a>
 				</div>
+				<%
+					SubofficeEntity suboffice=(SubofficeEntity)request.getAttribute("suboffice");
+				%>
 				<div class="container">
 					<div class="panel-body">
 						<input type="hidden" name="id" id="id"
-							value="${suboffice.subofficeid}"> <input type="hidden"
+							value="<%=suboffice.getSubofficeid() %>"> <input type="hidden"
 							name="isonlysuboid" id="isonlysuboid"
-							value="${suboffice.isonlysubo}">
+							value="<%=suboffice.getIsonlysubo() %>">
 						<div class="form-group">
 							<label for="rolename">部门名称</label> <input type="text"
 								class="form-control" id="subofficename" style="width: 400px;"

@@ -4,6 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%-- 页面导出选择数据页面 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -38,7 +39,7 @@
 						if (!prowindex.equals(""+titles.get(i).get("rowindex"))) {
 				%>
 			</tr>
-			<tr style="background:#ffff99">
+			<tr>
 				<%
 						}
 				%>
@@ -54,29 +55,29 @@
 				%> 
 				<%=titles.get(i).get("showtitle")%>
 				<%
- 	} else {
+ 						} else {
  				%> 
  
- <%=titlemap.get(titles.get(i).get("tdid"))%> 
+ 					<%=titlemap.get(titles.get(i).get("tdid"))%> 
  
  
  				<%
- 	}
+ 						}
  				%> 			
  				</td>
  				<%
- 	}
- %>
+ 					}
+ 				%>
 				
 			</tr>
 		</thead>
 		<tbody>
-			<%
+				<%
 				ArrayList<HashMap<String, Object>> listData = (ArrayList) request.getAttribute("listData");
 				ArrayList<HashMap<String, Object>> propertys = (ArrayList) request.getAttribute("propertys");
 				String[] onerow = (String[]) request.getAttribute("onerow");
 				for (int i = 0; i < listData.size(); i++) {
-			%>
+				%>
 			<tr>
 				<%
 					for (int a = 0; a < propertys.size(); a++) {
@@ -88,9 +89,9 @@
 					}
 				%>
 			</tr>
-			<%
-				}
-			%>
+				<%
+					}
+				%>
 		</tbody>
 	</table>
 </body>
