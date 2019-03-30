@@ -54,7 +54,6 @@ function changeView(){
 	}
 }
 function validatef(){
-	/*
 	$('#formSearch').bootstrapValidator({
 		message: 'This value is not valid',
 		feedbackIcons: {
@@ -97,7 +96,6 @@ function validatef(){
 			}
 		}
 	});
-	*/
 }
 function echartinitpie(){
 	var rows = $('#t_datagrid').bootstrapTable('getData');
@@ -184,17 +182,18 @@ function echartonepie2(_divid,datas){
                 saveAsImage : {show: true}
             }
         },
+        
         series: {
         	name: '分局合同月统计',
             type: 'pie',
             data: [
-                {name: '合同总金额', value: datas["contractTotal"]},
+                {name: '合同总金额', value: 1},
                 {name: '本年度计划完成投资', value: datas["thisYearPlan"]},
-                {name: '本月完成投资', value: datas["thisMonthInvest"]},
+                {name: '本月完成投资', value: datas["thisMonthInvestStr"]},
                 {name: '本年至当月完成投资', value: datas["thisYtmTotal"]},
-                {name: '自开关以来累计完成投资', value: datas["investTotal"]},
-                {name: '累计结算工程款额', value: datas["balanceTotal"]},
-                {name: '工程累计支付情况', value: datas["payforTotal"]}
+                {name: '自开关以来累计完成投资', value: datas["investTotalStr"]},
+                {name: '累计结算工程款额', value: datas["balanceTotalStr"]},
+                {name: '工程累计支付情况', value: datas["payforTotalStr"]}
             ]
         }
     });
