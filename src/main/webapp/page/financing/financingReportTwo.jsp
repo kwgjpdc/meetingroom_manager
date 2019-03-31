@@ -20,12 +20,16 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-table.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/bootstrap-editable.min.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.min.js" charset="UTF-8" ></script>
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8" ></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/financingReportTwo.js?ts=<%=request.getAttribute("ts") %>"></script>
 <style type="text/css">
 	.table {table-layout:fixed;}
+	#tailer span{
+		text-decoration:underline;
+	}
 </style>
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
@@ -36,7 +40,7 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading">
-            	统计报表 / 财务数据统计
+            	统计报表 / 工程投资完成汇总月统计
             	<div id="toolbar" class="btn-group btn-group-right" >
 		            <button id="printbtn" type="button" class="btn btn-default" onclick="print()" >
 		                <span class="glyphicon" aria-hidden="true" >打印</span>
@@ -48,15 +52,21 @@ String fule = base + "" + contextPath + "/";
             </div>
             <div class="panel-body">
                 <form id="formSearch" class="form-horizontal" autosubmit="return false;" method="post" >
-                	<input type="hidden" name="dcdytype" value="cwsjtj" />
-                	<input type="hidden" name="fileName" id="fileName" />
+                	<input type="hidden" name="dcdytype" value="gctzwchzytj" />
+                	<input type="hidden" name="filename" id="filename" />
+                	<input type="hidden" name="yearmonth" id="yearmonth" />
                 	<input type="hidden" name="year" id="year" />
                 	<input type="hidden" name="month" id="month" />
                 	<input type="hidden" name="yearn" id="yearn" />
                 	<input type="hidden" name="monthn" id="monthn" />
+                	<input type="hidden" name="tailyyi" id="tailyyi" />
+                	<input type="hidden" name="tailyer" id="tailyer" />
+                	<input type="hidden" name="tailysan" id="tailysan" />
+                	<input type="hidden" name="tailysi" id="tailysi" />
+                	<input type="hidden" name="tailestr" id="tailestr" />
                 	<input type="hidden" name="reportDaten" id="reportDaten" />
                     <div class="form-group" style="margin-top:15px">
-                        <label class="control-label col-sm-1" for="reportDate">汇报年月</label>
+                        <label class="control-label col-sm-1" for="reportDate">汇报截至日</label>
                         <div class="col-sm-2">
                         	<div style="position:absolute;left:180px;top:7px;cursor:pointer;" class="input_clear">
                         		<button type="button" class="close" data-dismiss="modal" 
@@ -75,6 +85,13 @@ String fule = base + "" + contextPath + "/";
 
         <div id="bodydiv" >
         	<table id="t_datagrid"></table>
+        	<div style="font-size: 18px;padding:5px 10px;" id="spantailestr" >资金来源：
+				截止2月25日，2019年累计到位 ___ 万元（2018年结余转结资金），
+				其中①中央补助 ___ 万元
+				②省级配套 ___ 万元
+				③地方水利建设基金 ___ 万元
+				④银行贷款 ___ 万元。
+        	</div>
         </div>
 	</div>
 </div>

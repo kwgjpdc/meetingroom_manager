@@ -38,7 +38,7 @@ String fule = base + "" + contextPath + "/";
             	财务填报 
             	 <form id="formSearch" class="form-horizontal" autosubmit="return false;" style="margin-left: 80px;margin-top: -40px;" method="post" >
                 	<input type="hidden" name="dcdytype" value="cwtbhzczlb" />
-                	<input type="hidden" name="fileName" id="fileName" />
+                	<input type="hidden" name="filename" id="filename" />
                     <div class="form-group" style="margin-top:15px">
                         <div class="col-sm-2">
                         	<select id="writeyear" lang="<%=request.getAttribute("year") %>" onchange="reloadtable()" name="writeyear" class="selectpicker" data-width="100px" >

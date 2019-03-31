@@ -27,7 +27,7 @@ function setFormVal(_this){
 		$("#year2").val('');
 		$("#year1").val('');
 		$("#month").val('');
-		$("#fileName").val('');
+		$("#filename").val('');
 	}else{
 		var arrstr = _reportDate.split("-");
 		var _year3 = parseInt(arrstr[0]);
@@ -43,7 +43,7 @@ function setFormVal(_this){
 		$("#year1n").val(_year1+"年");
 		$("#monthn").val(_year3+"年"+arrstr[1]+"月");
 		$("#reportDaten").val(_year3+"年"+arrstr[1]+"月"+arrstr[2]+"日");
-		$("#fileName").val("滇中引水工程建设资金支付情况统计表("+_year3+"年"+arrstr[1]+"月)");
+		$("#filename").val("滇中引水工程建设资金支付情况统计表("+_year3+"年"+arrstr[1]+"月)");
 	}
 }
 function initDateTable(){

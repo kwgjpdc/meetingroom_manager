@@ -49,7 +49,7 @@ String fule = base + "" + contextPath + "/";
             <div class="panel-body">
                 <form id="formSearch" class="form-horizontal" autosubmit="return false;" method="post" >
                 	<input type="hidden" name="dcdytype" value="cwsjtj" />
-                	<input type="hidden" name="fileName" id="fileName" />
+                	<input type="hidden" name="filename" id="filename" />
                 	<input type="hidden" name="year1" id="year1" />
                 	<input type="hidden" name="year2" id="year2" />
                 	<input type="hidden" name="year3" id="year3" />

@@ -175,40 +175,40 @@ public class FinancingController {
 	}
 	
 	//获取工程投资完成汇总补录数据
-		@RequestMapping(value = "/getFinancingRepairSourceMoney.json",method=RequestMethod.POST)
-		public @ResponseBody String getFinancingRepairSourceMoney(String belongTimeStr,HttpServletRequest req,
-				HttpServletResponse resp, HttpSession session) throws IOException {
-			JSONObject obj = new JSONObject();
-			try {
-				if(belongTimeStr!=null&&!belongTimeStr.equals("")){
-					HashMap<String, Object> param = new HashMap<String, Object>();
-					param.put("year", belongTimeStr.substring(0,4));
-					param.put("month", belongTimeStr.substring(5,7));
-					param.put("classes", "2");
-					List<Map<String, Object>> list = baseService.queryList("comle.financing.getFinancingRepairSourceMoneyData", param);
-					if(list.size()>0){
-						obj.put("isCount", 1);
-					}else{
-						obj.put("isCount", 0);
-					}
-					for(Map<String, Object> map : list){
-						String sourcemoney = (String) map.get("sourcemoney");
-						String sourcemoneyArr [] = sourcemoney.split("##");
-						obj.put("totalmoney", sourcemoneyArr[0]);
-						obj.put("centralmoney", sourcemoneyArr[1]);
-						obj.put("provincemoney", sourcemoneyArr[2]);
-						obj.put("localmoney", sourcemoneyArr[3]);
-						obj.put("bankmoney", sourcemoneyArr[4]);
-						obj.put("sourceMoneyId", map.get("id"));
-					}
-					obj.put("msgType", 1);
+	@RequestMapping(value = "/getFinancingRepairSourceMoney.json",method=RequestMethod.POST)
+	public @ResponseBody String getFinancingRepairSourceMoney(String belongTimeStr,HttpServletRequest req,
+			HttpServletResponse resp, HttpSession session) throws IOException {
+		JSONObject obj = new JSONObject();
+		try {
+			if(belongTimeStr!=null&&!belongTimeStr.equals("")){
+				HashMap<String, Object> param = new HashMap<String, Object>();
+				param.put("year", belongTimeStr.substring(0,4));
+				param.put("month", belongTimeStr.substring(5,7));
+				param.put("classes", "2");
+				List<Map<String, Object>> list = baseService.queryList("comle.financing.getFinancingRepairSourceMoneyData", param);
+				if(list.size()>0){
+					obj.put("isCount", 1);
+				}else{
+					obj.put("isCount", 0);
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				obj.put("msgType", 0);
+				for(Map<String, Object> map : list){
+					String sourcemoney = (String) map.get("sourcemoney");
+					String sourcemoneyArr [] = sourcemoney.split("##");
+					obj.put("totalmoney", sourcemoneyArr[0]);
+					obj.put("centralmoney", sourcemoneyArr[1]);
+					obj.put("provincemoney", sourcemoneyArr[2]);
+					obj.put("localmoney", sourcemoneyArr[3]);
+					obj.put("bankmoney", sourcemoneyArr[4]);
+					obj.put("sourceMoneyId", map.get("id"));
+				}
+				obj.put("msgType", 1);
 			}
-			return obj.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.put("msgType", 0);
 		}
+		return obj.toString();
+	}
 	
 	//工程投资完成汇总补录数据保存
 	@RequestMapping(value = "/insertFRepair.json",method=RequestMethod.POST)
@@ -256,7 +256,6 @@ public class FinancingController {
 		return obj.toString();
 	}
 	
-
 	//工程投资完成汇总表页面跳转 
 	@RequestMapping(value = "/financingReportTwo.web",method=RequestMethod.GET)
 	public String financingReportTwo(HttpServletRequest req,HttpServletResponse resp, 
@@ -266,7 +265,7 @@ public class FinancingController {
 		return "/page/financing/financingReportTwo";
 	}
 
-	//获取财务数据统计表列表数据
+	//工程投资完成汇总表列表数据
 	@RequestMapping(value = "/getFinancingReportTwoData.json",method=RequestMethod.POST)
 	public @ResponseBody List<Map<String, Object>> getFinancingReportTwoData(HttpServletRequest req,
 			HttpServletResponse resp, HttpSession session,String month, String year) throws IOException {
@@ -283,5 +282,35 @@ public class FinancingController {
 		}
 		
 		return list;
+	}
+	
+	//工程投资完成汇总表补充数据
+	@RequestMapping(value = "/getFinancingReportTwoBcData.json",method=RequestMethod.POST)
+	public @ResponseBody Map<String, Object> getFinancingReportTwoBcData(HttpServletRequest req,
+			HttpServletResponse resp, HttpSession session,String month, String year) throws IOException {
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		if(result.isEmpty()) {
+			HashMap<String, String> param = new HashMap<String, String>();
+			param.put("year", year);
+			param.put("month", month);
+			param.put("classes", "2");
+			Object obj = baseService.queryObject("comle.financing.getFinancingRepairSourceMoneyData", param);
+			if(obj != null) {
+				param = (HashMap<String, String>)obj;
+				String temps = param.get("sourcemoney");
+				if(temps != null && !temps.isEmpty()) {
+					String[] strs = temps.split("##");
+					if(strs.length == 5) {
+						String[] names = {"taileyi","taileer","tailesan","tailesi","tailewu"};
+						for (int i = 0; i < names.length; i++) {
+							result.put(names[i], strs[i]);
+						}
+					}
+				}
+			}
+		}
+		
+		return result;
 	}
 }

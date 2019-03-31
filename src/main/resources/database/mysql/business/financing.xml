@@ -119,12 +119,16 @@
     </update>
 
     <select id="getFinancingReportTwoData" parameterType="java.util.Map" resultType="java.util.Map" >
-		SELECT * FROM (
+		SELECT typename,ifnull(contractmoney,0) as contractmoney, 
+		ifnull(contractfinish,0) as contractfinish,
+		ifnull(nytnmmoney,0) as nytnmmoney,
+		ifnull(nymonth,0) as nymonth
+			FROM (
 	SELECT 0 AS orderby,'一、工程合同投资（含监理费用）' AS typename
 			,( SELECT SUM(amount) FROM t_c_contract ) AS contractmoney
 			,(SELECT SUM(money) FROM t_f_financingwrite) AS contractfinish
-			,(SELECT SUM(money) FROM t_f_financingwrite WHERE writeyear = 2019 AND writemonth <![CDATA[<]]> 3) AS nytnmmoney
-			,(SELECT SUM(money) FROM t_f_financingwrite WHERE writeyear = 2019 AND writemonth = 3) AS nymonth
+			,(SELECT SUM(money) FROM t_f_financingwrite WHERE writeyear = #{year} AND writemonth <![CDATA[<]]> #{month}) AS nytnmmoney
+			,(SELECT SUM(money) FROM t_f_financingwrite WHERE writeyear = #{year} AND writemonth = #{month}) AS nymonth
 		UNION
 		(SELECT ts.subofficeid AS o,
 			CONCAT(ts.subofficeid,'.',ts.subofficename,'工程投资')
@@ -134,10 +138,10 @@
 			,SUM(tft.money) AS nymonth
 			FROM t_s_suboffice ts 
 			LEFT JOIN t_c_contract tc ON tc.subofficeid = ts.subofficeid
-			LEFT JOIN t_f_financingwrite tf ON tf.subofficeid = ts.subofficeid AND (tf.writeyear <![CDATA[<]]> 2019 
-				OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3))
-			LEFT JOIN t_f_financingwrite tfo ON tfo.subofficeid = ts.subofficeid AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.subofficeid = ts.subofficeid AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tf ON tf.subofficeid = ts.subofficeid AND (tf.writeyear <![CDATA[<]]> #{year} 
+				OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> 3))
+			LEFT JOIN t_f_financingwrite tfo ON tfo.subofficeid = ts.subofficeid AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.subofficeid = ts.subofficeid AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.isonlysubo = '1'
 			GROUP BY ts.subofficeid)
 		UNION
@@ -148,23 +152,23 @@
 			,SUM(tfo.money) AS nytnmmoney
 			,SUM(tft.money) AS nymonthfrom
 			FROM t_s_code ts 
-			LEFT JOIN t_f_financingwrite tf ON ts.key = tf.costtype AND (tf.writeyear <![CDATA[<]]> 2019 
-				OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
+			LEFT JOIN t_f_financingwrite tf ON ts.key = tf.costtype AND (tf.writeyear <![CDATA[<]]> #{year} 
+				OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> 3)) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.codetype = 'costtype' AND ts.key IN ('03','02')
 			GROUP BY ts.key)
 		UNION
 		(SELECT 9 AS orderby, '二、设计费用' AS typename
 			,SUM(tf.cmoney),SUM(tf.summoney),SUM(tf.tytmmoney),SUM(tf.mmoney) FROM t_s_code ts
 			LEFT JOIN t_f_financingrepair tf ON ts.`key` = tf.ctype
-				AND tf.classes = 1 AND tf.`year` = 2019 AND tf.`month` = 3
+				AND tf.classes = 1 AND tf.`year` = #{year} AND tf.`month` = #{month}
 			WHERE ts.codetype = 'costtypesub')
 		UNION
 			(SELECT (CAST(ts.key AS  SIGNED)+9) AS o,CONCAT(RIGHT(ts.key,1),'.',ts.`value`),tf.cmoney,tf.summoney,tf.tytmmoney,tf.mmoney FROM t_s_code ts
 			LEFT JOIN t_f_financingrepair tf ON ts.`key` = tf.ctype
-				AND tf.classes = 1 AND tf.`year` = 2019 AND tf.`month` = 3
+				AND tf.classes = 1 AND tf.`year` = #{year} AND tf.`month` = #{month}
 		WHERE ts.codetype = 'costtypesub')
 		UNION
 		(SELECT 
@@ -174,11 +178,11 @@
 			,SUM(tfo.money) AS nytnmmoney
 			,SUM(tft.money) AS nymonth
 			FROM t_s_code t
-			LEFT JOIN t_f_financingwrite tf ON tf.costtype= t.key AND (tf.writeyear <![CDATA[<]]> 2019 
-				OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3))
+			LEFT JOIN t_f_financingwrite tf ON tf.costtype= t.key AND (tf.writeyear <![CDATA[<]]> #{year} 
+				OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> 3))
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = t.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = t.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = t.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = t.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE t.codetype = 'costtype' AND t.key IN ('05','07','13','06','08','11'))
 		UNION
 		(SELECT CASE ts.key WHEN '05' THEN 15 WHEN '07' THEN 16
@@ -192,11 +196,11 @@
 			,SUM(tfo.money) AS nytnmmoney
 			,SUM(tft.money) AS nymonthfrom
 			FROM t_s_code ts 
-			LEFT JOIN t_f_financingwrite tf ON ts.key = tf.costtype AND (tf.writeyear <![CDATA[<]]> 2019 
-				OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
+			LEFT JOIN t_f_financingwrite tf ON ts.key = tf.costtype AND (tf.writeyear <![CDATA[<]]> #{year} 
+				OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> 3)) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3 
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.codetype = 'costtype' AND ts.key IN ('05','07','13','06','08','11')
 			GROUP BY ts.key)
 		UNION
@@ -208,10 +212,10 @@
 			,SUM(tft.money) AS nymonthfrom
 			FROM t_s_code ts 
 			LEFT JOIN t_f_financingwrite tf ON tf.costtype = 12 AND	ts.key = tf.payeedescribe
-			 AND (tf.writeyear <![CDATA[<]]> 2019 OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
+			 AND (tf.writeyear <![CDATA[<]]> #{year} OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> 3)) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.codetype = 'costtypejgf' )
 		UNION 
 		(SELECT  (CAST(ts.key AS  SIGNED)+21) AS o,
@@ -222,10 +226,10 @@
 			,tft.money AS nymonthfrom
 			FROM t_s_code ts 
 			LEFT JOIN t_f_financingwrite tf ON tf.costtype = 12 AND	ts.key = tf.payeedescribe
-			 AND (tf.writeyear <![CDATA[<]]>  2019 OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3)) 
+			 AND (tf.writeyear <![CDATA[<]]>  #{year} OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> #{month})) 
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.codetype = 'costtypejgf' 
 			GROUP BY ts.key ORDER BY ts.key)
 		UNION 
@@ -236,11 +240,11 @@
 			,SUM(tfo.money) AS nytnmmoney
 			,SUM(tft.money) AS nymonthfrom
 			FROM t_s_code ts
-			LEFT JOIN t_f_financingwrite tf ON tf.costtype = ts.key AND (tf.writeyear <![CDATA[<]]> 2019
-				 OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3))
+			LEFT JOIN t_f_financingwrite tf ON tf.costtype = ts.key AND (tf.writeyear <![CDATA[<]]> #{year}
+				 OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> #{month}))
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid 
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.codetype = 'costtype' AND ts.key = '10')
 		UNION
 		(SELECT 
@@ -250,11 +254,11 @@
 			,17704.96 AS nytnmmoney
 			,0 AS nymonthfrom
 			FROM t_s_code ts
-			LEFT JOIN t_f_financingwrite tf ON tf.costtype = ts.key AND (tf.writeyear <![CDATA[<]]> 2019 
-				OR (tf.writeyear = 2019 AND tf.writemonth <![CDATA[<]]> 3))
+			LEFT JOIN t_f_financingwrite tf ON tf.costtype = ts.key AND (tf.writeyear <![CDATA[<]]> #{year} 
+				OR (tf.writeyear = #{year} AND tf.writemonth <![CDATA[<]]> #{month}))
 			LEFT JOIN t_c_contract tc ON tc.contractid = tf.contractid 
-			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = 2019 AND tfo.writemonth <![CDATA[<]]> 3
-			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = 2019 AND tft.writemonth = 2
+			LEFT JOIN t_f_financingwrite tfo ON tfo.costtype = ts.key AND tfo.writeyear = #{year} AND tfo.writemonth <![CDATA[<]]> #{month}
+			LEFT JOIN t_f_financingwrite tft ON tft.costtype = ts.key AND tft.writeyear = #{year} AND tft.writemonth = #{month}
 			WHERE ts.codetype = 'costtype' AND ts.key = '10')
 	) ttt ORDER BY ttt.orderby
 		

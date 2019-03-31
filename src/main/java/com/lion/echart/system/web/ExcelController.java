@@ -5,7 +5,6 @@ import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.lion.echart.base.logic.BaseService;
-import com.mchange.v3.decode.Decoder;
 
 @Controller
 public class ExcelController {
@@ -33,11 +31,9 @@ public class ExcelController {
 	 */
 	@RequestMapping(value="/excel/toExcelXlsExecute.web",method=RequestMethod.POST)
 	public String proExcelXlsExecute(HttpServletRequest request,HttpServletResponse response,Model model,
-			String dcdytype,String qparam,String fileName){
+			String dcdytype,String qparam){
 		boolean goon = true;
 		String message = "";
-		fileName = URLDecoder.decode(fileName);
-		model.addAttribute("fileName", fileName);
 		model.addAttribute("msgType", 1); 
 
 		Enumeration paramkey = request.getParameterNames();
@@ -50,12 +46,18 @@ public class ExcelController {
 			param.put(keyname, request.getParameter(keyname));
 			titlemap.put(keyname, URLDecoder.decode(request.getParameter(keyname)));
 		}
-		
+		String filename =  titlemap.get("filename").toString();
+		model.addAttribute("filename", filename);
+		param.put("istitleortail",1);
 		List<HashMap<String,Object>> titles = baseService.queryList("com.system.eap.getTitle", param);
 		if(titles == null || titles.isEmpty()) {
 			goon = false;
 			message = "没有设置对应的表头格式";
 		}
+		
+		param.put("istitleortail",2);
+		List<HashMap<String,Object>> tails = baseService.queryList("com.system.eap.getTitle", param);
+		model.addAttribute("tails", tails);
 		
 		List<HashMap<String,Object>> propertys = baseService.queryList("com.system.eap.getSqlproerty", param);
 		if(propertys == null || propertys.isEmpty()) {
@@ -96,7 +98,6 @@ public class ExcelController {
 			model.addAttribute("listData", listData);
 			model.addAttribute("listcount", listcount); 
 		}
-		titlemap.put("filename", fileName);
 		model.addAttribute("titlemap", titlemap);
 		
 		try {
@@ -106,8 +107,8 @@ public class ExcelController {
 			model.addAttribute("message", message); 
 			
 			response.setContentType("application/octet-stream");
-			fileName=new String(fileName.getBytes("utf-8"),"iso-8859-1");
-			response.addHeader("Content-Disposition", "attachment; filename="+fileName+".xls");
+			filename=new String(filename.getBytes("utf-8"),"iso-8859-1");
+			response.addHeader("Content-Disposition", "attachment; filename="+filename+".xls");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

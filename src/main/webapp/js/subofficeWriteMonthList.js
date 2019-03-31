@@ -39,16 +39,6 @@ function setFootWidth(){
     	}
     }
 }
-function setFootWidth(){
-    var footths = $(".fixed-table-footer").find("th");
-    var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
-    
-    if(bodytds != undefined){
-    	for(var i = 0; i < bodytds.length; i++){
-    		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
-    	}
-    }
-}
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table

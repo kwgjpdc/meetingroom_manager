@@ -25,7 +25,7 @@
 	vnd .ms-excel.numberformat: yyyy-mm-dd
 }
 </style>
-<title>${fileName }</title>
+<title>${filename }</title>
 </head>
 <body>
 	<table border="1" id="table1" cellspacing="0" cellpadding="0">
@@ -45,9 +45,8 @@
 				%>
 				<%
 					prowindex= titles.get(i).get("rowindex")+"";
-					//request.setAttribute("prowindex", );
 				%>
-				<td id="<%=titles.get(i).get("tdid")%>"
+				<td id="<%=titles.get(i).get("tdid")%>" align="<%=titles.get(i).get("talign")%>"
 					rowspan="<%=titles.get(i).get("mrowspan")%>"
 					colspan="<%=titles.get(i).get("mcolspan")%>">
 				<%
@@ -93,6 +92,43 @@
 					}
 				%>
 		</tbody>
+		<tfoot>
+			<%
+					prowindex = "1";
+					ArrayList<HashMap<String, Object>> tails = (ArrayList) request.getAttribute("tails");
+					for (int i = 0; i < tails.size(); i++) {
+						if (!prowindex.equals(""+tails.get(i).get("rowindex"))) {
+				%>
+			</tr>
+			<tr>
+				<%
+						}
+				%>
+				<%
+					prowindex= tails.get(i).get("rowindex")+"";
+				%>
+				<td rowspan="<%=tails.get(i).get("mrowspan")%>"
+					colspan="<%=tails.get(i).get("mcolspan")%>">
+				<%
+						if (tails.get(i).get("tdid") == null) {
+				%> 
+				<%=tails.get(i).get("showtitle")%>
+				<%
+ 						} else {
+ 				%> 
+ 
+ 					<%=titlemap.get(tails.get(i).get("tdid"))%> 
+ 
+ 
+ 				<%
+ 						}
+ 				%> 			
+ 				</td>
+ 				<%
+ 					}
+ 				%>
+ 				
+		</tfoot>
 	</table>
 </body>
 </html>

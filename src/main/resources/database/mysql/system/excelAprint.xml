@@ -5,12 +5,15 @@
 	<select id="getTitle" parameterType="java.util.Map" resultType="java.util.Map"  >
 		select tdid,showtitle,mrowspan,mcolspan,rowindex
 			from t_s_dcdytitles t
-		where t.dcdytype = #{dcdytype}
+		where t.dcdytype = #{dcdytype} 
+		<if test="istitleortail != null and istitleortail != ''">
+			and istitleortail = #{istitleortail}
+		</if>
 		<if test="isdytype != null and isdytype != ''">
-			isdytype = #{isdytype}
+			and isdytype = #{isdytype}
 		</if>
 		<if test="isdctype != null and isdctype != ''">
-			isdctype = #{isdctype}
+			and isdctype = #{isdctype}
 		</if>
 		order by t.rowindex,colindex
 	</select>
@@ -24,7 +27,7 @@
 		select t.keyname,t.talign,t.formartstr from t_s_dcdysqlproperty t 
 			where t.dcdytype = #{dcdytype} 
 			<if test="protype != null and protype != ''">
-				protype = #{protype}
+				and protype = #{protype}
 			</if>
 			order by orderby 
 	</select>

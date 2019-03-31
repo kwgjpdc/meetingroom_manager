@@ -55,7 +55,7 @@ String fule = base + "" + contextPath + "/";
             <div class="panel-body">
                 <form id="formSearch" class="form-horizontal" method="post" autosubmit="return false;" >
                 	<input type="hidden" name="dcdytype" value="htzxytjb" />
-                	<input type="hidden" name="fileName" id="fileName" />
+                	<input type="hidden" name="filename" id="filename" />
                     <div class="form-group" style="margin-top:15px">
                         <label class="control-label col-sm-1" for="department">部门</label>
                         <div class="col-sm-2">

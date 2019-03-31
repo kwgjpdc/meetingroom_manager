@@ -35,7 +35,7 @@ function print(){
 }
 
 function doexcel(_this){
-	if($("#fileName").val() == ''){
+	if($("#filename").val() == ''){
 		modalTitle('无法导出，请先设置关键查询条件',1);		
 		return;
 	}
