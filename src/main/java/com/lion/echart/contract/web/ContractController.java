@@ -23,6 +23,7 @@ import com.lion.echart.contract.entity.ContractEntity;
 import com.lion.echart.contract.entity.ContractExecuteEntity;
 import com.lion.echart.contract.logic.ContractService;
 import com.lion.echart.project.entity.PayforEntity;
+import com.lion.echart.system.entity.UserEntity;
 
 import net.sf.json.JSONObject;
 
@@ -183,6 +184,7 @@ public class ContractController {
 	public String contractExecutemonthTotalList(HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
 		req.setAttribute("ts", System.currentTimeMillis());
 		req.setAttribute("who", "report");
+		req.setAttribute("realname",((UserEntity)session.getAttribute("USER_SESSION")).getRealname());
 		return "/page/contract/contractExecuteMonthTotalList";
 	}
 	//合同月度统计表数据

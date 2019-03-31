@@ -48,9 +48,9 @@
 				%>
 				<td id="<%=titles.get(i).get("tdid")%>" align="<%=titles.get(i).get("talign")%>"
 					rowspan="<%=titles.get(i).get("mrowspan")%>"
-					colspan="<%=titles.get(i).get("mcolspan")%>">
+					colspan="<%=titles.get(i).get("mcolspan")%>" >
 				<%
-						if (titles.get(i).get("tdid") == null) {
+						if (titles.get(i).get("tdid") == null || titles.get(i).get("tdid").toString().isEmpty()) {
 				%> 
 				<%=titles.get(i).get("showtitle")%>
 				<%
@@ -107,10 +107,11 @@
 				<%
 					prowindex= tails.get(i).get("rowindex")+"";
 				%>
-				<td rowspan="<%=tails.get(i).get("mrowspan")%>"
+				<td align="<%=titles.get(i).get("talign")%>" 
+					rowspan="<%=tails.get(i).get("mrowspan")%>"
 					colspan="<%=tails.get(i).get("mcolspan")%>">
 				<%
-						if (tails.get(i).get("tdid") == null) {
+						if (tails.get(i).get("tdid") == null || titles.get(i).get("tdid").toString().isEmpty()) {
 				%> 
 				<%=tails.get(i).get("showtitle")%>
 				<%

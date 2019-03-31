@@ -5,7 +5,12 @@ $(document).ready(function(){
 
 	$("#year").val(year);
 	$("#month").val(month);
-	validatef();
+	$('#filename').val(year+'年度工程建设管理月度统计表  —开工工程进度、投资完成情况汇总表');
+	$("#yearmonth").val('（'+year+'年＿'+month+'月）');
+	$("#reportDaten").val(year+'年'+month+'月25日');
+	$("#monthn").val(month+'月完成投资(万元)');
+	$("#ytmn").val(year+'年至'+month+'月实际完成投资(万元)');
+	//validatef();
 	
 	var oTable = new TableInit();
 	oTable.Init();
@@ -20,8 +25,31 @@ $(document).ready(function(){
 	
 	$("#btn_query").click(reloadtable);
 });
-
+function setParam(){
+	if($("#year").val() == '' || $("#month").val() == ''){
+		$('#filename').val('');
+		$("#yearmonth").val('');
+		$("#reportDaten").val('');
+		$("#monthn").val('');
+		$("#ytmn").val('');
+	}else{
+		var year = $("#year").val();
+		var month = parseInt($("#month").val());
+		$('#filename').val('合同执行月统计('+year+'_'+month+')');
+		$("#yearmonth").val('（'+year+'年＿'+month+'月）');
+		$("#reportDaten").val(year+'年'+month+'月25日');
+		$("#monthn").val(month+'月完成投资(万元)');
+		$("#ytmn").val(year+'年至'+month+'月实际完成投资(万元)');
+	}
+}
 function reloadtable(){
+	if($("#year").val() == '' || $("#month").val() == ''){
+		modalTitle("请选择年月",1);
+		return;
+	}
+	$("#spanmonth").html($("#monthn").val());
+	$("#spanytm").html($("#ytmn").val());
+	
 	$.ajax({
 		url: $("#fule").val()+'contract/contractExecuteMonthTotalListGetDat.json',
 		data: $("#formSearch").serializeObj(),
@@ -245,13 +273,15 @@ var TableInit = function () {
 						}
 				 }
 				 //,{field: 'thisMonthInvest',hiden:'right'}
-				 ,{field: 'thisMonthInvestStr',title: '2月完成投资（万元）',align:'right',
+				 ,{field: 'thisMonthInvestStr',align:'right',
+					 title: '<span id="spanmonth">'+$("#monthn").val()+'</span>',
 						formatter:function (value, row, index, field) {
 							return fmoney(value,4);
 						}
 				 }
 				 //,{field: 'thisYtmTotal',hiden:'right'}
-				 ,{field: 'thisYtmTotalStr',title: '2019年至2月实际完成投资（万元）',align:'right',
+				 ,{field: 'thisYtmTotalStr',align:'right',
+					 title: '<span id="spanytm">'+$("#ytmn").val()+'</span>',
 						formatter:function (value, row, index, field) {
 							return fmoney(value,4);
 						}

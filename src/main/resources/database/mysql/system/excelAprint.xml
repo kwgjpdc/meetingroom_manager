@@ -3,7 +3,7 @@
 
 <mapper namespace="com.system.eap">
 	<select id="getTitle" parameterType="java.util.Map" resultType="java.util.Map"  >
-		select tdid,showtitle,mrowspan,mcolspan,rowindex
+		select tdid,showtitle,mrowspan,mcolspan,rowindex,talign
 			from t_s_dcdytitles t
 		where t.dcdytype = #{dcdytype} 
 		<if test="istitleortail != null and istitleortail != ''">

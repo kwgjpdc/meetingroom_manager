@@ -50,7 +50,7 @@ String fule = base + "" + contextPath + "/";
 		            <button id="printbtn" type="button" class="btn btn-default" onclick="print()" >
 		                <span class="glyphicon" aria-hidden="true" >打印</span>
 		            </button>
-		            <button id="excelbtn" type="button" class="btn btn-default" onclick="doexcel(this)" >
+		            <button id="excelbtn" type="button" class="btn btn-default" onclick="doexcel()" >
 		                <span class="glyphicon" aria-hidden="true"  >导出</span>
 		            </button>
 		        </div>

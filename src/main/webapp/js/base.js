@@ -34,14 +34,13 @@ function print(){
 	modalTitle('工程师正在努力实现中<br/>您可以导入后打印',1);
 }
 
-function doexcel(_this){
+function doexcel(){
 	if($("#filename").val() == ''){
 		modalTitle('无法导出，请先设置关键查询条件',1);		
 		return;
 	}
-	
 	$("#formSearch").attr('action',$("#fule").val()+"excel/toExcelXlsExecute.web");
-	$("#formSearch").submit();
+	document.getElementById("formSearch").submit();
 }
 
 function modalTitle(_msg,_type){

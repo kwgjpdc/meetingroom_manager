@@ -78,12 +78,19 @@
     </update>
    <!-- 合同执行月统计查询 -->
 	<select id="getcontractExecuteMonthTotalListData" parameterType="java.util.Map" resultType="java.util.Map" >
-		select a.subofficename departStr,a.subofficeid,b.*,c.balanceTotalStr,c.payforTotalStr 
-		from (t_s_suboffice a left join
+		select a.subofficename departStr,a.subofficeid
+			,ifnull(b.thisYearPlanStr,0) as thisYearPlanStr
+			,ifnull(b.contractTotalStr,0) as contractTotalStr
+			,ifnull(b.thisMonthInvestStr,0) as thisMonthInvestStr
+			,ifnull(b.thisYtmTotalStr,0) as thisYtmTotalStr
+			,ifnull(b.investTotalStr,0) as investTotalStr
+			,ifnull(c.balanceTotalStr,0) as balanceTotalStr
+			,ifnull(c.payforTotalStr,0) as payforTotalStr 
+		from ((select * from t_s_suboffice where isonlysubo = 1) a left join
 			(select 
-				su.subofficeid,
-				sum(ct.amount) contractTotalStr,sum(sw.monthrealityinvest) thisMonthInvestStr,
-				sum(sw.yearrealityinvest) thisYtmTotalStr,sum(sw.finishinvest) investTotalStr
+				su.subofficeid,sum(ifnull(sw.yearplaninvest,0)) thisYearPlanStr,
+				sum(ifnull(ct.amount,0)) contractTotalStr,sum(ifnull(sw.monthrealityinvest,0)) thisMonthInvestStr,
+				sum(ifnull(sw.yearrealityinvest,0)) thisYtmTotalStr,sum(ifnull(sw.finishinvest,0)) investTotalStr
 			from t_s_subofficewrite sw,t_c_contract ct,t_s_suboffice su 
 			where sw.contractid = ct.contractid and su.subofficeid=ct.subofficeid and sw.isdisabled=0
 			<if test="year != null and year != 0">
@@ -94,10 +101,10 @@
 			</if>
 			group by su.subofficeid) b on a.subofficeid=b.subofficeid)
 			left join (select aa.subofficeid,
-			sum(case when aa.costtype='01' then aa.balanceTotalStr else 0 end) 'balanceTotalStr',
-			sum(case when aa.costtype in ('02','03') then aa.balanceTotalStr else 0 end) 'payforTotalStr'
+			sum(case when aa.costtype='01' then ifnull(aa.balanceTotalStr,0) else 0 end) 'balanceTotalStr',
+			sum(case when aa.costtype in ('02','03') then ifnull(aa.balanceTotalStr,0) else 0 end) 'payforTotalStr'
 			 from (
-			select subofficeid,costtype,sum(money) balanceTotalStr
+			select subofficeid,costtype,sum(ifnull(money,0)) balanceTotalStr
 			from t_f_financingwrite  where costtype in (01,02,03)
 			<if test="year != null and year != 0">
 				and (writeyear = #{year} )
