@@ -47,17 +47,20 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<!--系统管理 / 菜单管理 / 菜单添加-->
-
-					<a href="http://127.0.0.1:8080/echart/login.json"
-						style="color: #000; text-decoration: none;">系统管理</a> / <a
-						href="http://127.0.0.1:8080/echart/menu/menuList.web"
+					系统管理 / <a
+						href="<%=fule %>menu/menuList.web"
 						style="color: #000; text-decoration: none;">菜单管理</a> / <a
-						href="http://127.0.0.1:8080/echart/menu/menuAdd.web"
+						href="<%=fule %>menu/menuAdd.web"
 						style="color: #000; text-decoration: none;">菜单添加</a>
 
-
-					<button onclick="save()" class="btn btn-primary"
-						style="float: right; border: 1px">提交</button>
+					<div id="toolbar" class="btn-group btn-group-right"  style="margin-top: -28px;">
+						<button onclick="save()" class="btn btn-primary" >提交</button>
+						
+			            <button id="btn_back" type="button" class="btn btn-default" 
+			            	onclick="window.location.href='<%=fule %>menu/menuList.web';">
+			                <span class="glyphicon" aria-hidden="true"></span>返回
+			            </button>
+					</div>
 				</div>
 
 				<div class="container">

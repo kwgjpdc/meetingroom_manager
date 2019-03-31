@@ -34,13 +34,19 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	<!--系统管理 / 菜单管理 / 菜单修改-->
-            	<a href="http://127.0.0.1:8080/echart/login.json"
-						style="color: #000; text-decoration: none;">系统管理</a> / <a
-						href="http://127.0.0.1:8080/echart/menu/menuList.web"
-						style="color: #000; text-decoration: none;">菜单管理</a> / <a
-						href="http://127.0.0.1:8080/echart/menu/menuEdit.web"
+            	系统管理 / 
+				<a href="<%=fule %>menu/menuList.web"
+						style="color: #000; text-decoration: none;">菜单管理</a> / 
+				<a href="<%=fule %>menu/menuEdit.web"
 						style="color: #000; text-decoration: none;">菜单修改</a>
           	
+				<div id="toolbar" class="btn-group btn-group-right"  style="margin-top: -28px;">
+					<button onclick="save()" class="btn btn-primary">提交</button>
+		            <button id="btn_back" type="button" class="btn btn-default" 
+		            	onclick="window.location.href='<%=fule %>menu/menuList.web';">
+		                <span class="glyphicon" aria-hidden="true"></span>返回
+		            </button>
+				</div>
             </div>
             <div class="panel-body">
                 	<input type="hidden" name="id" id="id" value="${menu.id}">
@@ -71,7 +77,6 @@ String fule = base + "" + contextPath + "/";
 						<label for="priority">排序序号</label>
 						<input type="text" class="form-control" id="priority"  style="width: 400px;" placeholder="请输入排序序号" value="${menu.priority}">
 					</div>
-					<button onclick="save()" class="btn btn-primary">提交</button>
             </div>
         </div>       
 		</div>
