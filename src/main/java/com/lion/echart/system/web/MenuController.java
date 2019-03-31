@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.lion.echart.Suboffice.entity.SubofficeWriteEntity;
 import com.lion.echart.base.logic.BaseService;
-import com.lion.echart.project.entity.MonthTotalEntity;
-import com.lion.echart.project.entity.PayforEntity;
 import com.lion.echart.system.entity.MenuEntity;
 import com.lion.echart.system.entity.UserEntity;
 
@@ -124,7 +121,13 @@ public class MenuController {
 		if(!"1".equals(userid))
 			searchmap.put("userid", userid);
 		
-		List<Map<String, Object>> list = baseService.queryList("comle.menu.getMenuListDataByUserId", searchmap);
+		List<Map<String, Object>> list = null;
+		if(req.getSession().getAttribute("USER_MENU") != null) {
+			list = (List<Map<String, Object>>)req.getSession().getAttribute("USER_MENU");
+		}else {
+			list = baseService.queryList("comle.menu.getMenuListDataByUserId", searchmap);
+			req.getSession().setAttribute("USER_MENU",list);
+		}
 		return list;
 	}
 	//删除菜单
