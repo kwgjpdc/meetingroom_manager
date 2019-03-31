@@ -72,6 +72,10 @@ String fule = base + contextPath + "/";
 		            <button id="btn_delete" type="button" class="btn btn-default" onclick="delRow()">
 		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 		            </button>
+		            <button id="btn_delete" type="button" class="btn btn-default" 
+		            	onclick="window.location.href='<%=fule %>financing/financingList.web';">
+		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>返回
+		            </button>
 		        </div>
             </div>
         </div>       

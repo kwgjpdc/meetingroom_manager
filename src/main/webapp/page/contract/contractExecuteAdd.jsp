@@ -34,7 +34,10 @@ String fule = base + "" + contextPath + "/";
         <div class="panel panel-default">
             <div class="panel-heading">
             	合同管理 / 合同执行 / 合同执行添加
-           <button onclick="save()" class="btn btn-primary" style="float:right;border:1px">提交</button>
+            	<div id="toolbar" class="btn-group btn-group-right" >
+           			<button onclick="save()" class="btn btn-primary" >提交</button>
+        			<button onclick="window.location.href='<%=fule %>contract/contractExecuteList.web';" class="btn" >返回</button>
+           		</div>
             </div>
             
             <div class="container">
