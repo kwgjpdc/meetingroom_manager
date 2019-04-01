@@ -93,9 +93,14 @@
 				%>
 		</tbody>
 		<tfoot>
-			<%
+				<%
 					prowindex = "1";
-					ArrayList<HashMap<String, Object>> tails = (ArrayList) request.getAttribute("tails");
+					Object obj = request.getAttribute("tails");
+					ArrayList<HashMap<String, Object>> tails = null;
+					if(obj!=null){
+						tails=(ArrayList)obj;
+					}
+					if(tails !=null){
 					for (int i = 0; i < tails.size(); i++) {
 						if (!prowindex.equals(""+tails.get(i).get("rowindex"))) {
 				%>
@@ -111,8 +116,8 @@
 					rowspan="<%=tails.get(i).get("mrowspan")%>"
 					colspan="<%=tails.get(i).get("mcolspan")%>">
 				<%
-						if (tails.get(i).get("tdid") == null || titles.get(i).get("tdid").toString().isEmpty()) {
-				%> 
+						if (tails.get(i).get("tdid") == null || "".equals(tails.get(i).get("tdid"))) {
+				%> 0
 				<%=tails.get(i).get("showtitle")%>
 				<%
  						} else {
@@ -126,7 +131,8 @@
  				%> 			
  				</td>
  				<%
- 					}
+						}
+					}
  				%>
  				
 		</tfoot>

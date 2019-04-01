@@ -725,10 +725,10 @@ function saveRow(){
 	var _stonework = '';
 	var _beton = '';
 	for(var i = 0; i < length; i++){
-		$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
+$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		
 		_budgetinvest = $("#budgetinvest_"+i).html();
-		if(_budgetinvest != null && _budgetinvest != undefined && _budgetinvest != "0.0000" && _budgetinvest != ""){
+		if(_budgetinvest != null && _budgetinvest != undefined && _budgetinvest != ""){
 			while(_budgetinvest.indexOf(",") != -1){
 				_budgetinvest = _budgetinvest.replace(",","");
 			}
@@ -739,7 +739,7 @@ function saveRow(){
 		}
 		
 		_nextmonthplaninvest = $("#nextmonthplaninvest_"+i).html();
-		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined && _nextmonthplaninvest != "0.0000" && _nextmonthplaninvest != ""){
+		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined && _nextmonthplaninvest != ""){
 			while(_nextmonthplaninvest.indexOf(",") != -1){
 				_nextmonthplaninvest = _nextmonthplaninvest.replace(",","");
 			}
@@ -750,7 +750,7 @@ function saveRow(){
 		}
 		
 		_finishinvest = $("#finishinvest_"+i).html();
-		if(_finishinvest != null && _finishinvest != undefined  && _finishinvest != "0.0000" && _finishinvest != ""){
+		if(_finishinvest != null && _finishinvest != undefined  && _finishinvest != ""){
 			while(_finishinvest.indexOf(",") != -1){
 				_finishinvest = _finishinvest.replace(",","");
 			}
@@ -761,7 +761,7 @@ function saveRow(){
 		}
 		
 		_surplusinvest= $("#surplusinvest_"+i).html();
-		if(_surplusinvest != null && _surplusinvest != undefined && _surplusinvest != "0.0000" && _surplusinvest != ""){
+		if(_surplusinvest != null && _surplusinvest != undefined && _surplusinvest != ""){
 			while(_surplusinvest.indexOf(",") != -1){
 				_surplusinvest = _surplusinvest.replace(",","");
 			}
@@ -772,7 +772,7 @@ function saveRow(){
 		}
 		
 		_yearplaninvest= $("#yearplaninvest_"+i).html();
-		if(_yearplaninvest != null && _yearplaninvest != undefined && _yearplaninvest != "0.0000" && _yearplaninvest != ""){
+		if(_yearplaninvest != null && _yearplaninvest != undefined  && _yearplaninvest != ""){
 			while(_yearplaninvest.indexOf(",") != -1){
 				_yearplaninvest = _yearplaninvest.replace(",","");
 			}
@@ -783,7 +783,7 @@ function saveRow(){
 		}
 		
 		_monthplaninvest= $("#monthplaninvest_"+i).html();
-		if(_monthplaninvest != null && _monthplaninvest != undefined && _monthplaninvest != "0.0000" && _monthplaninvest != ""){
+		if(_monthplaninvest != null && _monthplaninvest != undefined  && _monthplaninvest != ""){
 			while(_monthplaninvest.indexOf(",") != -1){
 				_monthplaninvest = _monthplaninvest.replace(",","");
 			}
@@ -794,7 +794,7 @@ function saveRow(){
 		}
 		
 		_yearrealityinvest= $("#yearrealityinvest_"+i).html();
-		if(_yearrealityinvest != null && _yearrealityinvest != undefined && _yearrealityinvest != "0.0000" && _yearrealityinvest != ""){
+		if(_yearrealityinvest != null && _yearrealityinvest != undefined && _yearrealityinvest != ""){
 			while(_yearrealityinvest.indexOf(",") != -1){
 				_yearrealityinvest = _yearrealityinvest.replace(",","");
 			}
@@ -805,7 +805,7 @@ function saveRow(){
 		}
 		
 		_monthrealityinvest= $("#monthrealityinvest_"+i).html();
-		if(_monthrealityinvest != null && _monthrealityinvest != undefined && _monthrealityinvest != "0.0000" && _monthrealityinvest != ""){
+		if(_monthrealityinvest != null && _monthrealityinvest != undefined  && _monthrealityinvest != ""){
 			while(_monthrealityinvest.indexOf(",") != -1){
 				_monthrealityinvest = _monthrealityinvest.replace(",","");
 			}
@@ -935,6 +935,7 @@ function reloadtable(){
 			$("#t_datagrid").bootstrapTable('load', json);
 		}
 	});
+	hasnosave = false;
 }
 //计算本月实际完成投资
 function calculateMonthRealityInvest(contractid,year,month,tendaytype){

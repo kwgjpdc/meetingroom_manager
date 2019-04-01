@@ -672,10 +672,9 @@ function saveRow(){
 	var _stonework = '';
 	var _beton = '';
 	for(var i = 0; i < length; i++){
-		$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
+$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		
 		_budgetinvest = $("#budgetinvest_"+i).html();
-		alert(_budgetinvest+"_budgetinvest1111111")
 		if(_budgetinvest != null && _budgetinvest != undefined){
 			while(_budgetinvest.indexOf(",") != -1){
 				_budgetinvest = _budgetinvest.replace(",","");
@@ -796,7 +795,6 @@ function saveRow(){
 			alert("保存失败,请重新保存11")
 			return;
 		}
-		
 		
 		$("#remark"+i).val($("#remark_"+i).html());
 		$("#overallimageprogress"+i).val($("#overallimageprogress_"+i).html());

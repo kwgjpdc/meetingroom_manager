@@ -41,7 +41,7 @@ String fule = base + "" + contextPath + "/";
             <div class="panel-heading" style="height: 41px;">
             	分局管理 / 旬填报 
             	<div class='input-group date' id='belongTime' style="width: 120px;margin-left:150px;margin-top: -25px;">
-	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" />
+	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" readonly="readonly"/>
 	                <span class="input-group-addon">
 	                    <span class="glyphicon glyphicon-calendar"></span>
 	                </span>

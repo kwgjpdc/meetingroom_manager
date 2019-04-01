@@ -77,6 +77,9 @@ function setTailer(){
 					'③地方水利建设基金#tailesi#万元'+
 					'④银行贷款#tailewu#万元。';
 				for(var i = 0; i < tailers.length; i++){
+					if(data[tailers[i]]==null||data[tailers[i]]!= undefined){
+						data[tailers[i]]=0;
+					}
 					resultstr = resultstr.replace('#'+tailers[i]+'#',data[tailers[i]]);
 				}
 
