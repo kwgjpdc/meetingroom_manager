@@ -692,45 +692,45 @@ $("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 			}
 			$("#nextmonthplaninvest"+i).val(_nextmonthplaninvest);
 		}else{
-			alert("保存失败,请重新保存2")
+			alert("保存失败,请重新保存")
 			return;
 		}
 		
 		_finishinvest = $("#finishinvest_"+i).html();
-		if(_finishinvest != null && _finishinvest != undefined && _finishinvest != "0.0000"){
+		if(_finishinvest != null && _finishinvest != undefined ){
 			while(_finishinvest.indexOf(",") != -1){
 				_finishinvest = _finishinvest.replace(",","");
 			}
 			$("#finishinvest"+i).val(_finishinvest);
 		}else{
-			alert("保存失败,请重新保存3")
+			alert("保存失败,请重新保存")
 			return;
 		}
 		
 		_surplusinvest= $("#surplusinvest_"+i).html();
-		if(_surplusinvest != null && _surplusinvest != undefined && _surplusinvest != "0.0000"){
+		if(_surplusinvest != null && _surplusinvest != undefined ){
 			while(_surplusinvest.indexOf(",") != -1){
 				_surplusinvest = _surplusinvest.replace(",","");
 			}
 			$("#surplusinvest"+i).val(_surplusinvest);
 		}else{
-			alert("保存失败,请重新保存4")
+			alert("保存失败,请重新保存")
 			return;
 		}
 		
 		_yearplaninvest= $("#yearplaninvest_"+i).html();
-		if(_yearplaninvest != null && _yearplaninvest != undefined && _yearplaninvest != "0.0000"){
+		if(_yearplaninvest != null && _yearplaninvest != undefined ){
 			while(_yearplaninvest.indexOf(",") != -1){
 				_yearplaninvest = _yearplaninvest.replace(",","");
 			}
 			$("#yearplaninvest"+i).val(_yearplaninvest);
 		}else{
-			alert("保存失败,请重新保存5")
+			alert("保存失败,请重新保存")
 			return;
 		}
 		
 		_monthplaninvest= $("#monthplaninvest_"+i).html();
-		if(_monthplaninvest != null && _monthplaninvest != undefined && _monthplaninvest != "0.0000"){
+		if(_monthplaninvest != null && _monthplaninvest != undefined ){
 			while(_monthplaninvest.indexOf(",") != -1){
 				_monthplaninvest = _monthplaninvest.replace(",","");
 			}
@@ -742,7 +742,7 @@ $("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		}
 		
 		_yearrealityinvest= $("#yearrealityinvest_"+i).html();
-		if(_yearrealityinvest != null && _yearrealityinvest != undefined && _yearrealityinvest != "0.0000"){
+		if(_yearrealityinvest != null && _yearrealityinvest != undefined ){
 			while(_yearrealityinvest.indexOf(",") != -1){
 				_yearrealityinvest = _yearrealityinvest.replace(",","");
 			}
@@ -753,7 +753,7 @@ $("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		}
 		
 		_monthrealityinvest= $("#monthrealityinvest_"+i).html();
-		if(_monthrealityinvest != null && _monthrealityinvest != undefined && _monthrealityinvest != "0.0000"){
+		if(_monthrealityinvest != null && _monthrealityinvest != undefined ){
 			while(_monthrealityinvest.indexOf(",") != -1){
 				_monthrealityinvest = _monthrealityinvest.replace(",","");
 			}
@@ -764,7 +764,7 @@ $("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
 		}
 		
 		_earthwork= $("#earthwork_"+i).html();
-		if(_earthwork != null && _earthwork != undefined && _earthwork != "0.0000"){
+		if(_earthwork != null && _earthwork != undefined ){
 			while(_earthwork.indexOf(",") != -1){
 				_earthwork = _earthwork.replace(",","");
 			}

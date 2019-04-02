@@ -86,7 +86,7 @@
 				</a>
 					<ul class="dropdown-menu">
 						<li><a href="<%=fule %>subofficewrite/subofficewriteList.web">分局填报</a></li>
-						<li><a href="<%=fule %>financing/financingList.web">财务填报</a></li>
+						<li><a href="<%=fule %>financing/financingList.web" >财务填报</a></li>
 					</ul></li>
 				<li id="projectli"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> 合同管理 <b class="caret"></b>

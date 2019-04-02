@@ -39,7 +39,7 @@ String fule = base + "" + contextPath + "/";
 		<div class="panel-body" style="padding-bottom:0px;">
         <div id="searchdiv" class="panel panel-default">
             <div class="panel-heading" style="height: 41px;">
-            	分局管理 / 旬填报 
+            	分局管理 / 旬填报
             	<div class='input-group date' id='belongTime' style="width: 120px;margin-left:150px;margin-top: -25px;">
 	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" readonly="readonly"/>
 	                <span class="input-group-addon">

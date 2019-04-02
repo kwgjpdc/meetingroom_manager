@@ -22,6 +22,7 @@ import com.lion.echart.base.logic.BaseService;
 import com.lion.echart.contract.entity.ContractEntity;
 import com.lion.echart.contract.entity.ContractExecuteEntity;
 import com.lion.echart.contract.logic.ContractService;
+import com.lion.echart.global.GlobalThings;
 import com.lion.echart.project.entity.PayforEntity;
 import com.lion.echart.system.entity.UserEntity;
 
@@ -83,9 +84,36 @@ public class ContractController {
 		Map<String, Object> searchmap = new HashMap<String, Object>();
 		searchmap.put("subofficeid", suboffice);
 		searchmap.put("contractname", contractname);
-		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
-		return list;
+		Object obj = GlobalThings.getCash("contracts");
+		//List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
+		List<Map<String, Object>> resultlist = new ArrayList<Map<String,Object>>();
+		if(obj != null) {
+			List<Map<String, Object>> tmplist = (List<Map<String, Object>>)obj;
+			if(contractname != null && !contractname.isEmpty()) {
+				for (int i = 0; i < tmplist.size(); i++) {
+					if(contractname.equals(tmplist.get(i).get("contractname"))) {
+						resultlist.add(tmplist.get(i));
+						break;
+					}
+				}
+			}else if(suboffice != null) {
+				for (int i = 0; i < tmplist.size(); i++) {
+					if((""+suboffice).equals(""+tmplist.get(i).get("subofficeid"))) {
+						resultlist.add(tmplist.get(i));
+					}
+				}
+			}
+		}
+		return resultlist;
 	}
+//	@RequestMapping(value = "/contract/contractSignedListGetDatBySuboffice.json",method=RequestMethod.POST)
+//	public @ResponseBody List<Map<String, Object>> contractSignedListGetDatBySuboffice(String contractname,Integer suboffice, HttpServletRequest req,HttpServletResponse resp, HttpSession session) throws IOException { 
+//		Map<String, Object> searchmap = new HashMap<String, Object>();
+//		searchmap.put("subofficeid", suboffice);
+//		searchmap.put("contractname", contractname);
+//		List<Map<String, Object>> list = baseService.queryList("comle.contract.getcontractSignedListData", searchmap);
+//		return list;
+//	}
 	
 	//合同签订添加页 
 	@RequestMapping(value = "/contract/contractSignedAdd.web",method=RequestMethod.GET)
