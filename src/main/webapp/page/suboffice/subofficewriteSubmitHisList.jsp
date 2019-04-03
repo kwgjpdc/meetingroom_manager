@@ -48,7 +48,6 @@
 .table {
 	table-layout: fixed;
 }
-
 </style>
 </head>
 <body class="bgdiv"
@@ -79,12 +78,12 @@
 			</div>
 
 			<div id="contentTablediv" style="overflow-y: auto;">
-				<%-- <form style="border: none; margin: 0px; padding: 0px;" id="editForm"
+				<form style="border: none; margin: 0px; padding: 0px;" id="editForm"
 					target="myajaxfor"
 					action="<%=fule%>subofficewrite/insertSubofficewrite.json"
 					method="post">
 					<table id="t_datagrid"></table>
-				</form> --%>
+				</form>
 			</div>
 			<select id="subofficedata" style="display: none;">
 			</select>
