@@ -39,16 +39,6 @@ function setFootWidth(){
     	}
     }
 }
-function setFootWidth(){
-    var footths = $(".fixed-table-footer").find("th");
-    var bodytds = $($("#t_datagrid").find(".oddn")[0]).find("td");
-    
-    if(bodytds != undefined){
-    	for(var i = 0; i < bodytds.length; i++){
-    		$(footths[i]).width($(bodytds[i]).outerWidth()-2);
-    	}
-    }
-}
 var TableInit = function () {
 	var oTableInit = new Object();
 	//初始化Table
@@ -111,22 +101,22 @@ var TableInit = function () {
 					rowspan: 2
 				  },
 				  {
-					field: 'tendaytype',
-					align: 'center',
-					title: '旬' ,
-					valign : "middle",
-					width : 100,
-					rowspan: 2,
-					formatter:function (value, row, index, field) {
-						var tendaytypeStr = '<option value="1">上旬</option><option value="2">中旬</option><option value="3">下旬</option>'
-						var indexSelect = tendaytypeStr.indexOf('<option value="'+value+'">');
-						tendaytypeStr = tendaytypeStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
-						return '<select readonly="true" name="list['+index+'].tendaytype" onchange="calculateAllInvest('+index+')" class="form-control" id="tendaytype'+index+'" data-width="100px" >'+tendaytypeStr+'</select>';
-					},
-				    footerFormatter: function (value) {
-				    	return '-';
-				    }
-				  },
+						field: 'tendaytype',
+						align: 'center',
+						title: '旬' ,
+						valign : "middle",
+						width : 100,
+						rowspan: 2,
+						formatter:function (value, row, index, field) {
+							var tendaytypeStr = '<option value="1">上旬</option><option value="2">中旬</option><option value="3">下旬</option>'
+							var indexSelect = tendaytypeStr.indexOf('<option value="'+value+'">');
+							tendaytypeStr = tendaytypeStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
+							return '<select readonly="true" name="list['+index+'].tendaytype" onchange="calculateAllInvest('+index+')" class="form-control" id="tendaytype'+index+'" data-width="100px" >'+tendaytypeStr+'</select>';
+						},
+					    footerFormatter: function (value) {
+					    	return '-';
+					    }
+					  },
 	              {
 					field: 'subofficeid',
 					align: 'center',
@@ -336,9 +326,7 @@ var TableInit = function () {
 						title: '自开工以来累计<br/>完成投资（万元）',
 						width : 190,
 						formatter:function (value, row, index, field) {
-							//ajax加载本月实际完成投资
-							var calculateData = calculateFinishInvest(row["contractid"],row["year"],row["month"],row["tendaytype"]);
-							return '<div id="finishinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(calculateData,4) + '</div>' + 
+							return '<div id="finishinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="finishinvest'+index+'" name="list['+index+'].finishinvest" />';
 					    },
 					    footerFormatter: function (value) {
@@ -406,9 +394,7 @@ var TableInit = function () {
 						title: '本年度实际完成<br/>投资（万元）',
 						width : 120,
 						formatter:function (value, row, index, field) {
-							//ajax加载本年度实际完成投资
-							var calculateData = calculateYearRealityInvest(row["contractid"],row["year"],row["month"],row["tendaytype"]);
-							return '<div id="yearrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(calculateData,4) + '</div>' + 
+							return '<div id="yearrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="yearrealityinvest'+index+'" name="list['+index+'].yearrealityinvest" />';
 					    },
 					    footerFormatter: function (value) {
@@ -425,9 +411,7 @@ var TableInit = function () {
 						title: '本月实际完成<br/>投资（万元）',
 						width : 120,
 						formatter:function (value, row, index, field) {
-							//ajax加载本月实际完成投资
-							var calculateData = calculateMonthRealityInvest(row["contractid"],row["year"],row["month"],row["tendaytype"]);
-							return '<div id="monthrealityinvest_'+index+'" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(calculateData,4) + '</div>' + 
+							return '<div id="monthrealityinvest_'+index+'" contenteditable="true" onblur="$(this).html(fmoney($(this).html(),4))">' + fmoney(value,4) + '</div>' + 
 							'<input type="hidden" value="'+(value || "")+'" id="monthrealityinvest'+index+'" name="list['+index+'].monthrealityinvest" />';
 					    },
 					    footerFormatter: function (value) {
@@ -609,7 +593,7 @@ function loadContractDataBySubofficeid(subofficeid){
 	});
 	return returnData;
 }
-function setcontractnum(_this,index2,contractid,year,month,tendaytype){
+function setcontractnum(_this){
 	$("#contractnum"+_index).html("");
 	var index = _this.selectedIndex ;
 	var _contractnum = $(_this.options[index]).attr("title");
@@ -617,7 +601,7 @@ function setcontractnum(_this,index2,contractid,year,month,tendaytype){
 	var _index = $(_this).attr("id").split("_")[1];
 	$("#contractnum"+_index).html(_contractnum);
 	$("#contractamount"+_index).html(fmoney(_contractamount));
-	calculateAllInvest(index2);
+	
 }
 /**
  * 新增一行数据
@@ -702,15 +686,14 @@ function delRow(){
     }
     hasnosave = false;
 }
-
 /*
  * 保存操作
  */
-function saveRow(){
+function saveRow() {
 	var length = 0;
-	if(true){
+	if (true) {
 		var rows = $("#t_datagrid").bootstrapTable('getData');
-		length = rows.length; 
+		length = rows.length;
 	}
 	var _budgetinvest = '';
 	var _nextmonthplaninvest = '';
@@ -724,147 +707,150 @@ function saveRow(){
 	var _earthwork = '';
 	var _stonework = '';
 	var _beton = '';
-	for(var i = 0; i < length; i++){
-$("#constructioncontent"+i).val($("#constructioncontent_"+i).html());
-		
-		_budgetinvest = $("#budgetinvest_"+i).html();
-		if(_budgetinvest != null && _budgetinvest != undefined && _budgetinvest != ""){
-			while(_budgetinvest.indexOf(",") != -1){
-				_budgetinvest = _budgetinvest.replace(",","");
+	for (var i = 0; i < length; i++) {
+		$("#constructioncontent" + i)
+				.val($("#constructioncontent_" + i).html());
+
+		_budgetinvest = $("#budgetinvest_" + i).html();
+		if (_budgetinvest != null && _budgetinvest != undefined) {
+			while (_budgetinvest.indexOf(",") != -1) {
+				_budgetinvest = _budgetinvest.replace(",", "");
 			}
-			$("#budgetinvest"+i).val(_budgetinvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#budgetinvest" + i).val(_budgetinvest);
+		} else {
+			alert("保存失败,数据为空请添加数据1")
 			return;
 		}
-		
-		_nextmonthplaninvest = $("#nextmonthplaninvest_"+i).html();
-		if(_nextmonthplaninvest != null && _nextmonthplaninvest != undefined && _nextmonthplaninvest != ""){
-			while(_nextmonthplaninvest.indexOf(",") != -1){
-				_nextmonthplaninvest = _nextmonthplaninvest.replace(",","");
+
+		_nextmonthplaninvest = $("#nextmonthplaninvest_" + i).html();
+		if (_nextmonthplaninvest != null && _nextmonthplaninvest != undefined) {
+			while (_nextmonthplaninvest.indexOf(",") != -1) {
+				_nextmonthplaninvest = _nextmonthplaninvest.replace(",", "");
 			}
-			$("#nextmonthplaninvest"+i).val(_nextmonthplaninvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#nextmonthplaninvest" + i).val(_nextmonthplaninvest);
+		} else {
+			alert("保存失败,数据为空请添加数据2")
 			return;
 		}
-		
-		_finishinvest = $("#finishinvest_"+i).html();
-		if(_finishinvest != null && _finishinvest != undefined  && _finishinvest != ""){
-			while(_finishinvest.indexOf(",") != -1){
-				_finishinvest = _finishinvest.replace(",","");
+
+		_finishinvest = $("#finishinvest_" + i).html();
+		if (_finishinvest != null && _finishinvest != undefined) {
+			while (_finishinvest.indexOf(",") != -1) {
+				_finishinvest = _finishinvest.replace(",", "");
 			}
-			$("#finishinvest"+i).val(_finishinvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#finishinvest" + i).val(_finishinvest);
+		} else {
+			alert("保存失败,数据为空请添加数据3")
 			return;
 		}
-		
-		_surplusinvest= $("#surplusinvest_"+i).html();
-		if(_surplusinvest != null && _surplusinvest != undefined && _surplusinvest != ""){
-			while(_surplusinvest.indexOf(",") != -1){
-				_surplusinvest = _surplusinvest.replace(",","");
+
+		_surplusinvest = $("#surplusinvest_" + i).html();
+		if (_surplusinvest != null && _surplusinvest != undefined) {
+			while (_surplusinvest.indexOf(",") != -1) {
+				_surplusinvest = _surplusinvest.replace(",", "");
 			}
-			$("#surplusinvest"+i).val(_surplusinvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#surplusinvest" + i).val(_surplusinvest);
+		} else {
+			alert("保存失败,数据为空请添加数据4")
 			return;
 		}
-		
-		_yearplaninvest= $("#yearplaninvest_"+i).html();
-		if(_yearplaninvest != null && _yearplaninvest != undefined  && _yearplaninvest != ""){
-			while(_yearplaninvest.indexOf(",") != -1){
-				_yearplaninvest = _yearplaninvest.replace(",","");
+
+		_yearplaninvest = $("#yearplaninvest_" + i).html();
+		if (_yearplaninvest != null && _yearplaninvest != undefined) {
+			while (_yearplaninvest.indexOf(",") != -1) {
+				_yearplaninvest = _yearplaninvest.replace(",", "");
 			}
-			$("#yearplaninvest"+i).val(_yearplaninvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#yearplaninvest" + i).val(_yearplaninvest);
+		} else {
+			alert("保存失败,数据为空请添加数据5")
 			return;
 		}
-		
-		_monthplaninvest= $("#monthplaninvest_"+i).html();
-		if(_monthplaninvest != null && _monthplaninvest != undefined  && _monthplaninvest != ""){
-			while(_monthplaninvest.indexOf(",") != -1){
-				_monthplaninvest = _monthplaninvest.replace(",","");
+
+		_monthplaninvest = $("#monthplaninvest_" + i).html();
+		if (_monthplaninvest != null && _monthplaninvest != undefined) {
+			while (_monthplaninvest.indexOf(",") != -1) {
+				_monthplaninvest = _monthplaninvest.replace(",", "");
 			}
-			$("#monthplaninvest"+i).val(_monthplaninvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#monthplaninvest" + i).val(_monthplaninvest);
+		} else {
+			alert("保存失败,数据为空请添加数据6")
 			return;
 		}
-		
-		_yearrealityinvest= $("#yearrealityinvest_"+i).html();
-		if(_yearrealityinvest != null && _yearrealityinvest != undefined && _yearrealityinvest != ""){
-			while(_yearrealityinvest.indexOf(",") != -1){
-				_yearrealityinvest = _yearrealityinvest.replace(",","");
+
+		_yearrealityinvest = $("#yearrealityinvest_" + i).html();
+		if (_yearrealityinvest != null && _yearrealityinvest != undefined) {
+			while (_yearrealityinvest.indexOf(",") != -1) {
+				_yearrealityinvest = _yearrealityinvest.replace(",", "");
 			}
-			$("#yearrealityinvest"+i).val(_yearrealityinvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#yearrealityinvest" + i).val(_yearrealityinvest);
+		} else {
+			alert("保存失败,数据为空请添加数据7")
 			return;
 		}
-		
-		_monthrealityinvest= $("#monthrealityinvest_"+i).html();
-		if(_monthrealityinvest != null && _monthrealityinvest != undefined  && _monthrealityinvest != ""){
-			while(_monthrealityinvest.indexOf(",") != -1){
-				_monthrealityinvest = _monthrealityinvest.replace(",","");
+
+		_monthrealityinvest = $("#monthrealityinvest_" + i).html();
+		if (_monthrealityinvest != null && _monthrealityinvest != undefined) {
+			while (_monthrealityinvest.indexOf(",") != -1) {
+				_monthrealityinvest = _monthrealityinvest.replace(",", "");
 			}
-			$("#monthrealityinvest"+i).val(_monthrealityinvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#monthrealityinvest" + i).val(_monthrealityinvest);
+		} else {
+			alert("保存失败,数据为空请添加数据8")
 			return;
 		}
-		
-		_tendayrealityinvest= $("#tendayrealityinvest_"+i).html();
-		if(_tendayrealityinvest != null && _tendayrealityinvest != undefined && _tendayrealityinvest != ""){
-			while(_tendayrealityinvest.indexOf(",") != -1){
-				_tendayrealityinvest = _tendayrealityinvest.replace(",","");
+
+		_tendayrealityinvest = $("#tendayrealityinvest_" + i).html();
+		if (_tendayrealityinvest != null && _tendayrealityinvest != undefined) {
+			while (_tendayrealityinvest.indexOf(",") != -1) {
+				_tendayrealityinvest = _tendayrealityinvest.replace(",", "");
 			}
-			$("#tendayrealityinvest"+i).val(_tendayrealityinvest);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#tendayrealityinvest" + i).val(_tendayrealityinvest);
+		} else {
+			alert("保存失败,数据为空请添加数据9")
 			return;
 		}
-		
-		_earthwork= $("#earthwork_"+i).html();
-		if(_earthwork != null && _earthwork != undefined && _earthwork != ""){
-			while(_earthwork.indexOf(",") != -1){
-				_earthwork = _earthwork.replace(",","");
+
+		_earthwork = $("#earthwork_" + i).html();
+		if (_earthwork != null && _earthwork != undefined) {
+			while (_earthwork.indexOf(",") != -1) {
+				_earthwork = _earthwork.replace(",", "");
 			}
-			$("#earthwork"+i).val(_earthwork);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#earthwork" + i).val(_earthwork);
+		} else {
+			alert("保存失败,数据为空请添加数据10")
 			return;
 		}
-		
-		_stonework= $("#stonework_"+i).html();
-		if(_stonework != null && _stonework != undefined && _stonework != ""){
-			while(_stonework.indexOf(",") != -1){
-				_stonework = _stonework.replace(",","");
+
+		_stonework = $("#stonework_" + i).html();
+		if (_stonework != null && _stonework != undefined ) {
+			while (_stonework.indexOf(",") != -1) {
+				_stonework = _stonework.replace(",", "");
 			}
-			$("#stonework"+i).val(_stonework);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#stonework" + i).val(_stonework);
+		} else {
+			alert("保存失败,数据为空请添加数据11")
 			return;
 		}
-		
-		_beton= $("#beton_"+i).html();
-		if(_beton != null && _beton != undefined && _beton != ""){
-			while(_beton.indexOf(",") != -1){
-				_beton = _beton.replace(",","");
+
+		_beton = $("#beton_" + i).html();
+		if (_beton != null && _beton != undefined) {
+			while (_beton.indexOf(",") != -1) {
+				_beton = _beton.replace(",", "");
 			}
-			$("#beton"+i).val(_beton);
-		}else{
-			alert("保存失败,数据为空请添加数据")
+			$("#beton" + i).val(_beton);
+		} else {
+			console.info(_beton);
+			alert("保存失败,数据为空请添加数据12")
 			return;
-		}	
-		
-		
-		$("#remark"+i).val($("#remark_"+i).html());
-		$("#overallimageprogress"+i).val($("#overallimageprogress_"+i).html());
+		}
+
+		$("#remark" + i).val($("#remark_" + i).html());
+		$("#overallimageprogress" + i).val(
+				$("#overallimageprogress_" + i).html());
 	}
-	modalTitle("是否确定提交",2);
+	modalTitle("是否确定提交", 2);
 }
+
 function saveFun(){
 	console.log($("#editForm").serialize());
 	showloding();
@@ -933,86 +919,6 @@ function reloadtable(){
 		dataType:"json",
 		success : function(json) {
 			$("#t_datagrid").bootstrapTable('load', json);
-		}
-	});
-	hasnosave = false;
-}
-//计算本月实际完成投资
-function calculateMonthRealityInvest(contractid,year,month,tendaytype){
-	var returnData;
-	$.ajax({
-		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
-		type:"POST",
-		dataType:"json",
-		async :false,
-		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
-		success:function(data){
-			returnData=data.calculateMonthRealityInvestData;
-		},
-		error:function(){
-			
-		}
-	});
-	return returnData;
-}
-//计算本年实际完成投资
-function calculateYearRealityInvest(contractid,year,month,tendaytype){
-	var returnData;
-	$.ajax({
-		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
-		type:"POST",
-		dataType:"json",
-		async :false,
-		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
-		success:function(data){
-			returnData=data.calculateYearRealityInvestData;
-		},
-		error:function(){
-			
-		}
-	});
-	return returnData;
-}
-//计算自开工以来实际完成投资
-function calculateFinishInvest(contractid,year,month,tendaytype){
-	var returnData;
-	$.ajax({
-		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
-		type:"POST",
-		dataType:"json",
-		async :false,
-		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
-		success:function(data){
-			returnData=data.calculateFinishInvestData;
-		},
-		error:function(){
-			
-		}
-	});
-	return returnData;
-}
-//计算本月实际完成投资、本年度实际完成投资、自开工以来实际完成投资
-function calculateAllInvest(index){
-	var contractid = $("#contractid_"+index).val();
-	var year = $("#year"+index).val();
-	var month = $("#month"+index).val();
-	var tendaytype = $("#tendaytype"+index).val();
-	$.ajax({								
-		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
-		type:"POST",
-		dataType:"json",
-		async :false,
-		data: {contractid : contractid,year : year,month : month,tendaytype: tendaytype,belongTimeStr:$("#belongTimeStr").val()},
-		success:function(data){
-			var calculateMonthRealityInvestData=data.calculateMonthRealityInvestData;
-			$("#monthrealityinvest_"+index).html(fmoney(calculateMonthRealityInvestData,4));
-			var calculateYearRealityInvestData=data.calculateYearRealityInvestData;
-			$("#yearrealityinvest_"+index).html(fmoney(calculateYearRealityInvestData,4));
-			var calculateFinishInvestData=data.calculateFinishInvestData;
-			$("#finishinvest_"+index).html(fmoney(calculateFinishInvestData,4));
-		},
-		error:function(){
-			
 		}
 	});
 }

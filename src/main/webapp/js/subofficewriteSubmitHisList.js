@@ -103,23 +103,7 @@ var TableInit = function () {
 					width : 100,
 					rowspan: 2
 				  },
-	              {
-					field: 'subofficeid',
-					align: 'center',
-					title: '分局名称' ,
-					valign : "middle",
-					width : 250,
-					rowspan: 2,
-					formatter:function (value, row, index, field) {
-						var subofficedataStr = $("#subofficedata").html();
-						var indexSelect = subofficedataStr.indexOf('<option value="'+value+'">');
-						subofficedataStr = subofficedataStr.replace('<option value="'+value+'">','<option value="'+value+'" selected="selected">');
-				        return '<select readonly="true" disabled="disabled" name="list['+index+'].subofficeid" onchange="contracinputsel(\''+index+'\')" class="form-control" id="subofficeid'+index+'" data-width="100px" value="'+value+'" >'+subofficedataStr+'</select>';
-					},
-				    footerFormatter: function (value) {
-				    	return '-';
-				    }
-				  },
+
 				  {
 					field: 'contractid',
 					align: 'center',
