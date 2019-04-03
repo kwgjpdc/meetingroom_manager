@@ -997,7 +997,7 @@ function calculateAllInvest(index){
 	var year = $("#year"+index).val();
 	var month = $("#month"+index).val();
 	var tendaytype = $("#tendaytype"+index).val();
-	$.ajax({
+	$.ajax({								
 		url:$("#fule").val()+"subofficewrite/calculateRealityInvestGetDat.json",
 		type:"POST",
 		dataType:"json",
