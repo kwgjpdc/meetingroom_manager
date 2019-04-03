@@ -51,6 +51,8 @@ var TableInit = function () {
 	            	}
 	            }
 	        },
+	        
+	    
 			columns: [
 				[
 				  {                    

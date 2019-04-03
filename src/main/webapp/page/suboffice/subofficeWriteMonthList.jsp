@@ -83,7 +83,6 @@ String fule = base + "" + contextPath + "/";
                 </form>
             </div>
         </div>       
-
         <div id="contentTablediv" style="overflow-y: auto;">
         	<form style="border:none;margin:0px;padding:0px;" id="editForm" target="myajaxfor"
 				action="<%=fule %>subofficewrite/insertSubofficewrite.json" method="post" >

@@ -48,6 +48,7 @@
 .table {
 	table-layout: fixed;
 }
+
 </style>
 </head>
 <body class="bgdiv"
