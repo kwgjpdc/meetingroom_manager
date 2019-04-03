@@ -66,13 +66,40 @@
 						style="color: #000; text-decoration: none;"> 月填报 </a> / <a
 						href="#" style="color: #000; text-decoration: none;">提交历史 </a>
 
+					<!-- 日期选择下拉框 -->
+					<!-- <div class='input-group date' id='belongTime' style="width: 200px;margin-left:150px;margin-top: -25px;">
+	                <input type='text' class="form-control" name="belongTimeStr" id="belongTimeStr" readonly="readonly"/>
+	                <span class="input-group-addon">
+	                    <span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+	            </div> -->
 
-				
+
+					<!--  <div id="toolbar" class="btn-group btn-group-right" style="margin-top: -28px;">
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="showSubmit()">
+		                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>提交
+		            </button>
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="addRow()">
+		                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		            </button>
+		            <button id="btn_add" type="button" class="btn btn-default" onclick="saveRow()"
+		            	data-toggle="modal" data-target="#myModal" >
+		                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>保存
+		            </button>
+		            <button id="btn_delete" type="button" class="btn btn-default" onclick="delRow()">
+		                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		            </button>
+		            <button id="btn_delete" type="button" class="btn btn-default" onclick="showHis()">
+		                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>提交历史
+		            </button>
+		        </div>  -->
 
 				</div>
+
+				<!-- 表单 -->
 				<div class="panel-body" style="display: none;">
 					<form id="formSearch" class="form-horizontal">
-						<input type="hidden" id="subofficeid"> -->
+						<input type="hidden" id="subofficeid">
 					</form>
 				</div>
 			</div>
