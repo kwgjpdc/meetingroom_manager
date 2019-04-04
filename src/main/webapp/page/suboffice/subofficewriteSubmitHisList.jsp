@@ -65,8 +65,6 @@
 						href="http://127.0.0.1:8080/echart/subofficewrite/subofficewriteMonthList.web"
 						style="color: #000; text-decoration: none;"> 月填报 </a> / <a
 						href="#" style="color: #000; text-decoration: none;">提交历史 </a>
-
-
 				</div>
 
 				<!-- 表单 -->

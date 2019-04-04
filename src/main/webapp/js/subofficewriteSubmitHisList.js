@@ -103,31 +103,25 @@ var TableInit = function () {
 					width : 100,
 					rowspan: 2
 				  },
-
+	              {
+					field: 'subofficename',
+					align: 'center',
+					title: '分局名称' ,
+					valign : "middle",
+					width : 250,
+					rowspan: 2,
+					
+				    footerFormatter: function (value) {
+				    	return '-';
+				    }
+				  },
 				  {
-					field: 'contractid',
+					field: 'contractname',
 					align: 'center',
 					title: '合同名称' ,
 					valign : "middle",
 					width : 250,
 					rowspan: 2,
-					formatter:function (value, row, index, field) {
-						var subofficeid = $("#subofficeid"+index).val();
-						var strHtml= '<option value="0">-请选择-</option>';
-						if(subofficeid==0){
-							
-						}else{
-							var data = loadContractDataBySubofficeid(row["subofficeid"]);
-							$.each(data, function(key,value2){
-								if(value2.contractid==value){
-									strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'"  amount="'+value2.amount+'" selected="selected">'+value2.contractname+'</option>';
-								}else{
-									strHtml+='<option value="'+value2.contractid+'" title="'+value2.contractnum+'" amount="'+value2.amount+'">'+value2.contractname+'</option>';
-								}
-							});
-						}
-						return '<select name="list['+index+'].contractid" disabled="disabled" onchange="setcontractnum(this)" subofficeid="'+row["subofficeid"]+'" class="form-control" id="contractid_'+index+'" data-width="200px" value="'+value+'" >'+strHtml+'</select>';
-					},
 				    footerFormatter: function (value) {
 				    	return '-';
 				    }
