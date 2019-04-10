@@ -24,7 +24,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/jquery.the-modal.js"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/contractExecuteMonthTotalList.js?ts=<%=request.getAttribute("ts") %>"></script>
-
+<script type="text/javascript" src="<%=contextPath%>/js/lodop/js/LodopFuncs.js"></script>
 </head>
 <body class="bgdiv" style="height:100%;background-image:url('/echart/image/loginbk1.jpg');" >
 <div id="head" >
@@ -36,7 +36,7 @@ String fule = base + "" + contextPath + "/";
             <div class="panel-heading">
             	统计报表 / 合同月度统计表
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="printbtn" type="button" class="btn btn-default" onclick="print()" >
+		            <button id="printbtn" type="button" class="btn btn-default" onclick="doacrossprint()" >
 		                <span class="glyphicon" aria-hidden="true" >打印</span>
 		            </button>
 		            <button id="excelbtn" type="button" class="btn btn-default" onclick="doexcel()" >

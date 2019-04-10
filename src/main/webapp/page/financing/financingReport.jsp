@@ -24,6 +24,7 @@ String fule = base + "" + contextPath + "/";
 <script type="text/javascript" src="<%=contextPath%>/js/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8" ></script>
 <script type="text/javascript" src="<%=contextPath%>/js/base.js?ts=<%=request.getAttribute("ts") %>"></script>
 <script type="text/javascript" src="<%=contextPath%>/js/financingReport.js?ts=<%=request.getAttribute("ts") %>"></script>
+<script type="text/javascript" src="<%=contextPath%>/js/lodop/js/LodopFuncs.js"></script>
 <style type="text/css">
 	.table {table-layout:fixed;}
 </style>
@@ -38,7 +39,7 @@ String fule = base + "" + contextPath + "/";
             <div class="panel-heading">
             	统计报表 / 财务数据统计
             	<div id="toolbar" class="btn-group btn-group-right" >
-		            <button id="printbtn" type="button" class="btn btn-default" onclick="print()" >
+		            <button id="printbtn" type="button" class="btn btn-default" onclick="dolengprint()" >
 		                <span class="glyphicon" aria-hidden="true" >打印</span>
 		            </button>
 		            <button id="excelbtn" type="button" class="btn btn-default" onclick="doexcel()" >

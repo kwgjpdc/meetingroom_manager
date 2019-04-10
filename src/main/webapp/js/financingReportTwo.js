@@ -14,6 +14,31 @@ $(document).ready(function(){
 	var oTable = new TableInit();
 	oTable.Init();
 });
+var LODOP; //声明为全局变量 
+function dolengprint(){
+	//纵向打印
+	LODOP=getLodop();  
+	LODOP.PRINT_INIT("");
+	LODOP.SET_PRINT_STYLE("FontSize",14);
+	LODOP.SET_PRINT_STYLE("Bold",1);
+	LODOP.ADD_PRINT_TEXT(30,231,260,39,$("#filename").val());
+	LODOP.ADD_PRINT_TEXT(75,20,360,39,"填报单位（盖章）：建设管理处");
+	LODOP.ADD_PRINT_TEXT(95,20,360,39,"填报日期："+$("#reportDaten").val());
+	//LODOP.ADD_PRINT_HTM(100,20,1000,800,document.getElementById("bodydiv").innerHTML.replace('<table id="t_datagrid"','<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;"'));
+	LODOP.ADD_PRINT_HTM(120,20,1000,800,'<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;">'+document.getElementById("t_datagrid").innerHTML+'</table><div style="font-size: 18px;padding:5px 10px;width: 700px">'+document.getElementById("spantailestr").innerHTML+'</div>');
+	LODOP.PREVIEW();
+}
+function doacrossprint(){
+	//横向打印
+	LODOP=getLodop();  
+	LODOP.PRINT_INIT("");
+	LODOP.SET_PRINT_PAGESIZE(2,900,500,'');
+	LODOP.SET_PRINT_STYLE("FontSize",14);
+	LODOP.SET_PRINT_STYLE("Bold",1);
+	LODOP.ADD_PRINT_TEXT(30,431,260,39,$("#filename").val());
+	LODOP.ADD_PRINT_HTM(100,20,1100,800,'<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;">'+document.getElementById("t_datagrid").innerHTML+'</table>');
+	LODOP.PREVIEW();
+}
 function reloadtable(){
 	var _reportDate = $("#reportDate").val();
 	if(_reportDate == ''){
@@ -130,7 +155,7 @@ var TableInit = function () {
 			//如果没有设置height属性，表格自动根据记录条数觉得表格高度
 			columns: [
 				[
-				  {field:'typename',title: '序号-项目类型',align:'left',width:300,
+				  {field:'typename',title: '序号-项目类型',align:'left',width:250,
 					    footerFormatter: function (value) {
 					        return '合计';
 					    }

@@ -25,6 +25,36 @@ $(document).ready(function(){
 	
 	$("#btn_query").click(reloadtable);
 });
+var LODOP; //声明为全局变量 
+function dolengprint(){
+	//纵向打印
+	LODOP=getLodop();  
+	LODOP.PRINT_INIT("");
+	LODOP.SET_PRINT_STYLE("FontSize",14);
+	LODOP.SET_PRINT_STYLE("Bold",1);
+	LODOP.ADD_PRINT_TEXT(30,231,260,39,$("#filename").val());
+	LODOP.ADD_PRINT_TEXT(76,261,260,39,$("#yearmonth").val());
+	LODOP.ADD_PRINT_TEXT(96,20,460,39,"填报单位(盖章)：建设管理处");
+	LODOP.ADD_PRINT_TEXT(116,20,260,39,"填报时间："+$("#reportDaten").val());
+	LODOP.ADD_PRINT_TEXT(136,20,260,39,"填报人："+$("#reportUser").val());
+	LODOP.ADD_PRINT_HTM(100,20,1100,800,'<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;">'+document.getElementById("t_datagrid").innerHTML+'</table>');
+	LODOP.PREVIEW();
+}
+function doacrossprint(){
+	//横向打印
+	LODOP=getLodop();  
+	LODOP.PRINT_INIT("");
+	LODOP.SET_PRINT_PAGESIZE(2,900,500,'');
+	LODOP.SET_PRINT_STYLE("FontSize",14);
+	LODOP.SET_PRINT_STYLE("Bold",1);
+	LODOP.ADD_PRINT_TEXT(30,431,260,39,$("#filename").val());
+	LODOP.ADD_PRINT_TEXT(76,461,260,39,$("#yearmonth").val());
+	LODOP.ADD_PRINT_TEXT(96,20,460,39,"填报单位(盖章)：建设管理处");
+	LODOP.ADD_PRINT_TEXT(116,20,260,39,"填报时间："+$("#reportDaten").val());
+	LODOP.ADD_PRINT_TEXT(136,20,260,39,"填报人："+$("#reportUser").val());
+	LODOP.ADD_PRINT_HTM(160,20,1100,800,'<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;">'+document.getElementById("t_datagrid").innerHTML+'</table>');
+	LODOP.PREVIEW();
+}
 function setParam(){
 	if($("#year").val() == '' || $("#month").val() == ''){
 		$('#filename').val('');
@@ -259,7 +289,7 @@ var TableInit = function () {
 			detailView: false,                   //是否显示父子表
 			columns: [
 				[
-				  {field: 'departStr',title: '直属分局' ,align:'center'}
+				  {field: 'departStr',title: '直属分局' ,align:'center',width : 100}
 				 //,{field: 'contractTotal',hiden:'true'}
 				 ,{field: 'contractTotalStr',title: '合同总金额（万元）',align:'right',
 						formatter:function (value, row, index, field) {

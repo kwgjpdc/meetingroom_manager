@@ -11,6 +11,30 @@ $(document).ready(function(){
 	setFormVal("#reportDate");
 	initDateTable();
 });
+var LODOP; //声明为全局变量 
+function dolengprint(){
+	//纵向打印
+	LODOP=getLodop();  
+	LODOP.PRINT_INIT("");
+	LODOP.SET_PRINT_STYLE("FontSize",14);
+	LODOP.SET_PRINT_STYLE("Bold",1);
+	LODOP.ADD_PRINT_TEXT(30,231,260,39,$("#filename").val());
+	LODOP.ADD_PRINT_TEXT(75,20,360,39,"填报处室：计划财务处1");
+	LODOP.ADD_PRINT_TEXT(95,20,360,39,"填报截至日期："+$("#reportDaten").val());
+	LODOP.ADD_PRINT_HTM(120,20,1100,800,'<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;">'+document.getElementById("t_datagrid").innerHTML+'</table>');
+	LODOP.PREVIEW();
+}
+function doacrossprint(){
+	//横向打印
+	LODOP=getLodop();  
+	LODOP.PRINT_INIT("");
+	LODOP.SET_PRINT_PAGESIZE(2,900,500,'');
+	LODOP.SET_PRINT_STYLE("FontSize",14);
+	LODOP.SET_PRINT_STYLE("Bold",1);
+	LODOP.ADD_PRINT_TEXT(30,431,260,39,$("#filename").val());
+	LODOP.ADD_PRINT_HTM(100,20,1100,800,'<table id="t_datagrid" border="1px solid #ddd;"style="border-collapse:collapse;table-layout:fixed;border:solid 1px black;">'+document.getElementById("t_datagrid").innerHTML+'</table>');
+	LODOP.PREVIEW();
+}
 function reloadtable(){
 	$("#year1title").val($("#year1n").val());
 	$("#year2title").val($("#year2n").val());

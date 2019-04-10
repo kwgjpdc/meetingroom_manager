@@ -119,7 +119,7 @@
     </update>
 
     <select id="getFinancingReportTwoData" parameterType="java.util.Map" resultType="java.util.Map" >
-		SELECT typename,ifnull(contractmoney,0) as contractmoney, 
+		SELECT CAST(typename AS  char) typename,ifnull(contractmoney,0) as contractmoney, 
 		ifnull(contractfinish,0) as contractfinish,
 		ifnull(nytnmmoney,0) as nytnmmoney,
 		ifnull(nymonth,0) as nymonth
