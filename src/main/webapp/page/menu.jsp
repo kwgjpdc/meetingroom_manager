@@ -1,13 +1,13 @@
-<%@page import="com.lion.echart.system.entity.UserEntity"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<input type="hidden" name="userid" id="userid"
-	value="${USER_SESSION.id}">
+<%@ page isELIgnored="false"%>
+<input type="hidden" name="userid" id="userid" value="${USER_SESSION.id}">
 <script>
 	//通过用户加载动态菜单加载菜单
+	/*
 	var userid = $("#userid").val();
 	$.ajax({
-		url:"<%=fule %>menu/menuGetDataByUserId.json",
+		url:"${fule}menu/menuGetDataByUserId.json",
 		type:"POST",
 		dataType:"json",
 		data:{"userid":userid},
@@ -19,7 +19,7 @@
 					//是父级菜单
 					strHtml+='<li>';
 					if(value.url!=undefined&&value.url!=''){
-						strHtml+='<a href="<%=fule %>'+value.url+'">'+value.menuname+'</a>';
+						strHtml+='<a href="${fule}"'+value.url+'">'+value.menuname+'</a>';
 					}else{
 						strHtml+='<a href="#" class="dropdown-toggle" data-toggle="dropdown">';
 						strHtml+=value.menuname+'<b class="caret"></b>';
@@ -29,7 +29,7 @@
 						//遍历子菜单
 						$.each(sondate, function(sonkey,sonvalue){
 							if(sonvalue.pid==pid){
-								strHtml+='<li><a href="<%=fule %>'+sonvalue.url+'">'+sonvalue.menuname+'</a></li>';
+								strHtml+='<li><a href="${fule}'+sonvalue.url+'">'+sonvalue.menuname+'</a></li>';
 							}
 						});
 						strHtml+='</ul>';
@@ -43,20 +43,22 @@
 			
 		}
 	});
+	*/
 </script>
 <iframe style="display: none" id="myajaxfor" name="myajaxfor"></iframe>
-<input type="hidden" id="who" value="<%=request.getAttribute("who") %>" />
-<input type="hidden" id="fule" value="<%=fule %>" />
+<input type="hidden" id="who" value="${who}" />
+<input type="hidden" id="fule" value="${fule}" />
 <div class="title">
-	滇中引水管理局
+	SmartMeetingRoom
 	<div class="userinfo">
 		您好：
 		<% 
-			//获取到服务器中的用户对象 
-			UserEntity userSession=(UserEntity)request.getSession().getAttribute("USER_SESSION");
-			//初始值为空
 			String subofficename="";
 			String username="";
+			//获取到服务器中的用户对象 
+			/*
+			UserEntity userSession=(UserEntity)request.getSession().getAttribute("USER_SESSION");
+			//初始值为空
 			//判断是否有值 如果有则赋值
 		 	if(userSession.getSubofficename()!=null){
 		 		subofficename=userSession.getSubofficename();
@@ -64,89 +66,33 @@
 		 	if(userSession.getUsername()!=null){
 		 		username=userSession.getUsername();
 		 	}
+		 	*/
 		%>
 		<%=subofficename%>
 		<%=username %>
-		<a href="<%=fule%>logout">退出登录</a>
+		<a href="${fule}logout">退出登录</a>
 	</div>
 </div>
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
 	<div class="container-fluid">
-		<!-- 
-	    <div class="navbar-header">
-	        <a class="navbar-brand" href="#">系统菜单</a>
-	    </div>
-	     -->
 		<div>
 			<ul class="nav navbar-nav" id="menuUl">
-				<li id="mainpli"><a
-					href="http://127.0.0.1:8080/echart/login.json">首页</a></li>
-				<li id="writeli"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> 填报管理 <b class="caret"></b>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="<%=fule %>subofficewrite/subofficewriteList.web">分局填报</a></li>
-						<li><a href="<%=fule %>financing/financingList.web" >财务填报</a></li>
-					</ul></li>
-				<li id="projectli"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> 合同管理 <b class="caret"></b>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="<%=fule %>contract/contractSignedList.web">合同签订</a></li>
-						<li><a href="<%=fule %>contract/contractExecuteList.web">合同执行</a></li>
-					</ul></li>
+				<li id="mainpli"><a href="http://127.0.0.1:8080/echart/login.json">首页</a></li>
+				<li id="writeli"><a href="#" >会议室预定<b class="caret"></b></a></li>
+				<li id="writeli"><a href="#" >会议议程管理<b class="caret"></b></a></li>
+				<li id="writeli"><a href="#" >邮件通知日志<b class="caret"></b></a></li>
+				<li id="writeli"><a href="#" >区域楼层管理<b class="caret"></b></a></li>
+				<li id="writeli"><a href="#" >会议录入 <b class="caret"></b></a></li>
 				<!-- 
-	            <li id="projectli" > 
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown" >
-	                	项目管理 <b class="caret"></b>
-	                </a>
-	                <ul class="dropdown-menu">
-	                    <li><a href="#">进度管理</a></li>
-	                    <li><a href="<%=fule %>project/payforList.web" >支付申请</a></li>
-	                </ul>
-	            </li>
-	            <li><a href="#">费用管理</a></li>
-	            <li><a href="#">采购管理</a></li>
-	            <li><a href="#">物资管理</a></li>
-	            <li><a href="#">绩效管理</a></li>
-	            <li><a href="#">账户管理</a></li>
-	            <li>
-	            	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-	                	财务管理<b class="caret"></b>
-	                </a>
-	                <ul class="dropdown-menu">
-	                    <li><a href="#">头寸管理</a></li>
-	                    <li><a href="#">付费管理</a></li>
-	                </ul>
-	            </li>
-	            <li><a href="#">流程管理</a></li>
-	             -->
-				<li id="reportli"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> 统计报表<b class="caret"></b>
-				</a>
+				<li>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理 <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a
-							href="<%=fule%>contract/contractExecuteMonthTotalList.web">合同执行月统计</a></li>
-						<li><a href="<%=fule%>financing/financingReport.web"">财务数据统计</a></li>
-						<!-- 
-	                    <li><a href="#">建设资金支付统计表</a></li>
-	               	 	<li><a href="#">分局数据统计</a></li>
-	               	 	<li><a href="#">工程建设开工进度、投资完成情况月统计</a></li>
-	               	 	<li><a href="#">工程投资完成汇总月统计</a></li>
-	               	 	<li><a href="#">工程建设资金支付情况月统计</a></li>
-	               	 	<li><a href="#">招投标情况统计</a></li>
-	                    <li><a href="#">合同签订情况统计</a></li>
-	                    <li><a href="#">已签合同执行情况统计</a></li>
-	             		-->
-					</ul></li>
-				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						系统管理 <b class="caret"></b>
-				</a>
-					<ul class="dropdown-menu">
-						<li><a href="<%=fule%>user/userList.web">用户管理</a></li>
-						<li><a href="<%=fule%>role/roleList.web">角色管理</a></li>
-						<li><a href="<%=fule%>menu/menuList.web">菜单管理</a></li>
-					</ul></li>
+						<li><a href="${fule}user/userList.web">用户管理</a></li>
+						<li><a href="${fule}role/roleList.web">角色管理</a></li>
+						<li><a href="${fule}menu/menuList.web">菜单管理</a></li>
+					</ul>
+				</li>
+				 -->
 			</ul>
 		</div>
 	</div>
