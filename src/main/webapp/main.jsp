@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SmartMeetingRoom</title>
+<title>会议室预订</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/base.css?ts=<%=request.getAttribute("ts")%>" type="text/css" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main.css?ts=<%=request.getAttribute("ts")%>" type="text/css" />
@@ -18,7 +18,10 @@
 <body class="bgdiv"
 	style="height: 100%;">
 	<div id="head">
+		<!-- 页面头部 -->
 		<%@include file="page/menu.jsp"%>
+		<!-- 导航侧栏 -->
+		<%@include file="page/aside.jsp"%>
 	</div>
 	<div id="bodydiv" >
 		<div class="left" >

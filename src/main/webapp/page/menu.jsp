@@ -49,7 +49,7 @@
 <input type="hidden" id="who" value="${who}" />
 <input type="hidden" id="fule" value="${fule}" />
 <div class="title">
-	SmartMeetingRoom
+	<h3>会议室预订</h3>
 	<div class="userinfo">
 		您好：
 		<% 
