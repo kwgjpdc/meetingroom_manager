@@ -5,6 +5,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="java-output-path" value="/meetingroom/target/classes"/>
-        <property name="context-root" value="meetingroom"/>
+        <property name="context-root" value="echart"/>
     </wb-module>
 </project-modules>

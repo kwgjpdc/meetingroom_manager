@@ -14,11 +14,11 @@
 		</if>
 	</select>
 	<!-- 用户插入 -->
-	<insert id="insertUser" parameterType="com.lion.echart.contract.entity.DemoEntity">
+	<insert id="insertUser" parameterType="com.lion.meetingroom.contract.entity.DemoEntity">
            insert into t_sys_user(contractName) 
                values(${contractName})
    </insert>
-   <update id="updateUser" parameterType="com.lion.echart.contract.entity.DemoEntity">
+   <update id="updateUser" parameterType="com.lion.meetingroom.contract.entity.DemoEntity">
    		update t_sys_user 
    		set contractName = #{contractName}
    		where id=#{id}
