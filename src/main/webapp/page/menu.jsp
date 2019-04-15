@@ -49,7 +49,6 @@
 <input type="hidden" id="who" value="${who}" />
 <input type="hidden" id="fule" value="${fule}" />
 <div class="title">
-	SmartMeetingRoom
 	<div class="userinfo">
 		您好：
 		<% 
@@ -77,48 +76,34 @@
 	<div class="container-fluid">
 		<div>
 			<ul class="nav navbar-nav" id="menuUl">
-				<li id="mainpli"><a href="http://127.0.0.1:8080/echart/login.json">首页</a></li>
-				<li id="writeli"><a href="#" >会议室预定<b class="caret"></b></a></li>
-				<li id="writeli"><a href="#" >会议议程管理<b class="caret"></b></a></li>
-				<li id="writeli"><a href="#" >邮件通知日志<b class="caret"></b></a></li>
-				<li id="writeli"><a href="#" >区域楼层管理<b class="caret"></b></a></li>
-				<li id="writeli"><a href="#" >会议录入 <b class="caret"></b></a></li>
-				<!-- 
+				<li id="mainpli"><a href="http://localhosst:8080/echart/login.json">我的会议</a></li>
+				<li id="writeli"><a href="#" >预定会议室</a></li>
+				<li id="writeli"><a href="#" >邮件通知日志</a></li>
+				<li id="writeli"><a href="#" >区域楼层管理</a></li>
+				<li id="writeli"><a href="#" >会议录入</a></li>
+				
 				<li>
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">系统管理 <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="${fule}user/userList.web">用户管理</a></li>
-						<li><a href="${fule}role/roleList.web">角色管理</a></li>
-						<li><a href="${fule}menu/menuList.web">菜单管理</a></li>
+						<li><a href="#">用户管理</a></li>
+						<li><a href="#">会议室管理</a></li>
+						<li><a href="#">MCU管理</a></li>
+						<li><a href="${fule}menu/meetingList.web">权限管理</a></li>
+						<li><a href="#">日志</a></li>
 					</ul>
-				</li>
-				 -->
+				</li> 
+				<li>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">管理后台 <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">部门管理</a></li>
+						<li><a href="#">用户管理</a></li>
+						<li><a href="#">权限管理</a></li>
+						<li><a href="#">会议统计</a></li>
+					</ul>
+				</li> 
+				
 			</ul>
 		</div>
 	</div>
 </nav>
 
-<div class="modal-dialog" id="show-modal" tabindex="-1"
-	style="display: none;">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button onclick="closeloding()" type="button" class="close"
-					data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title" id="myModalLabel">提示消息</h4>
-			</div>
-			<div class="modal-body" id="infobody"
-				style="text-align: center; font-size: large;">提示消息</div>
-			<div class="modal-footer">
-				<button id="leftBtn" type="button" class="btn btn-default"
-					onclick="closeloding()" data-dismiss="modal">关闭</button>
-				<button id="rightBtn2" type="button"
-					class="rightBtn btn btn-primary" onclick="saveFun()">确定</button>
-				<button id="rightBtn3" sytle="display:none;" type="button"
-					class="rightBtn btn btn-primary" onclick="deleteFun()">确定</button>
-				<button id="rightBtn4" sytle="display:none;" type="button"
-					class="rightBtn btn btn-primary" onclick="submitFun()">确定</button>
-			</div>
-		</div>
-	</div>
-</div>

@@ -17,11 +17,13 @@
 </head>
 <body class="bgdiv"
 	style="height: 100%;">
+	${pageContext.request.contextPath }
 	<div id="head">
-		<%@include file="page/menu.jsp"%>
+		<%@include file="page/menu.jsp"%> 
 	</div>
 	<div id="bodydiv" >
 		<div class="left" >
+		<%=request.getAttribute("ts")%>
 			<div style="font-size: 30px">yyyymmdd 区域楼层 会议主题</div>
 			<div style="font-size: 30px">yyyymmdd 区域楼层 会议主题</div>
 			<div style="font-size: 30px">yyyymmdd 区域楼层 会议主题</div>
