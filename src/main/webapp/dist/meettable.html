@@ -68,24 +68,26 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-
                                 <a href="meetroom.html" class="nav-link">
+                                    <i class="icon icon-speedometer "></i> 预订会议
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="meettable.html" class="nav-link">
                                     <i class="icon icon-speedometer "></i> 我的预订
                                 </a>
                             </li>
-                            <ul class="nav-dropdown-items">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="icon icon-speedometer"></i> 视频会议
-                                    </a>
-                                </li>
-                                <li class="nav-item">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="icon icon-speedometer"></i> 视频会议
+                                </a>
+                            </li>
+                            <li class="nav-item">
 
-                                    <a href="#" class="nav-link">
-                                        <i class="icon icon-speedometer"></i> 我的历史会议
-                                    </a>
-                                </li>
-                            </ul>
+                                <a href="meet_history.html" class="nav-link">
+                                    <i class="icon icon-speedometer"></i> 我的历史会议
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item nav-dropdown">
@@ -231,7 +233,9 @@
                                 <table class="table ">
                                     <thead>
                                     <tr>
-                                        <th>会议名</th>
+                                        <th class="active">
+                                            <input type="checkbox" name="" id="" value="" />
+                                        </th>
                                         <th>主持</th>
                                         <th>会议号</th>
                                         <th>密码</th>
@@ -247,69 +251,104 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>1</td>
+                                        <td class="active">
+                                            <input type="checkbox" name=""  value="" />
+                                        </td>
                                         <td class="text-nowrap">Samsung Galaxy S8</td>
-                                        <td>31,589</td>
-                                        <td>$800</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
+                                        <td>66578</td>
+                                        <td>123</td>
+                                        <td>xxx会议</td>
+                                        <td>本地会议</td>
+                                        <td>9:30</td>
+                                        <td>1小时</td>
+                                        <td>508</td>
+                                        <td>未开始</td>
+                                        <td class="text-center">
+                                            <form class="navbar-form">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">参会人员信息</button>
+                                                <a href="#" class="btn btn-default" onclick="return confirm('你确认要取消?')">取消</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
-                                        <td class="text-nowrap">Google Pixel XL</td>
-                                        <td>99,542</td>
-                                        <td>$750</td>
-                                        <td>3%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
+                                        <td class="active">
+                                            <input type="checkbox" name=""  value="" />
+                                        </td>
+                                        <td class="text-nowrap">Samsung Galaxy S8</td>
+                                        <td>66578</td>
+                                        <td>123</td>
+                                        <td>xxx会议</td>
+                                        <td>本地会议</td>
+                                        <td>9:30</td>
+                                        <td>1小时</td>
+                                        <td>508</td>
+                                        <td>未开始</td>
+                                        <td class="text-center">
+                                            <form class="navbar-form">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">参会人员信息</button>
+                                                <a href="#" class="btn btn-default" onclick="return confirm('你确认要取消?')">取消</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
-                                        <td class="text-nowrap">iPhone X</td>
-                                        <td>62,220</td>
-                                        <td>$1,200</td>
-                                        <td>0%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
+                                        <td class="active">
+                                            <input type="checkbox" name=""  value="" />
+                                        </td>
+                                        <td class="text-nowrap">Samsung Galaxy S8</td>
+                                        <td>66578</td>
+                                        <td>123</td>
+                                        <td>xxx会议</td>
+                                        <td>本地会议</td>
+                                        <td>9:30</td>
+                                        <td>1小时</td>
+                                        <td>508</td>
+                                        <td>未开始</td>
+                                        <td class="text-center">
+                                            <form class="navbar-form">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">参会人员信息</button>
+                                                <a href="#" class="btn btn-default" onclick="return confirm('你确认要取消?')">取消</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>4</td>
-                                        <td class="text-nowrap">OnePlus 5T</td>
-                                        <td>50,000</td>
-                                        <td>$650</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
+                                        <td class="active">
+                                            <input type="checkbox" name=""  value="" />
+                                        </td>
+                                        <td class="text-nowrap">Samsung Galaxy S8</td>
+                                        <td>66578</td>
+                                        <td>123</td>
+                                        <td>xxx会议</td>
+                                        <td>本地会议</td>
+                                        <td>9:30</td>
+                                        <td>1小时</td>
+                                        <td>508</td>
+                                        <td>未开始</td>
+                                        <td class="text-center">
+                                            <form class="navbar-form">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">参会人员信息</button>
+                                                <a href="#" class="btn btn-default" onclick="return confirm('你确认要取消?')">取消</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td>5</td>
-                                        <td class="text-nowrap">Google Nexus 6</td>
-                                        <td>400</td>
-                                        <td>$400</td>
-                                        <td>7%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
-                                        <td>5%</td>
+                                        <td class="active">
+                                            <input type="checkbox" name=""  value="" />
+                                        </td>
+                                        <td class="text-nowrap">Samsung Galaxy S8</td>
+                                        <td>66578</td>
+                                        <td>123</td>
+                                        <td>xxx会议</td>
+                                        <td>本地会议</td>
+                                        <td>9:30</td>
+                                        <td>1小时</td>
+                                        <td>508</td>
+                                        <td>未开始</td>
+                                        <td class="text-center">
+                                            <form class="navbar-form">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">参会人员信息</button>
+                                                <a href="#" class="btn btn-default" onclick="return confirm('你确认要取消?')">取消</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -318,9 +357,122 @@
                     </div>
                 </div>
             </div>
-
-
 </div>
+        <!-- 添加修改对话框开始 -->
+        <div id="login" class="modal fade" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card" >
+                                <div class="card-header bg-light">
+                                    <span class="fa fa-home">>参会人员信息 </span>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="table-responsive ">
+
+                                        <table class="table ">
+                                            <thead>
+                                            <tr>
+                                                <th class="active">
+                                                    <input type="checkbox" name="" id="check1" value="" />
+                                                </th>
+                                                <th>姓名</th>
+                                                <th>部门</th>
+                                                <th>性别</th>
+
+                                                <th>联系方式</th>
+                                                <th>邮箱</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td class="active">
+                                                    <input type="checkbox" name=""  value="" />
+                                                </td>
+                                                <td class="text-nowrap">张山</td>
+                                                <td>人事部</td>
+                                                <td>男</td>
+
+                                                <td>13456789087</td>
+                                                <td>samsung@xx.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="active">
+                                                    <input type="checkbox" name=""  value="" />
+                                                </td>
+                                                <td class="text-nowrap">离司</td>
+                                                <td>人事部</td>
+                                                <td>男</td>
+
+                                                <td>13456789087</td>
+                                                <td>samsung@xx.com</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        &lt;!&ndash;<h4 class="modal-title text-center">会议室名称:</h4>&ndash;&gt;
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="username" class="control-label col-md-3">会议室类型:</label>
+                                <div class="col-md-12">
+                                    <input type="text" id="username" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password1" class="control-label col-md-3">会议室分组：</label>
+                                <div class="col-md-12">
+                                    <input type="password" id="password1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="control-label col-md-3">呼叫方式：</label>
+                                <div class="col-md-12">
+                                    <input type="password" id="password2" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password3" class="control-label col-md-3">呼叫地址：</label>
+                                <div class="col-md-12">
+                                    <input type="password" id="password3" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password4" class="control-label col-md-3">是否启用：</label>
+                                <div class="col-md-12">
+                                    <input type="password" id="password4" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password5" class="control-label col-md-3">管理者：</label>
+                                <div class="col-md-12">
+                                    <input type="password" id="password5" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 text-center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">确认</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <!-- 添加修改对话框结束 -->
 
 <script src="./vendor/jquery/jquery.min.js"></script>
 <script src="./vendor/popper.js/popper.min.js"></script>
