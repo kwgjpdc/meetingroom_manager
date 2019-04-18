@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>会议管理系统</title>
+    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="./vendor/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="./vendor/font-awesome/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+ <script type="text/javascript">   
+		 function SetIFrameHeight(){
+		  	  var iframeid=document.getElementById("iframe"); //iframe id
+		  	  if (document.getElementById){
+		  		iframeid.height =document.documentElement.clientHeight;			   	   
+			  }
+		 }
+	</script>
+</head>
+<body class="sidebar-fixed header-fixed">
+<div class="page-wrapper">
+	<!-- 页面头部 -->
+    <header class="navbar page-header">
+
+        <a class="navbar-brand" href="#">
+            <img src="./imgs/1.png" width="50px" height="50px" style="margin-left: 50px" alt="会议管理系统">
+        </a>
+
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item d-md-down-none">
+                <a href="#">
+                    <i class="fa fa-envelope-open"></i>
+                    <span class="badge badge-pill badge-danger">5</span>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="./imgs/avatar-1.png" class="avatar avatar-sm" alt="logo">
+                    <span class="small ml-1 d-md-down-none">张主任</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-header">用户</div>
+
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-user"></i> 个人信息
+                    </a>
+
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-wrench"></i> 设置
+                    </a>
+
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-lock"></i> 退出
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <!-- 页面头部 /-->
+	
+	
+	<!-- 导航侧栏 -->
+    <aside class="main-container">
+        <div class="sidebar">
+            <nav class="sidebar-nav">
+                <ul class="nav">
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
+                            <i class="icon icon-speedometer"></i> 我的会议<i class="fa fa-caret-left"></i>
+                        </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" target="iframe">
+                                    <i class="icon icon-speedometer"></i> 预定会议室
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="meetroom.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-speedometer "></i> 预订会议
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="meettable.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-speedometer "></i> 我的预订
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+
+                                <a href="meet_history.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-speedometer"></i> 我的历史会议
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
+                            <i class="icon icon-target"></i> 会议室管理<i class="fa fa-caret-left"></i>
+                        </a>
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="meet_management.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-target"></i>会议室维护
+                                </a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a href="#" class="nav-link" target="iframe">
+                                    <i class="icon icon-target"></i> 常用会议室
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
+                            <i class="icon icon-energy"></i> 会议统计 <i class="fa fa-caret-left"></i>
+                        </a>
+
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="icon icon-energy"></i> 会议报表
+                                </a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a href="#" class="nav-link">
+                                    <i class="icon icon-energy"></i> 历史报表
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
+                            <i class="icon icon-graph"></i> 会议审批 <i class="fa fa-caret-left"></i>
+                        </a>
+
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="icon icon-graph"></i> 会议审批进度
+                                </a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a href="#" class="nav-link">
+                                    <i class="icon icon-graph"></i> 审批历史
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
+                            <i class="icon icon-puzzle"></i> 系统管理<i class="fa fa-caret-left"></i>
+                        </a>
+
+                        <ul class="nav-dropdown-items">
+
+
+                            <li class="nav-item">
+                                <a href="vm_management.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-puzzle"></i> 会议室管理
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="mcu_management.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-puzzle"></i> MCU管理
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="resources_management.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-puzzle"></i> 资源管理
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="email_management.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-puzzle"></i> 邮件管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item nav-dropdown">
+                        <a href="#" class="nav-link nav-dropdown-toggle">
+                            <i class="icon icon-umbrella"></i> 管理后台 <i class="fa fa-caret-left"></i>
+                        </a>
+
+                        <ul class="nav-dropdown-items">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" target="iframe">
+                                    <i class="icon icon-umbrella"></i> 部门管理
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" target="iframe">
+                                    <i class="icon icon-umbrella"></i> 用户管理
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="limit.html" class="nav-link" target="iframe">
+                                    <i class="icon icon-umbrella"></i> 权限管理
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="icon icon-umbrella"></i> 日志管理
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" target="iframe">
+                                    <i class="icon icon-umbrella"></i> 配置管理
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+	<!-- 导航侧栏 /-->
+
+
+	<!-- 内容区域 -->
+        <div class="content-wrapper">
+			<iframe width="100%" id="iframe" name="iframe"	onload="SetIFrameHeight()" 
+					frameborder="0" src="home.html"></iframe>
+        </div>
+    <!-- 内容区域 /-->
+</div>
+
+<script src="./vendor/jquery/jquery.min.js"></script>
+<script src="./vendor/popper.js/popper.min.js"></script>
+<script src="./vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="./vendor/chart.js/chart.min.js"></script>
+<script src="./js/carbon.js"></script>
+<script src="./js/demo.js"></script>
+
+</body>
+	<script type="text/javascript">
+		var a = 1;
+		$(document).ready(function(){
+		$("#videomeet").click(function(){
+			$("#locameets").hide();
+			$("#voidemeets").show();
+			$("#videomeet").toggleClass('active');
+			$("#locameet").removeClass('active');
+		});
+		$("#locameet").click(function(){
+			$("#locameets").show()
+			$("#voidemeets").hide();
+			$("#videomeet").removeClass('active');
+			$("#locameet"). toggleClass('active');
+		});
+		});
+	
+	</script>
+	
+</html>
