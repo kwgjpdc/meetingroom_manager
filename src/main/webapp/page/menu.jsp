@@ -77,7 +77,7 @@
 	<div class="container-fluid">
 		<div>
 			<ul class="nav navbar-nav" id="menuUl">
-				<li id="mainpli"><a href="http://127.0.0.1:8080/echart/login.json">首页</a></li>
+				<li id="mainpli"><a href="http://127.0.0.1:8080/meetingroom/login.json">首页</a></li>
 				<li id="writeli"><a href="#" >会议室预定<b class="caret"></b></a></li>
 				<li id="writeli"><a href="#" >会议议程管理<b class="caret"></b></a></li>
 				<li id="writeli"><a href="#" >邮件通知日志<b class="caret"></b></a></li>
