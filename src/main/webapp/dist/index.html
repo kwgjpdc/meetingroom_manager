@@ -17,10 +17,12 @@
 			  }
 		 }
 	</script>
-
-    <style>
-
-    </style>
+    <style type="text/css">
+       body{
+           overflow:scroll;
+           overflow-y:hidden;
+       }
+   </style>
 </head>
 <body class="sidebar-fixed header-fixed">
 <div class="page-wrapper">
@@ -68,15 +70,13 @@
 	
 	
 	<!-- 导航侧栏 -->
-
     <aside class="main-container">
-        <div class="sidebar" >
+        <div class="sidebar">
             <nav class="sidebar-nav">
                 <ul class="nav">
                     <li class="nav-item nav-dropdown">
-                        <a href="#" class="nav-link nav-dropdown-toggle" id="link_1" target="iframe" >
+                        <a href="#" class="nav-link nav-dropdown-toggle" target="iframe">
                             <i class="icon icon-speedometer"></i> 我的会议<i class="fa fa-caret-left"></i>
-
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
@@ -84,7 +84,11 @@
                                     <i class=""></i> 预定会议室
                                 </a>
                             </li>
-
+                            <li class="nav-item">
+                                <a href="meetroom.html" class="nav-link" target="iframe">
+                                    <i class=""></i> 预订会议
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="meettable.html" class="nav-link" target="iframe">
                                     <i class=""></i>  我的预订
@@ -166,11 +170,11 @@
                         <ul class="nav-dropdown-items">
 
 
-                            <li class="nav-item">
-                                <a href="vm_management.html" class="nav-link" target="iframe">
+                           <!-- <li class="nav-item">
+                                <a href="meet_management.html" class="nav-link" target="iframe">
                                     <i class=""></i> 会议室管理
                                 </a>
-                            </li>
+                            </li>-->
 
                             <li class="nav-item">
                                 <a href="mcu_management.html" class="nav-link" target="iframe">
