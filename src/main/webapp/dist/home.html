@@ -15,12 +15,15 @@
 <body class="sidebar-fixed header-fixed">
 <div class="content">
     <div class="row">
+
         <div class="col-md-12 text-center">
+
             <button class="btn btn-primary btn-lg"><span class="fa fa-list"></span>日程</button>
             <button class="btn btn-success btn-lg"><span class="fa fa-arrow-circle-down"></span>资源</button>
             <button class="btn btn-primary btn-sm" style="background-color: darkblue">空闲</button>
             <button class="btn btn-secondary btn-sm">占用</button>
-            <br/><br/><br/>
+            <br /><br /><br />
+
         </div>
         <div>
             <div class="container-fluid">
@@ -30,125 +33,146 @@
                             <div class="col-md-2">
                                 <div class="form-group">
 
-                                    <select id="1" class="form-control">
+                                    <select  class="form-control">
                                             <span class="fa fa-home">
-                                                <option> </span>WH</option>
+                                           <option> </span>WH</option>
                                         <option>NJ</option>
                                         <option>SH</option>
                                     </select>
                                 </div>
+
+
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
 
-                                    <select id="2" class="form-control">
+                                    <select  class="form-control">
                                         <option>YMTC</option>
                                         <option>NJ</option>
                                         <option>SH</option>
+
                                     </select>
                                 </div>
+
+
                             </div>
 
 
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
 
-                                    <input type="date" class="form-control">
+                                    <input type="datetime-local" class="form-control">
                                 </div>
 
 
                             </div>
                             <div class="col-md-2">
-                                <div class="form-group">
+                                <select class="form-control">
+                                    <option>本地会议</option>
+                                    <option>视屏会议</option>
+                                    <option>音频会议</option>
 
-                                    <input type="time" class="form-control">
-                                </div>
-
+                                </select>
 
                             </div>
 
                         </div>
 
 
+
+
+
                         <div class="col-md-12 mb-2">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active text-primary" data-toggle="tab" href="#home"
-                                       role="tab" aria-controls="home">floor5</a>
+                                    <a class="nav-link active text-primary" data-toggle="tab" href="#home" role="tab" aria-controls="home">floor5</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-primary" data-toggle="tab" href="#profile"
-                                       role="tab" aria-controls="profile">floor6</a>
+                                    <a class="nav-link text-primary" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">floor6</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link text-primary" data-toggle="tab" href="#messages"
-                                       role="tab" aria-controls="messages">Video Meeting</a>
-                                </li>
+
                             </ul>
 
                             <div class="tab-content">
-                                <div class="tab-pane active" id="home" role="tabpanel">
+                                <div class="tab-pane active" id="home" role="tabpanel" >
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-md-12 container-fluid" >
+                                            <div  class="col-md-12 container-fluid" >
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         <div class="card ">
                                                             <div>
-                                                                <img src="imgs/biaoqian.png" width="40px">
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
+
                                                                 <div style="float: right;" id="xingxing1">
-                                                                    <button id="shoucang1"
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button id="shoucang1" style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <div style="float: right;display: none"
-                                                                     id="xingxing2">
-                                                                    <button id="shoucang2"
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                <div style="float: right;display: none" id="xingxing2">
+                                                                    <button id="shoucang2" style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
-                                                                <a href="meetroom.html" class="h6 text-warning">B栋05014</a>
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%"; ></center>
+
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="#" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card "  >
+
+
+
+
+                                                            <div >
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
+                                                                <div style="float: right;" >
+                                                                    <button  style="background-color: #ffffff; width:25px;border: none;">
+
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -159,29 +183,24 @@
                                                     <div class="col-md-2">
                                                         <div class="card ">
 
+                                                            <div >
 
-                                                            <div>
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -190,31 +209,34 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+
                                                                 </div>
+                                                                <div style="float: right;" >
+                                                                    <img src="imgs/video.png" width="28px" height="18px"></button>
+                                                                </div>
+
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -223,71 +245,25 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
-
-                                                                <img src="imgs/biaoqian.png" width="40px">
+                                                            <div >
 
 
-                                                                <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
-
-
-                                                                </div>
-                                                                <div style="float: right;" >
-                                                                    <img src="imgs/video.png" width="28px"
-                                                                         height="18px"></button>
-                                                                </div>
-
-                                                                <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
-                                                                </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
-
-                                                            </div>
-                                                            <div class="card-footer bg-light text-center">
-                                                                <a href="#" class="h6 text-warning">B栋05014</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="card ">
-
-                                                            <div>
-
-                                                                <img src="imgs/biaoqian.png" width="40px">
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet2.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet2.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -297,31 +273,26 @@
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -331,31 +302,25 @@
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet2.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet2.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -365,31 +330,25 @@
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -398,31 +357,25 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -431,31 +384,25 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -464,31 +411,25 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -498,31 +439,26 @@
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
                                                                 </div>
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet2.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet2.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -530,6 +466,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
 
 
                                                 </div>
@@ -537,48 +474,43 @@
                                         </div>
                                     </div>
                                 </div>
+
 
 
                                 <div class="tab-pane" id="profile" role="tabpanel">
 
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-md-12 container-fluid" >
+                                            <div  class="col-md-12 container-fluid" >
                                                 <div class="row">
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
                                                                 <div style="float: right;" >
-                                                                    <img src="imgs/video.png" width="28px"
-                                                                         height="18px"></button>
+                                                                    <img src="imgs/video.png" width="28px" height="18px"></button>
                                                                 </div>
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -588,38 +520,32 @@
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div  >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
                                                                 <div style="float: right;" >
-                                                                    <img src="imgs/video.png" width="28px"
-                                                                         height="18px"></button>
+                                                                    <img src="imgs/video.png" width="28px" height="18px"></button>
                                                                 </div>
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -628,35 +554,29 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
 
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -665,35 +585,30 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
 
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -702,35 +617,30 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
 
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -739,35 +649,32 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
 
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -777,35 +684,29 @@
                                                     </div>
 
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
 
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -814,35 +715,30 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <div class="card ">
+                                                        <div class="card "   >
 
-                                                            <div>
+                                                            <div >
 
-                                                                <img src="imgs/biaoqian.png" width="40px">
+
+                                                                <img src="imgs/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke"><span class="h5">12</span></div>
+
 
 
                                                                 <div style="float: right;" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
-                                                                        <img src="imgs/xingxing 2.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="imgs/xingxing 2.png" width="20px" height="20px"></button>
 
 
                                                                 </div>
 
 
                                                                 <div style="float: right;display: none" >
-                                                                    <button
-                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                    <button  style="background-color: #ffffff; width:25px;height:25px;border: none;">
 
-                                                                        <img src="imgs/xingxing1.png"
-                                                                             width="20px" height="20px">
-                                                                    </button>
+                                                                        <img src="imgs/xingxing1.png" width="20px" height="20px"></button>
                                                                 </div>
-                                                                <center><img class="text-center"
-                                                                             src="imgs/meet1.jpg " width="140px"
-                                                                             ;></center>
+                                                                <center><img class="text-center" src="imgs/meet1.jpg " width="100%";></center>
 
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
@@ -854,42 +750,27 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+
+
                             </div>
-                            <div class="card-body p-0">
-                                <div class="p-4">
 
-                                    <table border="1">
-                                    </table>
-                                </div>
 
-                                <div class="justify-content-around mt-4 p-4 bg-light d-flex border-top d-md-down-none">
-                                    <div class="text-center">
-                                        <div class="text-muted small">近期会议</div>
-                                        <div>xxxxxxx</div>
-                                    </div>
 
-                                    <div class="text-center">
-                                        <div class="text-muted small">地点</div>
-                                        <div>xxxxxxxx</div>
-                                    </div>
 
-                                    <div class="text-center">
-                                        <div class="text-muted small">联系人</div>
-                                        <div>Tom</div>
-                                    </div>
 
-                                    <div class="text-center">
-                                        <div class="text-muted small">手机</div>
-                                        <div>13333236782</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-muted small">电话</div>
-                                        <div>027-888888</div>
-                                    </div>
 
-                                </div>
-                            </div>
+
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -907,5 +788,23 @@
 
 </body>
 
-	
+<script type="text/javascript">
+    var a = 1;
+    $(document).ready(function(){
+        $("#shoucang1").click(function(){
+            $("#xingxing1").hide();
+            $("#xingxing2").show();
+            alert("收藏成功")
+
+        });
+        $("#shoucang2").click(function(){
+            $("#xingxing1").show()
+            $("#xingxing2").hide();
+            alert("取消收藏")
+        });
+    });
+
+
+
+</script>
 </html>
