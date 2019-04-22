@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bcsd.dao.MeetRoomDao">
+    <!--查询所有-->
+    <select id="findAll" resultType="com.bcsd.entity.MeetRoom">
+        SELECT  c.roomarea,
+                c.roomfloor,
+                c.personcount,
+                c.roomstatus,
+                c.roomname,
+                c.meetingsubdept,
+                c.callip
+        from cj_meetroom c
+    </select>
+    <!--查找一个-->
+    <select id="findOne" parameterType="java.lang.String" resultType="com.bcsd.entity.MeetRoom">
+        SELECT  c.roomarea,
+        c.roomfloor,
+        c.personcount,
+        c.roomstatus,
+        c.roomname,
+        c.meetingsubdept,
+        c.callip
+        from cj_meetroom c
+        where roomid=#{id}
+    </select>
+
+    <insert id="add" >
+        insert into cj_meetroom
+    </insert>
+
+</mapper>
