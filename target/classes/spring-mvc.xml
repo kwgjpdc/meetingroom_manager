@@ -68,7 +68,7 @@
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>
-		<aop:pointcut id="pc" expression="execution(public * com.iion.meetingroom.**.logic.*.*(..))" />
+		<aop:pointcut id="pc" expression="execution(public * com.lion.meetingroom.**.logic.*.*(..))" />
 		<aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />
 	</aop:config>
 	    
@@ -79,11 +79,14 @@
 	<mvc:resources mapping="/css/**" location="/css/" />
 	<mvc:resources mapping="/fonts/**" location="/fonts/" />
 	<mvc:resources mapping="/plug-in/kindeditor/**" location="/plug-in/kindeditor/" />
- 	<mvc:resources mapping="/system/**" location="/system/" />
- 	<context:component-scan base-package="com.lion.meetingroom.**.web" />
-	<mvc:resources location="/image" mapping="/**"/>
-	<mvc:resources location="/css" mapping="/**"/>
-	<mvc:resources location="/js" mapping="/**"/>
+	<context:component-scan base-package="com.lion.meetingroom.**.web" />
+
+	<!--过滤静态资源	-->
+	<mvc:resources location="/image/" mapping="/image/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/vendor/" mapping="/vendor/**" />
+	<mvc:resources location="/fonts/" mapping="/fonts/**" />
 	
 	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
