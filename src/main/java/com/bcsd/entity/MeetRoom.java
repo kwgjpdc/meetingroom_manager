@@ -12,12 +12,12 @@ public class MeetRoom {
     private String roomArea;//会议室区域
     private String roomFloor;//会议室楼层
     private String roomBuilding;//创建者
-    private String rooName;//会议室名称
+    private String roomName;//会议室名称
     private String personCount;//容纳人数
     private String roomStatus;//状态
-    private Date createDate;//创建时间
+    private String createDate;//创建时间
     private String createUser;//创建人
-    private Date lastUpdateDate;//上次修改时间
+    private String lastUpdateDate;//上次修改时间
     private String lastUpdateUser;//上次修改人
     private String managerUid;//管理者id
     private String manager;//管理者
@@ -32,6 +32,36 @@ public class MeetRoom {
     private String isStart;//是否开启
     private String roomType;//会议室类型
 
+    public MeetRoom(String roomId, String roomCode, String areaId, String roomArea, String roomFloor, String roomBuilding, String roomName, String personCount, String roomStatus, String createDate, String createUser, String lastUpdateDate, String lastUpdateUser, String managerUid, String manager, String isExamine, String roomEmail, String meetingSubDeptId, String meetingSubdept, String roomAreaName, String roomRegion, String isPublic, String callIp, String isStart, String roomType) {
+        this.roomId = roomId;
+        this.roomCode = roomCode;
+        this.areaId = areaId;
+        this.roomArea = roomArea;
+        this.roomFloor = roomFloor;
+        this.roomBuilding = roomBuilding;
+        this.roomName = roomName;
+        this.personCount = personCount;
+        this.roomStatus = roomStatus;
+        this.createDate = createDate;
+        this.createUser = createUser;
+        this.lastUpdateDate = lastUpdateDate;
+        this.lastUpdateUser = lastUpdateUser;
+        this.managerUid = managerUid;
+        this.manager = manager;
+        this.isExamine = isExamine;
+        this.roomEmail = roomEmail;
+        this.meetingSubDeptId = meetingSubDeptId;
+        this.meetingSubdept = meetingSubdept;
+        this.roomAreaName = roomAreaName;
+        this.roomRegion = roomRegion;
+        this.isPublic = isPublic;
+        this.callIp = callIp;
+        this.isStart = isStart;
+        this.roomType = roomType;
+    }
+
+    public MeetRoom() {
+    }
 
     public String getRoomId() {
         return roomId;
@@ -81,14 +111,21 @@ public class MeetRoom {
         this.roomBuilding = roomBuilding;
     }
 
-    public String getRooName() {
-        return rooName;
+    public String getRoomName() {
+        return roomName;
     }
 
-    public void setRooName(String rooName) {
-        this.rooName = rooName;
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
     }
 
+    public String getPersonCount() {
+        return personCount;
+    }
+
+    public void setPersonCount(String personCount) {
+        this.personCount = personCount;
+    }
 
     public String getRoomStatus() {
         return roomStatus;
@@ -98,11 +135,11 @@ public class MeetRoom {
         this.roomStatus = roomStatus;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
@@ -114,11 +151,11 @@ public class MeetRoom {
         this.createUser = createUser;
     }
 
-    public Date getLastUpdateDate() {
+    public String getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Date lastUpdateDate) {
+    public void setLastUpdateDate(String lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
 
@@ -165,6 +202,7 @@ public class MeetRoom {
     public String getMeetingSubDeptId() {
         return meetingSubDeptId;
     }
+
 
     public void setMeetingSubDeptId(String meetingSubDeptId) {
         this.meetingSubDeptId = meetingSubDeptId;
@@ -226,13 +264,6 @@ public class MeetRoom {
         this.roomType = roomType;
     }
 
-    public String getPersonCount() {
-        return personCount;
-    }
-
-    public void setPersonCount(String personCount) {
-        this.personCount = personCount;
-    }
 
     @Override
     public String toString() {
@@ -243,12 +274,12 @@ public class MeetRoom {
                 ", roomArea='" + roomArea + '\'' +
                 ", roomFloor='" + roomFloor + '\'' +
                 ", roomBuilding='" + roomBuilding + '\'' +
-                ", rooName='" + rooName + '\'' +
+                ", roomName='" + roomName + '\'' +
                 ", personCount='" + personCount + '\'' +
                 ", roomStatus='" + roomStatus + '\'' +
-                ", createDate=" + createDate +
+                ", createDate='" + createDate + '\'' +
                 ", createUser='" + createUser + '\'' +
-                ", lastUpdateDate=" + lastUpdateDate +
+                ", lastUpdateDate='" + lastUpdateDate + '\'' +
                 ", lastUpdateUser='" + lastUpdateUser + '\'' +
                 ", managerUid='" + managerUid + '\'' +
                 ", manager='" + manager + '\'' +

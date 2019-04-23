@@ -13,4 +13,8 @@ public interface MeetRoomDao {
     void add(MeetRoom meetRoom);
 
     MeetRoom findOne(String id);
+
+    void delete(String id);
+
+    void update(MeetRoom meetRoom);
 }

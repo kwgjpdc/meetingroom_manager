@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <%@ page isELIgnored="false"%>
-<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -115,7 +114,7 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/page/meet_management.jsp" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/meet/findAll" class="nav-link" target="iframe">
                                     <i class=""></i>会议室维护
                                 </a>
                             </li>

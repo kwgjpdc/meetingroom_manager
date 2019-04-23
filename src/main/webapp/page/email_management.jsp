@@ -3,7 +3,7 @@ pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <%@ page isELIgnored="false"%>
-<!doctype html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
