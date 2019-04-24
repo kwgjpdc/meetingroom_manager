@@ -19,10 +19,7 @@ public class MeetRoomServiceImpl implements MeetRoomService {
     @Autowired
     private MeetRoomDao meetRoomDao;
 
-    public List<MeetRoom> findAll() {
-       return meetRoomDao.findAll();
-
-    }
+    public List<MeetRoom> findAll() { return meetRoomDao.findAll(); }
 
     public void add(MeetRoom meetRoom) throws ParseException {
         //设置roomId

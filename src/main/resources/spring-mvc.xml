@@ -26,6 +26,8 @@
     <mvc:resources location="/vendor/" mapping="/vendor/**" />
     <mvc:resources location="/fonts/" mapping="/fonts/**" />
 
+    <context:component-scan base-package="com.bcsd.controller"></context:component-scan>
+
 
     <!--视图解析-->
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
