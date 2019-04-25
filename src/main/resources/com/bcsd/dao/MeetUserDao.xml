@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bcsd.dao.MeetUserDao">
+    <!--查询所有-->
+    <select id="findAll" resultType="com.bcsd.entity.MeetUser">
+     SELECT u.id,u.username,u.sex,u.tel,o.rolename,u.email,u.suboffice FROM cj_user u,cj_user_role r,cj_role o WHERE
+     u.id=r.userid AND r.roleid = o.id
+
+    </select>
+    <insert id="add" parameterType="com.bcsd.entity.MeetUser">
+
+        insert into cj_user values(#{username},#{sex},#{rolename},#{email},#{tel},#{suboffice})
+
+    </insert>
+    <!--<insert id="addid" parameterType="com.bcsd.entity.MeetUser">-->
+        <!--insert into cj_user_role values (#{id},#{userid},#{roleid})-->
+    <!--</insert>-->
+
+
+</mapper>

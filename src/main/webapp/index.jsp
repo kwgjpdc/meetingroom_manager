@@ -90,7 +90,7 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath}/page/home.jsp" class="nav-link" target="iframe">
+                                <a href="remeetroom" class="nav-link" target="iframe">
                                     <i class=""></i> 预定会议室
                                 </a>
                             </li>
@@ -115,7 +115,7 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/page/meet_management.jsp" class="nav-link" target="iframe">
+                                <a href="meet/meet_management" class="nav-link" target="iframe">
                                     <i class=""></i>会议室维护
                                 </a>
                             </li>
@@ -200,13 +200,14 @@
 
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" target="iframe">
+                                <a href="/dept/findAll" class="nav-link" target="iframe">
                                     <i class=""></i> 部门管理
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="#" class="nav-link" target="iframe">
+                                <a href="/user/findAll" class="nav-link"
+                                   target="iframe">
                                     <i class=""></i> 用户管理
                                 </a>
                             </li>

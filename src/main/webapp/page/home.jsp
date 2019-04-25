@@ -4,6 +4,7 @@ pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <%@ page isELIgnored="false"%>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,16 +25,15 @@ pageEncoding="UTF-8"%>
 </head>
 <body class="sidebar-fixed header-fixed" id="body">
 <div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 text-center">
-            <button class="btn btn-primary btn-lg" onclick="window.location.href=''"><span class="fa fa-list"></span>日程</button>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button class="btn btn-primary btn-lg" onclick="window.location.href='${pageContext.request.contextPath }/page/data.jsp'"><span class="fa fa-list"></span>日程</button>
             <button class="btn btn-success btn-lg"><span class="fa fa-arrow-circle-down"></span>资源</button>
             <button class="btn btn-primary btn-sm" style="background-color: darkblue">空闲</button>
             <button class="btn btn-secondary btn-sm">占用</button>
             <br/><br/><br/>
         </div>
-
+        <div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 bg-light">
@@ -42,37 +42,36 @@ pageEncoding="UTF-8"%>
                                 <div class="form-group">
                                     <select class="form-control">
                                             <span class="fa fa-home">
-                                                <c:forEach items="${meetRoomArea}" var="area">
-                                                    <option id="${area.areaId}" value="${area.areaId}"> </span>${area.roomAreaName}</option>
-                                                </c:forEach>
+                                           <option> </span>WH</option>
+                                        <option>NJ</option>
+                                        <option>SH</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <select id="meetBuilding" class="form-control">
-
-
+                                    <select class="form-control">
+                                        <option>YMTC</option>
+                                        <option>NJ</option>
+                                        <option>SH</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group" style="height: 22px ">
-                                    <input type="date" class="form-control">
+                                    <input type="datetime-local" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <select class="form-control">
                                     <option>本地会议</option>
-                                    <option value="1" selected="selected">视屏会议</option>
+                                    <option>视屏会议</option>
                                     <option>音频会议</option>
-
                                 </select>
-
                             </div>
                         </div>
                         <div class="col-md-12 mb-2">
-                            <ul class="nav nav-tabs" role="tablist" id="floor">
+                            <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active text-primary" data-toggle="tab" href="#home" role="tab"
                                        aria-controls="home">floor5</a>
@@ -82,17 +81,237 @@ pageEncoding="UTF-8"%>
                                        aria-controls="profile">floor6</a>
                                 </li>
                             </ul>
-                            <div class="tab-content" >
+                            <div class="tab-content">
                                 <div class="tab-pane active" id="home" role="tabpanel">
 
-                                 <div class="col-md-12 container-fluid">
-                                                <div class="row" id="meetroom">
+
+
+
+
+                                            <div class="col-md-12 container-fluid">
+                                                <div class="row">
+
+
+                                                    <c:forEach items="${meetRoomList}" var="ss" varStatus="st">
+
+                                                        <div class="col-md-2">
+                                                            <div class="card ">
+                                                                <div>
+                                                                    <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                    <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                        <span class="h5">${ss.personCount}</span></div>
+
+
+                                                                    <div style="float: right;" >
+                                                                        <button
+                                                                                style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                            <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                                 height="20px"></button>
+                                                                    </div>
+                                                                    <div style="float: right;display: none" >
+                                                                        <button
+                                                                                style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                            <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                                 height="20px"></button>
+                                                                    </div>
+                                                                    <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                                 width="100%" ;></center>
+                                                                </div>
+                                                                <div class="card-footer bg-light text-center">
+                                                                    <a href="localmeetroom.html" class="h6 text-warning">${ss.roomArea}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </c:forEach>
+
+
+
+
+
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" id="xingxing1">
+                                                                    <button id="shoucang1"
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" id="xingxing2">
+                                                                    <button id="shoucang2"
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
 
                                 </div>
-                                            </div>
+                                    </div>
                                 </div>
-                                <div class="tab-pane" id="this.roomFloor" role="tabpanel">
+
+
+                                <div class="tab-pane" id="profile" role="tabpanel">
                                     <div class="container-fluid">
                                         <div class="row">
                                             <div class="col-md-12 container-fluid">
@@ -121,11 +340,155 @@ pageEncoding="UTF-8"%>
                                                                              width="100%" ;></center>
                                                             </div>
                                                             <div class="card-footer bg-light text-center">
-                                                                <a href="#" class="h6 text-warning">this.roomArea</a>
+                                                                <a href="#" class="h6 text-warning">B栋05014</a>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
 
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <div class="card ">
+                                                            <div>
+                                                                <img src="${pageContext.request.contextPath}/image/biaoqian.png" width="50px">
+                                                                <div style="position: absolute;left: 15px;top: 0px;color: whitesmoke">
+                                                                    <span class="h5">12</span></div>
+
+
+                                                                <div style="float: right;" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing 2.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <div style="float: right;display: none" >
+                                                                    <button
+                                                                            style="background-color: #ffffff; width:25px;height:25px;border: none;">
+
+                                                                        <img src="${pageContext.request.contextPath}/image/xingxing1.png" width="20px"
+                                                                             height="20px"></button>
+                                                                </div>
+                                                                <center><img class="text-center" src="${pageContext.request.contextPath}/image/meet1.jpg "
+                                                                             width="100%" ;></center>
+                                                            </div>
+                                                            <div class="card-footer bg-light text-center">
+                                                                <a href="localmeetroom.html" class="h6 text-warning">B栋05014</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -147,109 +510,8 @@ pageEncoding="UTF-8"%>
 </body>
 
 <script type="text/javascript">
-
-    $(document).ready(function () {
-
-            $("select:first").change(function(){
-                var url="meetbuilding";
-                var key = $("select:first").val();
-                if(key.length>0){
-
-                    var data = {"key":key}
-                    $("#meetBuilding").empty();
-                    $.post(url,data,function(result){
-                        $(result).each(function(){
-                            $("#meetBuilding").append("<option value='"+this.roomBuilding+"' >"+this.roomBuilding+"</option>")
-                        })
-                    },"json");
-                }
-
-
-            });
-        $("#meetBuilding").click(function() {
-            var url = "meetfloor";
-            var area = $("select:first").val();
-            var building = $("#meetBuilding").val();
-
-            var data = {"area":area,"building":building}
-            $("#floor").empty();
-            $.post(url, data, function (result) {
-                $(result).each(function () {
-
-                $("#floor").append("<li class=\"nav-item\">\n" +
-                    "                        <a class=\"nav-link  text-primary\" data-toggle=\"tab\" href=\"#"+this.roomFloor+"\" role=\"tab\"\n" +
-                    "                    aria-controls=\""+this.roomFloor+"\">"+this.roomFloor+"</a>\n" +
-                    "                        </li>")
-                })
-
-                $("ul li").click(function() {
-                    var url = "meetroom";
-                    var area = $("select:first").val();
-                    var building = $("#meetBuilding").val();
-                    var floor=$(this).text();
-                    var data = {"area":area,"building":building,"floor":floor}
-                    $("#meetroom").empty();
-                    $.post(url, data, function (result) {
-                        $(result).each(function () {
-                            $("#meetroom").append(" <div class=\"col-md-2\">\n" +
-                                "                                                        <div class=\"card \">\n" +
-                                "                                                            <div>\n" +
-                                "                                                                <img src=\"${pageContext.request.contextPath}/image/biaoqian.png\" width=\"50px\">\n" +
-                                "                                                                <div style=\"position: absolute;left: 15px;top: 0px;color: whitesmoke\">\n" +
-                                "                                                                    <span class=\"h5\">"+this.personCount+"</span></div>\n" +
-                                "                                                                <div style=\"float: right;\">\n" +
-                                "                                                                    <button style=\"background-color: #ffffff; width:25px;height:25px;border: none;\">\n" +
-                                "                                                                        <img src=\"${pageContext.request.contextPath}/image/xingxing 2.png\" width=\"20px\"\n" +
-                                "                                                                             height=\"20px\"></button>\n" +
-                                "                                                                </div>\n" +
-                                "                                                                <div style=\"float: right;\">\n" +
-                                "                                                                    <img src=\"${pageContext.request.contextPath}/image/video.png\" width=\"28px\"\n" +
-                                "                                                                         height=\"18px\"></button>\n" +
-                                "                                                                </div>\n" +
-                                "                                                                <div style=\"float: right;display: none\">\n" +
-                                "                                                                    <button style=\"background-color: #ffffff; width:25px;height:25px;border: none;\">\n" +
-                                "                                                                        <img src=\"${pageContext.request.contextPath}/image/xingxing1.png\" width=\"20px\"\n" +
-                                "                                                                             height=\"20px\"></button>\n" +
-                                "                                                                </div>\n" +
-                                "                                                                <center><img class=\"text-center\" src=\"${pageContext.request.contextPath}/image/meet1.jpg \"\n" +
-                                "                                                                             width=\"100%\" ;></center>\n" +
-                                "                                                            </div>\n" +
-                                "                                                            <div class=\"card-footer bg-light text-center\">\n" +
-                                "                                                                <a href=\"${pageContext.request.contextPath }/meetroom/remmet\" class=\"h6 text-warning\">"+this.roomName+"</a>\n" +
-                                "                                                            </div>\n" +
-                                "                                                        </div>\n" +
-                                "                                                    </div>")
-
-
-
-                        })
-                    }, "json");
-
-
-
-
-
-                })
-
-
-
-
-
-            }, "json");
-
-
-
-        })
-
-
-
-
-
-
-
     var a = 1;
-
-
+    $(document).ready(function () {
         $("#shoucang1").click(function () {
             $("#xingxing1").hide();
             $("#xingxing2").show();
@@ -260,10 +522,7 @@ pageEncoding="UTF-8"%>
             $("#xingxing1").show()
             $("#xingxing2").hide();
             alert("取消收藏")
-
-
         });
-
     });
 
 
