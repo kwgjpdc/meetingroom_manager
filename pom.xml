@@ -30,20 +30,9 @@
     <jsoup.version>1.8.3</jsoup.version>
     <slf4j.version>1.7.21</slf4j.version>
     <log4j.version>2.7</log4j.version>
-    <javax.mail.version>1.4</javax.mail.version>
   </properties>
   
   <dependencies>
-	  <dependency>
-		  <groupId>com.sun.mail</groupId>
-		  <artifactId>javax.mail</artifactId>
-		  <version>1.5.3</version>
-	  </dependency>
-	  <dependency>
-		  <groupId>org.projectlombok</groupId>
-		  <artifactId>lombok</artifactId>
-		  <version>1.16.18</version>
-	  </dependency>
 	  <dependency>
 		  <groupId>javax.el</groupId>
 		  <artifactId>javax.el-api</artifactId>
@@ -158,11 +147,6 @@
 		<artifactId>jackson-databind</artifactId>
 		<version>${jackson.version}</version>
 	</dependency>
-	  <dependency>
-		  <groupId>com.alibaba</groupId>
-		  <artifactId>fastjson</artifactId>
-		  <version>1.2.15</version>
-	  </dependency>
 	<dependency>  
 	  <groupId>net.sf.json-lib</groupId>  
 	  <artifactId>json-lib</artifactId>  
@@ -288,12 +272,7 @@
 	    <artifactId>commons-net</artifactId>
 	    <version>3.3</version>
 	</dependency>
-	<!-- javax.mai邮件服务 -->	
-	<dependency>
-	    <groupId>javax.mail</groupId>
-	    <artifactId>mail</artifactId>
-	    <version>${javax.mail.version}</version>
-	</dependency>
+		
     <!-- activemq的三个依赖包 -->
     <dependency>
       <groupId>org.apache.activemq</groupId>

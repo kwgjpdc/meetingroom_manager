@@ -96,14 +96,14 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/page/meettable.jsp" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/meetroom/myappointmeet" class="nav-link" target="iframe">
                                     <i class=""></i>  我的预订
                                 </a>
                             </li>
 
                             <li class="nav-item">
 
-                                <a href="${pageContext.request.contextPath }/page/meet_history.jsp" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/meetroom/meet_history" class="nav-link" target="iframe">
                                     <i class=""></i> 我的历史会议
                                 </a>
                             </li>
