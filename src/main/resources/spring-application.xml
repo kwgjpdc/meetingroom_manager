@@ -44,6 +44,7 @@
                 </bean>
             </array>
         </property>-->
+        <property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml"></property>
     </bean>
     <!-- 扫描dao接口 -->
     <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

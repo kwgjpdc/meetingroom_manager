@@ -65,8 +65,8 @@
                         <i class="fa fa-user"></i> 个人信息
                     </a>
 
-                    <a href="#" class="dropdown-item">
-                        <i class="fa fa-wrench"></i> 设置
+                    <a href="${pageContext.request.contextPath }/page/user/linkman.jsp" class="dropdown-item" target="iframe">
+                        <i class="fa fa-wrench"></i> 联系人
                     </a>
 
                     <a href="#" class="dropdown-item">
@@ -77,8 +77,8 @@
         </ul>
     </header>
     <!-- 页面头部 /-->
-	
-	
+
+
 	<!-- 导航侧栏 -->
     <aside class="main-container">
         <div class="sidebar">
@@ -115,7 +115,7 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="meet/meet_management" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/meet/findAll" class="nav-link" target="iframe">
                                     <i class=""></i>会议室维护
                                 </a>
                             </li>
@@ -200,18 +200,24 @@
 
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="/dept/findAll" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/dept/findAll" class="nav-link" target="iframe">
                                     <i class=""></i> 部门管理
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="/user/findAll" class="nav-link"
+                                <a href="${pageContext.request.contextPath }/user/findAll" class="nav-link"
                                    target="iframe">
                                     <i class=""></i> 用户管理
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+                                <a href="${pageContext.request.contextPath }/dict/findPage" class="nav-link"
+                                   target="iframe">
+                                    <i class=""></i> 字典管理
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a href="${pageContext.request.contextPath }/page/limit.jsp" class="nav-link" target="iframe">
                                     <i class=""></i> 权限管理
