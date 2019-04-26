@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bcsd.dao.AppointmentMeetDao">
+
+    <select id="findAll" resultType="com.bcsd.entity.Remeet">
+          select * from cj_appointment_meeting;
+    </select>
+
+
+    <insert id="appointmentMeet" parameterType="com.bcsd.entity.Remeet">
+      insert into cj_appointment_meeting(meetName,meetDate,meetTime,meetlaber,meetDescription,meetType,meetRoomId,meetRoomName,state,userId)
+        VALUES (#{meetName},#{meetDate},#{meetTime},#{meetLaber},#{meetDescription},#{meetType},#{meetRoomId},#{meetRoomName},1,#{userId})
+    </insert>
+
+    <insert id="appointmentVideoMeet" parameterType="com.bcsd.entity.Remeet">
+         insert into cj_appointment_meeting(meetName,uri,requireCallId,defaultLayout,callId,nonMemberAccess,callProfile,callLegProfile,meetDate,meetTime,meetlaber,meetDescription,meetType,meetRoomId,meetRoomName,state,userId)
+        VALUES (#{meetName},#{uri},#{requireCallId},#{defaultLayout},#{callId},#{nonMemberAccess},#{callProfile},#{callLegProfile},#{meetDate},#{meetTime},#{meetLaber},#{meetDescription},#{meetType},#{meetRoomId},#{meetRoomName},1,#{userId})
+
+    </insert>
+
+</mapper>

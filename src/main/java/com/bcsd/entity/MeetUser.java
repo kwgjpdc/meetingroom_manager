@@ -1,6 +1,7 @@
 package com.bcsd.entity;
 
 /**
+ * 用户实体类
  * @author HOEP
  * @data 2019/4/24
  */

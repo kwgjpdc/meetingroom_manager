@@ -35,7 +35,7 @@ pageEncoding="UTF-8"%>
 
 
                     <div class=" container-fluid">
-                        <form role="form" action="${pageContext.request.contextPath }/meetroom/appointmeet" method="post">
+                        <form role="form" action="${pageContext.request.contextPath }/meetroom/appointVideoMeet" method="post">
                         <div class=" col-md-12 form-group row">
                             <label  class=" form-control col-md-2 "style="border: 0px "><center>会议名称:</center></label>
                             <input id="meetName" name="meetName" style="height: 35px" class="form-control col-5" type="text" class="form-control">

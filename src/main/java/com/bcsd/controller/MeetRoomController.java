@@ -40,7 +40,7 @@ public class MeetRoomController {
 
     /**
      * 查询会议室信息
-     * @param roomId
+     * @param
      * @return
      */
     @RequestMapping("/findOne")

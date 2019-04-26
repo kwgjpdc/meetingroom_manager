@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
@@ -69,7 +70,35 @@ pageEncoding="UTF-8"%>
                                     </form>
                                 </td>
                             </tr>
+                            <c:forEach items="${historymeet}" var="list">
+                                <tr>
+
+
+                                    <td class="active">
+                                        <input type="checkbox" name=""  value="" />
+                                    </td>
+                                    <td class="text-nowrap">Samsung Galaxy S8</td>
+                                    <td>${list.meetName}</td>
+                                    <td>${list.meetType}</td>
+                                    <td>${list.starttime}</td>
+                                    <!--<td>2018-12-24 10:30</td>-->
+                                    <td>${list.duration}</td>
+                                    <td>${list.meetRoom}</td>
+                                    <td>完结</td>
+                                    <td class="text-center">
+                                        <form class="navbar-form">
+                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">参会人员</button>
+                                            <a href="#" class="btn btn-default" onclick="return confirm('确认')">继续发起会议</a>
+                                        </form>
+                                    </td>
+                                </tr>
+
+
+
+                            </c:forEach>
                             <tr>
+
+
                                 <td class="active">
                                     <input type="checkbox" name=""  value="" />
                                 </td>
@@ -117,7 +146,7 @@ pageEncoding="UTF-8"%>
     </div>
 </div>
 <!-- 添加修改对话框开始 -->
-<div id="login" class="modal fade" >
+<div id="login" class="modal fade" style="position:absolute;top: 100px;" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="row">

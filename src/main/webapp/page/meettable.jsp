@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
@@ -60,6 +61,22 @@ pageEncoding="UTF-8"%>
                                 <td>508</td>
                                 <td style="color: red" ><span id="timer"> </span></td>
                             </tr>
+                            <c:forEach items="${meets}" var="list">
+                                <tr>
+                                    <td class="active">
+                                        <input type="checkbox" name="" value=""/>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#login" style="color: #0c87eb">${list.meetName}</a>
+                                    </td>
+                                    <td>${list.meetType}</td>
+                                    <td >2019-4-18 9:30</td>
+                                    <td>${list.meetRoomName}</td>
+                                    <td style="color: red" ><span > </span></td>
+                                </tr>
+
+
+                            </c:forEach>
                             <tr>
                                 <td class="active">
                                     <input type="checkbox" name="" value=""/>

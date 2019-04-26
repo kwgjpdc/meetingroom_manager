@@ -12,10 +12,19 @@
     </select>
 
     <select id="findBuilding" resultType="com.bcsd.entity.MeetRoom">
-        select areaid,  roombuilding from cj_meetroom where areaid = #{0}
+        select areaid,  roombuilding from cj_meetroom where areaid = #{0} GROUP BY roombuilding
     </select>
 
     <select id="findRoom" parameterType="String" resultType="com.bcsd.entity.MeetRoom">
         select * from cj_meetroom where areaid=#{areaid} AND roombuilding=#{roombuilding} and roomfloor =#{roomfloor}
     </select>
+
+    <select id="findById" resultType="com.bcsd.entity.MeetRoom">
+        select  * from cj_meetroom where roomId =#{0}
+    </select>
+
+    <select id="findByDate" resultType="com.bcsd.entity.Appointment_Meeting">
+        select meetRoomId from cj_appointment_meeting where meetDate BETWEEN #{startTime} AND #{endTime}
+    </select>
+
 </mapper>

@@ -15,5 +15,7 @@ public interface ReMeetRoomService {
     List<MeetRoom> findBuilding( String area);
     //查询会议室
     List<MeetRoom> findRoom(String areaid,String building,String floor);
+    //根据Roomid查询会议室
+    MeetRoom findById(String id);
 
 }

@@ -43,12 +43,12 @@ public class MeetRoomServiceImpl implements MeetRoomService {
         return meetRoomDao.findOne(id);
     }
 
-    @Override
+
     public void delete(String id) {
         meetRoomDao.delete(id);
     }
 
-    @Override
+
     public void update(MeetRoom meetRoom) {
         //设置最后修改时间
         meetRoom.setLastUpdateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));

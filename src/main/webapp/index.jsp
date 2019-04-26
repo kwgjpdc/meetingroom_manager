@@ -65,8 +65,8 @@
                         <i class="fa fa-user"></i> 个人信息
                     </a>
 
-                    <a href="${pageContext.request.contextPath }/page/user/linkman.jsp" class="dropdown-item" target="iframe">
-                        <i class="fa fa-wrench"></i> 联系人
+                    <a href="#" class="dropdown-item">
+                        <i class="fa fa-wrench"></i> 设置
                     </a>
 
                     <a href="#" class="dropdown-item">
@@ -77,8 +77,8 @@
         </ul>
     </header>
     <!-- 页面头部 /-->
-
-
+	
+	
 	<!-- 导航侧栏 -->
     <aside class="main-container">
         <div class="sidebar">
@@ -90,7 +90,7 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="remeetroom" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/meetroom/remeetroom" class="nav-link" target="iframe">
                                     <i class=""></i> 预定会议室
                                 </a>
                             </li>
@@ -115,7 +115,7 @@
                         </a>
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/meet/findAll" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/page/meet_management.jsp" class="nav-link" target="iframe">
                                     <i class=""></i>会议室维护
                                 </a>
                             </li>
@@ -200,14 +200,13 @@
 
                         <ul class="nav-dropdown-items">
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/dept/findAll" class="nav-link" target="iframe">
+                                <a href="#" class="nav-link" target="iframe">
                                     <i class=""></i> 部门管理
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/user/findAll" class="nav-link"
-                                   target="iframe">
+                                <a href="#" class="nav-link" target="iframe">
                                     <i class=""></i> 用户管理
                                 </a>
                             </li>

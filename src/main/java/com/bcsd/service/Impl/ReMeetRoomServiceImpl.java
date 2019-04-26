@@ -31,4 +31,8 @@ public class ReMeetRoomServiceImpl implements ReMeetRoomService {
     public List<MeetRoom> findRoom(String areaid, String building, String floor) {
         return reMeetRoomDao.findRoom(areaid,building,floor);
     }
+
+    public MeetRoom findById(String id) {
+        return reMeetRoomDao.findById(id);
+    }
 }
