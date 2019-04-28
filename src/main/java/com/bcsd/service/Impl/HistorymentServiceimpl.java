@@ -6,6 +6,7 @@ import com.bcsd.entity.HistoryMeet;
 import com.bcsd.entity.Remeet;
 import com.bcsd.service.AppointmentMeetService;
 import com.bcsd.service.HistoryMeetService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,8 @@ public class HistorymentServiceimpl implements HistoryMeetService {
     private HistoryMeetDao historyMeetDao;
 
 
-    public List<HistoryMeet> findAll() {
+    public List<HistoryMeet> findAll(int pageNum,int pageSize) {
+        PageHelper.startPage(pageNum,pageSize);//分页
         return historyMeetDao.findAll();
     }
 

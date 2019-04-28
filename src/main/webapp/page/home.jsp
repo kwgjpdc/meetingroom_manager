@@ -36,7 +36,6 @@ pageEncoding="UTF-8"%>
             <button class="btn btn-secondary btn-sm">占用</button>
             <br/><br/><br/>
         </div>
-
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 bg-light">
@@ -57,13 +56,9 @@ pageEncoding="UTF-8"%>
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-md-2">
-
-
                                 <div class="form-group" >
                                     <input id="date" type="date" class="form-control">
-
                                 </div>
                             <%--</div>--%>
                             <%--会议类型--%>
@@ -72,15 +67,12 @@ pageEncoding="UTF-8"%>
                                     <%--<option>本地会议</option>--%>
                                     <%--<option value="1" selected="selected">视屏会议</option>--%>
                                     <%--<option>音频会议</option>--%>
-
                                 <%--</select>--%>
-
                             <%--</div>--%>
                         </div>
                             <div class="col-md-2">
                             <div class="form-group" >
                                 <input id="time" type="time" class="form-control">
-
                             </div>
                             </div>
                             <div class="col-md-1" style="padding: 10px">
@@ -194,7 +186,6 @@ pageEncoding="UTF-8"%>
                     var date=$("#date").val();
                     var time=$("#time").val();
                     var duration=$("#duration").val();
-                    alert(duration)
                     var data = {"area":area,"building":building,"floor":floor,"date":date,"time":time,"duration":duration}
                     $("#meetroom").empty();
                     if(date.length==0||time.length==0||duration.length==0){
@@ -227,12 +218,12 @@ pageEncoding="UTF-8"%>
 
                             if(this.roomType=="视屏会议室"){
                                 $row.append(" <div class=\"card-footer bg-light text-center\">\n" +
-                                    "<a href=\"${pageContext.request.contextPath }/meetroom/videoremeet?id="+this.roomId+"\" class=\"h6 text-warning\">"+this.roomName+"</a>\n" +
+                                    "<a href=\"${pageContext.request.contextPath }/meetroom/videoremeet?id="+this.roomId+"&date="+date+"&time="+time+"&duration="+duration+"\" class=\"h6 text-warning\">"+this.roomName+"</a>\n" +
                                     "</div>")
                             }else{
 
                             $row.append(" <div class=\"card-footer bg-light text-center\">\n" +
-                                "<a href=\"${pageContext.request.contextPath }/meetroom/remmet?id="+this.roomId+"\" class=\"h6 text-warning\">"+this.roomName+"</a>\n" +
+                                "<a href=\"${pageContext.request.contextPath }/meetroom/remmet?id="+this.roomId+"&date="+date+"&time="+time+"&duration="+duration+"\" class=\"h6 text-warning\">"+this.roomName+"</a>\n" +
                                 "</div>")
                             }
                             $row.appendTo($("#meetroom"))

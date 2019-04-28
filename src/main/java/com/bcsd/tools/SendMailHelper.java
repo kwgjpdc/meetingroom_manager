@@ -61,7 +61,7 @@ public class SendMailHelper {
             // 4. 根据 Session 获取邮件传输对象
             Transport transport = session.getTransport();
             // 5. 使用 邮箱账号 和 密码 连接邮件服务器, 这里认证的邮箱必须与 message 中的发件人邮箱一致, 否则报错
-            // 
+            //
             //    PS_01: 成败的判断关键在此一句, 如果连接服务器失败, 都会在控制台输出相应失败原因的 log,
             //           仔细查看失败原因, 有些邮箱服务器会返回错误码或查看错误类型的链接, 根据给出的错误
             //           类型到对应邮件服务器的帮助网站上查看具体失败原因。
@@ -135,7 +135,7 @@ public class SendMailHelper {
     }
     public static void main(String[] args) {
     	String content = "XXX用户，<br/>&nbsp;&nbsp;&nbsp;&nbsp;你好，你是第一位收到此测试邮件的用户，恭喜你！";
-    	boolean bool = sendMail("tangxianmail@vip.qq.com", "这是一封测试邮件title", "这是一封测试邮件suject", content);
+    	boolean bool = sendMail("1162572875@qq.com", "这是一封测试邮件title", "这是一封测试邮件suject", content);
     	if(bool){
     		System.out.println("发送成功");
     	}else{

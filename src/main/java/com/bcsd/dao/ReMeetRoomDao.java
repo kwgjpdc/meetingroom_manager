@@ -21,7 +21,7 @@ public interface ReMeetRoomDao {
     List<MeetRoom> findArea();
 
     //查询会议室
-    List<MeetRoom> findRoom(@Param("areaid") String areaid, @Param("roombuilding")String roombuilding,@Param("roomfloor")String roomfloor);
+    List<MeetRoom> findRoom(@Param("areaid") String areaid, @Param("roombuilding")String roombuilding,@Param("roomfloor")String roomfloor,@Param("roomId")String roomId);
 
     //根据id查会议室
     MeetRoom findById(String id);

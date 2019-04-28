@@ -5,7 +5,9 @@
     <select id="findAll" resultType="com.bcsd.entity.MeetUser">
      SELECT u.id,u.username,u.sex,u.tel,o.rolename,u.email,u.suboffice FROM cj_user u,cj_user_role r,cj_role o WHERE
      u.id=r.userid AND r.roleid = o.id
-
+        <if test="subOfficeId !=null and subOfficeId != '' ">
+            AND u.subOfficeId = #{subOfficeId}
+        </if>
     </select>
     <insert id="add" parameterType="com.bcsd.entity.MeetUser">
 
@@ -16,5 +18,59 @@
         <!--insert into cj_user_role values (#{id},#{userid},#{roleid})-->
     <!--</insert>-->
 
+   <!-- &lt;!&ndash;查询内部联系人&ndash;&gt;
+    <select id="findInternal" parameterType="java.lang.Integer" resultType="com.bcsd.entity.MeetUser">
+        SELECT u.id,u.username,u.name,u.sex,u.tel,u.email,u.suboffice,d.deptname,u.isExternal FROM cj_user u,cj_dept d WHERE
+        u.deptid=d.deptid
+        <if test="isexternal = 0 ">
+            AND u.isExternal =0
+        </if>
+        <if test="param2  != null and param2  !='' ">
+            AND u.name like "%"#{name,java.type=varchar}"%"
+        </if>
+    </select>
+    &lt;!&ndash;查询外部联系人&ndash;&gt;&lt;!&ndash;  name like "%"#{name}"%"  &ndash;&gt;
+    <select id="findExternal" parameterType="java.lang.Integer" resultType="com.bcsd.entity.MeetUser">
+        SELECT u.id,u.name,u.sex,u.tel,u.email,u.suboffice FROM cj_user u WHERE
+        u.subOfficeId =0
+        <if test="isexternal = 1 ">
+            AND u.isexternal = 1
+        </if>
+        /*第二个参数写法   String->param2  */
+        <if test="param2  != null and param2  !='' ">
+            AND u.name like "%"#{name,java.type=varchar}"%"
+        </if>
+    </select>-->
 
+    <!--查询内部联系人-->
+    <select id="findInternal" parameterType="java.lang.Integer" resultType="com.bcsd.entity.UserInternal">
+        SELECT * from cj_user_internal
+        where 1 = 1
+        <if test="internal = 0 ">
+            AND internal =0
+        </if>
+        <if test="param2  != null and param2  !='' ">
+            AND u.name like "%"#{name,java.type=varchar}"%"
+        </if>
+    </select>
+    <!--查询外部联系人--><!--  name like "%"#{name}"%"  -->
+    <select id="findExternal" parameterType="java.lang.Integer" resultType="com.bcsd.entity.UserInternal">
+        SELECT * from cj_user_internal
+        where 1 = 1
+        <if test="internal = 1 ">
+            AND internal =1
+        </if>
+        <if test="param2  != null and param2  !='' ">
+            AND u.name like "%"#{name,java.type=varchar}"%"
+        </if>
+    </select>
+
+    <insert id="addInternal" parameterType="com.bcsd.entity.UserInternal">
+        insert into cj_user_internal (name,tel,email,sex,dept,company,username,internal,status)
+        values(#{name},#{tel},#{email},#{sex},#{dept},#{company},#{username},#{internal},#{status})
+    </insert>
+
+    <delete id="deleteInternal" parameterType="java.lang.Integer">
+        delete from cj_user_internal where id=#{id}
+    </delete>
 </mapper>

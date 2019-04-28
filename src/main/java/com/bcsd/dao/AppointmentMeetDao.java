@@ -1,6 +1,7 @@
 package com.bcsd.dao;
 
 import com.bcsd.entity.MeetRoom;
+import com.bcsd.entity.MeetUser;
 import com.bcsd.entity.Remeet;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,7 +24,8 @@ public interface AppointmentMeetDao {
     //增加预约视屏会议
     void appointmentVideoMeet(Remeet remeet);
 
-
+    //
+    void addUser(@Param("user") List<MeetUser> user);
 
 
 

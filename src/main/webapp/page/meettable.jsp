@@ -14,6 +14,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/vendor/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
     <script src="${pageContext.request.contextPath }/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/vendor/popper.js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath }/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -29,15 +30,13 @@ pageEncoding="UTF-8"%>
                 <div class="card-header bg-light">
                     <span class="fa fa-home">>我的预定会议 </span>
                 </div>
-
                 <div class="card-body">
                     <div class="table-responsive ">
-
-                        <table class="table ">
+                        <table class="table">
                             <thead>
                             <tr>
                                 <th class="active">
-                                    <input type="checkbox" name="" id="" value=""/>
+
                                 </th>
                                 <th>会议名称</th>
                                 <th>会议类型</th>
@@ -45,64 +44,64 @@ pageEncoding="UTF-8"%>
                                 <th>会议室</th>
                                 <th>距离开会时间:</th>
                                 <!-- <th>操作</th>-->
-
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" name="" value=""/>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#login" style="color: #0c87eb">人事会议</a>
-                                </td>
-                                <td>视频会议</td>
-                                <td >2019-4-18 9:30</td>
-                                <td>508</td>
-                                <td style="color: red" ><span id="timer"> </span></td>
-                            </tr>
-                            <c:forEach items="${meets}" var="list">
+                            <c:forEach items="${pageInfo.list}" var="list">
+                               <c:if test="${list.state==1}">
                                 <tr>
                                     <td class="active">
-                                        <input type="checkbox" name="" value=""/>
+                                      <center><input type="checkbox" name="" value=""/></center>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-default" data-toggle="modal" data-target="#login" style="color: #0c87eb">${list.meetName}</a>
+                                        <a href="#"  data-toggle="modal" data-target="#login" style="color: #0c87eb">${list.meetName}</a>
                                     </td>
                                     <td>${list.meetType}</td>
-                                    <td >2019-4-18 9:30</td>
+                                    <td>${list.meetDate}</td>
                                     <td>${list.meetRoomName}</td>
-                                    <td style="color: red" ><span > </span></td>
+                                    <td style="color: red" ><span ></span></td>
                                 </tr>
-
-
+                               </c:if>
                             </c:forEach>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" name="" value=""/>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#login" style="color: #0c87eb">人事会议</a>
-                                </td>
-                                <td>视频会议</td>
-                                <td >2019-4-18 9:30</td>
-                                <td>508</td>
-                                <td style="color: red" ><span id="timer1"> </span></td>
-                            </tr>
-                            <tr>
-                                <td class="active">
-                                    <input type="checkbox" name="" value=""/>
-                                </td>
-                                <td>
-                                    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#login" style="color: #0c87eb">人事会议</a>
-                                </td>
-                                <td>视频会议</td>
-                                <td >2019-4-18 9:30</td>
-                                <td>508</td>
-                                <td style="color: red" ><span id="timer2"> </span></td>
-                            </tr>
                             </tbody>
                         </table>
+                        <div>
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页
+                                    10条
+                                </div>
+                            </div>
+                            <div>
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/meetroom/myappointmeet?page=1&size=${pageInfo.pageSize}"
+                                           aria-label="Previous">首页</a>
+                                        <%-- <a href="${pageContext.request.contextPath}/mail/findPage?page=1&size=${pageInfo.pageSize}" aria-label="Previous">首页</a> --%>
+                                    </li>
+                                <c:if test="${pageInfo.pageNum!=1}">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/meetroom/myappointmeet?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">&laquo;</a>
+                                    </li>
+                                </c:if>
+                                    <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/meetroom/myappointmeet?page=${pageNum}&size=${pageInfo.pageSize}">${pageNum}</a>
+                                        </li>
+                                    </c:forEach>
+                                    <c:if test="${pageInfo.pages!=pageInfo.pageNum}">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/meetroom/myappointmeet?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">&raquo;</a>
+                                    </li>
+                                    </c:if>
+                                    <li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/meetroom/myappointmeet?page=${pageInfo.pages}&size=${pageInfo.pageSize}"
+                                           aria-label="Next">尾页</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

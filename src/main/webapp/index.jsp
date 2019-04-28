@@ -64,6 +64,12 @@
                     <a href="#" class="dropdown-item">
                         <i class="fa fa-user"></i> 个人信息
                     </a>
+                    <a href="${pageContext.request.contextPath }/user/findInternal" class="dropdown-item" target="iframe">
+                        <i class="fa fa-wrench"></i> 内部联系人
+                    </a>
+                    <a href="${pageContext.request.contextPath }/user/findExternal" class="dropdown-item" target="iframe">
+                        <i class="fa fa-wrench"></i> 外部联系人
+                    </a>
 
                     <a href="#" class="dropdown-item">
                         <i class="fa fa-wrench"></i> 设置
@@ -141,7 +147,7 @@
                             </li>
                             <li class="nav-item">
 
-                                <a href="${pageContext.request.contextPath }/page/history_report.jsp" class="nav-link" target="iframe">
+                                <a href="" class="nav-link" target="iframe">
                                     <i class=""></i> 历史报表
                                 </a>
                             </li>
@@ -186,7 +192,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="${pageContext.request.contextPath }/page/email_management.jsp" class="nav-link" target="iframe">
+                                <a href="${pageContext.request.contextPath }/mail/findPage" class="nav-link" target="iframe">
                                     <i class=""></i> 邮件管理
                                 </a>
                             </li>

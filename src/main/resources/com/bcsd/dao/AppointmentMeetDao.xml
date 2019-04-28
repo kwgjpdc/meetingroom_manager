@@ -3,7 +3,7 @@
 <mapper namespace="com.bcsd.dao.AppointmentMeetDao">
 
     <select id="findAll" resultType="com.bcsd.entity.Remeet">
-          select * from cj_appointment_meeting;
+          select * from cj_appointment_meeting
     </select>
 
 
@@ -17,5 +17,7 @@
         VALUES (#{meetName},#{uri},#{requireCallId},#{defaultLayout},#{callId},#{nonMemberAccess},#{callProfile},#{callLegProfile},#{meetDate},#{meetTime},#{meetLaber},#{meetDescription},#{meetType},#{meetRoomId},#{meetRoomName},1,#{userId})
 
     </insert>
+
+
 
 </mapper>

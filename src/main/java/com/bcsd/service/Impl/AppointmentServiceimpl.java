@@ -7,6 +7,7 @@ import com.bcsd.entity.MeetRoom;
 import com.bcsd.entity.Remeet;
 import com.bcsd.service.AppointmentMeetService;
 import com.bcsd.service.ReMeetRoomService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +41,13 @@ public class AppointmentServiceimpl implements AppointmentMeetService {
         return null;
     }
 
-    //查询所有会议
     public List<Remeet> findAll() {
+        return appointmentMeetDao.findAll();
+}
+
+    //查询所有会议
+    public List<Remeet> findPage(int page,int size) {
+        PageHelper.startPage(page,size);
         return appointmentMeetDao.findAll();
     }
 

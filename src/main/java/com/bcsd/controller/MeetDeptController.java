@@ -22,8 +22,8 @@ public class MeetDeptController {
 
 
     @Autowired
-    @Qualifier("meetDeptService")
     private MeetDeptService meetDeptService;
+
     @RequestMapping("/findAll")
     public ModelAndView findAll(){
         ModelAndView vm=new ModelAndView();

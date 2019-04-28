@@ -59,19 +59,26 @@ pageEncoding="UTF-8"%>
 
 
                         <!--</div>-->
+                            <div class=" col-md-12 form-group row">
+
+                                <label  class=" form-control col-md-2 "style="border: 0px "><center>开始时间:</center></label>
+                                <input readonly="readonly" id="meetDate" value="${datetime}" name="meetDate" style="height: 35px" class="form-control col-2" type="text" class="form-control">
+
+                            </div>
 
                         <div class=" col-md-12 form-group row">
 
                             <label  class=" form-control col-md-2 "style="border: 0px "><center>会议时长:</center></label>
-                            <input id="meetTime" name="meetTime" style="height: 35px" class="form-control col-2" type="time" class="form-control">
+                            <input readonly="readonly" id="meetTime" value="${duration}" name="meetTime" style="height: 35px" class="form-control col-2" type="time" class="form-control">
 
                         </div>
+
 
                         <div class=" col-md-12 form-group row">
 
                             <label  class=" form-control col-md-2 "style="border: 0px " ><center>邀请参会人:</center></label>
                             <input name="UserId" style="height: 35px" class="form-control col-5" type="text" class="form-control">
-                            <label  class=" form-control col-md-2 "style="border: 0px "><center><a href="#" class="text-primary" data-toggle="modal" data-target="#login">邀请参会人</a></center></label>
+                            <label  class=" form-control col-md-2 "style="border: 0px "><center><a href="${pageContext.request.contextPath }/meetroom/findInternal">邀请参会人</a></center></label>
                         </div>
 
                         <div class=" col-md-12 form-group row">

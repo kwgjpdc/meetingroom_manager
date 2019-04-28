@@ -20,5 +20,7 @@ public interface AppointmentMeetService {
     //根据用户Id查询所有预约的会议
     List<Remeet>  findAll();
 
+    List<Remeet> findPage(int index,int size);
+
 
 }

@@ -2,11 +2,14 @@ package com.bcsd.service.Impl;
 
 import com.bcsd.dao.MeetRoomDao;
 import com.bcsd.dao.ReMeetRoomDao;
+import com.bcsd.entity.Appointment_Meeting;
 import com.bcsd.entity.MeetRoom;
 import com.bcsd.service.ReMeetRoomService;
+import com.bcsd.util.DateChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.util.List;
 @Service("reMeetRoomService")
 public class ReMeetRoomServiceImpl implements ReMeetRoomService {
@@ -28,11 +31,22 @@ public class ReMeetRoomServiceImpl implements ReMeetRoomService {
         return reMeetRoomDao.findBuilding(area);
     }
 
-    public List<MeetRoom> findRoom(String areaid, String building, String floor) {
-        return reMeetRoomDao.findRoom(areaid,building,floor);
+    public List<MeetRoom> findRoom(String areaid, String building, String floor,String roomId) {
+
+
+
+
+        return reMeetRoomDao.findRoom(areaid,building,floor,roomId);
     }
+
+
 
     public MeetRoom findById(String id) {
         return reMeetRoomDao.findById(id);
+    }
+
+
+    public List<Appointment_Meeting> findByDate(String startTime, String endTime) {
+        return reMeetRoomDao.findByDate(startTime,endTime);
     }
 }

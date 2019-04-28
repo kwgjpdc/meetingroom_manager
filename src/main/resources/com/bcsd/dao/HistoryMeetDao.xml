@@ -3,7 +3,7 @@
 <mapper namespace="com.bcsd.dao.HistoryMeetDao">
 
     <select id="findAll" resultType="com.bcsd.entity.HistoryMeet">
-          select * from cj_historyroom;
+          select * from cj_historyroom
     </select>
 
 

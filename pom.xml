@@ -265,7 +265,11 @@
 	    <artifactId>persistence-api</artifactId>
 	    <version>1.0.2</version>
 	</dependency>
-	
+	  <dependency>
+	  <groupId>com.alibaba</groupId>
+	  <artifactId>fastjson</artifactId>
+	  <version>1.2.12</version>
+  	</dependency>
 	<!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
 	<dependency>
 	    <groupId>commons-net</groupId>
@@ -300,6 +304,11 @@
 		  <version>4.13-beta-1</version>
 		  <scope>test</scope>
 	  </dependency>
+      <dependency>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+          <version>1.4</version>
+      </dependency>
   </dependencies>
   <build>
     <finalName>meetingroom</finalName>

@@ -5,7 +5,7 @@
     <select id="findFloor" parameterType="String" resultType="com.bcsd.entity.MeetRoom">
       select roomfloor from cj_meetroom where  areaid=#{areaid} AND roombuilding=#{roombuilding}  GROUP BY roomfloor
     </select>
-
+    <!--查询areaId 会议室名称-->
     <select id="findArea" resultType="com.bcsd.entity.MeetRoom">
         select areaid ,roomareaname from cj_meetroom group by areaid
 
@@ -16,14 +16,14 @@
     </select>
 
     <select id="findRoom" parameterType="String" resultType="com.bcsd.entity.MeetRoom">
-        select * from cj_meetroom where areaid=#{areaid} AND roombuilding=#{roombuilding} and roomfloor =#{roomfloor}
+        select * from cj_meetroom where areaid=#{areaid} AND roombuilding=#{roombuilding} and roomfloor =#{roomfloor} and roomid not in(#{roomId})
     </select>
 
     <select id="findById" resultType="com.bcsd.entity.MeetRoom">
         select  * from cj_meetroom where roomId =#{0}
     </select>
 
-    <select id="findByDate" resultType="com.bcsd.entity.Appointment_Meeting">
+    <select id="findByDate" parameterType="String" resultType="com.bcsd.entity.Appointment_Meeting">
         select meetRoomId from cj_appointment_meeting where meetDate BETWEEN #{startTime} AND #{endTime}
     </select>
 

@@ -7,6 +7,7 @@ import java.util.List;
 public class HistoryMeet implements Serializable {
     private Integer id;
     private String meetName;
+    private String originator;
     private String meetType;
     private String starttime;
     private String duration;
@@ -23,6 +24,7 @@ public class HistoryMeet implements Serializable {
         return "HistoryMeet{" +
                 "id=" + id +
                 ", meetName='" + meetName + '\'' +
+                ", originator='" + originator + '\'' +
                 ", meetType='" + meetType + '\'' +
                 ", starttime='" + starttime + '\'' +
                 ", duration='" + duration + '\'' +
@@ -50,6 +52,14 @@ public class HistoryMeet implements Serializable {
 
     public void setMeetName(String meetName) {
         this.meetName = meetName;
+    }
+
+    public String getOriginator() {
+        return originator;
+    }
+
+    public void setOriginator(String originator) {
+        this.originator = originator;
     }
 
     public String getMeetType() {

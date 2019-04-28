@@ -60,12 +60,19 @@ pageEncoding="UTF-8"%>
 
                         <!--</div>-->
 
-                        <div class=" col-md-12 form-group row">
+                            <div class=" col-md-12 form-group row">
 
-                            <label  class=" form-control col-md-2 "style="border: 0px "><center>会议时长:</center></label>
-                            <input id="meetTime" name="meetTime" style="height: 35px" class="form-control col-2" type="time" class="form-control">
+                                <label  class=" form-control col-md-2 "style="border: 0px "><center>开始时间:</center></label>
+                                <input readonly="readonly" id="meetDate" value="${datetime}" name="meetDate" style="height: 35px" class="form-control col-2" type="text" class="form-control">
 
-                        </div>
+                            </div>
+
+                            <div class=" col-md-12 form-group row">
+
+                                <label  class=" form-control col-md-2 "style="border: 0px "><center>会议时长:</center></label>
+                                <input readonly="readonly" id="meetTime" value="${duration}" name="meetTime" style="height: 35px" class="form-control col-2" type="time" class="form-control">
+
+                            </div>
 
                         <div class=" col-md-12 form-group row">
 
@@ -178,7 +185,7 @@ pageEncoding="UTF-8"%>
 
                         </div>
 
-                        <center>	<input type="submit" class="btn btn-primary btn-lg"  value="确定"  onclick="if(confirm('确认预定会议    ？')==false)return false;" ></input>&nbsp;
+                        <center>	<input type="submit" class="btn btn-primary btn-lg"  value="确定"  onclick="if(confirm('确认预定会议？')==false)return false;" ></input>&nbsp;
                             <button type="button" class="btn btn-info btn-lg" onclick="window.history.back(-1)">返回</button></center>
                     </div>
 
