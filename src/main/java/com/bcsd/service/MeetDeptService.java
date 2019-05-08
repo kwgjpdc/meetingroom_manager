@@ -10,11 +10,11 @@ import java.util.List;
  * @data 2019/4/23
  */
 public interface MeetDeptService {
-    List<MeetDept> fidnAll(Integer page, Integer size, String deptName);
+    List<MeetDept> fidnAll(Integer page,Integer size,String deptName);
 
     MeetDept findByid(String deptId);
-    void update(MeetDept meetDept);
+    void update (MeetDept meetDept);
     void add(MeetDept meetDept);
 
-    void delect(String id);
+    void delect(String  id);
 }

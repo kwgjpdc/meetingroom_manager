@@ -12,7 +12,7 @@ import java.util.List;
 public interface MeetDeptDao {
     List<MeetDept> findAll(@Param("deptName") String deptName);
     MeetDept findByid(String deptId);
-    void add(MeetDept meetDept);
+    void add (MeetDept meetDept);
     void update(MeetDept meetDept);
-    void delete(String id);
+    void delete (String id);
 }

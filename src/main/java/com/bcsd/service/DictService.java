@@ -22,7 +22,7 @@ public interface DictService {
     Page<Map<String, Object>> list(Page page, String condition);
 
 
-    List<Dict> findPage(int pageNum, int pageSize, String name);
+    List<Dict> findPage(int pageNum, int pageSize,String name);
 
     List<Dict> findByPid(Integer page, Integer size, Integer pid);
 }

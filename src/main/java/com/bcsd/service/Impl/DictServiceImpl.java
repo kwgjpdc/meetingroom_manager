@@ -17,32 +17,26 @@ public class DictServiceImpl implements DictService {
     private DictDao dictDao;
 
 
-    @Override
     public List<Dict> findAll() {
         return dictDao.findAll();
     }
 
-    @Override
     public void add(Dict dict) {
         dictDao.add(dict);
     }
 
-    @Override
     public Dict findOne(int id) {
         return dictDao.findOne(id);
     }
 
-    @Override
     public void delete(int id) {
         dictDao.delete(id);
     }
 
-    @Override
     public void update(Dict dict) {
         dictDao.update(dict);
     }
 
-    @Override
     public Page<Map<String, Object>> list(Page page,String condition) {
         if (page.getPageSize()==0){
             page.setPageNum(1);
@@ -59,13 +53,11 @@ public class DictServiceImpl implements DictService {
      * @param pageSize
      * @return
      */
-    @Override
     public List<Dict> findPage(int pageNum, int pageSize,String name) {
         PageHelper.startPage(pageNum,pageSize);//分页
         return dictDao.findAll(name);
     }
 
-    @Override
     public List<Dict> findByPid(Integer page, Integer size, Integer pid) {
         PageHelper.startPage(page,size);//分页
 

@@ -50,7 +50,6 @@ public class ReMeetRoomServiceImpl implements ReMeetRoomService {
         return reMeetRoomDao.findByDate(startTime,endTime);
     }
 
-    @Override
     public List<MeetRoom> updateMeetRoom(String areaId, String building, String floor, String roomId) {
         return reMeetRoomDao.findRoom(areaId,building,floor,roomId);
     }

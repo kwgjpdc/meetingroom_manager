@@ -57,12 +57,10 @@ public class AppointmentServiceimpl implements AppointmentMeetService {
         return null;
     }
 
-    @Override
     public void removeMeet(Integer meetId) {
         appointmentMeetDao.removeMeet(meetId);
     }
 
-    @Override
     public void endMeet(Integer meetId) {
         appointmentMeetDao.endMeet(meetId);
     }
@@ -94,12 +92,10 @@ public class AppointmentServiceimpl implements AppointmentMeetService {
         return appointmentMeetDao.findHistoryUser(id);
     }
 
-    @Override
     public Remeet findOne(Integer id) {
         return appointmentMeetDao.findOne(id);
     }
 
-    @Override
     public void update(Remeet remeet) {
         appointmentMeetDao.update(remeet);
     }

@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public interface MeetRoomService {
-    List<MeetRoom> findAll(Integer page, Integer size, String roomName);
+    List<MeetRoom> findAll(Integer page,Integer size,String roomName);
 
     void add(MeetRoom meetRoom) throws ParseException;
 

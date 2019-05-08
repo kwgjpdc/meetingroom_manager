@@ -59,7 +59,6 @@ public class MeetRoomServiceImpl implements MeetRoomService {
         meetRoomDao.update(meetRoom);
     }
 
-    @Override
     public List<MeetRoom> findRoomName(String areaid, String roombuilding, String roomfloor) {
         return meetRoomDao.findRoomName(areaid,roombuilding,roomfloor);
     }

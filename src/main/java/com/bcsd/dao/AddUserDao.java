@@ -10,9 +10,9 @@ import java.util.List;
  * @author TANGXIAN
  */
 public interface AddUserDao {
-   void addUser(@Param("userId") String userId, @Param("meetId") String meetId);
+   void addUser(@Param("userId") String  userId,@Param("meetId") String meetId);
 
-   void deleteUser(@Param("userId") String userId, @Param("meetId") String meetId);
+   void deleteUser(@Param("userId") String  userId,@Param("meetId") String meetId);
 
    List<UserInternal> findUserByMeetId(String id);
 }

@@ -12,14 +12,14 @@ import java.util.List;
  * @data 2019/4/24
  */
 public interface MeetUserService {
-    List<MeetUser> findAll(Integer page, Integer size, String username);
+    List<MeetUser> findAll(Integer page,Integer size,String username);
     void add(MeetUser meetUser);
     void addid(MeetUserRole meetUserRole);
     MeetUser findByid(String Id);
     void update(MeetUser meetUser);
     void delete(String id);
 
-    public List<UserInternal> findInternal(Integer page, Integer size, Integer internal, String name);
+    public List<UserInternal> findInternal(Integer page, Integer size, Integer internal,String name);
    // public List<UserInternal> findExternal(Integer page, Integer size, Integer internal);
 
     void addInternal(UserInternal internal);

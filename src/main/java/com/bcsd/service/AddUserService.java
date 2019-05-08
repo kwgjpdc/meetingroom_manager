@@ -7,8 +7,8 @@ import java.util.List;
 
 
 public interface AddUserService {
-   void addUser(String userId, String meetId);
+   void addUser(String userId,String meetId);
    List<UserInternal> findUserByMeetId(String userId);
 
-   void deleteUser(String userId, String meetId);
+   void deleteUser(String userId,String meetId);
 }

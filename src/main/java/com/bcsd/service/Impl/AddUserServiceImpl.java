@@ -25,12 +25,10 @@ public class AddUserServiceImpl implements AddUserService {
         addUserDao.addUser(userId,meetId);
     }
 
-    @Override
     public List<UserInternal> findUserByMeetId(String userId) {
         return addUserDao.findUserByMeetId(userId);
     }
 
-    @Override
     public void deleteUser(String userId, String meetId) {
         addUserDao.deleteUser(userId,meetId);
     }
