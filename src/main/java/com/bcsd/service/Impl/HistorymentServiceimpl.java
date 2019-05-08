@@ -3,8 +3,6 @@ package com.bcsd.service.Impl;
 import com.bcsd.dao.AppointmentMeetDao;
 import com.bcsd.dao.HistoryMeetDao;
 import com.bcsd.entity.HistoryMeet;
-import com.bcsd.entity.Remeet;
-import com.bcsd.service.AppointmentMeetService;
 import com.bcsd.service.HistoryMeetService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

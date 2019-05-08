@@ -21,7 +21,7 @@ public class SendMailTask {
 		try {
 			SimpleDateFormat si = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			System.out.println(si.format(new Date())+"定时执行");
-			List<Mail> list = mailService.findAll("1");
+			List<Mail> list = mailService.findAll(1);
 	        System.out.println(si.format(new Date())+"待发送的邮件共"+list.size()+"条");
 	        for(Mail mail : list){
 	        	boolean bool = SendMailHelper.sendMail(mail.getReceivemailaccount(), mail.getMailtitle(), mail.getMailsubject(), mail.getMailcontent());

@@ -21,9 +21,9 @@ import java.util.List;
 public class MeetUserServiceImpl implements MeetUserService {
     @Autowired
     private MeetUserDao meetUserDao;
-    public List<MeetUser> findAll() {
-        List<MeetUser> all = meetUserDao.findAll();
-        return all;
+    public List<MeetUser> findAll(Integer page,Integer size,String username) {
+        PageHelper.startPage(page,size);
+        return meetUserDao.findAll(username);
     }
 
     public void add(MeetUser meetUser) {
@@ -51,30 +51,21 @@ public class MeetUserServiceImpl implements MeetUserService {
      * @param page
      * @param size
      * @param internal
-     * @param name
      * @return
      */
 
-    public List<User> findInternal(Integer page,Integer size,Integer internal,String name) {
-        //PageHelper.startPage(page,size);
-        List<User> list= meetUserDao.findInternal(internal,name);
+    public List<UserInternal> findInternal(Integer page,Integer size,Integer internal,String name) {
+        PageHelper.startPage(page,size);
+        List<UserInternal> list= meetUserDao.findInternal(internal,name);
         return list;
     }
 
-    /**
-     * 查询外部联系人
-     * @param page
-     * @param size
-     * @param internal
-     * @param name
-     * @return
-     */
-
-    public List<MeetUser> findExternal(Integer page,Integer size,Integer internal,String name) {
-        //PageHelper.startPage(page,size);
-        List<MeetUser> list= meetUserDao.findExternal(internal,name);
+   /*
+    public List<UserInternal> findExternal(Integer page,Integer size,Integer internal) {
+        PageHelper.startPage(page,size);
+        List<UserInternal> list= meetUserDao.findExternal(internal);
         return list;
-    }
+    }*/
 
 
     public void addInternal(UserInternal internal) {
@@ -109,4 +100,14 @@ public class MeetUserServiceImpl implements MeetUserService {
         }
 
     }
+
+    public UserInternal findOne(Integer id) {
+        return meetUserDao.findOne(id);
+    }
+
+    public void updateLinkman(UserInternal userInternal) {
+        meetUserDao.updateLinkman(userInternal);
+    }
+
+
 }

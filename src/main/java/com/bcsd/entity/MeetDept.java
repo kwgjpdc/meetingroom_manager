@@ -1,15 +1,14 @@
 package com.bcsd.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+
+import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * @author HOEP
  * @data 2019/4/23
  */
-public class MeetDept {
+public class MeetDept implements Serializable {
 //    部门id
 
     private String deptid;

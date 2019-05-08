@@ -39,8 +39,7 @@
                     <div style="width: 120px">
                         <ul class="nav nav-tabs" role="tablist">
                             <li class="nav-item" style="width: 150px">
-
-                                <a class="btn btn-primary" data-toggle="tab" href="#Internal"  onclick="internal()" role="tab" aria-controls="Internal">内部联系人</a>
+                                <a class="btn btn-primary" >内部联系人</a>
                             </li>
 
                            <%-- <li class="nav-item" style="width: 150px;margin-top: 10px">
@@ -49,43 +48,10 @@
                         </ul>
                     </div>
                 </div>
-                <script>
-                    function internal() {
-                       /* $.ajax({
-                            url:"findInternal",
-                            type:"GET",
-                            data:"page=1&size=5&isExternal=0",
-                            //data:{"page":1,"size":5,"isExternal":0},//请求参数
-                            success:function (data) {
-                                alert(data.list);//回调函数
-                            },
-                            error:function () {
-                                alert("出错了!!")//出现错误回调函数
-                            },
-                            dataType:"document"   //设置接收响应数据的格式
-                        });*/
-                       $.get("user/findInternal",{page:1,size:5,isExternal:0},function (data) {
-                           var person = data.list;
-                           for(var key in person){
-                               alert(key +":" +person[key]);
-                           }
-                       },"json");
-
-                    }
-                    function external() {
-
-                    }
-                    $(function () {
-                        init();
-                        function init() {
-                            $.get("user/internal",{page:1,size:5,isExternal:0});
-                        }
-                    });
-                </script>
 
                 <div class="tab-content col-md-10">
                     <%--内部联系人--%>
-                    <div class="tab-pane active" id="Internal" role="tabpanel">
+                    <div class="tab-pane active"  role="tabpanel">
                         <div class="col-md-12 mb-4">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li class="nav-item">
@@ -98,15 +64,13 @@
                             </ul>
 
 
-                            <%--<div style="float: right;margin: 5px;">--%>
 
-                                <%--<a class="btn btn-primary" href="${pageContext.request.contextPath}/add.jsp">添加联系人</a>--%>
-                                <%--<a class="btn btn-primary" href="javascript:void(0);" id="delSelected">删除选中</a>--%>
-
-                            <%--</div>--%>
                             <%--联系人列表--%>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="home1" role="tabpanel">
+                                    <div style="float: right;margin: 5px;">
+                                        <a class="btn btn-primary" href="javascript:void(0);" id="delSelected">删除选中</a>
+                                    </div>
                                    <form id="form" action="${pageContext.request.contextPath}/user/deleteInternals" method="post">
                                        <table class="table table-bordered" >
                                            <tr >
@@ -119,30 +83,18 @@
                                                <th class="col-md-2 text-center">E-mail</th>
                                                <th class="col-md-2 text-center">操作</th>
                                            </tr>
-                                           <%-- <c:forEach items="${Internal.list}" var="list">
-                                                <tr>
-                                                    <td class="col-md-2 text-center" id="name">${list.name}</td>
-                                                    <td class="col-md-2 text-center" id="depaname">${list.deptname}</td>
-                                                    <td class="col-md-2 text-center" id="tel">${list.tel}</td>
-                                                    <td class="col-md-2 text-center" id="email">${list.email}</td>
-                                                    <td><a href="javascript:void(0);">
-                                                        <span class="glyphicon glyphicon-search text-left">查看</span></a>
-                                                        <a href="javascript:void(0);" userId="#" class="text-right">
-                                                            <span class="btn btn-danger">删除</span> </a>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>--%>
-                                           <c:forEach items="${Internal}" var="list">
+                                           <c:forEach items="${pageInfo.list}" var="list">
                                                <tr>
                                                    <td class="col-md-1 active text-center">
-                                                       <input type="checkbox" name="uid" id="'${list.id}'" value=""/>
+                                                       <input type="checkbox" name="id" value="${list.id}" />
                                                    </td>
-                                                   <td class="col-md-2 text-center">${list.name}</td>
-                                                   <td class="col-md-2 text-center">${list.dept}</td>
-                                                   <td class="col-md-2 text-center">${list.tel}</td>
-                                                   <td class="col-md-2 text-center">${list.email}</td>
-                                                   <td><a href="javascript:void(0);">
-                                                       <span class="glyphicon glyphicon-search text-left">修改</span></a>
+                                                   <td class="col-md-2 text-center" >${list.name}</td>
+                                                   <td class="col-md-2 text-center" >${list.dept}</td>
+                                                   <td class="col-md-2 text-center" >${list.tel}</td>
+                                                   <td class="col-md-2 text-center" >${list.email}</td>
+                                                   <td><%--<a href="javascript:void(0);">
+                                                       <span class="glyphicon glyphicon-search text-left">修改</span></a>--%>
+                                                       <a href="${pageContext.request.contextPath}/user/updateLinkman?roomId=${list.id}" class="glyphicon glyphicon-search text-left" >修改</a>
                                                        <a href="javascript:deleteLinkman(${list.id});"  class="text-right">
                                                            <span class="btn btn-danger">删除</span> </a>
                                                    </td>
@@ -150,6 +102,44 @@
                                            </c:forEach>
                                        </table>
                                    </form>
+                                    <%--分页查询--%>
+                                    <div>
+                                        <div class="pull-left">
+                                            <div class="form-group form-inline">
+                                                总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页
+                                                10条
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <ul class="pagination ">
+                                                <li>
+                                                    <a href="${pageContext.request.contextPath}/user/findInternal?page=1&size=${pageInfo.pageSize}"
+                                                       aria-label="Previous">首页</a>
+                                                    <%-- <a href="${pageContext.request.contextPath}/mail/findPage?page=1&size=${pageInfo.pageSize}" aria-label="Previous">首页</a> --%>
+                                                </li>
+                                                <c:if test="${pageInfo.pageNum!=1}">
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/user/findInternal?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">&laquo;</a>
+                                                    </li>
+                                                </c:if>
+                                                <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/user/findInternal?page=${pageNum}&size=${pageInfo.pageSize}">${pageNum}</a>
+                                                    </li>
+                                                </c:forEach>
+                                                <c:if test="${pageInfo.pages!=pageInfo.pageNum}">
+                                                    <li>
+                                                        <a href="${pageContext.request.contextPath}/user/findInternal?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">&raquo;</a>
+                                                    </li>
+                                                </c:if>
+
+                                                <li>
+                                                    <a href="${pageContext.request.contextPath}/user/findInternal?page=${pageInfo.pages}&size=${pageInfo.pageSize}"
+                                                       aria-label="Next">尾页</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                                 <script>
                                     function deleteLinkman(id) {
@@ -162,13 +152,11 @@
                                     }
                                     window.onload = function(){
                                         //给删除选中按钮添加单击事件
-
                                         document.getElementById("delSelected").onclick = function(){
                                             if(confirm("您确定要删除选中条目吗？")){
-
                                                 var flag = false;
                                                 //判断是否有选中条目
-                                                var cbs = document.getElementsByName("uid");
+                                                var cbs = document.getElementsByName("id");
                                                 for (var i = 0; i < cbs.length; i++) {
                                                     if(cbs[i].checked){
                                                         //有一个条目选中了
@@ -185,7 +173,7 @@
                                         //1.获取第一个cb
                                         document.getElementById("firstCb").onclick = function(){
                                             //2.获取下边列表中所有的cb
-                                            var cbs = document.getElementsByName("uid");
+                                            var cbs = document.getElementsByName("id");
                                             //3.遍历
                                             for (var i = 0; i < cbs.length; i++) {
                                                 //4.设置这些cbs[i]的checked状态 = firstCb.checked
@@ -223,8 +211,16 @@
                                             <div class="row form-group">
                                                 <span class="col-sm-1 control-label"></span>
                                                 <label for="dept" class="col-sm-2 control-label">部 门:</label>
-                                                <div class="col-sm-8">
+                                                <%--<div class="col-sm-8">
                                                     <input type="text" class="form-control" id="dept" name="dept" placeholder="">
+                                                </div>--%>
+                                                <div class="col-sm-5">
+                                                    <select  id="dept" name="dept" class="form-control"
+                                                             style="width: 150px;height:35px"
+                                                             onchange="okIS(this.options[selectedIndex].value)" >
+                                                        <option value="武汉分部" >武汉分部</option>
+                                                        <option value="上海分部" >上海分部</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -241,11 +237,22 @@
                                                     <input type="text" class="form-control" id="company" name="company" placeholder="">
                                                 </div>
                                             </div>
-                                            <div class="row form-group">
+                                           <%-- <div class="row form-group">
                                                 <span class="col-sm-1 control-label"></span>
                                                 <label for="internal" class="col-sm-2 control-label">内/外联系人:</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="internal" name="internal" placeholder="">
+                                                </div>
+                                            </div>--%>
+                                            <div class="row form-group">
+                                                <label for="internal" class="col-sm-3 control-label" style="margin-left: 50px">联系人:</label>
+                                                <div class="col-sm-5">
+                                                <select  id="internal" name="internal" class="form-control"
+                                                         style="width: 150px;height:35px"
+                                                         onchange="okIS(this.options[selectedIndex].value)" >
+                                                    <option value="0" >内部</option>
+                                                    <option value="1" >外部</option>
+                                                </select>
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -265,11 +272,9 @@
                                         </form>
                                     </table>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
                     <%--外部联系人--%>
                    <%-- <div class="tab-pane" id="external" role="tabpanel">
                         <div class="col-md-12 mb-4">

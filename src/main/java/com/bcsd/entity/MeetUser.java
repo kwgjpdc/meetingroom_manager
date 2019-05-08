@@ -1,11 +1,13 @@
 package com.bcsd.entity;
 
+import java.io.Serializable;
+
 /**
  * 用户实体类
  * @author HOEP
  * @data 2019/4/24
  */
-public class MeetUser {
+public class MeetUser implements Serializable {
 //    用户ID
     private String id;
 //    所属分部ID

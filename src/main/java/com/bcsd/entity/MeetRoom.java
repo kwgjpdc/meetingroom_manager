@@ -1,10 +1,11 @@
 package com.bcsd.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
 
-public class MeetRoom {
+public class MeetRoom implements Serializable {
 
     private String roomId;//会议室号
     private String roomCode;

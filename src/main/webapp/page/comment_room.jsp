@@ -23,16 +23,14 @@ pageEncoding="UTF-8"%>
 </head>
 <body class="sidebar-fixed header-fixed">
 <div class="content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header bg-light">
-                    <span class="fa fa-home">>常用会议室 </span>
-                </div>
-
-
+    <div class="container-fluid">
+        <div class="card-header bg-light">
+            <div class="text-left">
+                <a href="#">首页</a><span>&nbsp&nbsp >&nbsp&nbsp  </span><a
+                    href="#">会议室管理</a><span>&nbsp&nbsp >&nbsp&nbsp  </span><a href="#">常用会议室</a>
             </div>
         </div>
+        <hr>
     </div>
 </div>
 

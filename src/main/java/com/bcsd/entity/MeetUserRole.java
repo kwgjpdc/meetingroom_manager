@@ -1,10 +1,12 @@
 package com.bcsd.entity;
 
+import java.io.Serializable;
+
 /**
  * @author HOEP
  * @data 2019/4/25
  */
-public class MeetUserRole {
+public class MeetUserRole implements Serializable {
     private String id;
     private String userid;
     private String roleid;

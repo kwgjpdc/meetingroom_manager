@@ -69,13 +69,14 @@ pageEncoding="UTF-8"%>
                             </div>
                             <div class="form-group">
                                 <label for="roomType" class="col-sm-2 control-label">部门所属分公司:</label>
+                                <div class="col-sm-5">
                                 <select  id="roomType" name="subid" class="form-control"
                                          style="width: 150px;height:35px"
                                          onchange="okIS(this.options[selectedIndex].value)" >
                                     <option value="1" >武汉分部</option>
                                     <option value="2" >上海分部</option>
                                 </select>
-
+                                </div>
                             </div>
 
                             <div class="col-sm-5 control-label">
@@ -90,27 +91,7 @@ pageEncoding="UTF-8"%>
 
     </div>
 </div>
-<!-- 添加修改对话框开始 -->
-
-
-<!-- 添加修改对话框结束 -->
 
 </body>
-
-<%
-    if ((String)request.getAttribute("addInfo") == "success") { %>
-<script>
-    alert("添加成功！");
-    window.location.reload();
-</script>
-<%}%><%
-    if ((String)request.getAttribute("deleteInfo") == "success") { %>
-<script>
-    alert("删除成功！");
-    window.location.reload();
-</script>
-<%}%>
-
-
 
 </html>

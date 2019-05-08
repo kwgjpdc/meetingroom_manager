@@ -17,6 +17,24 @@ public class User implements Serializable {
     private Integer isdisabled;
     private String operuser;
     private  Date operdate;
+    private String name;
+    private String tel;
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     private Integer isexternal;  //外部联系人
 
@@ -140,6 +158,7 @@ public class User implements Serializable {
         this.operdate = operdate;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
@@ -157,7 +176,10 @@ public class User implements Serializable {
                 ", isdisabled=" + isdisabled +
                 ", operuser='" + operuser + '\'' +
                 ", operdate=" + operdate +
+                ", name='" + name + '\'' +
+                ", tel='" + tel + '\'' +
                 ", isexternal=" + isexternal +
                 '}';
     }
 }
+

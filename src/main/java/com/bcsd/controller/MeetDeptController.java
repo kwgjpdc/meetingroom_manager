@@ -2,6 +2,7 @@ package com.bcsd.controller;
 
 import com.bcsd.entity.MeetDept;
 import com.bcsd.service.MeetDeptService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,15 +25,39 @@ public class MeetDeptController {
     @Autowired
     private MeetDeptService meetDeptService;
 
+    /**
+     * 分页查询
+     * @param page
+     * @param size
+     * @param deptName
+     * @return
+     */
     @RequestMapping("/findAll")
-    public ModelAndView findAll(){
+    public ModelAndView findAll(Integer page,Integer size,String deptName){
+        if (page==null||page==0){
+            page=1;
+        }
+        if (size==null||size==0){
+            size=10;
+        }
         ModelAndView vm=new ModelAndView();
-        List<MeetDept> meetDeptList = meetDeptService.fidnAll();
-        vm.addObject("meetDeptList",meetDeptList);
+        //回显查询条件
+        if (deptName!=null||deptName!=""){
+            vm.addObject("deptName",deptName);
+        }
+        List<MeetDept> meetDeptList = meetDeptService.fidnAll(page,size,deptName);
+        PageInfo<MeetDept> pageInfo = new PageInfo<MeetDept>(meetDeptList);
+        vm.addObject("pageInfo",pageInfo);
         vm.setViewName("page/meet_dept");
         return vm;
 
     }
+
+    /**
+     * 查询部门
+     * @param deptid
+     * @return
+     */
     @RequestMapping("/findByid")
     public ModelAndView findByid(@RequestParam(value = "deptid") String deptid){
 

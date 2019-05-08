@@ -49,4 +49,9 @@ public class ReMeetRoomServiceImpl implements ReMeetRoomService {
     public List<Appointment_Meeting> findByDate(String startTime, String endTime) {
         return reMeetRoomDao.findByDate(startTime,endTime);
     }
+
+    @Override
+    public List<MeetRoom> updateMeetRoom(String areaId, String building, String floor, String roomId) {
+        return reMeetRoomDao.findRoom(areaId,building,floor,roomId);
+    }
 }

@@ -28,7 +28,7 @@ pageEncoding="UTF-8"%>
     <div class="container-fluid">
         <div class="card-header bg-light">
             <a href="#">首页</a><span>&nbsp&nbsp >&nbsp&nbsp  </span><a href="#">管理后台</a><span>&nbsp&nbsp >&nbsp&nbsp
-        </span><a href="#">部门修改</a>
+        </span><a href="#">用户添加</a>
         </div>
         <hr>
         <div >
@@ -36,46 +36,60 @@ pageEncoding="UTF-8"%>
                 <div class="row">
                     <div class="modal-body ">
                         <form class="form-horizontal" role="form"
-                              action="${pageContext.request.contextPath}/dept/add"
+                              action="${pageContext.request.contextPath}/user/add"
                               method="post">
 
                             <div class="form-group">
-                                <div ><label  for="deptname" class="col-sm-2 control-label">部门名称:</label></div>
+                                <div ><label  for="deptname" class="col-sm-2 control-label">用户名称:</label></div>
                                 <div class="col-md-6">
-                                    <input type="text" id="deptname" name="deptname"
+                                    <input type="text" id="deptname" name="username"
                                            class="form-control"  />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="deptaddr" class="col-sm-2 control-label">部门地址:</label>
+                                <label for="deptaddr" class="col-sm-2 control-label">用户性别:</label>
                                 <div class="col-md-6">
-                                    <input type="text" id="deptaddr" name="deptaddr"
+                                    <input type="text" id="deptaddr" name="sex"
                                            class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="depttel" class="col-sm-2 control-label">部门电话:</label>
-                                <div class="col-md-6">
-                                    <input type="text" id="depttel" name="depttel"
-                                           class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="col-sm-2 control-label">部门邮箱:</label>
+                                <label for="email" class="col-sm-2 control-label">用户邮箱:</label>
                                 <div class="col-md-6">
                                     <input type="text"  id="email" name="email"
                                            class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="roomType" class="col-sm-2 control-label">部门所属分公司:</label>
-                                <select  id="roomType" name="subid" class="form-control"
+                                <label for="tel" class="col-sm-2 control-label">用户电话:</label>
+                                <div class="col-md-6">
+                                    <input type="text"  id="tel" name="tel"
+                                           class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="roomType" class="col-sm-2 control-label">用户所属分公司:</label>
+                                <select  id="roomType" name="subofficeid" class="form-control"
                                          style="width: 150px;height:35px"
                                          onchange="okIS(this.options[selectedIndex].value)" >
                                     <option value="1" >武汉分部</option>
                                     <option value="2" >上海分部</option>
                                 </select>
 
+                            </div>
+                            <div class="form-group">
+                                <label for="roomType1" class="col-sm-2 control-label">用户所属分公司:</label>
+                                <div class="col-sm-5">
+                                <select  id="roomType1" name="deptid" class="form-control"
+                                         style="width: 150px;height:35px"
+                                         onchange="okIS(this.options[selectedIndex].value)" >
+                                    <option value="1" >总经办</option>
+                                    <option value="2" >研发部</option>
+                                    <option value="3" >财务部</option>
+                                    <option value="4" >市场部</option>
+                                    <option value="5" >人事部</option>
+                                </select>
+                                </div>
                             </div>
 
                             <div class="col-sm-5 control-label">

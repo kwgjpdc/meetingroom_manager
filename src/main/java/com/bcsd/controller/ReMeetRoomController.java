@@ -1,7 +1,6 @@
 package com.bcsd.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.bcsd.dao.AppointmentMeetDao;
 import com.bcsd.entity.*;
 import com.bcsd.service.*;
 
@@ -17,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -31,9 +33,8 @@ public class ReMeetRoomController {
     private AppointmentMeetService appointmentMeetService;
     @Autowired
     private HistoryMeetService historyMeetService;
-
     @Autowired
-    private MeetUserService meetUserService;
+    private AddUserService addUserService;
 
     /**
      * 查询所有
@@ -56,6 +57,19 @@ public class ReMeetRoomController {
         vm.setViewName("page/home");
         return vm;
     }
+
+    /**
+     * 查询地区
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/meetarea", produces={"application/json;charset=utf-8"})
+    @ResponseBody
+    public Object meetarea(){
+        String result =JSONObject.toJSONString(reMeetRoomService.findArea());
+        return result;
+    }
+
     /**
      * 查询大楼
      * @param
@@ -80,6 +94,18 @@ public class ReMeetRoomController {
     public Object roomfloor(@RequestParam(value="area") String area,@RequestParam(value="building") String building){
             String result =JSONObject.toJSONString(reMeetRoomService.findFloor(area,building));
             return result;
+    }
+    /**
+     * 修改会议室
+     * @param
+     * @return
+     */
+    @RequestMapping(value="/updateMeetRoom",method= RequestMethod.POST,
+            produces={"application/json;charset=utf-8"})
+    @ResponseBody
+    public Object updateMeetRoom(@RequestParam(value="areaId") String areaId,@RequestParam(value="building") String building,@RequestParam(value="floor") String floor,@RequestParam(value="roomId")String roomId){
+        String result =JSONObject.toJSONString(reMeetRoomService.updateMeetRoom(areaId,building,floor,roomId));
+        return result;
     }
 
 
@@ -115,6 +141,40 @@ public class ReMeetRoomController {
             return result;
     }
 
+    /*
+    * 初始状态进入
+    * */
+    @RequestMapping("getInto")
+    public ModelAndView getInto( HttpSession session) throws ParseException {
+        ModelAndView vm=new ModelAndView();
+        String areaid="c5539aa3-af34-463d-9415-1a7f8ae42727";
+        String roomfloor="5";
+        String roombuilding="YMTC-OS1";
+        String nowTime=new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
+        String time="01:00";
+        String endTime=DateChange.getTime(nowTime,time);
+        List<Appointment_Meeting> roomId=reMeetRoomService.findByDate(nowTime,endTime);
+        String roomid="(";
+        int i =1;
+        for (Appointment_Meeting id:roomId){
+            System.out.println(roomId.size());
+            if(i==roomId.size()) {
+                System.out.println(id.getMeetRoomId());
+                roomid = roomid + id.getMeetRoomId();
+            }else {
+                roomid = roomid + id.getMeetRoomId()+",";
+            }
+            i++;
+        }
+        roomid=roomid+")";
+      List<MeetRoom> meetRooms=  reMeetRoomService.findRoom(areaid,roombuilding,roomfloor.trim(),roomid);
+        
+        session.setAttribute("meetRoom",meetRooms);
+      vm.setViewName("index");
+      return vm;
+    }
+
+
 
     /**
      * 根据id查询会议室信息
@@ -122,64 +182,39 @@ public class ReMeetRoomController {
      * @return
      */
     @RequestMapping("remmet")
-    public ModelAndView remmet(@Param("id")String id,@RequestParam(value = "date")String date,@RequestParam(value = "time")String time,
-                               @RequestParam(value = "duration")String duration){
+    public ModelAndView remmet(@Param("id")String id, @RequestParam(value = "date")String date, @RequestParam(value = "time")String time,
+                               @RequestParam(value = "duration")String duration, HttpSession session){
+
         String datetime =date.trim()+" "+time.trim();
         ModelAndView vm=new ModelAndView();
+        int num = (int)(Math.random()*1000000);
         MeetRoom meetRoom=reMeetRoomService.findById(id);
+        session.setAttribute("meetid",num);
         vm.addObject("datetime",datetime);
         vm.addObject("duration",duration);
         vm.addObject("meetRoom",meetRoom);
+        vm.addObject("meetId",num);
+        vm.addObject("meetRoomId",id);
         vm.setViewName("page/localmeet");
         return vm;
     }
 
     @RequestMapping("videoremeet")
     public ModelAndView video(@Param("id")String id,@RequestParam(value = "date")String date,@RequestParam(value = "time")String time,
-                              @RequestParam(value = "duration")String duration){
+                              @RequestParam(value = "duration")String duration,HttpSession session){
         String datetime =date.trim()+" "+time.trim();
         ModelAndView vm=new ModelAndView();
+        int num = (int)(Math.random()*1000000);
         MeetRoom meetRoom=reMeetRoomService.findById(id);
+        session.setAttribute("meetid",num);
         vm.addObject("datetime",datetime);
         vm.addObject("duration",duration);
         vm.addObject("meetRoom",meetRoom);
+        vm.addObject("meetId",num);
+        vm.addObject("meetRoomId",id);
         vm.setViewName("page/videomeet");
         return vm;
     }
-
-    @RequestMapping("findInternal")
-    public ModelAndView findInternal(Integer page, Integer size, Integer internal, String name){
-        if (page == null || page == 0) {
-            page = 1;
-        }
-        if (size == null || size == 0) {
-            size = 5;
-        }
-        if (internal == null || internal != 1) {
-            internal = 0;
-        }
-        if (name == null) {
-            name = "";
-        }
-        ModelAndView vm = new ModelAndView();
-        List<User> list = meetUserService.findInternal(page, size, 0, name);
-        //PageInfo pageInfo = new PageInfo<>(list);
-        vm.addObject("Internal", list);
-//        if (isExternal==1){
-//            List<User> list = meetUserService.findExternal(page, size, isExternal, name);
-//            pageInfo = new PageInfo<>(list);
-//            vm.addObject("External",pageInfo);
-//        }
-        //vm.setViewName(PREFIX + "/linkman1");
-        return vm;
-//        ObjectMapper mapper = new ObjectMapper();
-//        String s = mapper.writeValueAsString(pageInfo);
-//        request.setAttribute("internal",pageInfo);
-//        request.getRequestDispatcher("page/user/linkman1.jsp").forward(request,response);
-//        response.sendRedirect("page/user/linkman1.jsp");
-        //return "linkman1.jsp";
-    }
-
 
     /**
      * 预定本地会议
@@ -190,7 +225,8 @@ public class ReMeetRoomController {
     public ModelAndView appointmmet(Remeet remeet){
         ModelAndView vm=new ModelAndView();
         //增加数据进去
-        appointmentMeetService.appointmentMeet(remeet);
+        List<UserInternal> user =addUserService.findUserByMeetId(String.valueOf(remeet.getId()));
+        appointmentMeetService.appointmentMeet(remeet,user);
         List<Remeet> meets=appointmentMeetService.findPage(1,10);
         vm.addObject("meets",meets);
         PageInfo pageInfo = new PageInfo<Remeet>(meets);
@@ -206,8 +242,9 @@ public class ReMeetRoomController {
     @RequestMapping("appointVideoMeet")
     public ModelAndView appointVideoMeet(Remeet remeet){
         ModelAndView vm=new ModelAndView();
+        List<UserInternal> user =addUserService.findUserByMeetId(String.valueOf(remeet.getId()));
         //增加数据进去
-        appointmentMeetService.appointmentVideoMeet(remeet);
+        appointmentMeetService.appointmentVideoMeet(remeet,user);
 
         List<Remeet> meets=appointmentMeetService.findPage(1,10);
         vm.addObject("meets",meets);
@@ -218,18 +255,32 @@ public class ReMeetRoomController {
     }
 
 
-
+    /**
+     * 查询预定会议
+     * @param page
+     * @param size
+     * @param meetName
+     * @param session
+     * @return
+     */
     @RequestMapping("myappointmeet")
-    public ModelAndView myappointmeet(Integer page,Integer size){
+    public ModelAndView myappointmeet(Integer page,Integer size,String meetName,HttpSession session){
         if(page==null||page==0){
             page=1;
         }
         if(size==null||size==0){
             size=10;
         }
+
         ModelAndView vm=new ModelAndView();
-        List<Remeet> meets=appointmentMeetService.findPage(page,size);
+        if (meetName!=null||meetName!=""){
+            vm.addObject("meetName",meetName);
+        }
+        List<Remeet> meets=appointmentMeetService.findPage(page,size,meetName);
+        String meetid=String.valueOf(session.getAttribute("meetid"));
+
         PageInfo pageInfo = new PageInfo<Remeet>(meets);
+        session.setAttribute("pageInfo",pageInfo);
         vm.addObject("pageInfo",pageInfo);
         vm.setViewName("page/meettable");
         return vm;
@@ -251,4 +302,62 @@ public class ReMeetRoomController {
         return vm;
     }
 
+    @RequestMapping("calender")
+    public ModelAndView calender(){
+        ModelAndView vm=new ModelAndView();
+        List<MeetRoom> meetRoomBuilding = reMeetRoomService.findBuilding("ch-wh");
+        List<MeetRoom> meetRoomArea = reMeetRoomService.findArea();
+        //System.out.println(111);
+        vm.addObject("meetRoomArea",meetRoomArea);
+        vm.addObject("meetRoomBuilding",meetRoomBuilding);
+        vm.setViewName("page/daymanager/data");
+        return vm;
+    }
+
+    @Autowired
+    private MeetRoomService meetRoomService;
+    @RequestMapping("/findRoomName")
+    public Object findRoomName(String areaid,String roombuilding,String roomfloor ){
+        System.out.println(areaid+"--"+roombuilding+"--"+roomfloor);
+        List<MeetRoom> list = meetRoomService.findRoomName(areaid,roombuilding,roomfloor);
+        String result = JSONObject.toJSONString(list);
+        return result;
+    }
+
+    /**
+     * 修改会议
+     */
+    @RequestMapping("/update")
+    public String update(Remeet remeet,@RequestParam(value = "date")String date,@RequestParam(value = "time")String time){
+        String datetime =date.trim()+" "+time.trim();
+        remeet.setMeetDate(datetime);
+        appointmentMeetService.update(remeet);
+        return "redirect:myappointmeet";
+    }
+
+    /**
+     * 查询会议
+     * @param id
+     * @return
+     */
+    @RequestMapping("/findOne")
+    public ModelAndView findOne(Integer id){
+        Remeet remeet = appointmentMeetService.findOne(id);
+        //处理时间
+        String[] split = remeet.getMeetDate().split(" ");
+        ModelAndView vm=new ModelAndView();
+        vm.addObject("remeet",remeet);
+        vm.addObject("date",split[0]);
+        vm.addObject("time",split[1]);
+        vm.setViewName("page/meeting/meeting_update");
+        return vm;
+    }
+
+    /**
+     * 查询重复会议
+     */
+    @RequestMapping("/repeatMeeting")
+    public void repeatMeeting(){
+
+    }
 }

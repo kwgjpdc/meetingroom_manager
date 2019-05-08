@@ -74,6 +74,7 @@ pageEncoding="UTF-8"%>
                             </div>
                             <div class="form-group">
                                 <label for="roomType" class="col-sm-2 control-label">部门所属分公司:</label>
+                                <div class="col-sm-5">
                                 <select  id="roomType" name="subid" class="form-control"
                                          style="width: 150px;height:35px"
                                          onchange="okIS(this.options[selectedIndex].value)" >
@@ -82,6 +83,7 @@ pageEncoding="UTF-8"%>
                                     </option>
                                     <option value="2" <c:if test="${meetdept.subid=='2'}">selected='selected'</c:if>>上海分部</option>
                                 </select>
+                                </div>
                             </div>
 
                             <%--<div class="form-group">--%>

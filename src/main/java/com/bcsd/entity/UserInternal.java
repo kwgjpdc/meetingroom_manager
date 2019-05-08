@@ -1,8 +1,11 @@
 package com.bcsd.entity;
 
-public class UserInternal {
+import java.io.Serializable;
 
-    private int id;
+public class UserInternal implements Serializable {
+
+    private Integer id;
+
     private String name;
     private String tel;
     private String email;
@@ -10,8 +13,8 @@ public class UserInternal {
     private String dept;
     private String company;
     private String username;
-    private int internal;
-    private int status;
+    private Integer internal;
+    private Integer status;
 
     @Override
     public String toString() {

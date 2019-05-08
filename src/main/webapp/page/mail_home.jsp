@@ -35,10 +35,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div>
-                        <form class="navbar-form navbar-right">
+                       <%-- <form class="navbar-form navbar-right">
                             <a href="javascript:sendMail('aa')"
                                class="btn btn-primary">发送</a>
-                        </form>
+                        </form>--%>
                     </div>
                     <div class="text-center">
                         <table class="table table-bordered text-center" id="dataList">
@@ -47,13 +47,13 @@
                                 <th class="active text-center">
                                     <input type="checkbox" id="selectAll" value=""/>
                                 </th>
-                                <th width="100px" class="col-md-2 text-center">收件人邮箱</th>
-                                <th width="100px" class="col-md-2 text-center">邮件标题</th>
-                                <th width="100px" class="col-md-2 text-center">邮件主题</th>
-                                <th width="100px" class="col-md-2 text-center">邮件内容</th>
-                                <th width="100px" class="col-md-2 text-center">创建时间</th>
-                                <th width="100px" class="col-md-2 text-center">状态</th>
-                                <th width="50px" class="col-md-3 text-center">操作</th>
+                                <th class="text-center">收件人邮箱</th>
+                                <th class="text-center">邮件标题</th>
+                                <th class="text-center">邮件主题</th>
+                                <th class="text-center">邮件内容</th>
+                                <th class="text-center">创建时间</th>
+                                <th class="text-center" style="width: 80px">状态</th>
+                                <%--<th class="text-center">操作</th>--%>
                             </tr>
                             </thead>
                             <tbody>
@@ -83,29 +83,22 @@
 										    </c:otherwise>
 										</c:choose>
                                     </td>
-                                    <td class="text-center">
+                                    <%--<td class="text-center">
                                           <form class="navbar-form">
                                             <a href="javascript:sendMail(${list.id})"
                                                class="btn btn-default">发送</a>
                                         </form>
-                                    </td>
+                                    </td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
 
-                    <div>
-                            <div class="pull-left">
-                                <div class="form-group form-inline">
-                                    总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页
-                                    <select  id="changePageSize" onchange="changePageSize()">
-                                        <option>10</option>
-                                        <option>15</option>
-                                        <option>20</option>
-                                    </select> 条
-                                </div>
-                            </div>
-                            <div>
+                        <%--分页查询--%>
+                        <div class="form-group form-inline">
+                            <div class="form-group form-inline">
+                                总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页 10 条
+                            </div>&nbsp;&nbsp;
                                 <ul class="pagination">
                                     <li>
                                         <a href="${pageContext.request.contextPath}/mail/findPage?page=1&size=${pageInfo.pageSize}"
@@ -136,28 +129,18 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
 
 <script  type="text/javascript">
-
-
-        /*$(document).ready(function () {
-            $.ajax({
-                type: "GET",//请求方式
-                url: "../../dict/findPage",//访问url
-                dataType:"json",//服务器返回的数据类型
-            })
-        });*/
-
+/*
     function changePageSize() {
         //获取下拉框的值
         var pageSize = $("#changePageSize").val();
 
         //向服务器发送请求，改变没页显示条数
-        location.href = "${pageContext.request.contextPath}/mail/findPage?page=1&size=" + pageSize;
-    }
+        location.href = "<%--${pageContext.request.contextPath}--%>/mail/findPage?page=1&size=" + pageSize;
+    }*/
 
     $("#selectAll").click(function() {
         var clicks = $(this).is(':checked');

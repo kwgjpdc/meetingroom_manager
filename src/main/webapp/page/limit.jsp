@@ -13,6 +13,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/vendor/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
     <script src="${pageContext.request.contextPath }/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/vendor/popper.js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath }/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -31,7 +32,6 @@ pageEncoding="UTF-8"%>
 
         <div class="card-header bg-light">
             <div class="row">
-
                 <div class="col-md-2">
                     <div >
                         <div class="card-title">
@@ -74,8 +74,6 @@ pageEncoding="UTF-8"%>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#profile1" role="tab" aria-controls="profile1">权限列表</a>
                                 </li>
-
-
                             </ul>
                             <div class="tab-content">
                                 <div class="tab-pane active" id="home1" role="tabpanel">
@@ -489,7 +487,7 @@ pageEncoding="UTF-8"%>
                                                                                   class="ng-pristine ng-untouched ng-valid"
                                                                                   checked="checked"><span></span></label>
                                             </td><!--写-->
-                                            <td><label class="ui-radio"><input id="scope0_10"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_10"
                                                                                type="radio"><span></span></label>
                                             </td>
@@ -497,7 +495,7 @@ pageEncoding="UTF-8"%>
                                                                                name="radio_10"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope2_10"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_10"
                                                                                type="radio"><span></span></label>
                                             </td>
@@ -514,7 +512,7 @@ pageEncoding="UTF-8"%>
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td>
                                             <td class="ng-binding">会议室管理</td>
-                                            <td><label class="ui-checkbox"><input id="isShow_13"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"
@@ -526,25 +524,25 @@ pageEncoding="UTF-8"%>
                                                     class="ng-pristine ng-untouched ng-valid"
                                                     checked="checked"><span></span></label>
                                             </td><!--读 -->
-                                            <td><label class="ui-checkbox"><input id="isWrite_13"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"
                                                                                   checked="checked"><span></span></label>
                                             </td><!--写-->
-                                            <td><label class="ui-radio"><input id="scope0_13"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_13"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope1_13"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_13"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope2_13"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_13"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope3_13"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_13"
                                                                                type="radio"
                                                                                checked="checked"><span></span></label>
@@ -557,34 +555,34 @@ pageEncoding="UTF-8"%>
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td>
                                             <td class="ng-binding">mcu管理</td>
-                                            <td><label class="ui-checkbox"><input id="isShow_11"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td><!--显示/隐藏 -->
-                                            <td><label class="ui-checkbox"><input id="isRead_11"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td><!--读 -->
-                                            <td><label class="ui-checkbox"><input id="isWrite_11"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td><!--写-->
-                                            <td><label class="ui-radio"><input id="scope0_11"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_11"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope1_11"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_11"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope2_11"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_11"
                                                                                type="radio"><span></span></label>
                                             </td>
-                                            <td><label class="ui-radio"><input id="scope3_11"
+                                            <td><label class="ui-radio"><input
                                                                                name="radio_11"
                                                                                type="radio"><span></span></label>
                                             </td>
@@ -596,18 +594,18 @@ pageEncoding="UTF-8"%>
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td>
                                             <td class="ng-binding">资源管理</td>
-                                            <td><label class="ui-checkbox"><input id="isShow_1"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
                                             </td><!--显示/隐藏 -->
-                                            <td><label class="ui-checkbox"><input id="isRead_1"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"
                                                                                   checked="checked"><span></span></label>
                                             </td><!--读 -->
-                                            <td><label class="ui-checkbox"><input id="isWrite_1"
+                                            <td><label class="ui-checkbox"><input
                                                                                   name="checkbox1"
                                                                                   type="checkbox"
                                                                                   class="ng-pristine ng-untouched ng-valid"><span></span></label>
@@ -2491,7 +2489,6 @@ pageEncoding="UTF-8"%>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -2509,7 +2506,6 @@ pageEncoding="UTF-8"%>
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label for="username" class="control-label col-md-12">添加角色:</label>
-
                     </div>
                     <div class="form-group">
                         <div class="col-md-12">

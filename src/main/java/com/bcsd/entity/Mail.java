@@ -2,17 +2,47 @@ package com.bcsd.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+
 public class Mail implements Serializable {
-    private Integer id;
-    private String receivemailaccount;
-    private String mailtitle;
-    private String mailsubject;
-    private String mailcontent;
-    private Date createdate;
-    private String remark;
-    private Integer status;
-    private Integer isdisabled;
-    private  Date senddate;
+   private Integer id;
+   private String receivemailaccount;
+   private String mailtitle;
+   private String mailsubject;
+   private String mailcontent;
+   private Date createdate;
+   private String remark;
+   private Integer status;
+   private Date senddate;
+   private Integer isdisabled;
+
+	public Mail() {
+	}
+
+	public Mail(Integer id, String receivemailaccount, String mailtitle, String mailsubject, String mailcontent, Date createdate, String remark, Integer status, Date senddate, Integer isdisabled) {
+		this.id = id;
+		this.receivemailaccount = receivemailaccount;
+		this.mailtitle = mailtitle;
+		this.mailsubject = mailsubject;
+		this.mailcontent = mailcontent;
+		this.createdate = createdate;
+		this.remark = remark;
+		this.status = status;
+		this.senddate = senddate;
+		this.isdisabled = isdisabled;
+	}
+
+	public Mail(String receivemailaccount, String mailtitle, String mailsubject, String mailcontent, Date createdate, String remark, Integer status, Integer isdisabled, Date senddate) {
+		this.receivemailaccount = receivemailaccount;
+		this.mailtitle = mailtitle;
+		this.mailsubject = mailsubject;
+		this.mailcontent = mailcontent;
+		this.createdate = createdate;
+		this.remark = remark;
+		this.status = status;
+		this.isdisabled = isdisabled;
+		this.senddate = senddate;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -73,5 +103,20 @@ public class Mail implements Serializable {
 	public void setSenddate(Date senddate) {
 		this.senddate = senddate;
 	}
-    
+
+	@Override
+	public String toString() {
+		return "Mail{" +
+				"id=" + id +
+				", receivemailaccount='" + receivemailaccount + '\'' +
+				", mailtitle='" + mailtitle + '\'' +
+				", mailsubject='" + mailsubject + '\'' +
+				", mailcontent='" + mailcontent + '\'' +
+				", createdate=" + createdate +
+				", remark='" + remark + '\'' +
+				", status=" + status +
+				", isdisabled=" + isdisabled +
+				", senddate=" + senddate +
+				'}';
+	}
 }

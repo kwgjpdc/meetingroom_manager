@@ -38,7 +38,7 @@ public class MailController {
         if (size==null||size==0){
             size=10;
         }
-        List<Mail> list = mailService.findPage("1",page, size);
+        List<Mail> list = mailService.findPage(2,page, size);
         PageInfo pageInfo = new PageInfo<Mail>(list);
         ModelAndView vm=new ModelAndView();
         vm.addObject("pageInfo",pageInfo);

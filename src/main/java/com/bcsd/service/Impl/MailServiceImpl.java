@@ -17,12 +17,12 @@ import java.util.List;
 public class MailServiceImpl implements MailService {
     @Autowired
     private MailDao mailDao;
-    public List<Mail> findAll(String status) {
+    public List<Mail> findAll(int status) {
         List<Mail> all = mailDao.findAll(status);
         return all;
     }
     
-    public List<Mail> findPage(String status,int pageNum, int pageSize) {
+    public List<Mail> findPage(int status,int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);//分页
         return mailDao.findAll(status);
     }

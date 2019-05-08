@@ -11,7 +11,8 @@
     </select>
     <!-- 添加 -->
     <insert id="add" parameterType="com.bcsd.entity.Mail">
-        insert into cj_mail values(#{receivemailaccount},#{mailtitle},#{mailsubject},#{mailcontent},#{createdate},#{remark},#{status},#{isdisabled},#{senddate})
+        insert into cj_mail(receivemailaccount,mailtitle,mailsubject,mailcontent,createdate,remark,status,isdisabled,senddate)
+        values(#{receivemailaccount},#{mailtitle},#{mailsubject},#{mailcontent},#{createdate},#{remark},#{status},#{isdisabled},#{senddate})
     </insert>
     <!--修改-->
     <update id="update" parameterType="com.bcsd.entity.Mail">

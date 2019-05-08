@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
     <link rel="stylesheet" href="${pageContext.request.contextPath }/vendor/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/vendor/font-awesome/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath }/css/styles.css">
-    <%--<link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath }/css/bootstrap.min.css">
     <script src="${pageContext.request.contextPath }/vendor/jquery/jquery.min.js"></script>
     <script src="${pageContext.request.contextPath }/vendor/popper.js/popper.min.js"></script>
     <script src="${pageContext.request.contextPath }/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -31,6 +31,10 @@ pageEncoding="UTF-8"%>
         <div class="card-header bg-light">
             <a href="#">首页</a><span>&nbsp&nbsp >&nbsp&nbsp  </span><a href="#">管理后台</a><span>&nbsp&nbsp >&nbsp&nbsp
         </span><a href="#">用户管理</a>
+
+            <a class="btn btn-primary"
+               href="${pageContext.request.contextPath }/page/meet_manager/meet_manager_dept_add.jsp" style="float: right;margin-right: 10px">
+                添加用户</a>
         </div>
         <hr>
 
@@ -39,19 +43,14 @@ pageEncoding="UTF-8"%>
 
                 <div class="col-md-12">
                     <div >
-                        <form class="right">
-                            <a class="btn btn-danger"
-                               href="${pageContext.request.contextPath }/page/meet_manager/meet_manager_dept_add.jsp">
-                                添加部门</a>
+                        <form action="${pageContext.request.contextPath }/user/findAll" method="post">
+                            <input type="text" class="form-control" style="width: 200px;float: left;margin: 5px" placeholder="搜索" name="username" value="${username}">
+                            <button type="submit" class="btn btn-default" style="width: 60px;float: left;margin: 5px">搜索</button>
                         </form>
-                    </div>
-                    <div >
-
-
                         <table class="table table-bordered">
                             <tr class="active">
-                                <th class="active">
-                                    <input type="checkbox" name="" id="" value="" />
+                                <th class="active text-center" style="width: 50px">
+                                    <input type="checkbox"  id="firstCb"  />
                                 </th>
                                 <th class="text-center">用户名称</th>
                                 <th class="text-center">用户性别</th>
@@ -65,10 +64,10 @@ pageEncoding="UTF-8"%>
                                 <!--<th>管理者</th>-->
                                 <th class="text-center">操作</th>
                             </tr>
-                            <c:forEach items="${meetuserlist}" var="list">
+                            <c:forEach items="${pageInfo.list}" var="list">
                                 <tr class="active">
-                                    <td class="active">
-                                        <input type="checkbox" name=""  value="" />
+                                    <td class="active text-center" style="width: 50px">
+                                        <input type="checkbox" name="id"  value="${list.id}" />
                                     </td>
                                     <td class="text-center">${list.username}</td>
                                     <td class="text-center">${list.sex}</td>
@@ -80,89 +79,97 @@ pageEncoding="UTF-8"%>
                                     <!--<td>xx</td>-->
                                     <td class="text-center">
                                         <form class="navbar-form">
-                                            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#login">修改</button>
+                                            <a class="btn btn-default"
+                                               href="${pageContext.request.contextPath}/user/findByid?id=${list.id}">修改</a>
                                             <a href="#" class="btn btn-danger" onclick="return confirm('你确认要删除')">删除</a>
                                         </form>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </table>
+                        <%--分页查询--%>
+                        <div class="form-group form-inline">
+                            <div class="form-group form-inline">
+                                总共${pageInfo.pages}页，共${pageInfo.total} 条数据。 每页 10 条
+                            </div>&nbsp;&nbsp;
+                            <ul class="pagination ">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/user/findAll?page=1&size=${pageInfo.pageSize}"
+                                       aria-label="Previous">首页</a>
+                                    <%-- <a href="${pageContext.request.contextPath}/mail/findPage?page=1&size=${pageInfo.pageSize}" aria-label="Previous">首页</a> --%>
+                                </li>
+                                <c:if test="${pageInfo.pageNum!=1}">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum-1}&size=${pageInfo.pageSize}">&laquo;</a>
+                                    </li>
+                                </c:if>
+                                <c:forEach begin="1" end="${pageInfo.pages}" var="pageNum">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/user/findAll?page=${pageNum}&size=${pageInfo.pageSize}">${pageNum}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${pageInfo.pages!=pageInfo.pageNum}">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pageNum+1}&size=${pageInfo.pageSize}">&raquo;</a>
+                                    </li>
+                                </c:if>
 
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/user/findAll?page=${pageInfo.pages}&size=${pageInfo.pageSize}"
+                                       aria-label="Next">尾页</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- 添加修改对话框开始 -->
-<div id="login" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title text-center">添加用户:</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal" action="${pageContext.request.contextPath}/user/add">
-                    <div class="form-group">
-                        <label for="roomName" class="control-label col-md-3">用户名称:</label>
-                        <div class="col-md-12">
-                            <input type="text" id="roomName" name="username" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="roomArea" class="control-label col-md-3">用户性别:</label>
-                        <div class="col-md-12">
-                            <input type="text" id="roomArea" name="sex" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3">用户职位:</label>
-                        <div class="col-md-12">
-                            <select   name="rolename"  onchange="okIS(this.options[selectedIndex].value)" >
-                                <option value="1">超级管理员</option>
-                                <option value="2">审批用户</option>
-                                <option value="10" >普通用户</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="personCount" class="control-label col-md-3">用户邮箱:</label>
-                        <div class="col-md-12">
-                            <input type="text"  id="personCount" name="email" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="personCount" class="control-label col-md-3">用户电话:</label>
-                        <div class="col-md-12">
-                            <input type="text"  id="personCoun" name="tel" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="roomType" class="control-label col-md-3">用户所属分部:</label>
-                        <div class="col-md-12">
-                            <input type="text" id="roomType" name="suboffice" class="form-control" />
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="col-md-offset-2 text-center">
-                            <input type="submit" class="btn btn-default"></input>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 添加修改对话框结束 -->
-
-
-
 </body>
-
-
 </html>
+<script>
+    function deleteLinkman(id) {
+        //alert(id);
+        //用户安全提示
+        if (confirm("您确定要删除吗？")) {
+            //访问路径
+            location.href = "${pageContext.request.contextPath}/user/deleteInternal?id=" + id;
+        }
+    }
+
+    window.onload = function () {
+        //给删除选中按钮添加单击事件
+        document.getElementById("delSelected").onclick = function () {
+            if (confirm("您确定要删除选中条目吗？")) {
+
+                var flag = false;
+                //判断是否有选中条目
+                var cbs = document.getElementsByName("id");
+                for (var i = 0; i < cbs.length; i++) {
+                    if (cbs[i].checked) {
+                        //alert(cbs[i]);
+                        //有一个条目选中了
+                        flag = true;
+                        break;
+                    }
+                }
+                if (flag) {//有条目被选中
+                    //表单提交
+                    document.getElementById("form").submit();
+                }
+            }
+        };
+        //1.获取第一个cb
+        document.getElementById("firstCb").onclick = function () {
+            //2.获取下边列表中所有的cb
+            var cbs = document.getElementsByName("id");
+            //3.遍历
+            for (var i = 0; i < cbs.length; i++) {
+                //4.设置这些cbs[i]的checked状态 = firstCb.checked
+                cbs[i].checked = this.checked;
+            }
+        };
+
+    }
+</script>

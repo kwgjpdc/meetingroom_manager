@@ -6,8 +6,8 @@ import java.util.List;
 
 
 public interface MailService {
-    List<Mail> findAll(String status);
-    List<Mail> findPage(String status,int pageNum,int pageSize);
+    List<Mail> findAll(int status);
+    List<Mail> findPage(int status, int pageNum, int pageSize);
     void add(Mail mail);
     Mail findByid(int id);
     void update(Mail mail);
